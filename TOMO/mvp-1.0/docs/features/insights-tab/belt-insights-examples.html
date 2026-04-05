@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights by Belt Level -- Content Examples</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#0a0a0a; color:#e5e5e5; padding:40px 20px; }
+  .page-title { text-align:center; font-size:24px; font-weight:700; color:#F5A623; margin-bottom:4px; }
+  .page-sub { text-align:center; font-size:13px; color:#525252; margin-bottom:16px; }
+
+  .intro { max-width:700px; margin:0 auto 48px; background:#1a1a1a; border-radius:8px; padding:20px 24px; border-left:3px solid #F5A623; }
+  .intro p { font-size:13px; color:#a3a3a3; line-height:1.7; margin-bottom:8px; }
+  .intro p:last-child { margin-bottom:0; }
+  .intro strong { color:#F5A623; }
+
+  .belt-section { max-width:1100px; margin:0 auto 64px; }
+  .belt-header { display:flex; align-items:center; gap:12px; margin-bottom:4px; }
+  .belt-color { width:32px; height:8px; border-radius:4px; }
+  .belt-white { background:#e5e5e5; }
+  .belt-white-striped { background: linear-gradient(90deg, #e5e5e5 60%, #F5A623 62%, #F5A623 68%, #e5e5e5 70%, #e5e5e5 78%, #F5A623 80%, #F5A623 86%, #e5e5e5 88%); }
+  .belt-blue { background:#3b82f6; }
+  .belt-name { font-size:20px; font-weight:700; color:#fff; }
+  .belt-desc { font-size:13px; color:#525252; margin-bottom:24px; max-width:600px; }
+
+  .scenario-row { display:flex; gap:24px; overflow-x:auto; padding-bottom:16px; scrollbar-width:thin; scrollbar-color:#333 transparent; }
+  .scenario { flex-shrink:0; width:320px; }
+  .scenario-label { font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:#525252; margin-bottom:8px; }
+  .scenario-context { font-size:11px; color:#333; margin-bottom:12px; line-height:1.5; }
+
+  .phone { width:320px; background:#111; border-radius:24px; border:2px solid #262626; overflow:hidden; }
+  .phone-header { padding:44px 20px 0; }
+  .phone-title { font-size:20px; font-weight:700; color:#fff; }
+  .phone-subtitle { font-size:11px; color:#525252; margin-top:2px; }
+  .phone-content { padding:12px 16px 20px; }
+  .phone-tab { height:56px; background:#1a1a1a; border-top:1px solid #222; display:flex; align-items:center; justify-content:center; gap:32px; padding:0 16px; }
+  .tab-item { font-size:9px; color:#525252; text-align:center; }
+  .tab-item.active { color:#F5A623; }
+
+  .section-label { font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#404040; margin:14px 0 8px; display:flex; align-items:center; gap:8px; }
+  .section-label::after { content:''; flex:1; height:1px; background:#1a1a1a; }
+
+  .card { background:#1a1a1a; border-radius:8px; padding:14px; margin-bottom:10px; border-left:3px solid #F5A623; }
+  .badge { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:8px; font-weight:600; letter-spacing:1px; text-transform:uppercase; padding:2px 6px; border-radius:3px; margin-bottom:6px; }
+  .b-technique { background:rgba(96,165,250,0.15); color:#60a5fa; }
+  .b-consistency { background:rgba(245,166,35,0.15); color:#F5A623; }
+  .b-sparring { background:rgba(34,197,94,0.15); color:#22c55e; }
+  .b-risk { background:rgba(239,68,68,0.15); color:#ef4444; }
+  .b-milestone { background:rgba(245,166,35,0.15); color:#F5A623; }
+  .b-new { font-family:'JetBrains Mono',monospace; font-size:7px; font-weight:700; letter-spacing:1px; color:#F5A623; background:rgba(245,166,35,0.12); padding:1px 5px; border-radius:3px; margin-left:6px; vertical-align:middle; }
+  .card-title { font-size:13px; font-weight:600; color:#fff; margin-bottom:4px; }
+  .card-body { font-size:11px; color:#a3a3a3; line-height:1.65; }
+
+  .focus { background:rgba(245,166,35,0.06); border-left:3px solid #F5A623; border-radius:4px; padding:10px 12px; margin-top:10px; }
+  .focus-label { font-family:'JetBrains Mono',monospace; font-size:8px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:#F5A623; margin-bottom:4px; }
+  .focus-body { font-size:11px; color:#d4d4d4; line-height:1.6; }
+
+  .coach { background:#141414; border-left:2px solid #60a5fa; border-radius:4px; padding:8px 10px; margin-top:12px; }
+  .coach-text { font-size:9px; color:#404040; line-height:1.5; font-style:italic; }
+
+  .annotation { background:rgba(255,255,255,0.02); border:1px solid #1a1a1a; border-radius:6px; padding:12px 16px; margin-top:20px; }
+  .annotation-label { font-size:10px; font-weight:600; color:#525252; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+  .annotation p { font-size:11px; color:#404040; line-height:1.6; margin-bottom:4px; }
+  .annotation p:last-child { margin-bottom:0; }
+  .annotation em { color:#737373; font-style:normal; }
+
+  .divider { border:none; border-top:1px solid #1a1a1a; margin:48px auto; max-width:1100px; }
+
+  .compare { max-width:1100px; margin:0 auto 48px; }
+  .compare h2 { font-size:18px; font-weight:700; color:#fff; margin-bottom:16px; }
+  .compare-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .compare-col { background:#1a1a1a; border-radius:8px; padding:16px; }
+  .compare-col h3 { font-size:13px; font-weight:600; margin-bottom:8px; }
+  .compare-col.white h3 { color:#e5e5e5; }
+  .compare-col.blue h3 { color:#3b82f6; }
+  .compare-item { margin-bottom:12px; }
+  .compare-item .label { font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:#525252; margin-bottom:3px; }
+  .compare-item .good { font-size:11px; color:#a3a3a3; line-height:1.6; }
+  .compare-item .bad { font-size:11px; color:#ef4444; line-height:1.6; opacity:0.6; text-decoration:line-through; margin-top:4px; }
+
+  .footer { text-align:center; color:#262626; font-size:11px; margin-top:64px; padding-top:24px; border-top:1px solid #1a1a1a; }
+
+  @media (max-width: 768px) {
+    .compare-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-title">Insights by Belt Level</div>
+<p class="page-sub">Content examples showing how the same training data produces different insights for white belts vs. blue belts</p>
+
+<div class="intro">
+  <p><strong>The core rule:</strong> White belts need to hear that showing up IS progress. Blue belts need to hear that their techniques are starting to connect. Same data, completely different framing.</p>
+  <p>Every example below uses realistic session data. Read each scenario's context line to understand what the user logged that week, then see how the insight adapts.</p>
+</div>
+
+<!-- ==================== WHITE BELT ==================== -->
+<div class="belt-section">
+  <div class="belt-header">
+    <div class="belt-color belt-white"></div>
+    <span class="belt-name">White Belt (0-2 stripes)</span>
+  </div>
+  <p class="belt-desc">Survival mode. 70-90% quit before blue. Celebrate consistency. Make invisible progress visible. Never overwhelm.</p>
+
+  <div class="scenario-row">
+
+    <!-- White: Week 1 (minimal data) -->
+    <div class="scenario">
+      <div class="scenario-label">Week 1 &middot; Just Started</div>
+      <div class="scenario-context">2 sessions, gi classes only, no techniques logged, no sparring. Total: 2 sessions ever.</div>
+      <div class="phone">
+        <div class="phone-header">
+          <div class="phone-title">Insights</div>
+          <div class="phone-subtitle">Based on 2 sessions</div>
+        </div>
+        <div class="phone-content">
+          <div class="section-label">Mar 24 - 30</div>
+          <div class="card">
+            <span class="badge b-consistency">Consistency</span>
+            <div class="card-title">First Week Done</div>
+            <div class="card-body">Two classes this week. The hardest part of all of this is walking through that door, and you did it twice. Everything else builds from showing up.</div>
+          </div>
+          <div class="focus">
+            <div class="focus-label">Focus Next Week</div>
+            <div class="focus-body">Try to notice what position you end up in most during class. You don't need to name it yet -- just start noticing.</div>
+          </div>
+          <div class="coach">
+            <div class="coach-text">Your coach knows your game better than any app. These observations supplement -- never replace -- their guidance.</div>
+          </div>
+        </div>
+        <div class="phone-tab">
+          <span class="tab-item">Journal</span>
+          <span class="tab-item" style="color:#F5A623; font-size:16px;">+</span>
+          <span class="tab-item active">Insights</span>
+          <span class="tab-item">Profile</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- White: Week 4 (building habit) -->
+    <div class="scenario">
+      <div class="scenario-label">Week 4 &middot; Habit Forming</div>
+      <div class="scenario-context">3 sessions (target: 3), gi classes, drilled hip escapes + closed guard. 2 sparring rounds, submitted 3x. 10 sessions total.</div>
+      <div class="phone">
+        <div class="phone-header">
+          <div class="phone-title">Insights</div>
+          <div class="phone-subtitle">Based on 10 sessions</div>
+        </div>
+        <div class="phone-content">
+          <div class="section-label">Apr 14 - 20</div>
+          <div class="card">
+            <span class="badge b-milestone">Milestone</span><span class="b-new">NEW</span>
+            <div class="card-title">10 Sessions</div>
+            <div class="card-body">Double digits. You've now been to more classes than most people who sign up. This is when it starts to feel less foreign.</div>
+          </div>
+          <div class="card">
+            <span class="badge b-technique">Technique</span>
+            <div class="card-title">Hip Escapes Keep Coming Back</div>
+            <div class="card-body">Third week in a row drilling hip escapes. That repetition is the point -- your body is learning a movement that shows up everywhere in jiu jitsu. It won't feel natural yet, but it will.</div>
+          </div>
+          <div class="card">
+            <span class="badge b-consistency">Consistency</span>
+            <div class="card-title">Hit Your Number</div>
+            <div class="card-body">3 for 3 again this week. Four straight weeks at your target. That consistency matters more than anything else at this stage.</div>
+          </div>
+          <div class="focus">
+            <div class="focus-label">Focus Next Week</div>
+            <div class="focus-body">During sparring, count how many times you get back to guard after being passed. That number is your real progress metric right now.</div>
+          </div>
+        </div>
+        <div class="phone-tab">
+          <span class="tab-item">Journal</span>
+          <span class="tab-item" style="color:#F5A623; font-size:16px;">+</span>
+          <span class="tab-item active">Insights</span>
+          <span class="tab-item">Profile</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- White: Rough week (ego hit) -->
+    <div class="scenario">
+      <div class="scenario-label">Week 8 &middot; Rough Week</div>
+      <div class="scenario-context">2 sessions (target: 3), missed Wednesday. Notes say "got destroyed" and "smaller guy tapped me 4 times." Negative sentiment. 24 sessions total.</div>
+      <div class="phone">
+        <div class="phone-header">
+          <div class="phone-title">Insights</div>
+          <div class="phone-subtitle">Based on 24 sessions</div>
+        </div>
+        <div class="phone-content">
+          <div class="section-label">Jun 2 - 8</div>
+          <div class="card">
+            <span class="badge b-sparring">Sparring</span>
+            <div class="card-title">Tough Rounds Happen</div>
+            <div class="card-body">Getting tapped by someone smaller is one of the most common experiences in jiu jitsu. It has nothing to do with strength or athleticism -- they just have more pattern recognition right now. That gap closes with mat time.</div>
+          </div>
+          <div class="card">
+            <span class="badge b-consistency">Consistency</span>
+            <div class="card-title">Still Showed Up</div>
+            <div class="card-body">2 sessions on a week that didn't feel great. A lot of people skip the week after a hard one. You didn't.</div>
+          </div>
+          <div class="focus">
+            <div class="focus-label">Focus Next Week</div>
+            <div class="focus-body">Try to get back to three sessions. And when you spar, pick one thing to focus on -- like keeping your elbows tight -- instead of trying to "win" the round.</div>
+          </div>
+        </div>
+        <div class="phone-tab">
+          <span class="tab-item">Journal</span>
+          <span class="tab-item" style="color:#F5A623; font-size:16px;">+</span>
+          <span class="tab-item active">Insights</span>
+          <span class="tab-item">Profile</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- White: Injury week -->
+    <div class="scenario">
+      <div class="scenario-label">Week 10 &middot; First Injury</div>
+      <div class="scenario-context">3 sessions, but notes mention "ribs sore" in 2 sessions. Sparring rounds dropped. 30 sessions total. Ribs also mentioned last week.</div>
+      <div class="phone">
+        <div class="phone-header">
+          <div class="phone-title">Insights</div>
+          <div class="phone-subtitle">Based on 30 sessions</div>
+        </div>
+        <div class="phone-content">
+          <div class="section-label">Jun 16 - 22</div>
+          <div class="card">
+            <span class="badge b-risk">Watch</span>
+            <div class="card-title">Ribs Two Weeks Running</div>
+            <div class="card-body">You mentioned rib soreness again this week. That's two weeks in a row. Rib injuries are one of the most common things in jiu jitsu -- but training through them can turn a two-week thing into a two-month thing. Talk to your coach about modifying your training while it heals.</div>
+          </div>
+          <div class="card">
+            <span class="badge b-consistency">Consistency</span>
+            <div class="card-title">Training Through It</div>
+            <div class="card-body">Still got 3 sessions in despite the discomfort. That said, dialing back the sparring intensity was smart -- drilling with control is how you stay on the mats long-term.</div>
+          </div>
+          <div class="focus">
+            <div class="focus-label">Focus Next Week</div>
+            <div class="focus-body">If the ribs are still bothering you, ask your coach if you can drill without live sparring for a week. Staying on the mats at 60% beats being off them completely.</div>
+          </div>
+        </div>
+        <div class="phone-tab">
+          <span class="tab-item">Journal</span>
+          <span class="tab-item" style="color:#F5A623; font-size:16px;">+</span>
+          <span class="tab-item active">Insights</span>
+          <span class="tab-item">Profile</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== WHITE BELT 3-4 STRIPES ==================== -->
+<div class="belt-section">
+  <div class="belt-header">
+    <div class="belt-color belt-white-striped"></div>
+    <span class="belt-name">White Belt (3-4 stripes)</span>
+  </div>
+  <p class="belt-desc">Survived the filter. Starting to see connections. Acknowledge emerging competence without calling it a "system." Pre-promotion window.</p>
+
+  <div class="scenario-row">
+
+    <!-- White 3-4: Techniques connecting -->
+    <div class="scenario">
+      <div class="scenario-label">Week 52 &middot; Things Clicking</div>
+      <div class="scenario-context">4 sessions, drilled half guard underhook + sweeps 3 times. First sweep in live sparring. 130 sessions total. Positive sentiment.</div>
+      <div class="phone">
+        <div class="phone-header">
+          <div class="phone-title">Insights</div>
+          <div class="phone-subtitle">Based on 130 sessions</div>
+        </div>
+        <div class="phone-content">
+          <div class="section-label">Mar 24 - 30</div>
+          <div class="card">
+            <span class="badge b-technique">Technique</span><span class="b-new">NEW</span>
+            <div class="card-title">Half Guard Is Becoming Familiar</div>
+            <div class="card-body">You drilled half guard underhook in 3 of 4 sessions this week. Whether you're choosing it or ending up there, it's becoming a position you know -- not just one you survive. That's a real shift.</div>
+          </div>
+          <div class="card">
+            <span class="badge b-sparring">Sparring</span>
+            <div class="card-title">First Sweep in Live Rolling</div>
+            <div class="card-body">That sweep on Saturday wasn't an accident. Your body did something it's been learning for months. It won't be consistent yet, but the pathway exists now. That's how it starts.</div>
+          </div>
+          <div class="card">
+            <span class="badge b-milestone">Milestone</span>
+            <div class="card-title">130 Sessions</div>
+            <div class="card-body">You've outlasted the vast majority of people who started when you did. The reps are compounding, even when it doesn't feel like it.</div>
+          </div>
+          <div class="focus">
+            <div class="focus-label">Focus Next Week</div>
+            <div class="focus-body">When you get to half guard this week, notice whether you're getting the underhook before or after they settle their weight. The timing makes the difference.</div>
+          </div>
+        </div>
+        <div class="phone-tab">
+          <span class="tab-item">Journal</span>
+          <span class="tab-item" style="color:#F5A623; font-size:16px;">+</span>
+          <span class="tab-item active">Insights</span>
+          <span class="tab-item">Profile</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- White 3-4: Pre-promotion anxiety -->
+    <div class="scenario">
+      <div class="scenario-label">Week 60 &middot; Plateau Feels</div>
+      <div class="scenario-context">3 sessions (target: 4), missed one. Notes: "feel like I should be further along." Same techniques as last 3 weeks. 150 sessions. Mixed sentiment.</div>
+      <div class="phone">
+        <div class="phone-header">
+          <div class="phone-title">Insights</div>
+          <div class="phone-subtitle">Based on 150 sessions</div>
+        </div>
+        <div class="phone-content">
+          <div class="section-label">May 19 - 25</div>
+          <div class="card">
+            <span class="badge b-technique">Technique</span>
+            <div class="card-title">Depth Over Breadth</div>
+            <div class="card-body">Same core techniques three weeks running -- half guard, hip escapes, closed guard sweeps. That's not stagnation. That's you going deeper on the things that matter instead of chasing new moves every week.</div>
+          </div>
+          <div class="card">
+            <span class="badge b-consistency">Consistency</span>
+            <div class="card-title">150 Sessions In</div>
+            <div class="card-body">You wrote that you feel like you should be further along. 150 sessions of showing up, drilling, sparring, and logging is further along than you think. Progress in jiu jitsu is invisible until suddenly it isn't.</div>
+          </div>
+          <div class="focus">
+            <div class="focus-label">Focus Next Week</div>
+            <div class="focus-body">Pick one thing you couldn't do three months ago that you can do now. Even if it's small -- holding guard 10 seconds longer, recognizing a sweep setup, staying calm when mounted. That's real.</div>
+          </div>
+        </div>
+        <div class="phone-tab">
+          <span class="tab-item">Journal</span>
+          <span class="tab-item" style="color:#F5A623; font-size:16px;">+</span>
+          <span class="tab-item active">Insights</span>
+          <span class="tab-item">Profile</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ==================== BLUE BELT ==================== -->
+<div class="belt-section">
+  <div class="belt-header">
+    <div class="belt-color belt-blue"></div>
+    <span class="belt-name">Blue Belt</span>
+  </div>
+  <p class="belt-desc">Blue Belt Blues. 50-60% quit before purple. Name what's developing. Connect techniques to each other. Treat them like a peer.</p>
+
+  <div class="scenario-row">
+
+    <!-- Blue: Game developing -->
+    <div class="scenario">
+      <div class="scenario-label">Week 4 at Blue &middot; Game Forming</div>
+      <div class="scenario-context">4 sessions, 2 gi / 2 nogi. Drilled SLX, heel hook entries, k-guard. 12 sparring rounds, 3 heel hooks given, 2 guillotines received. 190 sessions total.</div>
+      <div class="phone">
+        <div class="phone-header">
+          <div class="phone-title">Insights</div>
+          <div class="phone-subtitle">Based on 190 sessions</div>
+        </div>
+        <div class="phone-content">
+          <div class="section-label">Apr 7 - 13</div>
+          <div class="card">
+            <span class="badge b-technique">Technique</span><span class="b-new">NEW</span>
+            <div class="card-title">Leg Lock Chain Is Forming</div>
+            <div class="card-body">SLX into heel hook entries, with k-guard as the backup when the finish isn't there. Three heel hooks in sparring says the reps are translating. These techniques are starting to talk to each other.</div>
+          </div>
+          <div class="card">
+            <span class="badge b-sparring">Sparring</span>
+            <div class="card-title">Guillotine Problem</div>
+            <div class="card-body">Caught by guillotines twice this week. Your head position entering on guard pulls or shots might be the common thread -- worth paying attention to where your head is right before you get caught.</div>
+          </div>
+          <div class="card">
+            <span class="badge b-consistency">Consistency</span>
+            <div class="card-title">Even Split</div>
+            <div class="card-body">2 gi, 2 nogi. The nogi sessions are where your leg lock game gets reps. The gi sessions are forcing you to solve different problems. Both matter.</div>
+          </div>
+          <div class="focus">
+            <div class="focus-label">Focus Next Week</div>
+            <div class="focus-body">Spend 5 minutes each open mat drilling guillotine defense from the positions where you keep getting caught. You already know which ones.</div>
+          </div>
+        </div>
+        <div class="phone-tab">
+          <span class="tab-item">Journal</span>
+          <span class="tab-item" style="color:#F5A623; font-size:16px;">+</span>
+          <span class="tab-item active">Insights</span>
+          <span class="tab-item">Profile</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blue: Plateau -->
+    <div class="scenario">
+      <div class="scenario-label">Month 8 at Blue &middot; The Plateau</div>
+      <div class="scenario-context">3 sessions (target: 4), same techniques as last month, submission count flat. Notes: "not improving." 230 sessions total. Negative sentiment.</div>
+      <div class="phone">
+        <div class="phone-header">
+          <div class="phone-title">Insights</div>
+          <div class="phone-subtitle">Based on 230 sessions</div>
+        </div>
+        <div class="phone-content">
+          <div class="section-label">Nov 3 - 9</div>
+          <div class="card">
+            <span class="badge b-technique">Technique</span>
+            <div class="card-title">Same Techniques, Deeper Grooves</div>
+            <div class="card-body">Half guard, closed guard, arm drags -- this is the same core as last month. That's not stagnation at blue belt. That's your game getting more refined. New techniques are exciting but depth in your existing game is what makes it work under pressure.</div>
+          </div>
+          <div class="card">
+            <span class="badge b-sparring">Sparring</span>
+            <div class="card-title">The Numbers Aren't Moving</div>
+            <div class="card-body">Similar submission count, similar rounds. The Blue Belt Blues are real -- the learning curve flattens and progress becomes invisible. But "not improving" and "improving in ways you can't measure week to week" look identical from the inside.</div>
+          </div>
+          <div class="focus">
+            <div class="focus-label">Focus Next Week</div>
+            <div class="focus-body">Next open mat, start every round from your worst position. If you survive longer than you did two months ago, that's progress the numbers won't show you.</div>
+          </div>
+        </div>
+        <div class="phone-tab">
+          <span class="tab-item">Journal</span>
+          <span class="tab-item" style="color:#F5A623; font-size:16px;">+</span>
+          <span class="tab-item active">Insights</span>
+          <span class="tab-item">Profile</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blue: Injury + overtraining -->
+    <div class="scenario">
+      <div class="scenario-label">Month 14 at Blue &middot; Pushing It</div>
+      <div class="scenario-context">5 sessions, 16 rounds. Knee mentioned in 2 sessions (recurring from last week). Submitted a purple belt. 280 sessions total.</div>
+      <div class="phone">
+        <div class="phone-header">
+          <div class="phone-title">Insights</div>
+          <div class="phone-subtitle">Based on 280 sessions</div>
+        </div>
+        <div class="phone-content">
+          <div class="section-label">Feb 17 - 23</div>
+          <div class="card">
+            <span class="badge b-risk">Watch</span><span class="b-new">NEW</span>
+            <div class="card-title">Knee Is Talking Again</div>
+            <div class="card-body">Left knee mentioned in two sessions this week, and it came up last week too. That's three weeks. Training through joint pain at this volume is how short-term issues become long-term problems. Talk to your coach about whether your heel hook defense mechanics need adjusting, or if you need to dial back the leg entanglement work temporarily.</div>
+          </div>
+          <div class="card">
+            <span class="badge b-sparring">Sparring</span>
+            <div class="card-title">Caught a Purple Belt</div>
+            <div class="card-body">That submission on a purple belt isn't a fluke at 280 sessions. Your game is reaching a level where belt color matters less than position and timing. Don't overthink it -- just note what position you were in and what set it up.</div>
+          </div>
+          <div class="card">
+            <span class="badge b-consistency">Consistency</span>
+            <div class="card-title">5 Sessions, 16 Rounds</div>
+            <div class="card-body">That's high volume. If the knee weren't an issue, this would be a strong week. But the knee IS an issue -- and 5 sessions might be why.</div>
+          </div>
+          <div class="focus">
+            <div class="focus-label">Focus Next Week</div>
+            <div class="focus-body">Drop to 3-4 sessions and cut the nogi leg entanglement rounds until the knee settles. Your game will still be there when you come back to it.</div>
+          </div>
+        </div>
+        <div class="phone-tab">
+          <span class="tab-item">Journal</span>
+          <span class="tab-item" style="color:#F5A623; font-size:16px;">+</span>
+          <span class="tab-item active">Insights</span>
+          <span class="tab-item">Profile</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blue: Tapped by white belt -->
+    <div class="scenario">
+      <div class="scenario-label">Month 6 at Blue &middot; Ego Check</div>
+      <div class="scenario-context">3 sessions, 8 rounds. Notes: "white belt caught me with a triangle." Negative sentiment. Guard passing dropped. 210 sessions total.</div>
+      <div class="phone">
+        <div class="phone-header">
+          <div class="phone-title">Insights</div>
+          <div class="phone-subtitle">Based on 210 sessions</div>
+        </div>
+        <div class="phone-content">
+          <div class="section-label">Sep 8 - 14</div>
+          <div class="card">
+            <span class="badge b-sparring">Sparring</span>
+            <div class="card-title">White Belts Catch Everyone</div>
+            <div class="card-body">Getting caught by a white belt stings at blue. But it happens to everyone -- including purple and brown belts who won't admit it. The triangle they caught you with tells you something about your posture in their guard. That's useful data, not a failure.</div>
+          </div>
+          <div class="card">
+            <span class="badge b-technique">Technique</span>
+            <div class="card-title">Guard Passing Went Quiet</div>
+            <div class="card-body">No passing work logged in two weeks. Your last few sessions have been heavy on guard retention. If that's intentional, fine -- sometimes you need to shore up the bottom game. But if you stopped passing because you're avoiding top positions, that's worth noticing.</div>
+          </div>
+          <div class="focus">
+            <div class="focus-label">Focus Next Week</div>
+            <div class="focus-body">Start one roll from standing or top position. Get back to passing. The worst thing that happens is you end up in their guard again -- and you already know how to play there.</div>
+          </div>
+        </div>
+        <div class="phone-tab">
+          <span class="tab-item">Journal</span>
+          <span class="tab-item" style="color:#F5A623; font-size:16px;">+</span>
+          <span class="tab-item active">Insights</span>
+          <span class="tab-item">Profile</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ==================== SIDE BY SIDE COMPARISON ==================== -->
+<div class="compare">
+  <h2>Same Data, Different Belt -- Side by Side</h2>
+  <p style="font-size:13px; color:#525252; margin-bottom:20px;">Both users trained 3 times this week, drilled guard techniques, sparred 4 rounds, and got submitted twice. Here's how the insight differs:</p>
+
+  <div class="compare-grid">
+    <div class="compare-col white">
+      <h3>White Belt (Session #18)</h3>
+
+      <div class="compare-item">
+        <div class="label">Technique Insight</div>
+        <div class="good">"Closed guard and hip escapes again this week. The repetition is the point -- your body is memorizing these movements so they'll be there when you need them in sparring."</div>
+        <div class="bad">"Your guard system is developing with a clear closed guard emphasis."</div>
+      </div>
+
+      <div class="compare-item">
+        <div class="label">Sparring Insight</div>
+        <div class="good">"Got caught by an armbar and a collar choke. Those are two of the most common submissions at every level. Now you know what they feel like -- that's step one of learning to defend them."</div>
+        <div class="bad">"Submission ratio is 0:2 this week, down from last week."</div>
+      </div>
+
+      <div class="compare-item">
+        <div class="label">Focus Next</div>
+        <div class="good">"When you feel that armbar grip tighten, try pulling your elbow toward your hip before they extend. You'll get it wrong at first -- that's fine."</div>
+        <div class="bad">"Work on your armbar defense positioning and submission prevention strategy."</div>
+      </div>
+    </div>
+
+    <div class="compare-col blue">
+      <h3>Blue Belt (Session #195)</h3>
+
+      <div class="compare-item">
+        <div class="label">Technique Insight</div>
+        <div class="good">"Third straight week of guard work. Your open guard and closed guard are getting equal reps, which is unusual -- most blue belts lean one way. That versatility is worth keeping."</div>
+        <div class="bad">"Great job drilling guard techniques this week! Keep it up!"</div>
+      </div>
+
+      <div class="compare-item">
+        <div class="label">Sparring Insight</div>
+        <div class="good">"Armbar and collar choke caught you this week. Both are top-position finishes -- your guard retention might be the leak. Were you getting passed first, or were they finishing from inside your guard?"</div>
+        <div class="bad">"Don't worry about getting submitted! It happens to everyone!"</div>
+      </div>
+
+      <div class="compare-item">
+        <div class="label">Focus Next</div>
+        <div class="good">"Pay attention to the 5 seconds before each submission catch. If you're getting passed first, that's a guard retention issue. If they're finishing from inside your guard, your frame management needs work."</div>
+        <div class="bad">"Keep working hard and you'll see improvement soon!"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotation" style="margin-top:24px;">
+    <div class="annotation-label">Key Differences</div>
+    <p><em>White belt:</em> Names the technique, normalizes getting caught, gives a physical cue they can try tomorrow. Never quantifies the submission ratio. Never uses "system" or "game."</p>
+    <p><em>Blue belt:</em> Looks at the same data analytically. Asks diagnostic questions. Assumes they can identify the position where things went wrong. Challenges them to investigate, doesn't just reassure.</p>
+    <p><em>The red strikethrough text</em> shows what the wrong tone looks like for each belt. White belts don't need "system" language. Blue belts don't need cheerleading.</p>
+  </div>
+</div>
+
+<div class="footer">
+  TOMO &middot; FEAT-002 Insights Content Strategy &middot; March 30, 2026
+</div>
+
+</body>
+</html>

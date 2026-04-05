@@ -431,6 +431,46 @@ class GoogleTTS {
   }
 
   /**
+   * Play text using a pre-generated audio URL for the first chunk.
+   * Called by UIController when prefetched audio is available, so playback
+   * starts instantly without waiting for an API round-trip.
+   */
+  async playWithPrefetch(text, prefetchedAudioUrl) {
+    this.stop();
+    this.fullText = text;
+
+    // Chunk the text
+    const chunks = this.chunkText(text);
+
+    // Calculate chunk offsets for progress tracking
+    this.chunkOffsets = [];
+    let offset = 0;
+    for (const chunk of chunks) {
+      this.chunkOffsets.push(offset);
+      offset += chunk.length;
+    }
+
+    // Use the prefetched audio for chunk 0
+    this.audioQueue = [];
+    this.currentQueueIndex = 0;
+    this.audioQueue[0] = prefetchedAudioUrl;
+
+    // Start playing immediately (no API call needed for first chunk)
+    this.isPlaying = true;
+    this.isPaused = false;
+    this.playCurrentChunk();
+
+    // Generate remaining chunks in background
+    for (let i = 1; i < chunks.length; i++) {
+      this.generateAudio(chunks[i]).then(blob => {
+        this.audioQueue[i] = URL.createObjectURL(blob);
+      }).catch(err => {
+        console.error(`Failed to generate chunk ${i}:`, err);
+      });
+    }
+  }
+
+  /**
    * Play text with chunking support
    */
   async play(text, startChar = 0) {

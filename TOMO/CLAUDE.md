@@ -6,38 +6,41 @@
 
 > **Every Claude Code session that modifies code MUST update the tracking files before finishing.**
 
-**Location:** `docs/mvp-1.0/tracking/`
+**Location:** `mvp-1.0/docs/tracking/` (bugs + changelog) and `mvp-1.0/docs/features/` (planned features)
 
 | File | Purpose |
 |------|---------|
 | `CHANGELOG.md` | What changed, why, and how it was verified |
 | `ISSUES.md` | Active bugs, blockers, and feature requests |
+| `mvp-1.0/docs/features/README.md` | **Features backlog** - prioritized list of planned features |
+| `mvp-1.0/docs/features/<name>/` | Major feature subfolders (strategy, spec, tasks) |
 
 ### At the END of every session:
 
-1. **Update `CHANGELOG.md`** — Add a dated entry with all changes made this session. Include type (Build/Fix/Polish/Refactor/Feature), what changed, why, and how it was tested.
-2. **Update `ISSUES.md`** — Add any new bugs or issues discovered. Mark resolved items as Done. Move completed items to the Completed section.
+1. **Update `CHANGELOG.md`** - Add a dated entry with all changes made this session. Include type (Build/Fix/Polish/Refactor/Feature), what changed, why, and how it was tested.
+2. **Update `ISSUES.md`** - Add any new bugs or issues discovered. Mark resolved items as Done. Move completed items to the Completed section.
 3. **Run `npx tsc --noEmit`** before closing to verify no TypeScript errors.
-4. **Recommend testing path** — Tell Drew whether to test locally or deploy to TestFlight (see Testing & Deployment below).
+4. **Recommend testing path** - Tell Drew whether to test locally or deploy to TestFlight (see Testing & Deployment below).
 
 ### At the START of every session:
 
-1. **Read `ISSUES.md`** — Check for blockers and open bugs before starting new work.
-2. **Read the latest entry in `CHANGELOG.md`** — Understand what was done last.
+1. **Read `ISSUES.md`** - Check for blockers and open bugs before starting new work.
+2. **Read the latest entry in `CHANGELOG.md`** - Understand what was done last.
 
 ### Work Priority (Active as of March 28, 2026)
 
 > **Design Audit items (DA-/DS- prefixes) take precedence over all other open issues.**
 
-A full UX audit was conducted on 2026-03-28. Findings are in `ISSUES.md` under "ACTIVE PRIORITY: Design Audit". Full report at `docs/design-reviews/ux-audit-2026-03-28.md`.
+A full UX audit was conducted on 2026-03-28. Findings are in `ISSUES.md` under "ACTIVE PRIORITY: Design Audit". Full report at `mvp-1.0/docs/design-reviews/ux-audit-2026-03-28.md`.
 
 **When picking work, follow this order:**
 1. DA- items (P0/P1 first, then P2)
 2. DS- items (design system gaps)
-3. Existing CR-/UX-/INS- items (paused until DA/DS resolved or Drew says otherwise)
-4. P3 polish
+3. Features backlog (`mvp-1.0/docs/features/README.md`) - FEAT- items by priority
+4. Existing CR-/UX-/INS- items (paused until DA/DS resolved or Drew says otherwise)
+5. P3 polish
 
-This priority override stays in effect until Drew removes it or all DA-/DS- items are resolved.
+DA/DS priority override stays in effect until Drew removes it or all DA-/DS- items are resolved. The features backlog is the source of truth for planned work beyond bug fixes.
 
 ---
 
@@ -49,8 +52,8 @@ This priority override stays in effect until Drew removes it or all DA-/DS- item
 
 | Path | Command | Speed | When to Use |
 |------|---------|-------|-------------|
-| **Local Dev** | `SENTRY_DISABLE_AUTO_UPLOAD=true npx expo run:ios --device` | Instant (hot reload) | During development — every code change |
-| **TestFlight** | `bash build.sh` | 20-30 min | Milestones only — when testers need a new version |
+| **Local Dev** | `cd mvp-1.0/app && SENTRY_DISABLE_AUTO_UPLOAD=true npx expo run:ios --device` | Instant (hot reload) | During development - every code change |
+| **TestFlight** | `cd mvp-1.0/app && bash build.sh` | 20-30 min | Milestones only - when testers need a new version |
 
 ### When to Recommend LOCAL Testing
 
@@ -60,54 +63,57 @@ Recommend local testing when:
 - Work is still in progress or experimental
 - Only Drew needs to see the result
 
-Say: **"Run this locally to test — no need for TestFlight yet."**
+Say: **"Run this locally to test - no need for TestFlight yet."**
 
 ### When to Recommend TESTFLIGHT Deployment
 
 Recommend TestFlight **only** when ALL of these are true:
-1. **TypeScript clean** — `npx tsc --noEmit` passes with zero errors
-2. **Feature complete** — The change set is a coherent milestone (not half-finished)
-3. **Locally tested** — Drew has verified the changes work on his phone
-4. **Testers need it** — Other people need to try the new version
+1. **TypeScript clean** - `npx tsc --noEmit` passes with zero errors
+2. **Feature complete** - The change set is a coherent milestone (not half-finished)
+3. **Locally tested** - Drew has verified the changes work on his phone
+4. **Testers need it** - Other people need to try the new version
 
 Say: **"This looks ready for TestFlight. Want me to run `bash build.sh` to ship it to your testers?"**
 
 ### Never Auto-Deploy
 
 - **NEVER** run `build.sh` without Drew's explicit approval
-- **NEVER** suggest TestFlight for a single bug fix or small tweak — local test first
+- **NEVER** suggest TestFlight for a single bug fix or small tweak - local test first
 - **ALWAYS** confirm the testing path at the end of a session
 
 ### TestFlight Deploy Process
 
-Full guide: `docs/mvp-1.0/DEPLOYMENT_GUIDE.md`
+Full guide: `mvp-1.0/docs/DEPLOYMENT_GUIDE.md`
 
 ```
-bash build.sh    # Builds IPA + submits to TestFlight (~20-30 min)
+cd mvp-1.0/app && bash build.sh    # Builds IPA + submits to TestFlight (~20-30 min)
 ```
 
 - Build number auto-increments
 - Internal testers get it within minutes
 - External testers may wait 24-48h (first build to a new group only)
-- All credentials are pre-configured — no manual steps needed
+- All credentials are pre-configured - no manual steps needed
 
 ---
 
 ## Project Overview
 
-BJJ Journal is a voice-first training journal app for Brazilian Jiu-Jitsu practitioners. The app helps users log training sessions, track belt progression, and build a personal technique library.
+TOMO is a voice-first training journal app for Brazilian Jiu-Jitsu practitioners. The app helps users log training sessions, track belt progression, and build a personal technique library.
 
 **Core Value Proposition:** Capture training insights at the critical post-training moment when information is fresh but users are exhausted.
 
 ## Tech Stack
 
-- **Framework:** React 19 with TypeScript
-- **Build Tool:** Vite
-- **Styling:** Tailwind CSS v4 with custom design tokens (design system in `/prototype/src/index.css`)
-- **State Management:** React Context (UserProfileContext)
-- **Storage:** localStorage (prototype), API-ready patterns
-- **No external UI libraries** - custom components only
-- **Hosting:** Cloudflare Pages (bjjj.pages.dev)
+| Layer | Technology | Status |
+|-------|------------|--------|
+| Mobile App | React Native + Expo (managed workflow) | Live on TestFlight |
+| Database | Supabase (PostgreSQL) | Active |
+| Auth | Supabase Auth (Email + Apple Sign-In) | Active |
+| Voice Transcription | AssemblyAI (180 BJJ terms word_boost) | Active |
+| AI Extraction | Claude Haiku 4.5 (via Edge Function) | Active |
+| Audio Storage | Supabase Storage (private bucket, signed URLs) | Active |
+| Crash Reporting | Sentry | Active |
+| iOS Builds | Expo EAS (local builds) | Active |
 
 ---
 
@@ -116,26 +122,24 @@ BJJ Journal is a voice-first training journal app for Brazilian Jiu-Jitsu practi
 > **CRITICAL FOR AI AGENTS:** Any folder named `_archived/` contains historical documents that are **NOT** for production use.
 
 **Ignore these locations:**
-- `/docs/product/_archived/` - Superseded product specs
-- `/prototype/src/components/features/_archived/` - Unused component implementations
-- `/prototype/src/data/_inactive/` - Spec files not yet integrated
+- `_archived/prototype/` - Old web prototype (bjjj.pages.dev). Replaced by the iOS app.
+- `_archived/mobile-prep/` - Migration templates used during initial iOS setup.
+- `_archived/ux-exploration/` - Pre-MVP UX design workspace.
+- `docs/product/_archived/` - Superseded product specs.
 
-When working on TOMO, **only use active documentation**. If you encounter an `_archived` folder, do not read or reference its contents for current development work.
+When working on TOMO, **only use active files inside `mvp-1.0/`**. If you encounter an `_archived` folder, do not read or reference its contents for current development work.
 
-**Active documentation locations:**
-- `/docs/product/` (excluding `_archived/`)
-- `/docs/project/`
-- `/docs/research/`
-- `/docs/design-system/`
-- `/docs/personas/`
+**Active locations:**
+- `mvp-1.0/app/src/` - All source code
+- `mvp-1.0/design/` - Brand assets, icons, screen reference
+- `mvp-1.0/docs/` - Tracking, features, deployment, design system
+- `docs/` - Foundational docs (brand voice, research, personas, legal)
 
 ---
 
 ## CRITICAL: Data Integrity Rules
 
 > **NEVER FABRICATE DATA.** This is a non-negotiable rule.
-
-### What This Means:
 
 1. **External IDs must be verified** - YouTube video IDs, API keys, URLs, database IDs, or any external reference must be confirmed to exist before adding to the codebase. Never generate plausible-looking IDs.
 
@@ -145,172 +149,81 @@ When working on TOMO, **only use active documentation**. If you encounter an `_a
 
 4. **Prefer gaps over fabrication** - It's better to have incomplete data than fake data. Leave fields empty or use explicit placeholders like `PLACEHOLDER_NEEDS_REAL_ID` rather than inventing values.
 
-### Video Database Specific Rules:
-
-For `/prototype/src/data/techniqueVideos.ts`:
-- Every `youtube_id` must link to a real, working YouTube video
-- The video content must actually teach the technique it's assigned to
-- Verify by fetching the video page or using YouTube Data API
-- If unable to verify, mark with `youtube_id: 'NEEDS_VERIFICATION'`
-
-### Why This Matters:
-
-Fabricated data causes:
-- Broken user experiences (dead links, 404s)
-- Lost trust in the product
-- Wasted debugging time
-- Potential legal/copyright issues with misattributed content
-
----
-
-## Development Process (PROTOTYPE PHASE)
-
-> **IMPORTANT:** This process is for the prototype phase only. It will change when we move to App Store deployment or backend development.
-
-### Where Code Lives
-
-```
-LOCAL (your laptop)  →  REMOTE (GitHub)  →  PRODUCTION (live site)
-    npm run dev           git push            wrangler deploy
-   localhost:5173                            bjjj.pages.dev
-```
-
-### One-Command Deploy: `npm run ship`
-
-**This is the standard workflow.** From the `/prototype` directory:
-
-```bash
-npm run ship
-```
-
-This single command runs the full pipeline:
-1. **Build** - Compiles TypeScript, catches errors
-2. **Lint** - Runs ESLint, catches code quality issues
-3. **Commit** - Stages all changes, auto-generates timestamped commit
-4. **Push** - Pushes to `main` branch on GitHub
-5. **Deploy** - Deploys to Cloudflare Pages via Wrangler
-6. **Confirm** - Prints success message with live URL
-
-**If any step fails, the pipeline stops.** Broken code never reaches production.
-
-### Custom Commit Messages
-
-When you need a descriptive commit message instead of auto-generated:
-
-```bash
-npm run ship:m "Add new feature" && git push origin main && npm run deploy
-```
-
-### All Available Commands
-
-| Command | What it does |
-|---------|--------------|
-| `npm run dev` | Local dev server at localhost:5173 |
-| `npm run build` | Compile TypeScript + Vite build |
-| `npm run lint` | Run ESLint checks |
-| `npm run preview` | Preview production build locally |
-| `npm run deploy` | Deploy `dist/` to bjjj.pages.dev |
-| `npm run ship` | **Full pipeline:** build → lint → commit → push → deploy |
-| `npm run ship:m "msg"` | Build + lint + commit with custom message (then push/deploy manually) |
-
-### Local Testing
-
-1. Run `npm run dev` to start local server
-2. Test changes at http://localhost:5173
-3. When satisfied, run `npm run ship` to deploy
-
-### Testing Belt Personalization
-
-1. Go to Profile (tap avatar top-right)
-2. Tap "Settings" at bottom
-3. Use Demo Mode belt switcher
-4. Select White / Blue / Purple / Brown
-5. Navigate app to see personalized content
-
----
-
-## Belt Personalization System (PRIORITY)
-
-> **Built Dec 2024** - Use this system to personalize ALL user-facing features.
-
-A comprehensive belt-aware personalization engine exists at `/prototype/src/config/belt-system/`. **Leverage this in all new feature work.**
-
-**Key Documentation:**
-- **Integration Spec:** `/docs/product/BELT_INTEGRATION_SPEC.md` — Per-page contracts, implementation status, code patterns
-- **Psychology System:** `/docs/product/BELT_PERSONALIZATION_SYSTEM.md` — Full belt profiles, risk signals, journal patterns
-
-### Quick Access
-```typescript
-import { useBeltPersonalization } from '@/hooks';
-
-const { profile, dashboard, chatbot, videoTutorials, analyzeJournal } = useBeltPersonalization();
-```
-
-### What It Provides
-- **Belt Psychology Profiles** - Struggles, motivations, plateaus per belt
-- **Feature Adaptations** - Dashboard, session logger, chatbot, video recommendations
-- **Risk Detection** - Dropout warning signs with belt-specific interventions
-- **Journal Analysis** - Detect ego challenges, breakthroughs, injuries in text
-
-### Priority Integration Points
-1. **Chatbot/AI responses** - Use `chatbot.toneProfile`, `chatbot.technicalVocabulary`
-2. **Video suggestions** - Use `videoTutorials.recommendedCategories`
-3. **Dashboard metrics** - Use `dashboard.primaryMetric`, `dashboard.insightFocus`
-4. **Post-session messages** - Use `sessionLogger.postSessionMessage`
-
-See `/docs/product/BELT_PERSONALIZATION_SYSTEM.md` for full documentation.
-
 ---
 
 ## Project Structure
 
 ```
-/prototype/src/
-├── components/
-│   ├── features/          # Feature components (screens)
-│   │   ├── Dashboard.tsx
-│   │   ├── SessionLogger.tsx    # Primary logger (wraps VoiceFirstLogger)
-│   │   ├── VoiceFirstLogger.tsx # Active voice logging implementation
-│   │   ├── SessionHistory.tsx
-│   │   ├── SessionDetail.tsx
-│   │   ├── BeltProgress.tsx
-│   │   ├── TechniqueLibrary.tsx
-│   │   ├── ProfileScreen.tsx
-│   │   ├── Settings.tsx
-│   │   └── _archived/     # Unused alternative loggers
-│   ├── layout/            # Layout components
-│   │   ├── Header.tsx
-│   │   └── TabBar.tsx
-│   └── ui/                # Reusable UI primitives
-│       ├── Icons.tsx      # 95+ SVG icons
-│       ├── StatCard.tsx, BeltBadge.tsx, ProgressRing.tsx
-│       ├── ErrorState.tsx, EmptyState.tsx, Skeleton.tsx
-│       └── Toast.tsx, NotFound.tsx
-├── config/
-│   ├── app.ts             # App config, feature flags
-│   └── belt-system/       # Belt personalization engine
-├── hooks/
-│   └── useBeltPersonalization.ts
-├── context/
-│   └── UserProfileContext.tsx
-├── data/                  # Mock data
-│   ├── techniques.ts, progress.ts, journal.ts, users.ts
-│   └── _inactive/         # Spec files not yet integrated
-├── services/              # API abstraction (Supabase-ready)
-├── types/                 # TypeScript definitions
-├── utils/                 # Helper functions
-├── App.tsx
-└── index.css              # Design system CSS
-
-/docs/                     # All documentation
-├── design-system/         # Source of truth for UI
-├── product/               # Feature specs, belt personalization
-├── project/               # Status, feature tracker
-├── deployment/            # iOS plans, GTM
-├── personas/              # User profiles
-├── research/              # Market research
-└── brand/                 # Voice guidelines
+TOMO/
+├── CLAUDE.md                        # This file
+├── credentials.local                # API keys (gitignored)
+│
+├── mvp-1.0/                         # ALL active work lives here
+│   ├── app/                         # iOS codebase (React Native + Expo)
+│   │   ├── src/
+│   │   │   ├── screens/             # All app screens
+│   │   │   │   ├── SessionLoggerScreen.tsx    # 5-phase voice logger
+│   │   │   │   ├── JournalScreen.tsx          # Session list
+│   │   │   │   ├── SessionDetailScreen.tsx    # View/edit saved session
+│   │   │   │   ├── InsightsScreen.tsx         # Weekly insights
+│   │   │   │   ├── ProfileScreen.tsx          # User profile + settings
+│   │   │   │   ├── AuthScreen.tsx             # Sign in / sign up
+│   │   │   │   └── onboarding/                # 4 onboarding screens
+│   │   │   ├── components/          # Reusable UI (Icons, Toast, GymChip, etc.)
+│   │   │   ├── hooks/               # useAuth, useVoiceRecorder, useInsightTypewriter
+│   │   │   ├── services/            # Supabase client, insights engine, offline queue
+│   │   │   ├── config/              # Design tokens, belt system
+│   │   │   ├── data/                # BJJ dictionary, quotes, gym database
+│   │   │   ├── types/               # TypeScript definitions
+│   │   │   ├── utils/               # Helpers (haptics, logger, text)
+│   │   │   └── navigation/          # Tab navigator, onboarding navigator
+│   │   ├── supabase/                # Migrations + edge functions
+│   │   ├── assets/                  # App icon, splash, fonts
+│   │   ├── build.sh                 # TestFlight build script
+│   │   ├── app.config.ts            # Expo configuration
+│   │   └── eas.json                 # EAS build profiles
+│   │
+│   ├── design/                      # Visual design assets
+│   │   ├── brand/                   # Logos, mark, guidelines
+│   │   ├── icons/                   # SVG icon library
+│   │   ├── style-guide/             # Design tokens, typography
+│   │   └── screens/                 # Screen reference + HTML mockups
+│   │
+│   └── docs/                        # MVP-specific documentation
+│       ├── tracking/                # ISSUES.md + CHANGELOG.md
+│       ├── features/                # Feature backlog + feature subfolders
+│       ├── design-reviews/          # UX audit reports
+│       ├── design-system/           # Token reference, interactive browsers
+│       ├── insights/                # Insights feature architecture
+│       ├── beta-launch/             # Alliance Paoli onboarding
+│       ├── data-and-ai/             # AI strategy, voice pipeline
+│       └── DEPLOYMENT_GUIDE.md      # TestFlight deployment
+│
+├── docs/                            # Foundational docs (version-independent)
+│   ├── brand/                       # Voice, tone guidelines
+│   ├── research/                    # User research, competitive analysis
+│   ├── personas/                    # User profiles
+│   ├── domain-knowledge/            # BJJ curriculum, belt criteria
+│   ├── product/                     # Belt personalization, feature concepts
+│   ├── legal/                       # Privacy policy, terms
+│   ├── development/                 # Dev practices
+│   ├── project/                     # Project status, roadmap
+│   ├── RFP/                         # Business documents
+│   └── FIRST_PRINCIPLES.md          # Non-negotiable product beliefs
+│
+└── _archived/                       # Historical reference only
+    ├── prototype/                   # Web prototype (bjjj.pages.dev)
+    └── ...                          # See _archived/README.md
 ```
+
+## Screen Reference
+
+All screens are documented with named elements and workflows at:
+- `mvp-1.0/design/screens/index.html` - Element names for every screen
+- `mvp-1.0/design/screens/mockups.html` - Visual mockups of every screen
+- `mvp-1.0/design/screens/workflows.md` - How screens connect
+
+Use these names when requesting UI changes (e.g., "On the **Review Phase**, change the **Save Session Button** color").
 
 ## Brand Voice: "The Dedicated Training Partner"
 
@@ -328,13 +241,11 @@ Our app speaks like a knowledgeable, warm, and grounded training partner:
 - Celebrate consistency over perfection
 - Never use hollow superlatives ("Amazing job!")
 - **Session logging:** Ultra-concise (90-second window)
-- **Stats/Techniques/Journal:** Longer content OK—users are browsing leisurely
+- **Stats/Techniques/Journal:** Longer content OK - users are browsing leisurely
 
 ## Design System
 
-> **CRITICAL: Source of Truth**
->
-> The authoritative design system lives in `/docs/design-system/`. All UI decisions MUST reference these files:
+> **Source of Truth:** `mvp-1.0/docs/design-system/`
 >
 > | File | Purpose |
 > |------|---------|
@@ -342,11 +253,10 @@ Our app speaks like a knowledgeable, warm, and grounded training partner:
 > | `styles.css` | Production-ready CSS with all tokens and components |
 > | `index.html` | Interactive design system browser (open in browser) |
 > | `icons.html` | Full icon library (95+ icons) |
-> | `typography.html` | Typography demonstrations |
 >
 > **When making UI changes, Claude MUST:**
-> 1. Reference `/docs/design-system/tokens.md` for correct values
-> 2. Use existing CSS classes from `/docs/design-system/styles.css`
+> 1. Reference `tokens.md` for correct values
+> 2. Reference `mvp-1.0/app/src/config/design-tokens.ts` for React Native values
 > 3. Never invent new colors, spacing, or typography values
 
 ### Design Principles (Non-Negotiable)
@@ -355,77 +265,37 @@ Our app speaks like a knowledgeable, warm, and grounded training partner:
 2. **Dark Theme** - `#111111` background with gold accents
 3. **Large Typography** - Hero numbers up to 144-180px
 4. **Semantic Colors** - GREEN = positive, RED = negative (never swap)
-5. **Full-Bleed Sections** - Minimal rounded corners, gradient backgrounds
-6. **Unbounded + Inter + JetBrains Mono** - Unbounded for headlines/numbers, Inter for body, JetBrains Mono for labels
-7. **Font Weight 500+ Only** - Weight 400 is PROHIBITED (too thin for dark backgrounds)
-8. **12px Minimum Font Size** - Nothing smaller, ever
+5. **Unbounded + Inter + JetBrains Mono** - Unbounded for headlines/numbers, Inter for body, JetBrains Mono for labels
+6. **Font Weight 500+ Only** - Weight 400 is PROHIBITED (too thin for dark backgrounds)
+7. **12px Minimum Font Size** - Nothing smaller, ever
 
 ### Quick Token Reference
 
-See `/docs/design-system/tokens.md` for complete reference. Key values:
+See `mvp-1.0/docs/design-system/tokens.md` for complete reference. Key values:
 
-**Primary Colors:**
-- `--color-black`: `#111111` (background)
-- `--color-gold`: `#F5A623` (accent)
-- `--color-positive`: `#22c55e` (wins, success)
-- `--color-negative`: `#ef4444` (losses, errors)
+**Colors:** `#111111` (background), `#F5A623` (gold accent), `#22c55e` (positive), `#ef4444` (negative)
 
-**Typography:**
-- Hero Numbers: Unbounded, weight 800-900 (for stats 72px+)
-- Headlines: Unbounded, weight 700-800 (page titles, section headers)
-- Body: Inter, weight 500 (Medium) - REQUIRED MINIMUM
-- Labels: JetBrains Mono, weight 500-600
+**Typography:** Unbounded 700-800 (headlines), Inter 500+ (body), JetBrains Mono 500-600 (labels)
 
-**Spacing (4px base unit):**
-- `--space-xs`: 4px | `--space-sm`: 8px | `--space-md`: 16px
-- `--space-lg`: 24px | `--space-xl`: 32px | `--space-2xl`: 48px
+**Spacing (4px base):** xs=4, sm=8, md=16, lg=24, xl=32, 2xl=48
 
-**Touch Targets:**
-- Primary actions: 56-80px minimum
-- Secondary actions: 44px minimum
-
-### Component Classes
-
-Use existing classes from the design system. Key patterns:
-
-```css
-/* Stat displays */
-.stat-cell, .stat-cell--positive, .stat-cell--negative
-.stat-label, .stat-value
-
-/* Buttons */
-.btn, .btn-primary, .btn-dark, .btn-outline
-.btn-positive, .btn-negative
-
-/* Badges */
-.belt-badge, .belt-white, .belt-blue, .belt-purple, .belt-brown
-.training-badge, .training-gi, .training-nogi
-
-/* Callouts */
-.callout, .callout--positive, .callout--negative
-
-/* Forms */
-.form-group, .form-label, .form-input, .form-textarea
-```
+**Touch Targets:** Primary 56-80px, Secondary 44px minimum
 
 ### Icon Usage
 
 ```tsx
-import { Icons } from '@/components/ui/Icons';
+import { Icons } from '../components/Icons';
 
 <Icons.Check size={24} />
-<Icons.Trophy size={24} color="var(--color-gold)" />
+<Icons.Trophy size={24} color={colors.gold} />
 ```
 
-See `/docs/design-system/icons.html` for the full 95+ icon library.
-
-### Propagation: Design System → Code
+### Propagation: Design System to Code
 
 When the design system is updated:
-1. Update `/docs/design-system/styles.css` first
-2. Sync changes to `/prototype/src/index.css`
-3. Update `/prototype/src/config/design-tokens.ts` if tokens change
-4. This file (CLAUDE.md) reflects the summary, not the source
+1. Update `mvp-1.0/docs/design-system/tokens.md` first (source of truth)
+2. Update `mvp-1.0/app/src/config/design-tokens.ts` (React Native implementation)
+3. This file (CLAUDE.md) reflects the summary, not the source
 
 **The design system is the source. Code implements it. Never the reverse.**
 
@@ -439,15 +309,12 @@ When the design system is updated:
 |--------------|------------|----------------|-----------------|
 | **Session Logging** | EXHAUSTED | 90 seconds max | Minimal friction, voice-first, one question at a time |
 | **Stats/Dashboard** | RELAXED | Unlimited | Rich data, deep dives, multiple visualizations welcome |
-| **Techniques Library** | RELAXED | Unlimited | Detailed content, searchable, comprehensive |
 | **Journal/History** | RELAXED | Unlimited | Full entries, filtering, exploration encouraged |
 | **Profile/Settings** | RELAXED | Moderate | Standard forms, can handle complexity |
 
 ---
 
 ### The Exhausted User (Session Logging ONLY)
-
-**This principle applies ONLY to the session logging flow—when users are capturing data immediately post-training.**
 
 **Physical/cognitive state during logging:**
 - Physically exhausted, elevated heart rate
@@ -468,57 +335,50 @@ When the design system is updated:
 
 ---
 
-### The Relaxed User (Stats, Techniques, Journal)
+### The Relaxed User (Journal, Insights, Profile)
 
-**When users browse Stats, Techniques, or Journal pages, they are:**
+**When users browse these pages, they are:**
 - At home, on the couch, or commuting
 - Curious about their progress
 - Not time-pressured
 - Wanting depth, detail, and insight
-- Able to handle complexity and exploration
 
 ### Browse Mode Design Principles
 
-1. **Rich visualizations welcome:** Charts, graphs, timelines—users want to explore
+1. **Rich visualizations welcome:** Charts, graphs, timelines
 2. **Deep information hierarchies:** Multiple sections, expandable details
-3. **Dense data displays:** Show more, not less—users are engaged
-4. **Progressive disclosure optional:** Users can handle seeing everything
-5. **Long-form content OK:** Coaching text, technique descriptions, historical analysis
-6. **Standard touch targets:** 44px minimum is fine for relaxed browsing
+3. **Long-form content OK:** Coaching text, historical analysis
+4. **Standard touch targets:** 44px minimum is fine for relaxed browsing
 
 ## Key Patterns
 
 ### Onboarding (MVP 1.0)
 MVP uses **full upfront onboarding** (~60 seconds), not progressive profiling:
 - Screen 1: Welcome
-- Screen 2: Name, belt, stripes
+- Screen 2: Name, belt, stripes, birthday, gender
 - Screen 3: Gym picker, target frequency, optional goals + experience
-- Screen 4: Logging preference (voice/text), mic permission
+- Screen 4: Logging preference (voice/text), mic permission, chat payoff
 
-Progressive profiling (collecting data over ~20 sessions) is a **v1.1+ consideration**.
-See `docs/mvp-1.0/FEATURE_SPEC.md` for exact onboarding spec.
+See `mvp-1.0/docs/FEATURE_SPEC.md` for exact onboarding spec.
 
 ### Session Logging Flow
-1. User taps "Log Session"
-2. SessionLogger opens (respects preference: voice or text)
-3. Voice: Conversational prompts, one at a time
-4. Text: Single textarea, smart parsing, confirmation chips
-5. Review screen with edit capability
-6. Success confirmation
-7. Increment session count for progressive profiling
+1. User taps Log Button (gold + in tab bar)
+2. Entry Phase: training mode, kind, duration, spar toggle
+3. Recording Phase: voice capture with timer and prompts
+4. Processing Phase: transcription + AI extraction
+5. Review Phase: editable form with all extracted fields
+6. Success Phase: post-save quote (4 seconds), then back to Journal List
 
 ### Section-Based Editing
 When editing saved sessions:
 - Use `EditSheet` (bottom sheet modal)
-- Section-specific edit components in `EditSections.tsx`
+- Section-specific edit components
 - Staged changes with save/discard
 - Large touch targets for fatigued users
 
 ## User Personas
 
-> **Canonical Source:** `/docs/personas/PERSONA_PROFILES.md`
-
-### Primary Personas (6 Test Profiles)
+> **Canonical Source:** `docs/personas/PERSONAS.md`
 
 | Key | Name | Belt | Age | Archetype | Status |
 |-----|------|------|-----|-----------|--------|
@@ -529,68 +389,35 @@ When editing saved sessions:
 | `purple-average` | Sofia Rodriguez | Purple (1 str) | 28 | The Grinder | Stable |
 | `brown-average` | Elena Kim | Brown (2 str) | 38 | The Veteran | Refined |
 
-### User State During Session Logging
-When logging a session (immediately post-training):
-- Decision fatigue is real
-- Fine motor control is reduced
-- Attention span is minimal
-- Wants to be DONE, not engaged
+## Key MVP Decisions
 
-**Note:** This state does NOT apply to Stats, Techniques, or Journal browsing. See "User States: Context-Aware Design" above.
-
-## MVP Status
-
-### Web Prototype: ✅ COMPLETE (Production Ready)
-
-**Core Features:**
-- **Dashboard** - Stats, recent sessions, insights grid
-- **Session Logging** - Voice and text logging with smart parsing
-- **Session History** - Filterable list with detail views
-- **Belt Progress** - Visual progression tracking
-- **Technique Library** - Searchable technique catalog
-- **Profile/Settings** - Progressive profiling, preferences
-
-**UI Components:**
-- **Error States** - Network, validation, permission, generic variants
-- **Empty States** - Sessions, techniques, goals, search variants
-- **Loading Skeletons** - Dashboard, session cards, stat cards
-- **Toast Notifications** - Success, error, warning, info types
-- **404 NotFound** - Fallback screen with navigation
-
-**Infrastructure (iOS-Ready):**
-- **API Service Layer** - Abstracts localStorage, swap to Supabase with zero changes
-- **Auth Service** - Mock auth, ready for Supabase Auth + Apple Sign-In
-- **Type Definitions** - Match planned Supabase database schema
-- **Utility Functions** - Date, color, validation, accessibility helpers
-
-**Accessibility:**
-- Keyboard navigation (arrow keys in TabBar)
-- ARIA labels on all interactive elements
-- Focus states for buttons
-- Screen reader support
-
-### Next Phase: iOS TestFlight (MVP 1.0)
-See `docs/mvp-1.0/` for the current implementation plan (supersedes old deployment docs).
-Pre-built files ready in `mobile-prep/` — see `mobile-prep/README.md`.
+- **Bundle ID:** `com.drewgarraway.tomo`
+- **iOS target:** 16.0
+- **Data model:** `trainingMode` + `sessionKind` (not old `trainingType`)
+- **Onboarding:** Full upfront (~60 seconds), not progressive profiling
+- **Belt personalization:** Copy/tone/defaults only - no field locking in MVP
+- **Audio:** Private bucket, signed URLs, never publicly accessible
+- **PostHog:** Excluded from MVP, add post-TestFlight
+- **API keys:** All server-side via Edge Functions, none in app binary
 
 ## Development Guidelines
 
 ### Component Patterns
 - Functional components with hooks
 - Props interfaces at top of file
-- Inline styles using CSS variables
-- No external CSS files per component
+- React Native StyleSheet (not CSS)
+- Design tokens from `src/config/design-tokens.ts`
 
 ### State Management
-- Use `UserProfileContext` for profile data
+- `useAuth` hook for user profile and auth state
 - Local state for UI-only concerns
-- Mock data in `/data/` directory
+- Supabase for all persistent data
 
 ### Naming Conventions
-- Components: PascalCase (`BeltProgress.tsx`)
+- Components: PascalCase (`SessionLoggerScreen.tsx`)
 - Functions: camelCase (`handleSave`)
-- CSS variables: kebab-case (`--color-primary`)
 - Types/Interfaces: PascalCase (`interface SessionData`)
+- Design tokens: camelCase object (`colors.gold`, `spacing.md`)
 
 ### Code Style
 - Explicit types, avoid `any`
@@ -598,63 +425,17 @@ Pre-built files ready in `mobile-prep/` — see `mobile-prep/README.md`.
 - Comments for complex logic only
 - Keep components focused (single responsibility)
 
-## Testing Notes
-
-The prototype uses mock data throughout. Key mock files:
-- `mockTechniques` - 50 BJJ techniques
-- `mockTechniqueProgress` - User's proficiency data
-- `mockBeltHistory` - Promotion timeline
-- `mockJournalEntries` - Training sessions
-- `mockProgressSummary` - Belt progress stats
-
 ## Research Documents
 
-See `/docs/research/USER_PERSONAS_AND_RESEARCH.md` for:
+See `docs/research/USER_PERSONAS_AND_RESEARCH.md` for:
 - Detailed user personas
 - Market research data
 - BJJ demographic statistics
 - Persona-driven conversation design examples
 - Training frequency benchmarks by age
 
----
+## Key Metrics for TestFlight Success
 
-## iOS MVP 1.0 — TestFlight (Active Plan)
-
-> **Source of truth:** `docs/mvp-1.0/` (README, FEATURE_SPEC, SHIP_PLAN, SESSION_NOTES)
-> **Pre-built files:** `mobile-prep/` (README has full inventory and setup guide)
-> **Old deployment docs:** `docs/deployment/` — SUPERSEDED, kept for reference only
-
-### Technology Decisions (Decided March 7, 2026)
-| Layer | Technology | Status |
-|-------|------------|--------|
-| Mobile App | React Native + Expo (managed workflow) | Pre-built config ready |
-| Database | Supabase (PostgreSQL) | Migration SQL ready |
-| Auth | Supabase Auth (Email + Apple Sign-In) | Auth hook ready |
-| Voice Transcription | AssemblyAI (180 BJJ terms word_boost) | Edge Function ready |
-| AI Extraction | Claude Haiku 4.5 (via Edge Function) | Edge Function ready |
-| Audio Storage | Supabase Storage (private bucket, signed URLs) | RLS policies ready |
-| Crash Reporting | Sentry | Config in app.config.ts |
-| iOS Builds | Expo EAS | Not started |
-| Web Hosting | Cloudflare Pages | **Active** (bjjj.pages.dev) |
-
-### Key MVP Decisions
-- **Bundle ID:** `com.drewgarraway.tomo`
-- **iOS target:** 16.0
-- **Data model:** `trainingMode` + `sessionKind` (not old `trainingType`)
-- **Onboarding:** Full upfront (~60 seconds), not progressive profiling
-- **Belt personalization:** Copy/tone/defaults only — no field locking in MVP
-- **Audio:** Private bucket, signed URLs, never publicly accessible
-- **PostHog:** Excluded from MVP, add post-TestFlight
-- **API keys:** All server-side via Edge Functions, none in app binary
-
-### Cost Estimates (Updated March 7, 2026)
-| Phase | Monthly Cost |
-|-------|--------------|
-| Development | ~$99 one-time (Apple Developer Account) |
-| TestFlight (10 users) | ~$1.12/month |
-| Growth (1,000 users) | ~$200-250/month |
-
-### Key Metrics for TestFlight Success
 - App installs on iOS 16+
 - Download to first session < 3 minutes
 - Voice transcription > 85% accuracy for BJJ terms

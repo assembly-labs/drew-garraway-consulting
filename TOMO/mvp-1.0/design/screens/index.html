@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOMO Screen Reference</title>
+<style>
+  :root {
+    --black: #111111;
+    --gray-900: #1a1a1a;
+    --gray-800: #262626;
+    --gray-700: #3a3a3a;
+    --gray-600: #555;
+    --gray-500: #777;
+    --gray-400: #999;
+    --gray-300: #bbb;
+    --white: #f5f5f5;
+    --gold: #F5A623;
+    --gold-dim: rgba(245, 166, 35, 0.15);
+    --positive: #22c55e;
+    --negative: #ef4444;
+    --warning: #f59e0b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--black);
+    color: var(--gray-300);
+    line-height: 1.6;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* Sidebar */
+  nav {
+    width: 260px;
+    min-width: 260px;
+    background: var(--gray-900);
+    border-right: 1px solid var(--gray-700);
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 10;
+  }
+
+  nav h1 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 0 20px 16px;
+    border-bottom: 1px solid var(--gray-700);
+    margin-bottom: 16px;
+  }
+
+  nav h2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-500);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px 20px 8px;
+  }
+
+  nav a {
+    display: block;
+    padding: 6px 20px;
+    color: var(--gray-400);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s;
+  }
+
+  nav a:hover {
+    color: var(--white);
+    background: var(--gray-800);
+  }
+
+  nav a.active {
+    color: var(--gold);
+    background: var(--gold-dim);
+    border-right: 2px solid var(--gold);
+  }
+
+  /* Main */
+  main {
+    margin-left: 260px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 900px;
+  }
+
+  section {
+    margin-bottom: 64px;
+    padding-top: 24px;
+  }
+
+  h2.screen-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .screen-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--gray-500);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .screen-desc {
+    font-size: 15px;
+    color: var(--gray-400);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold);
+    margin: 24px 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--gray-800);
+  }
+
+  .element {
+    background: var(--gray-900);
+    border: 1px solid var(--gray-800);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+  }
+
+  .element-name {
+    font-weight: 700;
+    color: var(--white);
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .element-desc {
+    font-size: 13px;
+    color: var(--gray-400);
+    line-height: 1.5;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  .tag-gold { background: var(--gold-dim); color: var(--gold); }
+  .tag-green { background: rgba(34, 197, 94, 0.15); color: var(--positive); }
+  .tag-red { background: rgba(239, 68, 68, 0.15); color: var(--negative); }
+  .tag-gray { background: var(--gray-800); color: var(--gray-400); }
+  .tag-orange { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+
+  /* Workflow */
+  .workflow {
+    background: var(--gray-900);
+    border: 1px solid var(--gray-800);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+
+  .workflow h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .flow-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+
+  .flow-arrow {
+    color: var(--gold);
+    margin: 0 8px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .flow-screen {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .flow-trigger {
+    color: var(--gray-500);
+    font-style: italic;
+    margin-left: 4px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--gray-800);
+    margin: 48px 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav { display: none; }
+    main { margin-left: 0; padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <h1>TOMO Screens</h1>
+
+  <h2>Workflows</h2>
+  <a href="#workflows">All Workflows</a>
+
+  <h2>Onboarding</h2>
+  <a href="#welcome">Welcome</a>
+  <a href="#about-you">About You</a>
+  <a href="#your-training">Your Training</a>
+  <a href="#get-started">Get Started</a>
+
+  <h2>Session Logging</h2>
+  <a href="#entry-phase">Entry Phase</a>
+  <a href="#recording-phase">Recording Phase</a>
+  <a href="#processing-phase">Processing Phase</a>
+  <a href="#review-phase">Review Phase</a>
+  <a href="#success-phase">Success Phase</a>
+
+  <h2>Main App</h2>
+  <a href="#journal-list">Journal List</a>
+  <a href="#session-detail">Session Detail</a>
+  <a href="#insights">Insights</a>
+  <a href="#profile">Profile</a>
+
+  <h2>Other</h2>
+  <a href="#auth">Auth Screen</a>
+  <a href="#tab-bar">Tab Bar</a>
+  <a href="#post-save-quote">Post-Save Quote</a>
+  <a href="#gym-chip">Gym Chip</a>
+  <a href="#gym-picker-sheet">Gym Picker Sheet</a>
+</nav>
+
+<main>
+
+<!-- ==================== WORKFLOWS ==================== -->
+<section id="workflows">
+  <h2 class="screen-title">Workflows</h2>
+  <p class="screen-desc">How screens connect to each other and what triggers transitions.</p>
+
+  <div class="workflow">
+    <h4>1. First Launch (Onboarding)</h4>
+    <div class="flow-step"><span class="flow-screen">Auth Screen</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Welcome</span><span class="flow-trigger">successful sign-up</span></div>
+    <div class="flow-step"><span class="flow-screen">Welcome</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">About You</span><span class="flow-trigger">tap "Get Started"</span></div>
+    <div class="flow-step"><span class="flow-screen">About You</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Your Training</span><span class="flow-trigger">tap "Continue" (all fields filled)</span></div>
+    <div class="flow-step"><span class="flow-screen">Your Training</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Get Started</span><span class="flow-trigger">tap "Continue" (gym selected)</span></div>
+    <div class="flow-step"><span class="flow-screen">Get Started</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Tab Bar (Journal)</span><span class="flow-trigger">tap "Start Training" (after chat payoff)</span></div>
+    <div class="flow-step" style="margin-top: 8px; opacity: 0.7"><span class="flow-screen">Auth Screen</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Tab Bar (Journal)</span><span class="flow-trigger">sign-in (existing user)</span></div>
+  </div>
+
+  <div class="workflow">
+    <h4>2. Log a Session (Voice Path)</h4>
+    <div class="flow-step"><span class="flow-screen">Tab Bar Log Button</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Entry Phase</span><span class="flow-trigger">tap gold + button</span></div>
+    <div class="flow-step"><span class="flow-screen">Entry Phase</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Recording Phase</span><span class="flow-trigger">tap "Record Session"</span></div>
+    <div class="flow-step"><span class="flow-screen">Recording Phase</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Processing Phase</span><span class="flow-trigger">tap "Stop Recording"</span></div>
+    <div class="flow-step"><span class="flow-screen">Processing Phase</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Review Phase</span><span class="flow-trigger">pipeline completes (or timeout/skip)</span></div>
+    <div class="flow-step"><span class="flow-screen">Review Phase</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Success Phase</span><span class="flow-trigger">tap "Save Session"</span></div>
+    <div class="flow-step"><span class="flow-screen">Success Phase</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Journal List</span><span class="flow-trigger">auto-dismiss after 4 sec (or double-tap)</span></div>
+    <div class="flow-step" style="margin-top: 8px; opacity: 0.7"><span class="flow-screen">Entry Phase</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Review Phase</span><span class="flow-trigger">tap "Just type it" (skips recording)</span></div>
+    <div class="flow-step" style="opacity: 0.7"><span class="flow-screen">Voice preference user</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Recording Phase</span><span class="flow-trigger">auto-start (skips Entry)</span></div>
+  </div>
+
+  <div class="workflow">
+    <h4>3. Browse Journal</h4>
+    <div class="flow-step"><span class="flow-screen">Journal List</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Session Detail</span><span class="flow-trigger">tap a session card</span></div>
+    <div class="flow-step"><span class="flow-screen">Session Detail</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Journal List</span><span class="flow-trigger">tap back button</span></div>
+  </div>
+
+  <div class="workflow">
+    <h4>4. Edit a Saved Session</h4>
+    <div class="flow-step"><span class="flow-screen">Session Detail</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Edit Sheet (modal)</span><span class="flow-trigger">tap any editable section</span></div>
+    <div class="flow-step"><span class="flow-screen">Edit Sheet</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Session Detail</span><span class="flow-trigger">tap Save or Cancel</span></div>
+  </div>
+
+  <div class="workflow">
+    <h4>5. Delete a Session</h4>
+    <div class="flow-step"><span class="flow-screen">Session Detail</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Confirmation Alert</span><span class="flow-trigger">tap "Delete this session"</span></div>
+    <div class="flow-step"><span class="flow-screen">Confirmation Alert</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Journal List</span><span class="flow-trigger">tap "Delete"</span></div>
+  </div>
+
+  <div class="workflow">
+    <h4>6. Switch Gym (Temporary)</h4>
+    <div class="flow-step"><span class="flow-screen">Gym Chip</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Gym Picker Sheet</span><span class="flow-trigger">tap chip on Entry or Review</span></div>
+    <div class="flow-step"><span class="flow-screen">Gym Picker Sheet</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Gym Chip (gold override)</span><span class="flow-trigger">search + select gym</span></div>
+    <div class="flow-step" style="opacity: 0.7"><span class="flow-screen">Gym Chip (X button)</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Gym Chip (home gym)</span><span class="flow-trigger">tap X to reset</span></div>
+  </div>
+
+  <div class="workflow">
+    <h4>7. Profile Updates</h4>
+    <div class="flow-step"><span class="flow-screen">Profile Screen</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Edit Sheet / Picker</span><span class="flow-trigger">tap any row</span></div>
+    <div class="flow-step"><span class="flow-screen">Edit Sheet</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Profile Screen</span><span class="flow-trigger">save changes</span></div>
+  </div>
+
+  <div class="workflow">
+    <h4>8. Sign Out</h4>
+    <div class="flow-step"><span class="flow-screen">Profile Screen</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Confirmation Alert</span><span class="flow-trigger">tap "Sign Out"</span></div>
+    <div class="flow-step"><span class="flow-screen">Confirmation Alert</span><span class="flow-arrow">&rarr;</span><span class="flow-screen">Auth Screen</span><span class="flow-trigger">confirm sign out</span></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ==================== ONBOARDING ==================== -->
+
+<section id="welcome">
+  <h2 class="screen-title">Welcome Screen</h2>
+  <p class="screen-meta">Onboarding 1/4 &middot; WelcomeScreen.tsx</p>
+  <p class="screen-desc">First screen new users see after signing up.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Progress Bar</div>
+    <div class="element-desc">Thin bar at top showing 1/4 progress. Auto-adjusts if screens are added/removed.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">App Logo</div>
+    <div class="element-desc">"TOMO" in large white text (48px). "友" kanji below in gold (32px). Centered on screen.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Typewriter Tagline</div>
+    <div class="element-desc">Cycles through 3 phrases: "Your training. Remembered." / "Every session. A lesson." / "Let's roll." Gold blinking cursor. Tap to skip animation.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Get Started Button</div>
+    <div class="element-desc">Full-width gold button at bottom. Black text. Medium haptic on tap. Navigates to About You.</div>
+  </div>
+</section>
+
+<section id="about-you">
+  <h2 class="screen-title">About You Screen</h2>
+  <p class="screen-meta">Onboarding 2/4 &middot; AboutYouScreen.tsx</p>
+  <p class="screen-desc">Collects identity info: name, belt, stripes, age, gender.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Back Button</div>
+    <div class="element-desc">Top-left arrow, goes back to Welcome.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Progress Bar</div>
+    <div class="element-desc">Shows 2/4 progress.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Screen Title</div>
+    <div class="element-desc">"About You" in white (28px).</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Name Field <span class="tag tag-gold">REQUIRED</span></div>
+    <div class="element-desc">Label: "FIRST NAME". Text input, dark background. Placeholder: "Your first name".</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Belt Picker <span class="tag tag-gold">REQUIRED</span></div>
+    <div class="element-desc">5 colored circles: White, Blue, Purple, Brown, Black. Selected gets gold border + gold background. Light haptic on tap.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Stripes Picker</div>
+    <div class="element-desc">5 square buttons: 0, 1, 2, 3, 4. Selected gets gold background. Only appears after belt is picked. Defaults to 0.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Birthday Picker <span class="tag tag-gold">REQUIRED</span></div>
+    <div class="element-desc">Tap opens date spinner. Shows "X years old" in gold. Must be 18+. Red error if under 18.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Gender Picker <span class="tag tag-gold">REQUIRED</span></div>
+    <div class="element-desc">Two pills: "Male" and "Female". Selected gets gold background + gold text.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Continue Button</div>
+    <div class="element-desc">Full-width. Gold when all required fields filled, gray when incomplete. Navigates to Your Training.</div>
+  </div>
+</section>
+
+<section id="your-training">
+  <h2 class="screen-title">Your Training Screen</h2>
+  <p class="screen-meta">Onboarding 3/4 &middot; YourTrainingScreen.tsx</p>
+  <p class="screen-desc">Collects gym, training frequency, and optional goals/experience/weight.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Location Permission Card</div>
+    <div class="element-desc">Animated card. Map pin icon + "Find gyms near you". Enable Location (gold) / Skip (gray outline) buttons. Fades out after choice.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Gym Search Input <span class="tag tag-gold">REQUIRED</span></div>
+    <div class="element-desc">Text input with autocomplete dropdown (2+ chars). Shows gym matches with city/state. Unmatched text = custom gym. Selected shows gold checkmark.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Nearby Gyms List</div>
+    <div class="element-desc">Cards with gym name, distance, city, state. Only shows if location was granted. Tap to select.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Training Target Picker</div>
+    <div class="element-desc">Three pills: "1-2x / week", "3-4x / week" (default), "5+ / week". Selected gets gold highlight.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Training Goals <span class="tag tag-gray">OPTIONAL</span></div>
+    <div class="element-desc">Multi-select chips: Competition, Fitness, Self-Defense, Mental Health, Community, Hobby. Tap to toggle.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Experience Level <span class="tag tag-gray">OPTIONAL</span></div>
+    <div class="element-desc">Four options: &lt; 6 months, 6mo-2yr, 2-5yr, 5+ yr.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Body Weight <span class="tag tag-gray">OPTIONAL</span></div>
+    <div class="element-desc">Number input + lb/kg toggle. Shows competition weight class based on gender.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Continue Button</div>
+    <div class="element-desc">Enabled once gym is selected. Navigates to Get Started.</div>
+  </div>
+</section>
+
+<section id="get-started">
+  <h2 class="screen-title">Get Started Screen</h2>
+  <p class="screen-meta">Onboarding 4/4 &middot; GetStartedScreen.tsx &middot; Can't swipe back</p>
+  <p class="screen-desc">Final onboarding. Logging preference, mic permission, welcome chat.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Screen Title</div>
+    <div class="element-desc">"Ready to get rolling?"</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Voice First Button</div>
+    <div class="element-desc">Primary gold button. Selects voice logging, triggers mic permission flow.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Type It In Button</div>
+    <div class="element-desc">Secondary outline button. Selects text logging, skips mic permission.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Mic Permission Primer <span class="tag tag-gray">CONDITIONAL</span></div>
+    <div class="element-desc">Modal explaining mic access (voice path only). "Allow" (blue) and "Use Text Instead" (gray) buttons.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Chat Payoff Overlay</div>
+    <div class="element-desc">Full-screen. TOMO avatar (gold circle, "友"). 5 sequential chat bubbles with typewriter animation. Typing indicator (3 pulsing dots) between bubbles. Personalizes with name, belt, gym.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Start Training Button</div>
+    <div class="element-desc">Gold button, appears after all chat bubbles finish. Enters the main app.</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ==================== SESSION LOGGING ==================== -->
+
+<section id="entry-phase">
+  <h2 class="screen-title">Entry Phase</h2>
+  <p class="screen-meta">Session Logging 1/5 &middot; SessionLoggerScreen.tsx &middot; Skipped for voice-preference users</p>
+  <p class="screen-desc">Pre-recording form where you set up your session before recording.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Cancel Button</div>
+    <div class="element-desc">Top-left text link. Navigates to Journal List. No confirmation needed.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Screen Title</div>
+    <div class="element-desc">"Log Your Training" (28px, white).</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Gym Chip</div>
+    <div class="element-desc">Pill button with map pin + gym name. Tap to open Gym Picker Sheet. Gold border if overridden.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Training Mode Chips</div>
+    <div class="element-desc">Label: "TRAINING MODE". Three options: Gi, No-Gi, Other. Large chips (56px). Gold when selected.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Session Kind Chips</div>
+    <div class="element-desc">Label: "SESSION KIND". Four options: Regular Class, Open Mat, Comp Training, Other.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Duration Chips</div>
+    <div class="element-desc">Label: "DURATION". Six options: 30, 45, 60, 75, 90, 120 min. Square chips (44x44). Default: 90.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Spar Toggle</div>
+    <div class="element-desc">Label: "DID YOU SPAR?" Two chips: Yes, No. No default.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Record Session Button</div>
+    <div class="element-desc">Large gold button. Starts mic recording, moves to Recording Phase. Medium haptic.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Just Type It Link</div>
+    <div class="element-desc">Text link below record button. Skips to Review Phase with empty transcript.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Recording Prompt</div>
+    <div class="element-desc">Random prompt above the record button. "What did you work on today?" / "How was training?" etc.</div>
+  </div>
+</section>
+
+<section id="recording-phase">
+  <h2 class="screen-title">Recording Phase</h2>
+  <p class="screen-meta">Session Logging 2/5 &middot; SessionLoggerScreen.tsx</p>
+  <p class="screen-desc">Live voice recording. User talks about their training session.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Cancel Button</div>
+    <div class="element-desc">Top-left text link. Short recordings cancel immediately. Longer recordings show confirmation: "Keep Recording" / "Discard".</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Gym Label</div>
+    <div class="element-desc">Read-only. Map pin icon + gym name. Small gray text, not tappable.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Pulsing Circle</div>
+    <div class="element-desc">120x120 circle. Gold border (3px), transparent fill. "友" kanji inside (32px, gold). Pulses with opacity animation.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Session Timer</div>
+    <div class="element-desc">Elapsed time display (e.g., "2:34"). 48px white text, extra-bold font.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Recording Prompt</div>
+    <div class="element-desc">Rotating text below timer. Cycles through encouraging questions every few seconds.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Stop Recording Button</div>
+    <div class="element-desc">Gold button. Stop icon (black) + "Stop Recording" (black text). Moves to Processing Phase.</div>
+  </div>
+</section>
+
+<section id="processing-phase">
+  <h2 class="screen-title">Processing Phase</h2>
+  <p class="screen-meta">Session Logging 3/5 &middot; SessionLoggerScreen.tsx</p>
+  <p class="screen-desc">Loading screen while voice is transcribed and analyzed. 150-second timeout.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Loading Spinner</div>
+    <div class="element-desc">Large gold activity indicator, centered.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Status Text</div>
+    <div class="element-desc">Changes as pipeline progresses: "Transcribing..." then "Analyzing..." then "Almost there..."</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Skip / Cancel Option</div>
+    <div class="element-desc">Skips to Review Phase with empty extraction. User fills everything manually.</div>
+  </div>
+</section>
+
+<section id="review-phase">
+  <h2 class="screen-title">Review Phase</h2>
+  <p class="screen-meta">Session Logging 4/5 &middot; SessionLoggerScreen.tsx</p>
+  <p class="screen-desc">Editable form showing extracted data. Fix anything wrong, fill in what's missing, then save.</p>
+
+  <h3>Header</h3>
+  <div class="element">
+    <div class="element-name">Cancel Button</div>
+    <div class="element-desc">Left side. Discards everything, back to Journal List.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Review Title</div>
+    <div class="element-desc">"Review Session" centered (17px, white).</div>
+  </div>
+
+  <h3>Form Fields</h3>
+  <div class="element">
+    <div class="element-name">Gym Chip</div>
+    <div class="element-desc">Pill with map pin + gym name. Tap to open Gym Picker Sheet. Gold border if overridden.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Detail Badges Row</div>
+    <div class="element-desc">Two tappable badges: Mode Badge ("Gi"/"No-Gi"/"Other" + edit icon) and Duration Badge ("90 min" + edit icon). Tap to expand inline editor.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Mode Editor <span class="tag tag-gray">CONDITIONAL</span></div>
+    <div class="element-desc">Opens on Mode Badge tap. Three chips: Gi, No-Gi, Other. Closes on selection.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Duration Editor <span class="tag tag-gray">CONDITIONAL</span></div>
+    <div class="element-desc">Opens on Duration Badge tap. Six chips: 30, 45, 60, 75, 90, 120. Closes on selection.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Warm-up Field</div>
+    <div class="element-desc">Label: "WARM-UP". Yes/No chips. Gold left border + gold tint if unanswered.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Techniques Field</div>
+    <div class="element-desc">Label: "TECHNIQUES TRAINED / LESSON TOPIC". Removable pill tags + text input with autocomplete dropdown. "recent" badge on previously-logged techniques. Gold border if empty.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Did You Spar Field</div>
+    <div class="element-desc">Label: "DID YOU SPAR?" Yes/No chips. "No" hides sparring sections below.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Sparring Rounds <span class="tag tag-gray">IF SPARRING</span></div>
+    <div class="element-desc">Label: "SPARRING ROUNDS". Seven chips: 1-7+. Gold border if none selected.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Submissions Landed <span class="tag tag-green">GREEN</span> <span class="tag tag-gray">IF SPARRING</span></div>
+    <div class="element-desc">Label: "SUBMISSIONS LANDED". Green tags with +/- count buttons. Long-press for jiggle-delete mode. Text input with autocomplete.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Got Caught <span class="tag tag-red">RED</span> <span class="tag tag-gray">IF SPARRING</span></div>
+    <div class="element-desc">Same pattern as Submissions Landed but red-tinted. Tracks submissions received.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Injuries Field <span class="tag tag-orange">ORANGE</span></div>
+    <div class="element-desc">Label: "INJURIES". Orange tags, removable. Text input. Gold border if empty.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Instructor Field</div>
+    <div class="element-desc">Label: "INSTRUCTOR". Text input: "Who taught class?" Gold border if empty.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Session Type Chips</div>
+    <div class="element-desc">Label: "SESSION TYPE". Four chips: Regular Class, Open Mat, Comp Training, Other.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Voice Transcript <span class="tag tag-gray">IF VOICE</span></div>
+    <div class="element-desc">Label: "VOICE TRANSCRIPT". Raw recording text, italic gray, max 200px scroll. Bottom of form.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Save Session Button</div>
+    <div class="element-desc">Full-width gold. "Save Session" (black text). Spinner while saving. On success: moves to Success Phase.</div>
+  </div>
+</section>
+
+<section id="success-phase">
+  <h2 class="screen-title">Success Phase</h2>
+  <p class="screen-meta">Session Logging 5/5 &middot; SessionLoggerScreen.tsx + PostSaveQuote.tsx</p>
+  <p class="screen-desc">Post-save quote shown for 4 seconds, then returns to Journal List.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Post-Save Quote</div>
+    <div class="element-desc">Full-screen overlay. Belt-aware martial arts quote for 4 seconds. Progress bar at bottom. Double-tap to dismiss early. Then navigates to Journal List. See Post-Save Quote component below.</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ==================== MAIN APP ==================== -->
+
+<section id="journal-list">
+  <h2 class="screen-title">Journal List</h2>
+  <p class="screen-meta">Journal Tab &middot; JournalScreen.tsx</p>
+  <p class="screen-desc">Main screen. All logged sessions in chronological order.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Screen Title</div>
+    <div class="element-desc">"Journal" (28px, white).</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Weekly Pulse Strip</div>
+    <div class="element-desc">"X of Y" training sessions this week. Row of gold (completed) and gray (remaining) dots.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Filter Pills</div>
+    <div class="element-desc">Sticky row: "All", "Gi", "No-Gi". Active = gold, inactive = gray. Light haptic on tap.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Session Count</div>
+    <div class="element-desc">Right side of filter row. "X sessions" in monospace gray. Updates with filter.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Group Headers</div>
+    <div class="element-desc">Today / Yesterday / This Week / This Month / Earlier. Uppercase monospace gray.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Session Card</div>
+    <div class="element-desc">Dark card with: Mode Badge (colored, top-left), Duration (monospace, top-right), Session Kind (bold white), Lesson Topic (gray subtitle), Techniques (gray list), Sparring Indicator (icon + rounds), Chevron (right edge). Tap opens Session Detail.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Empty State (no sessions)</div>
+    <div class="element-desc">Mic icon + "No Sessions Yet" + gold "Log your first session" button.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Empty State (filtered)</div>
+    <div class="element-desc">Filter icon + "No Gi/No-Gi Sessions".</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Error State</div>
+    <div class="element-desc">Wifi-off icon + "Could Not Load Sessions" + "Retry" button.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Pull to Refresh</div>
+    <div class="element-desc">Pull down to refresh. Gold spinner.</div>
+  </div>
+</section>
+
+<section id="session-detail">
+  <h2 class="screen-title">Session Detail</h2>
+  <p class="screen-meta">JournalStack &middot; SessionDetailScreen.tsx</p>
+  <p class="screen-desc">View and edit a saved session. Every section is tappable to edit.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Back Button</div>
+    <div class="element-desc">Top-left arrow. Returns to Journal List.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Date and Time Header</div>
+    <div class="element-desc">"Monday, March 31, 2026". Tappable with edit icon. Opens date edit sheet.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Training Info Row</div>
+    <div class="element-desc">Mode Badge + Kind + Duration + Rounds. Edit icon. Tap to edit as a group.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Gym Display</div>
+    <div class="element-desc">Map pin + gym name. Read-only, not tappable.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Notes Card</div>
+    <div class="element-desc">Label: "MY NOTES". Gray left border. "Tap to add notes..." if empty. Edit icon. Opens edit sheet.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Lesson Topic Section</div>
+    <div class="element-desc">Label: "LESSON TOPIC". Text or "Not recorded". Tappable to edit.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Techniques Section</div>
+    <div class="element-desc">Label: "TECHNIQUES DRILLED". Tag pills or "No techniques recorded". Tappable to edit.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Sparring Section <span class="tag tag-gray">IF SPARRED</span></div>
+    <div class="element-desc">Label: "SPARRING". Rounds count. Submissions Landed (green). Got Caught (red). Each tappable.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Injuries Section <span class="tag tag-gray">IF ANY</span></div>
+    <div class="element-desc">Label: "INJURIES". Orange tags. Tappable to edit.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Transcript Toggle <span class="tag tag-gray">IF VOICE</span></div>
+    <div class="element-desc">Mic icon + "View voice transcript". Collapsed by default. Tap to expand/collapse.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Delete Session Link</div>
+    <div class="element-desc">Bottom of scroll. Red text "Delete this session". Shows confirmation alert.</div>
+  </div>
+</section>
+
+<section id="insights">
+  <h2 class="screen-title">Insights Screen</h2>
+  <p class="screen-meta">Insights Tab &middot; InsightsScreen.tsx</p>
+  <p class="screen-desc">Weekly training insights. Patterns, progress, things to watch.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Screen Title</div>
+    <div class="element-desc">"Insights" (28px, white).</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Pre-Insight State</div>
+    <div class="element-desc">Shown for new users or &lt; 7 days. Typewriter: "Building your training insights..." Gold cursor.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Latest Week Card</div>
+    <div class="element-desc">Period label (date range). Insight paragraphs with Ember Text typewriter animation (gold trailing glow fading to gray). Bold text support. Normal paragraphs (gray) and Risk/Watch paragraphs (gold background + left border).</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Focus Next Callout</div>
+    <div class="element-desc">Gold-accented section highlighting what to work on next week.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Older Insights</div>
+    <div class="element-desc">Collapsible section. Collapsed by default. Prior weeks, each tappable to expand.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Pull to Refresh</div>
+    <div class="element-desc">Pull down to refresh. Gold spinner.</div>
+  </div>
+</section>
+
+<section id="profile">
+  <h2 class="screen-title">Profile Screen</h2>
+  <p class="screen-meta">Profile Tab &middot; ProfileScreen.tsx</p>
+  <p class="screen-desc">Personal info, training settings, gym, sign-out.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Avatar</div>
+    <div class="element-desc">96px circle with belt-colored border. Initials or uploaded photo. Tap to edit name + photo.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">User Name</div>
+    <div class="element-desc">First name (20px, bold, white). Tappable to edit.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Belt Badge</div>
+    <div class="element-desc">Colored bar + "Blue Belt . 2 stripes". Tappable to edit.</div>
+  </div>
+
+  <h3>Settings Card</h3>
+  <div class="element">
+    <div class="element-name">Belt Row</div>
+    <div class="element-desc">"Belt" label, value shows belt + stripes. Tappable.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Training Target Row</div>
+    <div class="element-desc">"Training Target" label, value like "4x / week". Tappable.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Logging Preference Row</div>
+    <div class="element-desc">"Logging Preference" label, "Voice" or "Text". Tappable.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Sessions Logged Row</div>
+    <div class="element-desc">"Sessions Logged" label, count number. Read-only.</div>
+  </div>
+
+  <h3>Personal Info Card</h3>
+  <div class="element">
+    <div class="element-name">Birthday Row</div>
+    <div class="element-desc">"Birthday" label, shows calculated age. Opens date picker.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Gender Row</div>
+    <div class="element-desc">"Gender" label, "Male"/"Female" or "+ Add". Two-chip toggle.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Body Weight Row</div>
+    <div class="element-desc">"Body Weight" label, value + unit. Number input + lb/kg toggle.</div>
+  </div>
+
+  <h3>Gym Section</h3>
+  <div class="element">
+    <div class="element-name">Gym Card</div>
+    <div class="element-desc">Primary gym name + session count. "Change gym" gold button.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Gym History</div>
+    <div class="element-desc">Collapsible timeline of all gyms. Grouped by month. Name, dates, session count.</div>
+  </div>
+
+  <h3>Account</h3>
+  <div class="element">
+    <div class="element-name">Sign Out Button</div>
+    <div class="element-desc">Red text at bottom. Confirmation alert. Signs out to Auth Screen.</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ==================== OTHER ==================== -->
+
+<section id="auth">
+  <h2 class="screen-title">Auth Screen</h2>
+  <p class="screen-meta">AuthScreen.tsx</p>
+  <p class="screen-desc">Sign in or sign up with email and password.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">App Logo</div>
+    <div class="element-desc">"TOMO" (48px white) + "友" (gold) + "BJJ TRAINING JOURNAL" (monospace gray).</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Mode Toggle</div>
+    <div class="element-desc">Switches between Sign In / Sign Up. Gold link text at bottom.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Email Field</div>
+    <div class="element-desc">Label: "EMAIL". Placeholder: "you@email.com". Gold border on focus.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Password Field</div>
+    <div class="element-desc">Label: "PASSWORD". Masked input. Eye Toggle button (44x44) to show/hide.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Forgot Password Link <span class="tag tag-gray">SIGN-IN ONLY</span></div>
+    <div class="element-desc">"Forgot password?" gray underlined link. Sends reset email.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Submit Button</div>
+    <div class="element-desc">"Sign In" or "Create Account". Gold, full-width. Spinner while loading.</div>
+  </div>
+</section>
+
+<section id="tab-bar">
+  <h2 class="screen-title">Tab Bar</h2>
+  <p class="screen-meta">MainTabNavigator.tsx &middot; Bottom of every main screen</p>
+  <p class="screen-desc">4-tab bottom navigation with centered Log button.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Journal Tab</div>
+    <div class="element-desc">Position 1 (left). "JOURNAL" label + journal icon. Gold when active, gray when inactive.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Log Button</div>
+    <div class="element-desc">Position 2 (center). Large gold circle (70x70) with white plus icon. Elevated above bar with shadow. No text label. Opens Session Logger.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Insights Tab</div>
+    <div class="element-desc">Position 3. "INSIGHTS" label + trend-up icon. Gold when active, gray when inactive.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Profile Tab</div>
+    <div class="element-desc">Position 4 (right). "PROFILE" label + person icon. Gold when active, gray when inactive.</div>
+  </div>
+</section>
+
+<section id="post-save-quote">
+  <h2 class="screen-title">Post-Save Quote</h2>
+  <p class="screen-meta">PostSaveQuote.tsx &middot; Used by Success Phase</p>
+  <p class="screen-desc">Full-screen quote overlay shown after saving a session. 4 seconds, then auto-dismisses.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Quote Text</div>
+    <div class="element-desc">Centered, 180px from top. 17px gray text, 28px line height. Martial arts quote.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Quote Attribution</div>
+    <div class="element-desc">Below quote. Monospace, 12px, gold at 60% opacity. Person's name.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Progress Bar</div>
+    <div class="element-desc">Bottom of screen. 2px gold line animating left-to-right over 4 seconds.</div>
+  </div>
+
+  <h3>Behavior</h3>
+  <div class="element">
+    <div class="element-name">Auto-dismiss</div>
+    <div class="element-desc">Fades out after 4 seconds, navigates to Journal List.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Double-tap dismiss</div>
+    <div class="element-desc">Tap twice quickly anywhere to dismiss early.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Quote selection</div>
+    <div class="element-desc">135+ quotes from 48+ martial arts figures. Belt-aware. Female users see ~50% women athlete quotes. Tracks last 5 to prevent repeats.</div>
+  </div>
+</section>
+
+<section id="gym-chip">
+  <h2 class="screen-title">Gym Chip</h2>
+  <p class="screen-meta">GymChip.tsx &middot; Entry Phase, Review Phase, Session Detail</p>
+  <p class="screen-desc">Pill-shaped button showing your gym.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Default State (home gym)</div>
+    <div class="element-desc">Pill shape. Map pin icon (gray) + gym name. Dark gray background, gray border. Tap opens Gym Picker Sheet.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Override State (different gym)</div>
+    <div class="element-desc">Gold map pin + gold text + gold border + gold-tinted background. Reset Button (X circle, 36x36) to switch back to home gym.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Gym Label (variant)</div>
+    <div class="element-desc">Read-only version used on Recording Phase. Small gray text with map pin. Not tappable.</div>
+  </div>
+</section>
+
+<section id="gym-picker-sheet">
+  <h2 class="screen-title">Gym Picker Sheet</h2>
+  <p class="screen-meta">GymPickerSheet.tsx &middot; Modal from Gym Chip</p>
+  <p class="screen-desc">Bottom sheet for temporarily switching gym for this session.</p>
+
+  <h3>Elements</h3>
+  <div class="element">
+    <div class="element-name">Cancel Button</div>
+    <div class="element-desc">Left side of header. Closes sheet without changes.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Sheet Title</div>
+    <div class="element-desc">"Switch Gym" centered (17px, white).</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Done Button</div>
+    <div class="element-desc">Right side of header. Gold text. Disabled until a gym is picked.</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Subtitle</div>
+    <div class="element-desc">"Training somewhere else today? Your home gym won't change." (gray, 13px).</div>
+  </div>
+  <div class="element">
+    <div class="element-name">Gym Search Input</div>
+    <div class="element-desc">Auto-focused. "Search or add your gym". Autocomplete dropdown (2+ chars). Unmatched text = custom gym. Selected shows gold checkmark.</div>
+  </div>
+</section>
+
+</main>
+
+<script>
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>

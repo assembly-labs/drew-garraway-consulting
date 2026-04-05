@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOMO Beta Tester Agreement | Alliance Paoli</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ===== MOBILE-FIRST BASE ===== */
+  body {
+    background: #111111;
+    color: #e0e0e0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 1.8;
+    padding: 40px 20px;
+    -webkit-text-size-adjust: 100%;
+  }
+  .container { max-width: 720px; margin: 0 auto; }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 40px; border-bottom: 1px solid #222; padding-bottom: 36px; }
+  .logo { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 36px; color: #F5A623; letter-spacing: 2px; }
+  .kanji { font-size: 28px; color: #F5A623; margin-left: 8px; }
+  .subtitle { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px; color: #888; text-transform: uppercase; letter-spacing: 2px; margin-top: 12px; }
+  .meta { font-size: 14px; color: #666; margin-top: 12px; }
+
+  /* Intro */
+  .intro { font-size: 17px; color: #ccc; margin-bottom: 32px; line-height: 1.8; }
+
+  /* Accept banner */
+  .accept-line {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 40px;
+    font-size: 16px;
+    color: #ccc;
+    line-height: 1.7;
+  }
+  .accept-line strong { color: #fff; }
+
+  /* Section headings */
+  h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    color: #fff;
+    margin-top: 36px;
+    margin-bottom: 12px;
+  }
+  p { margin-bottom: 16px; color: #ccc; font-size: 17px; line-height: 1.8; }
+
+  /* Sections */
+  .section { padding-bottom: 20px; border-bottom: 1px solid #1a1a1a; }
+  .section:last-of-type { border-bottom: none; }
+
+  /* Discount callout */
+  .discount-note {
+    background: linear-gradient(135deg, #1a1708, #111);
+    border-left: 3px solid #F5A623;
+    padding: 16px 20px;
+    margin: 12px 0;
+    border-radius: 0 10px 10px 0;
+    font-size: 16px;
+    color: #ccc;
+    line-height: 1.7;
+  }
+
+  /* I Agree CTA */
+  .agree-cta {
+    background: linear-gradient(135deg, #1a1708, #151515);
+    border: 1px solid #333;
+    border-radius: 16px;
+    padding: 40px 24px;
+    text-align: center;
+    margin-top: 48px;
+  }
+  .agree-cta h2 { margin-top: 0; font-size: 22px; margin-bottom: 12px; }
+  .agree-cta p { color: #aaa; font-size: 16px; margin-bottom: 20px; line-height: 1.7; }
+  .agree-btn {
+    display: block;
+    width: 100%;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #111;
+    background: #22c55e;
+    border: none;
+    padding: 18px 32px;
+    border-radius: 12px;
+    cursor: pointer;
+    min-height: 56px;
+  }
+  .agree-btn:hover { background: #1dab53; }
+  .agree-btn:active { background: #19943f; transform: scale(0.98); }
+  .agree-btn:disabled { background: #444; color: #888; cursor: not-allowed; }
+  .agree-note { font-size: 14px; color: #666; margin-top: 16px; margin-bottom: 0; }
+
+  /* Success state */
+  .agree-success {
+    display: none;
+    text-align: center;
+    padding: 32px 0;
+  }
+  .agree-success h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #22c55e;
+    margin-bottom: 12px;
+  }
+  .agree-success p { font-size: 17px; color: #aaa; line-height: 1.7; }
+
+  /* Error state (no email param) */
+  .agree-error { display: none; }
+  .agree-error p { color: #ef4444; font-size: 16px; }
+
+  /* Sign off */
+  .sign-off { text-align: center; margin-top: 40px; padding-top: 32px; border-top: 1px solid #222; }
+  .sign-off p { color: #888; font-size: 16px; }
+  .sign-off .name { font-family: 'Unbounded', sans-serif; font-weight: 700; color: #fff; font-size: 17px; margin-top: 8px; }
+
+  /* Footer */
+  .footer { text-align: center; margin-top: 40px; }
+  .footer p { font-size: 13px; color: #555; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ===== TABLET+ ===== */
+  @media (min-width: 640px) {
+    body { padding: 56px 32px; }
+    .logo { font-size: 44px; }
+    .kanji { font-size: 36px; }
+    h2 { font-size: 20px; }
+    .agree-cta { padding: 56px 40px; }
+    .agree-btn { display: inline-block; width: auto; padding: 18px 64px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo">TOMO <span class="kanji">友</span></div>
+    <div class="subtitle">Beta Tester Agreement</div>
+    <div class="meta">Alliance Paoli Group &middot; Last updated March 28, 2026</div>
+  </div>
+
+  <p class="intro">Hey, thanks for being willing to test TOMO. It means a lot. I've put a ton of work into this and I'm excited to get it into your hands. This is a quick agreement to make sure we're on the same page before you get access. Nothing heavy, just a few things to keep in mind.</p>
+
+  <div class="accept-line">
+    <strong>Give it a read, then tap "I Agree" at the bottom.</strong>
+  </div>
+
+  <div class="section">
+    <h2>1. What You're Getting</h2>
+    <p>Early access to TOMO, a voice-first BJJ training journal, through Apple TestFlight. This is a pre-release build, so it's still a work in progress. Some things might be rough around the edges, and features will change as we go.</p>
+    <div class="discount-note">As a thank-you for your time, you'll get a heavily discounted subscription when TOMO officially launches. I'll share the details before that happens. This offer is just for you and can't be transferred.</div>
+  </div>
+
+  <div class="section">
+    <h2>2. Keep It Between Us</h2>
+    <p>I'd appreciate it if you kept the details of the app within our gym for now. Please don't post screenshots or feature details on social media or public forums. Talking about it with other Alliance Paoli testers is totally fine. If someone outside the gym is curious, just send them my way and I'll get them set up.</p>
+  </div>
+
+  <div class="section">
+    <h2>3. Feedback and Ideas</h2>
+    <p>I genuinely want to hear what you think. Bug reports, feature ideas, things that frustrate you, all of it. Just know that any feedback you share may end up shaping the product, and I'll have full freedom to use those ideas however makes sense. I'm grateful for every bit of input.</p>
+  </div>
+
+  <div class="section">
+    <h2>4. Intellectual Property</h2>
+    <p>TOMO, including the app, its design, and all the technology behind it, belongs to me (Drew Garraway). Beta access is just that: access. It doesn't come with any ownership or licensing rights.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. Your Access Is Personal</h2>
+    <p>Your TestFlight invite is tied to you. Please don't share the link or let someone else use the app through your account. If you know someone who'd be a great tester, let me know and I'll invite them myself.</p>
+  </div>
+
+  <div class="section">
+    <h2>6. It's a Beta</h2>
+    <p>This is early software. Things might crash, data might get lost, and the experience won't always be polished. That's the nature of a beta, and your patience with it is what helps me make it better. No warranties here, just an honest work in progress.</p>
+  </div>
+
+  <div class="section">
+    <h2>7. Liability</h2>
+    <p>I've done my best to build something solid, but I can't be held liable for any issues that come up from using the beta. That includes things like lost data or device problems.</p>
+  </div>
+
+  <div class="section">
+    <h2>8. After the Beta</h2>
+    <p>The beta won't last forever. When it wraps up or transitions to a public launch, I'll give you a heads up before anything changes.</p>
+  </div>
+
+  <div class="section">
+    <h2>9. Age Requirement</h2>
+    <p>You must be 18 or older to participate in the beta. No exceptions.</p>
+  </div>
+
+  <div class="agree-cta" id="agree-section">
+    <h2>Confirm your agreement</h2>
+    <p id="agree-name-display"></p>
+
+    <div id="agree-form">
+      <button class="agree-btn" id="agree-btn" onclick="submitAgreement()">I Agree</button>
+      <p class="agree-note">By tapping "I Agree" you confirm that you've read and accept all terms above.</p>
+    </div>
+
+    <div class="agree-success" id="agree-success">
+      <h3>Agreement signed.</h3>
+      <p>Drew will send your TestFlight invite shortly. See you on the mats.</p>
+    </div>
+
+    <div class="agree-error" id="agree-error">
+      <p>Something went wrong with this link. Email drew@assemblylabs.co to get a new agreement link.</p>
+    </div>
+
+    <div class="agree-manual" id="agree-manual" style="display:none;">
+      <p style="margin-bottom: 16px;">Enter your info to complete the agreement:</p>
+      <div style="margin-bottom: 12px;">
+        <label style="display:block; font-size:14px; color:#ccc; margin-bottom:6px; font-weight:600;">Name</label>
+        <input type="text" id="manual-name" placeholder="Your full name" style="width:100%; padding:14px; font-size:17px; background:#1a1a1a; border:1px solid #333; border-radius:10px; color:#fff; font-family:Inter,sans-serif; outline:none;">
+      </div>
+      <div style="margin-bottom: 16px;">
+        <label style="display:block; font-size:14px; color:#ccc; margin-bottom:6px; font-weight:600;">Email</label>
+        <input type="email" id="manual-email" placeholder="you@email.com" style="width:100%; padding:14px; font-size:17px; background:#1a1a1a; border:1px solid #333; border-radius:10px; color:#fff; font-family:Inter,sans-serif; outline:none;">
+      </div>
+      <button class="agree-btn" id="manual-agree-btn" onclick="submitManualAgreement()">I Agree</button>
+      <p class="agree-note">By tapping "I Agree" you confirm that you've read and accept all terms above.</p>
+    </div>
+  </div>
+
+  <div class="sign-off">
+    <p>Seriously, thank you. This wouldn't be possible without people like you willing to try it early. See you on the mats.</p>
+    <p class="name">- Drew Garraway</p>
+  </div>
+
+  <div class="footer">
+    <p>Built by Assembly Labs, LLC</p>
+  </div>
+</div>
+
+<script>
+var SUPABASE_FUNCTION_URL = 'https://whzycopfjvwmsgzfqvig.supabase.co/functions/v1/nda-agreement-notify';
+
+// Read name and email from URL params (set by the auto-email link)
+var params = new URLSearchParams(window.location.search);
+var testerEmail = params.get('email');
+var testerName = params.get('name');
+
+// Show who is agreeing
+var nameDisplay = document.getElementById('agree-name-display');
+if (testerName && testerEmail) {
+  nameDisplay.textContent = testerName + ' (' + testerEmail + ')';
+} else if (testerEmail) {
+  nameDisplay.textContent = testerEmail;
+} else {
+  // No URL params, show manual entry form
+  document.getElementById('agree-form').style.display = 'none';
+  document.getElementById('agree-manual').style.display = 'block';
+  nameDisplay.textContent = '';
+}
+
+function submitManualAgreement() {
+  var name = document.getElementById('manual-name').value.trim();
+  var email = document.getElementById('manual-email').value.trim();
+  if (!name || !email) { alert('Please enter your name and email.'); return; }
+  testerName = name;
+  testerEmail = email;
+
+  var btn = document.getElementById('manual-agree-btn');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  fetch(SUPABASE_FUNCTION_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name, email: email, user_agent: navigator.userAgent })
+  })
+  .then(function(res) { return res.json().then(function(data) { return { ok: res.ok, data: data }; }); })
+  .then(function(result) {
+    if (result.ok) {
+      document.getElementById('agree-manual').style.display = 'none';
+      document.getElementById('agree-success').style.display = 'block';
+    } else {
+      alert(result.data.error || 'Something went wrong. Email drew@assemblylabs.co.');
+      btn.textContent = 'I Agree';
+      btn.disabled = false;
+    }
+  })
+  .catch(function() {
+    alert('Connection error. Email drew@assemblylabs.co.');
+    btn.textContent = 'I Agree';
+    btn.disabled = false;
+  });
+}
+
+function submitAgreement() {
+  if (!testerEmail) return;
+
+  var btn = document.getElementById('agree-btn');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  fetch(SUPABASE_FUNCTION_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: testerName || 'Unknown',
+      email: testerEmail,
+      user_agent: navigator.userAgent
+    })
+  })
+  .then(function(res) { return res.json().then(function(data) { return { ok: res.ok, data: data }; }); })
+  .then(function(result) {
+    if (result.ok) {
+      document.getElementById('agree-form').style.display = 'none';
+      document.getElementById('agree-success').style.display = 'block';
+    } else {
+      alert(result.data.error || 'Something went wrong. Email drew@assemblylabs.co.');
+      btn.textContent = 'I Agree';
+      btn.disabled = false;
+    }
+  })
+  .catch(function() {
+    alert('Connection error. Email drew@assemblylabs.co.');
+    btn.textContent = 'I Agree';
+    btn.disabled = false;
+  });
+}
+</script>
+</body>
+</html>

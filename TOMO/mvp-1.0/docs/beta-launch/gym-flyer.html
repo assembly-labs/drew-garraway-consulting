@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMO - Gym Flyer (Print)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: letter;
+      margin: 0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 8.5in;
+      height: 11in;
+      margin: 0 auto;
+      padding: 0.75in 0.85in;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: #111111;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .top-section {
+      text-align: center;
+      width: 100%;
+    }
+
+    .product-name {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: 72px;
+      letter-spacing: 6px;
+      color: #111111;
+      margin-bottom: 8px;
+    }
+
+    .japanese {
+      font-size: 28px;
+      color: #999;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .tagline {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: #111111;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .divider {
+      width: 60px;
+      height: 4px;
+      background: #F5A623;
+      border-radius: 2px;
+      margin: 28px auto;
+    }
+
+    .middle-section {
+      text-align: center;
+      width: 100%;
+    }
+
+    .features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 28px;
+    }
+
+    .features li {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #333;
+      padding: 6px 0;
+    }
+
+    .features li strong {
+      font-weight: 600;
+      color: #111;
+    }
+
+    .free-banner {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #F5A623;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 32px;
+    }
+
+    .qr-section {
+      text-align: center;
+    }
+
+    #qr-code {
+      display: inline-block;
+      padding: 16px;
+      border: 3px solid #111;
+      border-radius: 12px;
+    }
+
+    #qr-code canvas {
+      display: block;
+    }
+
+    .scan-label {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: #111;
+      margin-top: 14px;
+      letter-spacing: 1px;
+    }
+
+    .bottom-section {
+      text-align: center;
+      width: 100%;
+    }
+
+    .iphone-note {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .built-by {
+      font-size: 14px;
+      color: #999;
+    }
+
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-section">
+    <div class="product-name">TOMO</div>
+    <div class="japanese">友</div>
+    <div class="tagline">Your training. Remembered.</div>
+    <div class="subtitle">A voice-powered BJJ training journal</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="middle-section">
+    <ul class="features">
+      <li><strong>Talk, don't type.</strong> Log sessions in 90 seconds after class.</li>
+      <li><strong>Build your technique library.</strong> Every drill, every roll, tracked.</li>
+      <li><strong>See your journey.</strong> Personalized to your belt level.</li>
+    </ul>
+
+    <div class="free-banner">Free for Alliance Paoli Members</div>
+
+    <div class="qr-section">
+      <div id="qr-code"></div>
+      <div class="scan-label">Scan to sign up</div>
+    </div>
+  </div>
+
+  <div class="bottom-section">
+    <div class="iphone-note">Currently available for iPhone</div>
+    <div class="built-by">Built by Drew Garraway, Alliance Paoli</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script>
+    new QRCode(document.getElementById('qr-code'), {
+      text: 'https://traintomo.com/',
+      width: 220,
+      height: 220,
+      colorDark: '#111111',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  </script>
+
+</body>
+</html>

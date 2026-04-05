@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FEAT-002: Insights Tab Strategy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #111111;
+    color: #e5e5e5;
+    line-height: 1.7;
+    padding: 40px 20px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #F5A623;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: #737373;
+    margin-bottom: 40px;
+    letter-spacing: 0.5px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #262626;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #d4d4d4;
+    margin: 28px 0 12px;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #a3a3a3;
+    margin: 20px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  p {
+    margin-bottom: 16px;
+    font-weight: 400;
+    color: #d4d4d4;
+  }
+
+  strong { color: #ffffff; font-weight: 600; }
+  em { color: #F5A623; font-style: normal; }
+
+  ul, ol {
+    margin: 0 0 16px 24px;
+    color: #d4d4d4;
+  }
+
+  li { margin-bottom: 8px; }
+
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .pill-gold { background: rgba(245,166,35,0.15); color: #F5A623; }
+  .pill-green { background: rgba(34,197,94,0.15); color: #22c55e; }
+  .pill-red { background: rgba(239,68,68,0.15); color: #ef4444; }
+  .pill-blue { background: rgba(96,165,250,0.15); color: #60a5fa; }
+  .pill-gray { background: rgba(163,163,163,0.15); color: #a3a3a3; }
+
+  .card {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 16px 0;
+    border-left: 3px solid #262626;
+  }
+
+  .card-gold { border-left-color: #F5A623; }
+  .card-green { border-left-color: #22c55e; }
+  .card-red { border-left-color: #ef4444; }
+  .card-blue { border-left-color: #60a5fa; }
+
+  .card h3 { margin-top: 0; }
+
+  .quote {
+    background: #1a1a1a;
+    border-left: 3px solid #F5A623;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-style: italic;
+    color: #a3a3a3;
+  }
+
+  .quote strong { color: #F5A623; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 14px;
+  }
+
+  th {
+    text-align: left;
+    padding: 10px 12px;
+    background: #1a1a1a;
+    color: #F5A623;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #333;
+  }
+
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #222;
+    color: #d4d4d4;
+    vertical-align: top;
+  }
+
+  tr:hover td { background: rgba(245,166,35,0.03); }
+
+  .strength { color: #22c55e; }
+  .risk { color: #ef4444; }
+  .neutral { color: #a3a3a3; }
+
+  .rating {
+    display: inline-block;
+    width: 18px;
+    text-align: center;
+  }
+
+  .approach-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #262626;
+  }
+
+  .approach-header h2 {
+    margin: 0;
+    border: none;
+    padding: 0;
+  }
+
+  .approach-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  .label-a { background: rgba(245,166,35,0.2); color: #F5A623; }
+  .label-b { background: rgba(34,197,94,0.2); color: #22c55e; }
+  .label-c { background: rgba(96,165,250,0.2); color: #60a5fa; }
+
+  .rec-banner {
+    background: rgba(34,197,94,0.08);
+    border: 1px solid rgba(34,197,94,0.25);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+
+  .rec-banner h3 {
+    color: #22c55e;
+    margin-top: 0;
+    font-size: 18px;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+    margin: 20px 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    background: #333;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #F5A623;
+  }
+
+  .timeline-item .day {
+    font-size: 13px;
+    font-weight: 600;
+    color: #F5A623;
+    margin-bottom: 4px;
+  }
+
+  .timeline-item p {
+    margin-bottom: 0;
+    font-size: 14px;
+  }
+
+  .persona-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .persona-name {
+    font-weight: 600;
+    color: #F5A623;
+    font-size: 14px;
+  }
+
+  .persona-belt {
+    font-size: 12px;
+    color: #737373;
+  }
+
+  .persona-text {
+    font-size: 14px;
+    color: #d4d4d4;
+  }
+
+  .persona-text .example {
+    color: #a3a3a3;
+    font-style: italic;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #262626;
+    margin: 48px 0;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #737373;
+    margin-bottom: 16px;
+  }
+
+  .eval-strong { color: #22c55e; font-weight: 500; }
+  .eval-mod { color: #F5A623; font-weight: 500; }
+  .eval-weak { color: #ef4444; font-weight: 500; }
+  .eval-ok { color: #a3a3a3; font-weight: 500; }
+
+  .phase-table td:first-child {
+    font-weight: 600;
+    color: #F5A623;
+    white-space: nowrap;
+  }
+
+  .footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid #262626;
+    color: #525252;
+    font-size: 13px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>Insights Tab Strategy</h1>
+<p class="subtitle">FEAT-002 &middot; Created March 30, 2026 &middot; Status: Exploring</p>
+
+<!-- CORE QUESTION -->
+<h2>The Core Question</h2>
+<p>We have a full insights engine ready to deploy. The question isn't <em>what</em> to build -- it's <strong>how should insights show up in the user's experience?</strong></p>
+
+<ol>
+  <li><strong>Where do insights live?</strong> Own tab vs. woven into existing screens</li>
+  <li><strong>What's the first impression?</strong> What does a user see on day one, day seven, day thirty?</li>
+  <li><strong>How do insights feel?</strong> Data dashboard vs. editorial narrative vs. conversational</li>
+</ol>
+
+<hr class="divider">
+
+<!-- UX RESEARCH -->
+<h2>UX Research Grounding</h2>
+
+<h3>User states matter here</h3>
+<p>From the UX audit and persona research, TOMO users exist in two modes:</p>
+<ul>
+  <li><strong>Exhausted (post-training):</strong> 90-second window, reduced cognition, voice-first logging. Insights are irrelevant in this state.</li>
+  <li><strong>Relaxed (browsing):</strong> Couch, commute, rest day. Curious about progress. Open to depth. <em>This is when insights deliver value.</em></li>
+</ul>
+
+<div class="quote">
+  Insights are a "relaxed state" feature. The user who opens TOMO on a rest day to see what the app noticed about their week -- that's the target moment.
+</div>
+
+<h3>What the personas want</h3>
+
+<div class="persona-row">
+  <div>
+    <div class="persona-name">Alex</div>
+    <div class="persona-belt">White belt, 0-6mo</div>
+  </div>
+  <div class="persona-text">
+    Needs validation that they're making progress. <span class="example">"You trained 3 times this week -- that's more than 80% of white belts at your stage"</span> matters more than technique analysis. Risk: if insights are too technical or sparse, Alex feels like the app doesn't get them.
+  </div>
+</div>
+
+<div class="persona-row">
+  <div>
+    <div class="persona-name">Jake</div>
+    <div class="persona-belt">White belt, 6-18mo</div>
+  </div>
+  <div class="persona-text">
+    Approaching blue belt. Wants to know their game is developing. <span class="example">"You've drilled half guard sweeps in 4 of your last 6 sessions -- that's becoming your system"</span> is the insight that makes Jake feel seen. Most likely to churn if TOMO feels like a dumb log.
+  </div>
+</div>
+
+<div class="persona-row">
+  <div>
+    <div class="persona-name">Marcus</div>
+    <div class="persona-belt">Blue belt, plateau</div>
+  </div>
+  <div class="persona-text">
+    Knows he's plateauing. Wants someone to see the patterns he can't. <span class="example">"Your submission rate dropped 20%, but your positional control improved -- that usually means you're working new positions. That's how games evolve."</span> Shallow insights feel patronizing. Marcus needs analytical depth.
+  </div>
+</div>
+
+<div class="persona-row">
+  <div>
+    <div class="persona-name">Sofia</div>
+    <div class="persona-belt">Purple belt, grinder</div>
+  </div>
+  <div class="persona-text">
+    Already tracks mentally. Looking for the blind spot. <span class="example">"You haven't touched your back game in 6 weeks -- every session has been guard-focused"</span> is useful because Sofia was doing it unconsciously. Will stop checking if insights just confirm what she already knows.
+  </div>
+</div>
+
+<h3>Cold start is real</h3>
+<p>A new user has zero sessions. After one week they might have 2-4 sessions. The insights engine has minimum thresholds (1 session for weekly, 5 for monthly, 2 monthly reviews for quarterly). The first-time experience must handle this gracefully without making the tab feel empty or pointless.</p>
+
+<h3>The "show your training partner" moment</h3>
+<div class="quote">
+  The strongest signal that insights are working: <strong>a user screenshots their weekly debrief and texts it to a training partner.</strong> This means the insight was specific enough to be interesting, personal enough to feel earned, and visual enough to be shareable. Every approach should be evaluated against this test.
+</div>
+
+<hr class="divider">
+
+<!-- APPROACH A -->
+<div class="approach-header">
+  <span class="approach-label label-a">Approach A</span>
+  <h2 style="font-size: 20px;">"The Debrief" -- Narrative-first, own tab</h2>
+</div>
+
+<p>Insights live in a dedicated tab. The latest insight plays with a <strong>typewriter animation</strong> -- text reveals character by character, gold glow trailing behind, like TOMO is composing the observation in real time. Older insights collapse below. Chat follow-up slides in after the text finishes.</p>
+
+<h4>What the user sees</h4>
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="day">Day 1 (0 sessions)</div>
+    <p>A warm empty state. "Log your first session. After a week of training, your first debrief will appear here." No progress bars -- just a clear promise of what's coming and when.</p>
+  </div>
+  <div class="timeline-item">
+    <div class="day">Day 7 (3-4 sessions)</div>
+    <p>First weekly insight auto-plays with typewriter. The user watches TOMO compose: "Three sessions this week, all gi classes. You drilled closed guard sweeps twice -- that repetition is building your foundation..." Gold cursor pulsing. When it finishes, a chat input fades in.</p>
+  </div>
+  <div class="timeline-item">
+    <div class="day">Day 30 (12+ sessions)</div>
+    <p>Monthly review appears above the weekly feed. Tapping opens a full-page review with typewriter on first view. Names the user's developing game, evaluates consistency, flags concerns. Weekly insights reference the monthly context.</p>
+  </div>
+  <div class="timeline-item">
+    <div class="day">Day 90 (30+ sessions)</div>
+    <p>Quarterly assessment at the top. Feels like sitting down with a black belt. "Q1 2026: You went from a white belt who survived to one who hunts. Your half guard system is the foundation of a real game..." Weighty, strategic.</p>
+  </div>
+</div>
+
+<div class="card card-green">
+  <h4 style="margin-top:0; color: #22c55e;">Strengths</h4>
+  <ul>
+    <li><strong>Strongest "wow" moment.</strong> The typewriter animation creates anticipation. Users watch their insight being composed, which feels alive and personal.</li>
+    <li><strong>Matches TOMO's voice-first identity.</strong> Users speak sessions into existence; TOMO speaks observations back.</li>
+    <li><strong>The prototype already proved it.</strong> The web prototype validated this design language -- typewriter, glow, chat input.</li>
+    <li><strong>Shareability is high.</strong> Gold glow on dark background is visually striking enough to screenshot.</li>
+    <li><strong>Chat follow-up is natural.</strong> "Ask about this" feels like continuing a conversation.</li>
+  </ul>
+</div>
+
+<div class="card card-red">
+  <h4 style="margin-top:0; color: #ef4444;">Risks</h4>
+  <ul>
+    <li><strong>Typewriter can feel slow.</strong> 200 words at 20ms/char = ~25 seconds. Need prominent skip and viewed-state tracking.</li>
+    <li><strong>Tab may feel empty early on.</strong> Until the first weekly insight generates, it's an empty promise.</li>
+    <li><strong>Engineering complexity.</strong> React Native glow effect needs adaptation. ~1,130 lines new/changed code.</li>
+    <li><strong>Over-invests in presentation.</strong> If content quality is mediocre, fancy animation makes it worse -- like a beautifully animated horoscope.</li>
+  </ul>
+</div>
+
+<p><span class="pill pill-gold">Implementation: Medium-High</span> &nbsp; Estimated 1-2 sessions</p>
+
+<hr class="divider">
+
+<!-- APPROACH B -->
+<div class="approach-header">
+  <span class="approach-label label-b">Approach B</span>
+  <h2 style="font-size: 20px;">"Weekly Check-In" -- Focused, own tab, no animation</h2>
+</div>
+
+<p>Ship the Insights tab with <strong>weekly insights only</strong>. No typewriter, no chat, no monthly/quarterly. Clean cards on a dark background. Most recent week at the top, older weeks below. Simple, fast, focused on proving that TOMO can say something useful.</p>
+
+<h4>What the user sees</h4>
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="day">Day 1 (0 sessions)</div>
+    <p>Same warm empty state as Approach A.</p>
+  </div>
+  <div class="timeline-item">
+    <div class="day">Day 7 (3-4 sessions)</div>
+    <p>A card appears with 2-3 observations. Each has a type badge (technique, consistency, sparring) and 1-2 sentences. Below: a "Focus Next Week" recommendation. No animation -- the content is just there.</p>
+  </div>
+  <div class="timeline-item">
+    <div class="day">Day 14 (7+ sessions)</div>
+    <p>Two weeks of cards. Newer week expanded, older collapsed. Users can compare weeks -- "Last week said focus on guard retention, this week says I drilled it 3 times. Progress."</p>
+  </div>
+  <div class="timeline-item">
+    <div class="day">Day 30+</div>
+    <p>Monthly and quarterly tiers are NOT shown. Added in a future update once weekly quality is validated.</p>
+  </div>
+</div>
+
+<div class="card card-green">
+  <h4 style="margin-top:0; color: #22c55e;">Strengths</h4>
+  <ul>
+    <li><strong>Fastest to ship.</strong> Use existing InsightsScreen as-is -- just wire the tab, deploy one edge function, add trigger. Could ship in a single session.</li>
+    <li><strong>Lowest risk.</strong> One edge function (Haiku, cheapest model), minimal new code. Small blast radius if quality is poor.</li>
+    <li><strong>Validates the core question first.</strong> Do users actually read weekly insights? Do they come back? Is the content useful? Real data beats design speculation.</li>
+    <li><strong>Weekly cadence matches training rhythm.</strong> 2-4x/week training, weekly summary is the natural reflection point.</li>
+  </ul>
+</div>
+
+<div class="card card-red">
+  <h4 style="margin-top:0; color: #ef4444;">Risks</h4>
+  <ul>
+    <li><strong>No "wow" factor.</strong> Static cards must stand on content alone. If Haiku output is generic, users check once and never return.</li>
+    <li><strong>Underuses what's built.</strong> Monthly, quarterly, chat, typewriter, glow -- all sitting unused.</li>
+    <li><strong>No chat means no depth.</strong> Users can't follow up on interesting observations.</li>
+    <li><strong>Harder to communicate the vision.</strong> "We have a weekly summary" vs. "tiered coaching system with conversational follow-up."</li>
+  </ul>
+</div>
+
+<p><span class="pill pill-green">Implementation: Low</span> &nbsp; Estimated ~0.5 sessions</p>
+
+<hr class="divider">
+
+<!-- APPROACH C -->
+<div class="approach-header">
+  <span class="approach-label label-c">Approach C</span>
+  <h2 style="font-size: 20px;">"The Feed" -- Insights woven into Journal</h2>
+</div>
+
+<p>Don't add a separate tab. Instead, insights appear as <strong>special cards in the Journal feed</strong> alongside session entries. A weekly debrief card appears at the end of each week. Monthly reviews at month boundaries. The Journal becomes a combined timeline of training and reflection.</p>
+
+<h4>What the user sees</h4>
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="day">Day 1 (0 sessions)</div>
+    <p>Normal Journal empty state. No mention of insights -- the user just starts logging.</p>
+  </div>
+  <div class="timeline-item">
+    <div class="day">Day 7 (3-4 sessions)</div>
+    <p>Scrolling through the Journal, a new card type appears: "Weekly Debrief - Mar 24-30". Gold left border, sparkle icon, different visual weight than session cards. Tapping opens the full debrief.</p>
+  </div>
+  <div class="timeline-item">
+    <div class="day">Day 30 (12+ sessions)</div>
+    <p>The Journal now has a rhythm: sessions interspersed with weekly debriefs, a "Monthly Check-In" card at month boundaries. The feed tells the full story.</p>
+  </div>
+  <div class="timeline-item">
+    <div class="day">Day 90 (30+ sessions)</div>
+    <p>A "Quarterly Review" card appears -- the most visually prominent card type. The Journal has become a living document of training and growth.</p>
+  </div>
+</div>
+
+<div class="card card-green">
+  <h4 style="margin-top:0; color: #22c55e;">Strengths</h4>
+  <ul>
+    <li><strong>Zero navigation change.</strong> No new tab needed. Insights appear where users already look.</li>
+    <li><strong>Natural context.</strong> Weekly debrief sits right next to the sessions that informed it.</li>
+    <li><strong>Solves the "empty tab" problem.</strong> No empty state to manage. Insights scale naturally.</li>
+    <li><strong>Engagement through existing habit.</strong> Users check Journal after logging. Insights catch them there.</li>
+  </ul>
+</div>
+
+<div class="card card-red">
+  <h4 style="margin-top:0; color: #ef4444;">Risks</h4>
+  <ul>
+    <li><strong>Insights get buried.</strong> 5 sessions in a week = debrief is 5 items down. Users who don't scroll will miss it.</li>
+    <li><strong>No dedicated home.</strong> Finding a monthly review from 2 months ago means scrolling through dozens of entries.</li>
+    <li><strong>Feed gets cluttered.</strong> Mixing session logs, debriefs, monthly reviews, and quarterlies creates visual noise.</li>
+    <li><strong>Chat follow-up is awkward.</strong> Where does the conversation live? Inline? Modal? No clean answer.</li>
+    <li><strong>Harder to extend later.</strong> Moving to a dedicated tab later breaks the pattern users learned.</li>
+    <li><strong>Screenshot test fails.</strong> Insights surrounded by session entries aren't shareable.</li>
+  </ul>
+</div>
+
+<p><span class="pill pill-blue">Implementation: Medium</span> &nbsp; Estimated 1-2 sessions (touches more existing code)</p>
+
+<hr class="divider">
+
+<!-- EVALUATION MATRIX -->
+<h2>Evaluation Matrix</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Criteria</th>
+      <th>A: The Debrief</th>
+      <th>B: Weekly Check-In</th>
+      <th>C: The Feed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>"Wow" moment</td>
+      <td class="eval-strong">Strong</td>
+      <td class="eval-mod">Moderate</td>
+      <td class="eval-weak">Weak</td>
+    </tr>
+    <tr>
+      <td>Cold start handling</td>
+      <td class="eval-ok">Good</td>
+      <td class="eval-ok">Good</td>
+      <td class="eval-strong">Great</td>
+    </tr>
+    <tr>
+      <td>Time to first value</td>
+      <td>~7 days</td>
+      <td>~7 days</td>
+      <td>~7 days</td>
+    </tr>
+    <tr>
+      <td>Speed to ship</td>
+      <td class="eval-mod">1-2 sessions</td>
+      <td class="eval-strong">0.5 sessions</td>
+      <td class="eval-mod">1-2 sessions</td>
+    </tr>
+    <tr>
+      <td>Shareability (screenshot test)</td>
+      <td class="eval-strong">Strong</td>
+      <td class="eval-mod">Moderate</td>
+      <td class="eval-weak">Weak</td>
+    </tr>
+    <tr>
+      <td>Scales to monthly/quarterly/chat</td>
+      <td class="eval-strong">Natural</td>
+      <td class="eval-mod">Future work</td>
+      <td class="eval-weak">Complicated</td>
+    </tr>
+    <tr>
+      <td>Risk if content quality is weak</td>
+      <td class="eval-weak">High (animation amplifies)</td>
+      <td class="eval-strong">Low (easy to iterate)</td>
+      <td class="eval-mod">Medium</td>
+    </tr>
+    <tr>
+      <td>Validates the right question</td>
+      <td>"Do users value AI coaching?"</td>
+      <td>"Is weekly content useful?"</td>
+      <td>"Do users notice in context?"</td>
+    </tr>
+    <tr>
+      <td>Uses existing code</td>
+      <td class="eval-mod">Most (with rewrite)</td>
+      <td class="eval-strong">Most (as-is)</td>
+      <td class="eval-weak">Least (new components)</td>
+    </tr>
+    <tr>
+      <td>Persona: Alex (newcomer)</td>
+      <td class="eval-ok">Good</td>
+      <td class="eval-ok">OK</td>
+      <td class="eval-ok">Good</td>
+    </tr>
+    <tr>
+      <td>Persona: Marcus (plateau)</td>
+      <td class="eval-strong">Strong</td>
+      <td class="eval-mod">Moderate</td>
+      <td class="eval-mod">Moderate</td>
+    </tr>
+    <tr>
+      <td>Persona: Sofia (grinder)</td>
+      <td class="eval-strong">Strong</td>
+      <td class="eval-weak">Weak</td>
+      <td class="eval-mod">Moderate</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr class="divider">
+
+<!-- RECOMMENDATION -->
+<h2>Recommendation</h2>
+
+<div class="rec-banner">
+  <h3>Start with B, graduate to A</h3>
+  <p style="margin-bottom:0; color: #d4d4d4;">Ship the Weekly Check-In first. Validate that the content resonates. Then layer on the typewriter animation, monthly/quarterly tiers, and chat as the earned graduation.</p>
+</div>
+
+<h3>Why not C (The Feed)</h3>
+<p>It solves discovery but creates bigger problems -- buried insights, cluttered feed, no home for chat, harder to extend. It also means decomposing the existing InsightsScreen into embeddable components, which is more engineering work than just wiring what's built. And the screenshot test fails.</p>
+
+<h3>Why not A (The Debrief) first</h3>
+<p>The typewriter animation is impressive, but it's presentation. If the underlying Haiku output is generic or unhelpful, the animation makes it worse. We'd be polishing a feature we haven't validated. The React Native port also adds real complexity that delays the first user touchpoint.</p>
+
+<h3>Why B first</h3>
+<div class="quote">
+  <strong>B answers the most important question: does TOMO's weekly insight content actually resonate with users?</strong>
+</div>
+
+<p>The existing InsightsScreen already renders weekly cards with type badges, titles, body text, and focus recommendations. It handles empty states, pull-to-refresh, and mark-as-viewed. Wiring it to the tab bar, deploying the weekly edge function, and adding a trigger is roughly half a session of work.</p>
+
+<p>Once it ships, we watch:</p>
+<ul>
+  <li>Do users open the Insights tab more than once?</li>
+  <li>Do they open it on non-training days (the "rest day check-in" behavior)?</li>
+  <li>Which insight types (technique, consistency, sparring, milestone) get the most views?</li>
+  <li>Do users screenshot/share?</li>
+  <li>What do testers say about content quality?</li>
+</ul>
+
+<p>If weekly insights land well, Approach A becomes the graduation. If they don't, we iterate on content quality before investing in animation and chat.</p>
+
+<h3>Proposed phasing</h3>
+
+<table class="phase-table">
+  <thead>
+    <tr>
+      <th>Phase</th>
+      <th>What Ships</th>
+      <th>Effort</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Phase 1 (now)</td>
+      <td>Insights tab with weekly cards. Tab icon, navigation wiring, DB migration, weekly edge function, generation trigger after session save.</td>
+      <td>0.5-1 session</td>
+    </tr>
+    <tr>
+      <td>Phase 2</td>
+      <td>Typewriter animation, glow text, "new insight" reveal. Monthly (Sonnet) edge function.</td>
+      <td>1-1.5 sessions</td>
+    </tr>
+    <tr>
+      <td>Phase 3</td>
+      <td>Chat follow-up (5 exchanges). Quarterly (Opus) edge function. Full debrief experience.</td>
+      <td>1-1.5 sessions</td>
+    </tr>
+    <tr>
+      <td>Phase 4</td>
+      <td>UCD learning from chat, feedback thumbs, progressive profiling.</td>
+      <td>1 session</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr class="divider">
+
+<div class="section-label">Decision Log</div>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Decision</th>
+      <th>Rationale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2026-03-30</td>
+      <td>Elevated from "wire the tab" task to feature project</td>
+      <td>Core differentiator deserves product thinking, not just plumbing</td>
+    </tr>
+    <tr>
+      <td>--</td>
+      <td>Approach decision pending</td>
+      <td>Awaiting Drew's review</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="footer">
+  TOMO &middot; FEAT-002 Insights Tab Strategy &middot; March 30, 2026
+</div>
+
+</body>
+</html>

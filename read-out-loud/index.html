@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -10,7 +10,7 @@
     <title>READ OUT LOUD - Free Text-to-Speech</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
-    <link rel="stylesheet" href="css/styles.css?v=20260118">
+    <link rel="stylesheet" href="css/styles.css?v=20260331e">
 </head>
 <body>
     <div id="app" class="app-container">
@@ -18,6 +18,13 @@
         <header class="app-header">
             <h1 class="app-title">READ OUT LOUD</h1>
             <div class="header-actions">
+                <button id="editModeBtn" class="edit-mode-btn" style="display: none;" aria-label="Back to edit mode">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    <span>Edit</span>
+                </button>
                 <button id="settingsBtn" class="settings-btn" aria-label="Settings">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="3"></circle>
@@ -30,27 +37,42 @@
             </div>
         </header>
 
-        <!-- Main Content -->
+        <!-- Main Content (fills space between header and fixed footer) -->
         <main class="app-main">
+            <!-- Offline indicator -->
+            <div id="offlineBanner" class="offline-banner" style="display: none;">
+                Offline - using device voices
+            </div>
+
+            <!-- Resume Banner (shown inline above text when saved position exists) -->
+            <div id="resumeBanner" class="resume-banner" style="display: none;">
+                <span id="resumeText">Resume from 0%</span>
+                <div class="resume-actions">
+                    <button id="resumeBtn" class="resume-action-btn primary">Resume</button>
+                    <button id="startOverBtn" class="resume-action-btn">Start Over</button>
+                </div>
+            </div>
+
             <!-- Text Input Area -->
             <div class="text-container">
                 <div class="text-actions">
-                    <button id="pasteBtn" class="action-btn">
+                    <button id="pasteBtn" class="action-btn paste-btn" aria-label="Paste from clipboard">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
                             <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
                         </svg>
                         <span>Paste</span>
                     </button>
-                    <button id="importBtn" class="action-btn">
+                    <button id="importBtn" class="action-btn" aria-label="Import file">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="12" y1="18" x2="12" y2="12"></line>
+                            <line x1="9" y1="15" x2="15" y2="15"></line>
                         </svg>
                         <span>Import</span>
                     </button>
-                    <button id="saveBtn" class="action-btn">
+                    <button id="saveBtn" class="action-btn" aria-label="Save to library">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
                             <polyline points="17 21 17 13 7 13 7 21"></polyline>
@@ -58,15 +80,15 @@
                         </svg>
                         <span>Save</span>
                     </button>
-                    <button id="downloadBtn" class="action-btn optional" title="Download as MP3 (Optional - requires free ElevenLabs account)">
+                    <button id="downloadBtn" class="action-btn optional" title="Download as MP3 (Optional - requires free ElevenLabs account)" aria-label="Download as MP3">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                            <path d="M9 18V5l12-2v13"></path>
+                            <circle cx="6" cy="18" r="3"></circle>
+                            <circle cx="18" cy="16" r="3"></circle>
                         </svg>
                         <span>MP3</span>
                     </button>
-                    <button id="clearBtn" class="action-btn danger">
+                    <button id="clearBtn" class="action-btn danger" aria-label="Clear text">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="3 6 5 6 21 6"></polyline>
                             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -81,33 +103,46 @@
                     aria-label="Text input area"></textarea>
                 <!-- Reading display with word highlighting -->
                 <div id="textDisplay" class="text-display" style="display: none;"></div>
+                <!-- "Follow along" pill - shown when user scrolls away during playback -->
+                <button id="followAlongBtn" class="follow-along-btn" style="display: none;">Follow along</button>
                 <div class="text-stats">
                     <span id="charCount">0 characters</span>
                     <span id="wordCount">0 words</span>
                     <span id="readingTime">~0 min</span>
+                    <span id="autoSaveIndicator" class="auto-save-indicator" style="display: none;">Saved</span>
                 </div>
             </div>
 
-            <!-- Hidden file input (iOS-optimized) -->
+            <!-- Hidden file input -->
             <input type="file" id="fileInput" accept=".txt,.pdf,.docx,text/plain,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display: none;">
         </main>
 
-        <!-- Playback Controls -->
-        <footer class="app-footer">
+        <!-- Fixed Bottom Playback Bar (always in thumb zone) -->
+        <footer class="playback-bar">
             <!-- Progress Bar -->
             <div class="progress-container">
-                <div class="progress-bar">
-                    <div id="progressFill" class="progress-fill"></div>
-                </div>
-                <div class="progress-info">
-                    <span id="progressPercent">0%</span>
-                    <span id="progressTime">0:00 / 0:00</span>
+                <div class="progress-bar" id="progressBar">
+                    <div id="progressFill" class="progress-fill" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
                 </div>
             </div>
 
-            <!-- Control Buttons -->
-            <div class="controls">
-                <div class="control-group">
+            <!-- Primary Controls Row -->
+            <div class="playback-controls">
+                <div class="playback-left">
+                    <div class="progress-info">
+                        <span id="progressPercent">0%</span>
+                        <span id="progressTime">0:00 / 0:00</span>
+                    </div>
+                </div>
+
+                <div class="playback-center">
+                    <button id="skipBackBtn" class="control-btn skip" aria-label="Go back 15 seconds">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M1 4v6h6" fill="none"/>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                        </svg>
+                        <span class="skip-label">15</span>
+                    </button>
                     <button id="playPauseBtn" class="control-btn primary" aria-label="Play/Pause">
                         <svg id="playIcon" width="36" height="36" viewBox="0 0 24 24" fill="currentColor">
                             <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -116,41 +151,80 @@
                             <rect x="6" y="4" width="4" height="16"></rect>
                             <rect x="14" y="4" width="4" height="16"></rect>
                         </svg>
+                        <div id="playSpinner" class="play-spinner" style="display: none;"></div>
                     </button>
-                    <button id="stopBtn" class="control-btn secondary" aria-label="Stop">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                    <button id="skipForwardBtn" class="control-btn skip" aria-label="Go forward 15 seconds">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M23 4v6h-6" fill="none"/>
+                            <path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"/>
+                        </svg>
+                        <span class="skip-label">15</span>
+                    </button>
+                </div>
+
+                <div class="playback-right">
+                    <button id="speedBadge" class="speed-badge" aria-label="Change speed">
+                        <span id="speedValue">1.0x</span>
+                    </button>
+                    <button id="voiceSelectBtn" class="voice-badge" aria-haspopup="dialog" aria-label="Change voice">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        </svg>
+                        <span id="currentVoiceName">Voice</span>
+                    </button>
+                    <button id="stopBtn" class="control-btn stop-btn" aria-label="Stop">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <rect x="6" y="6" width="12" height="12"></rect>
                         </svg>
                     </button>
                 </div>
+            </div>
 
-                <!-- Speed Control -->
-                <div class="speed-control">
-                    <label for="speedSlider" class="speed-label">Speed: <span id="speedValue">1.0x</span></label>
-                    <input type="range" id="speedSlider" class="speed-slider" min="0.5" max="2.5" step="0.1" value="1.0">
-                    <div class="speed-presets">
-                        <button class="speed-preset" data-speed="0.5">0.5x</button>
-                        <button class="speed-preset" data-speed="1.0">1.0x</button>
-                        <button class="speed-preset" data-speed="1.5">1.5x</button>
-                        <button class="speed-preset" data-speed="2.0">2.0x</button>
-                    </div>
+            <!-- Speed popover (hidden by default) -->
+            <div id="speedPopover" class="speed-popover" style="display: none;">
+                <div class="speed-popover-header">
+                    <span>Playback Speed</span>
+                    <button id="closeSpeedPopover" class="close-btn speed-popover-close">&times;</button>
                 </div>
-
-                <!-- Voice Selection -->
-                <div class="voice-control">
-                    <button id="voiceSelectBtn" class="voice-select-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                        </svg>
-                        <span id="currentVoiceName">Select Voice</span>
-                    </button>
+                <div class="speed-presets">
+                    <button class="speed-preset" data-speed="0.5" aria-label="0.5x speed">0.5x</button>
+                    <button class="speed-preset" data-speed="0.75" aria-label="0.75x speed">0.75x</button>
+                    <button class="speed-preset" data-speed="1.0" aria-label="1x speed">1.0x</button>
+                    <button class="speed-preset" data-speed="1.25" aria-label="1.25x speed">1.25x</button>
+                    <button class="speed-preset" data-speed="1.5" aria-label="1.5x speed">1.5x</button>
+                    <button class="speed-preset" data-speed="2.0" aria-label="2x speed">2.0x</button>
+                </div>
+                <div class="speed-slider-row">
+                    <div class="speed-slider-label">
+                        <span>Fine tune</span>
+                        <span id="speedSliderDisplay" class="speed-slider-value">1.0x</span>
+                    </div>
+                    <input type="range" id="speedSlider" class="speed-slider" min="0.5" max="2.5" step="0.1" value="1.0">
                 </div>
             </div>
         </footer>
 
+        <!-- Confirm Modal -->
+        <div id="confirmModal" class="modal confirm-modal" style="display: none;">
+            <div class="modal-content confirm-content">
+                <div class="modal-header">
+                    <h2 id="confirmTitle">Confirm</h2>
+                    <button class="close-btn confirm-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p id="confirmMessage"></p>
+                    <input type="text" id="confirmInput" class="confirm-input" style="display: none;">
+                    <div class="confirm-actions">
+                        <button id="confirmCancel" class="confirm-btn secondary">Cancel</button>
+                        <button id="confirmOk" class="confirm-btn primary">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Voice Selection Modal -->
-        <div id="voiceModal" class="modal" style="display: none;">
+        <div id="voiceModal" class="modal" style="display: none;" role="dialog" aria-label="Select Voice">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2>Select Voice</h2>
@@ -164,7 +238,7 @@
         </div>
 
         <!-- Library Modal -->
-        <div id="libraryModal" class="modal" style="display: none;">
+        <div id="libraryModal" class="modal" style="display: none;" role="dialog" aria-label="Text Library">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2>Text Library</h2>
@@ -178,14 +252,13 @@
         </div>
 
         <!-- Settings Modal -->
-        <div id="settingsModal" class="modal" style="display: none;">
+        <div id="settingsModal" class="modal" style="display: none;" role="dialog" aria-label="Settings">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2>Settings</h2>
                     <button id="closeSettingsModal" class="close-btn">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <!-- TTS Engine Selection -->
                     <div class="settings-section">
                         <h3 class="settings-title">Voice Quality</h3>
                         <p class="settings-description">Premium voices are selected by default. Offline voices are used automatically when needed.</p>
@@ -200,8 +273,6 @@
                             </button>
                         </div>
                     </div>
-
-                    <!-- Info about automatic fallback -->
                     <div class="settings-section">
                         <h3 class="settings-title">How It Works</h3>
                         <p class="settings-description">
@@ -220,16 +291,16 @@
         </div>
 
         <!-- Toast Notifications -->
-        <div id="toastContainer" class="toast-container"></div>
+        <div id="toastContainer" class="toast-container" aria-live="polite"></div>
     </div>
 
     <!-- Scripts -->
-    <script src="js/storage.js?v=20260118"></script>
-    <script src="js/speech.js?v=20260118"></script>
-    <script src="js/premiumTTS.js?v=20260118"></script>
-    <script src="js/googleTTS.js?v=20260118"></script>
-    <script src="js/fileImport.js?v=20260118"></script>
-    <script src="js/ui.js?v=20260118"></script>
-    <script src="js/app.js?v=20260118"></script>
+    <script src="js/storage.js?v=20260331e"></script>
+    <script src="js/speech.js?v=20260331e"></script>
+    <script src="js/premiumTTS.js?v=20260331e"></script>
+    <script src="js/googleTTS.js?v=20260331e"></script>
+    <script src="js/fileImport.js?v=20260331e"></script>
+    <script src="js/ui.js?v=20260331e"></script>
+    <script src="js/app.js?v=20260331e"></script>
 </body>
 </html>

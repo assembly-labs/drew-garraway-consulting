@@ -8,12 +8,24 @@ class UIController {
     // UI Elements
     this.elements = {};
     this.autoSaveTimer = null;
-    this.isHighlighting = true; // Enable word highlighting
+    this.isHighlighting = true;
     this.currentTextId = null;
-    this.savedPosition = 0; // For resume functionality
-    this.premiumTTS = null; // Premium TTS instance (ElevenLabs)
-    this.googleTTS = null; // Google Cloud TTS instance
-    this.currentEngine = 'browser'; // 'browser' or 'google'
+    this.savedPosition = 0;
+    this.premiumTTS = null;
+    this.googleTTS = null;
+    this.currentEngine = 'browser';
+    this.wordSpans = []; // Pre-built spans for performant highlighting
+    this.currentHighlightIndex = -1;
+    this._confirmResolve = null; // For custom confirm/prompt modals
+    this._lastTriggerBtn = null; // For focus restoration after modals
+
+    // Auto-scroll control: tracks whether user scrolled away during playback
+    this.userScrolledAway = false;
+    this.isProgrammaticScroll = false;
+
+    // Prefetch: cache first audio chunk so playback starts instantly
+    this.prefetchedAudio = null; // { text, audioUrl, chunkIndex }
+    this.prefetchTimer = null;
   }
 
   initialize() {
@@ -24,6 +36,9 @@ class UIController {
     this.initializePremiumTTS();
     this.initializeGoogleTTS();
     this.initializeSettingsModal();
+    this.checkResumeBanner();
+    this.loadSampleTextIfFirstVisit();
+    this.setupOfflineIndicator();
   }
 
   initializePremiumTTS() {
@@ -36,9 +51,9 @@ class UIController {
     if (window.GoogleTTS) {
       this.googleTTS = new GoogleTTS();
 
-      // Set up callbacks
       this.googleTTS.onProgress = (data) => {
         this.elements.progressFill.style.width = `${data.progress}%`;
+        this.elements.progressFill.setAttribute('aria-valuenow', Math.round(data.progress));
         this.elements.progressPercent.textContent = `${Math.round(data.progress)}%`;
       };
 
@@ -55,27 +70,20 @@ class UIController {
       };
 
       this.googleTTS.onError = (error) => {
-        // On Google TTS error, fall back to browser voices
         this.fallbackToBrowserVoices('Playback error, using offline voices');
         this.handlePlaybackError({ error: error.message || 'Google TTS error' });
       };
 
-      // Auto-select premium (Google) engine if configured
       if (this.googleTTS.isConfigured) {
         this.currentEngine = 'google';
         localStorage.setItem('tts_engine', 'google');
-        // Load premium voices automatically
         this.autoLoadPremiumVoices();
       } else {
-        // Fall back to browser if Google not configured
         this.currentEngine = 'browser';
       }
     }
   }
 
-  /**
-   * Automatically load premium voices on startup
-   */
   async autoLoadPremiumVoices() {
     try {
       await this.googleTTS.fetchVoices();
@@ -89,16 +97,12 @@ class UIController {
     }
   }
 
-  /**
-   * Fall back to browser voices when premium fails
-   */
   fallbackToBrowserVoices(message = null) {
     this.currentEngine = 'browser';
     localStorage.setItem('tts_engine', 'browser');
     this.updateEngineUI();
     this.renderVoiceList();
 
-    // Update voice display to browser voice
     if (this.speechEngine.selectedVoice) {
       this.updateVoiceDisplay(this.speechEngine.selectedVoice);
     }
@@ -109,16 +113,159 @@ class UIController {
   }
 
   initializeSettingsModal() {
-    // Load current engine state into UI
     this.updateEngineUI();
   }
 
+  // ==========================================
+  // Sample text on first visit
+  // ==========================================
+
+  loadSampleTextIfFirstVisit() {
+    const hasVisited = localStorage.getItem('rol_has_visited');
+    const currentText = this.elements.textInput.value;
+    if (hasVisited || currentText) return;
+
+    localStorage.setItem('rol_has_visited', '1');
+    const sample = `The old lighthouse keeper climbed the spiral staircase one last time, his weathered hands gripping the iron railing that had guided him for thirty years. Outside, the November wind howled against the stone walls, carrying with it the salt spray of waves crashing far below.
+
+He reached the lamp room and paused to catch his breath. Through the thick glass panels, he could see the fishing boats returning to harbor, their lights bobbing like fireflies on the dark water. Each one carried someone's father, someone's child, guided safely home by this beam of light.
+
+Tomorrow the automated system would take over. No more climbing these stairs at dusk. No more watching through the long winter nights. Progress, they called it. He called it the end of something worth keeping.
+
+Press play to hear this text read aloud. The words will highlight as they are spoken. You can paste your own text, import a file, or save texts to your library.`;
+
+    this.elements.textInput.value = sample;
+    this.handleTextChange();
+  }
+
+  // ==========================================
+  // Offline indicator
+  // ==========================================
+
+  setupOfflineIndicator() {
+    const banner = document.getElementById('offlineBanner');
+    if (!banner) return;
+
+    const updateOnlineStatus = () => {
+      if (!navigator.onLine) {
+        banner.style.display = 'block';
+        if (this.currentEngine === 'google') {
+          this.fallbackToBrowserVoices();
+        }
+      } else {
+        banner.style.display = 'none';
+      }
+    };
+
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+    updateOnlineStatus();
+  }
+
+  // ==========================================
+  // Listen Mode (transforms UI during playback)
+  // ==========================================
+
+  enterListenMode() {
+    if (this.elements.appContainer) {
+      this.elements.appContainer.classList.add('listen-mode');
+    }
+    if (this.elements.editModeBtn) {
+      this.elements.editModeBtn.style.display = 'flex';
+    }
+  }
+
+  exitListenMode() {
+    if (this.elements.appContainer) {
+      this.elements.appContainer.classList.remove('listen-mode');
+    }
+    if (this.elements.editModeBtn) {
+      this.elements.editModeBtn.style.display = 'none';
+    }
+    this.stopPlayback();
+  }
+
+  // ==========================================
+  // Speed popover
+  // ==========================================
+
+  toggleSpeedPopover() {
+    const popover = this.elements.speedPopover;
+    if (!popover) return;
+    const isVisible = popover.style.display !== 'none';
+    popover.style.display = isVisible ? 'none' : 'block';
+    if (!isVisible) this.updateSpeedPresetActive();
+  }
+
+  closeSpeedPopover() {
+    if (this.elements.speedPopover) {
+      this.elements.speedPopover.style.display = 'none';
+    }
+  }
+
+  updateSpeedPresetActive() {
+    const currentSpeed = parseFloat(this.elements.speedSlider.value);
+    this.elements.speedPresets.forEach(btn => {
+      btn.classList.toggle('active', parseFloat(btn.dataset.speed) === currentSpeed);
+    });
+  }
+
+  // ==========================================
+  // Custom confirm/prompt modals (replaces native dialogs)
+  // ==========================================
+
+  showConfirm(title, message, { okText = 'OK', cancelText = 'Cancel', showInput = false, inputValue = '', inputPlaceholder = '' } = {}) {
+    return new Promise((resolve) => {
+      this._confirmResolve = resolve;
+
+      this.elements.confirmTitle.textContent = title;
+      this.elements.confirmMessage.textContent = message;
+      this.elements.confirmOk.textContent = okText;
+      this.elements.confirmCancel.textContent = cancelText;
+
+      if (showInput) {
+        this.elements.confirmInput.style.display = 'block';
+        this.elements.confirmInput.value = inputValue;
+        this.elements.confirmInput.placeholder = inputPlaceholder;
+      } else {
+        this.elements.confirmInput.style.display = 'none';
+      }
+
+      this.elements.confirmModal.style.display = 'flex';
+
+      // Focus the first action button (or input if prompt)
+      setTimeout(() => {
+        if (showInput) {
+          this.elements.confirmInput.focus();
+          this.elements.confirmInput.select();
+        } else {
+          this.elements.confirmOk.focus();
+        }
+      }, 50);
+    });
+  }
+
+  closeConfirm(result) {
+    this.elements.confirmModal.style.display = 'none';
+    if (this._confirmResolve) {
+      this._confirmResolve(result);
+      this._confirmResolve = null;
+    }
+    // Restore focus to trigger button
+    if (this._lastTriggerBtn) {
+      this._lastTriggerBtn.focus();
+      this._lastTriggerBtn = null;
+    }
+  }
+
+  // ==========================================
+  // Cache DOM Elements
+  // ==========================================
+
   cacheElements() {
-    // Text area
     this.elements.textInput = document.getElementById('textInput');
     this.elements.textDisplay = document.getElementById('textDisplay');
 
-    // Action buttons
     this.elements.pasteBtn = document.getElementById('pasteBtn');
     this.elements.importBtn = document.getElementById('importBtn');
     this.elements.saveBtn = document.getElementById('saveBtn');
@@ -126,18 +273,25 @@ class UIController {
     this.elements.clearBtn = document.getElementById('clearBtn');
     this.elements.fileInput = document.getElementById('fileInput');
 
-    // Playback controls
     this.elements.playPauseBtn = document.getElementById('playPauseBtn');
     this.elements.playIcon = document.getElementById('playIcon');
     this.elements.pauseIcon = document.getElementById('pauseIcon');
+    this.elements.playSpinner = document.getElementById('playSpinner');
     this.elements.stopBtn = document.getElementById('stopBtn');
+    this.elements.skipBackBtn = document.getElementById('skipBackBtn');
+    this.elements.skipForwardBtn = document.getElementById('skipForwardBtn');
 
-    // Speed controls
     this.elements.speedSlider = document.getElementById('speedSlider');
     this.elements.speedValue = document.getElementById('speedValue');
+    this.elements.speedBadge = document.getElementById('speedBadge');
+    this.elements.speedPopover = document.getElementById('speedPopover');
+    this.elements.closeSpeedPopover = document.getElementById('closeSpeedPopover');
+    this.elements.speedSliderDisplay = document.getElementById('speedSliderDisplay');
     this.elements.speedPresets = document.querySelectorAll('.speed-preset');
 
-    // Voice selection
+    this.elements.editModeBtn = document.getElementById('editModeBtn');
+    this.elements.appContainer = document.getElementById('app');
+
     this.elements.voiceSelectBtn = document.getElementById('voiceSelectBtn');
     this.elements.currentVoiceName = document.getElementById('currentVoiceName');
     this.elements.voiceModal = document.getElementById('voiceModal');
@@ -145,43 +299,55 @@ class UIController {
     this.elements.voiceList = document.getElementById('voiceList');
     this.elements.closeVoiceModal = document.getElementById('closeVoiceModal');
 
-    // Progress
+    this.elements.progressBar = document.getElementById('progressBar');
     this.elements.progressFill = document.getElementById('progressFill');
     this.elements.progressPercent = document.getElementById('progressPercent');
     this.elements.progressTime = document.getElementById('progressTime');
 
-    // Text stats
     this.elements.charCount = document.getElementById('charCount');
     this.elements.wordCount = document.getElementById('wordCount');
     this.elements.readingTime = document.getElementById('readingTime');
+    this.elements.autoSaveIndicator = document.getElementById('autoSaveIndicator');
 
-    // Library
     this.elements.libraryBtn = document.getElementById('libraryBtn');
     this.elements.libraryModal = document.getElementById('libraryModal');
     this.elements.librarySearch = document.getElementById('librarySearch');
     this.elements.libraryList = document.getElementById('libraryList');
     this.elements.closeLibraryModal = document.getElementById('closeLibraryModal');
 
-    // Loading and toast
     this.elements.loadingIndicator = document.getElementById('loadingIndicator');
     this.elements.loadingMessage = document.getElementById('loadingMessage');
     this.elements.toastContainer = document.getElementById('toastContainer');
 
-    // Settings modal
     this.elements.settingsBtn = document.getElementById('settingsBtn');
     this.elements.settingsModal = document.getElementById('settingsModal');
     this.elements.closeSettingsModal = document.getElementById('closeSettingsModal');
     this.elements.engineBrowser = document.getElementById('engineBrowser');
     this.elements.engineGoogle = document.getElementById('engineGoogle');
+
+    // Resume banner
+    this.elements.resumeBanner = document.getElementById('resumeBanner');
+    this.elements.resumeText = document.getElementById('resumeText');
+    this.elements.resumeBtn = document.getElementById('resumeBtn');
+    this.elements.startOverBtn = document.getElementById('startOverBtn');
+
+    // Follow along button (auto-scroll control)
+    this.elements.followAlongBtn = document.getElementById('followAlongBtn');
+
+    // Confirm modal
+    this.elements.confirmModal = document.getElementById('confirmModal');
+    this.elements.confirmTitle = document.getElementById('confirmTitle');
+    this.elements.confirmMessage = document.getElementById('confirmMessage');
+    this.elements.confirmInput = document.getElementById('confirmInput');
+    this.elements.confirmOk = document.getElementById('confirmOk');
+    this.elements.confirmCancel = document.getElementById('confirmCancel');
   }
 
   attachEventListeners() {
-    // Text input
     if (this.elements.textInput) {
       this.elements.textInput.addEventListener('input', () => this.handleTextChange());
     }
 
-    // Action buttons
     if (this.elements.pasteBtn) {
       this.elements.pasteBtn.addEventListener('click', () => this.pasteText());
     }
@@ -201,15 +367,24 @@ class UIController {
       this.elements.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
     }
 
-    // Playback controls
     if (this.elements.playPauseBtn) {
       this.elements.playPauseBtn.addEventListener('click', () => this.togglePlayPause());
     }
     if (this.elements.stopBtn) {
       this.elements.stopBtn.addEventListener('click', () => this.stopPlayback());
     }
+    if (this.elements.skipBackBtn) {
+      this.elements.skipBackBtn.addEventListener('click', () => this.skipBack());
+    }
+    if (this.elements.skipForwardBtn) {
+      this.elements.skipForwardBtn.addEventListener('click', () => this.skipForward());
+    }
 
-    // Speed controls
+    // Click-to-seek on progress bar
+    if (this.elements.progressBar) {
+      this.elements.progressBar.addEventListener('click', (e) => this.seekToPosition(e));
+    }
+
     if (this.elements.speedSlider) {
       this.elements.speedSlider.addEventListener('input', (e) => this.updateSpeed(e.target.value));
     }
@@ -219,7 +394,19 @@ class UIController {
       });
     }
 
-    // Voice selection
+    // Speed badge opens popover
+    if (this.elements.speedBadge) {
+      this.elements.speedBadge.addEventListener('click', () => this.toggleSpeedPopover());
+    }
+    if (this.elements.closeSpeedPopover) {
+      this.elements.closeSpeedPopover.addEventListener('click', () => this.closeSpeedPopover());
+    }
+
+    // Edit mode button (exits listen mode)
+    if (this.elements.editModeBtn) {
+      this.elements.editModeBtn.addEventListener('click', () => this.exitListenMode());
+    }
+
     if (this.elements.voiceSelectBtn) {
       this.elements.voiceSelectBtn.addEventListener('click', () => this.openVoiceModal());
     }
@@ -230,7 +417,6 @@ class UIController {
       this.elements.voiceSearch.addEventListener('input', (e) => this.filterVoices(e.target.value));
     }
 
-    // Library
     if (this.elements.libraryBtn) {
       this.elements.libraryBtn.addEventListener('click', () => this.openLibraryModal());
     }
@@ -241,25 +427,90 @@ class UIController {
       this.elements.librarySearch.addEventListener('input', (e) => this.filterLibrary(e.target.value));
     }
 
+    // Resume banner
+    if (this.elements.resumeBtn) {
+      this.elements.resumeBtn.addEventListener('click', () => this.resumeFromSaved());
+    }
+    if (this.elements.startOverBtn) {
+      this.elements.startOverBtn.addEventListener('click', () => this.startFresh());
+    }
+
+    // Confirm modal
+    if (this.elements.confirmOk) {
+      this.elements.confirmOk.addEventListener('click', () => {
+        const input = this.elements.confirmInput;
+        const value = input.style.display !== 'none' ? input.value : true;
+        this.closeConfirm(value);
+      });
+    }
+    if (this.elements.confirmCancel) {
+      this.elements.confirmCancel.addEventListener('click', () => this.closeConfirm(null));
+    }
+    // Close button on confirm modal
+    const confirmClose = document.querySelector('.confirm-close');
+    if (confirmClose) {
+      confirmClose.addEventListener('click', () => this.closeConfirm(null));
+    }
+    if (this.elements.confirmModal) {
+      this.elements.confirmModal.addEventListener('click', (e) => {
+        if (e.target === this.elements.confirmModal) this.closeConfirm(null);
+      });
+    }
+    // Enter key in confirm input
+    if (this.elements.confirmInput) {
+      this.elements.confirmInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          this.closeConfirm(this.elements.confirmInput.value);
+        }
+      });
+    }
+
+    // Follow along button and scroll tracking
+    if (this.elements.followAlongBtn) {
+      this.elements.followAlongBtn.addEventListener('click', () => {
+        this.userScrolledAway = false;
+        this.elements.followAlongBtn.style.display = 'none';
+        // Scroll to the currently highlighted word
+        if (this.currentHighlightIndex >= 0 && this.currentHighlightIndex < this.wordSpans.length) {
+          this.isProgrammaticScroll = true;
+          this.wordSpans[this.currentHighlightIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setTimeout(() => { this.isProgrammaticScroll = false; }, 500);
+        }
+      });
+    }
+    if (this.elements.textDisplay) {
+      this.elements.textDisplay.addEventListener('scroll', () => {
+        // Only mark as user-scrolled if it wasn't triggered by our code
+        if (!this.isProgrammaticScroll) {
+          this.userScrolledAway = true;
+          this.showFollowAlongBtn();
+        }
+      });
+    }
+
     // Speech engine callbacks
     this.speechEngine.boundaryCallback = (data) => this.handleWordBoundary(data);
+    this.speechEngine.startCallback = () => this.handlePlaybackStarted();
     this.speechEngine.endCallback = () => this.handlePlaybackEnd();
     this.speechEngine.errorCallback = (error) => this.handlePlaybackError(error);
 
     // Keyboard shortcuts
     document.addEventListener('keydown', (e) => this.handleKeyboardShortcuts(e));
 
-    // Modal close on outside click
-    if (this.elements.voiceModal) {
-      this.elements.voiceModal.addEventListener('click', (e) => {
-        if (e.target === this.elements.voiceModal) this.closeVoiceModal();
-      });
-    }
-    if (this.elements.libraryModal) {
-      this.elements.libraryModal.addEventListener('click', (e) => {
-        if (e.target === this.elements.libraryModal) this.closeLibraryModal();
-      });
-    }
+    // Modal close on outside click with focus trap
+    [
+      { modal: this.elements.voiceModal, close: () => this.closeVoiceModal() },
+      { modal: this.elements.libraryModal, close: () => this.closeLibraryModal() },
+      { modal: this.elements.settingsModal, close: () => this.closeSettingsModal() }
+    ].forEach(({ modal, close }) => {
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) close();
+        });
+        // Focus trap
+        modal.addEventListener('keydown', (e) => this.trapFocus(e, modal));
+      }
+    });
 
     // Settings modal
     if (this.elements.settingsBtn) {
@@ -267,11 +518,6 @@ class UIController {
     }
     if (this.elements.closeSettingsModal) {
       this.elements.closeSettingsModal.addEventListener('click', () => this.closeSettingsModal());
-    }
-    if (this.elements.settingsModal) {
-      this.elements.settingsModal.addEventListener('click', (e) => {
-        if (e.target === this.elements.settingsModal) this.closeSettingsModal();
-      });
     }
 
     // Engine toggle
@@ -283,20 +529,82 @@ class UIController {
     }
   }
 
+  // ==========================================
+  // Focus trap for modals
+  // ==========================================
+
+  trapFocus(event, modal) {
+    if (event.key !== 'Tab') return;
+    const focusable = modal.querySelectorAll('button, input, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey) {
+      if (document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  }
+
+  // ==========================================
+  // Resume banner
+  // ==========================================
+
+  checkResumeBanner() {
+    const savedPos = this.loadSavedPosition();
+    const text = this.elements.textInput.value;
+    if (savedPos > 0 && text && savedPos < text.length) {
+      const percent = Math.round((savedPos / text.length) * 100);
+      this.elements.resumeText.textContent = `Resume from ${percent}%`;
+      this.elements.resumeBanner.style.display = 'flex';
+    } else {
+      this.elements.resumeBanner.style.display = 'none';
+    }
+  }
+
+  resumeFromSaved() {
+    this.elements.resumeBanner.style.display = 'none';
+    const text = this.elements.textInput.value;
+    const savedPos = this.loadSavedPosition();
+    if (!text) return;
+
+    this.updatePlayPauseButton('loading');
+    if (this.currentEngine === 'google' && this.googleTTS?.isConfigured) {
+      this.startGooglePlayback(text, savedPos);
+    } else {
+      this.speechEngine.play(text, savedPos);
+      this.showTextDisplay();
+      this.startProgressTracking();
+    }
+  }
+
+  startFresh() {
+    this.elements.resumeBanner.style.display = 'none';
+    this.clearSavedPosition();
+    this.startPlayback();
+  }
+
+  // ==========================================
+  // State management
+  // ==========================================
+
   loadSavedState() {
-    // Load saved text
     const savedText = this.storageManager.getCurrentText();
     if (savedText) {
       this.elements.textInput.value = savedText;
       this.updateTextStats();
     }
 
-    // Load saved speed
     const savedSpeed = this.storageManager.getPlaybackSpeed();
     this.elements.speedSlider.value = savedSpeed;
     this.updateSpeed(savedSpeed);
 
-    // Load saved voice
     const savedVoiceURI = this.storageManager.getSelectedVoice();
     if (savedVoiceURI && this.speechEngine.voices.length > 0) {
       const voice = this.speechEngine.voices.find(v => v.voiceURI === savedVoiceURI);
@@ -310,21 +618,81 @@ class UIController {
   handleTextChange() {
     this.updateTextStats();
     this.scheduleAutoSave();
+    this.checkResumeBanner();
+    this.schedulePrefetch();
+  }
+
+  // ==========================================
+  // Prefetch first audio chunk (reduces play lag)
+  // ==========================================
+
+  /**
+   * Schedule a prefetch of the first audio chunk after text changes.
+   * Debounced to 2 seconds so we don't spam the API while typing.
+   */
+  schedulePrefetch() {
+    // Clear any existing prefetch data since text changed
+    this.clearPrefetch();
+
+    if (this.prefetchTimer) {
+      clearTimeout(this.prefetchTimer);
+    }
+
+    this.prefetchTimer = setTimeout(() => {
+      this.prefetchFirstChunk();
+    }, 2000);
+  }
+
+  /**
+   * Pre-generate audio for the first chunk of text so playback can start instantly.
+   * Only runs when Google TTS is active and configured.
+   */
+  async prefetchFirstChunk() {
+    // Only prefetch for Google TTS engine
+    if (this.currentEngine !== 'google' || !this.googleTTS?.isConfigured) return;
+
+    const text = this.elements.textInput.value;
+    if (!text || text.length < 10) return;
+
+    try {
+      const chunks = this.googleTTS.chunkText(text);
+      if (chunks.length === 0) return;
+
+      const firstChunk = chunks[0];
+      const audioBlob = await this.googleTTS.generateAudio(firstChunk);
+      const audioUrl = URL.createObjectURL(audioBlob);
+
+      // Store the prefetched result with the full text for matching later
+      this.prefetchedAudio = {
+        text: text,
+        audioUrl: audioUrl,
+        chunkIndex: 0
+      };
+    } catch (error) {
+      // Prefetch failure is non-critical; playback will generate on demand
+      console.warn('Prefetch failed (non-critical):', error);
+    }
+  }
+
+  clearPrefetch() {
+    if (this.prefetchedAudio) {
+      URL.revokeObjectURL(this.prefetchedAudio.audioUrl);
+      this.prefetchedAudio = null;
+    }
   }
 
   updateTextStats() {
     const text = this.elements.textInput.value;
     const charCount = text.length;
     const wordCount = text.trim().split(/\s+/).filter(w => w.length > 0).length;
-    const readingTime = Math.ceil(wordCount / (200 * this.speechEngine.rate)); // Assume 200 WPM base rate
+    const readingTime = Math.ceil(wordCount / (200 * this.speechEngine.rate));
 
     this.elements.charCount.textContent = `${charCount.toLocaleString()} characters`;
     this.elements.wordCount.textContent = `${wordCount.toLocaleString()} words`;
     this.elements.readingTime.textContent = `~${readingTime} min`;
 
-    // Warn if approaching character limit
     if (charCount > 150000) {
-      this.elements.charCount.style.color = 'var(--warning-color)';
+      this.elements.charCount.style.color = 'var(--danger)';
     } else {
       this.elements.charCount.style.color = '';
     }
@@ -338,11 +706,24 @@ class UIController {
     this.autoSaveTimer = setTimeout(() => {
       const text = this.elements.textInput.value;
       if (this.storageManager.saveCurrentText(text)) {
-        // Show subtle save indicator
-        this.showToast('Auto-saved', 'success', 1000);
+        // Subtle inline indicator instead of toast
+        if (this.elements.autoSaveIndicator) {
+          this.elements.autoSaveIndicator.style.display = 'inline';
+          this.elements.autoSaveIndicator.style.opacity = '1';
+          setTimeout(() => {
+            this.elements.autoSaveIndicator.style.opacity = '0';
+            setTimeout(() => {
+              this.elements.autoSaveIndicator.style.display = 'none';
+            }, 400);
+          }, 1500);
+        }
       }
     }, 3000);
   }
+
+  // ==========================================
+  // Text actions
+  // ==========================================
 
   async pasteText() {
     try {
@@ -352,7 +733,6 @@ class UIController {
         this.handleTextChange();
         this.showToast('Text pasted', 'success');
 
-        // Vibration feedback on iOS
         if (navigator.vibrate) {
           navigator.vibrate(10);
         }
@@ -391,26 +771,30 @@ class UIController {
       this.showToast(error.message, 'error');
     } finally {
       this.hideLoading();
-      // Reset file input
       this.elements.fileInput.value = '';
     }
   }
 
-  saveToLibrary() {
+  async saveToLibrary() {
+    this._lastTriggerBtn = this.elements.saveBtn;
     const text = this.elements.textInput.value;
     if (!text) {
       this.showToast('No text to save', 'error');
       return;
     }
 
-    const title = prompt('Enter a title for this text:');
-    if (title !== null) {
+    const title = await this.showConfirm('Save to Library', 'Enter a title for this text:', {
+      okText: 'Save',
+      showInput: true,
+      inputPlaceholder: 'Enter title...'
+    });
+
+    if (title !== null && title !== '') {
       const entry = this.storageManager.saveToLibrary(title || 'Untitled', text);
       if (entry) {
         this.currentTextId = entry.id;
         this.showToast('Saved to library', 'success');
 
-        // Check storage usage
         const storageStatus = this.storageManager.checkStorageUsage();
         if (storageStatus.warning) {
           this.showToast(storageStatus.message, 'warning', 5000);
@@ -421,9 +805,14 @@ class UIController {
     }
   }
 
-  clearText() {
-    if (this.elements.textInput.value && !confirm('Clear all text? This cannot be undone.')) {
-      return;
+  async clearText() {
+    if (this.elements.textInput.value) {
+      this._lastTriggerBtn = this.elements.clearBtn;
+      const confirmed = await this.showConfirm('Clear Text', 'Clear all text? This cannot be undone.', {
+        okText: 'Clear',
+        cancelText: 'Keep'
+      });
+      if (!confirmed) return;
     }
 
     this.stopPlayback();
@@ -434,16 +823,22 @@ class UIController {
     this.showToast('Text cleared', 'success');
   }
 
-  // Playback methods are defined at the end of the class to support both engines
+  // ==========================================
+  // Playback button states
+  // ==========================================
 
-  updatePlayPauseButton(isPlaying) {
-    if (isPlaying) {
-      this.elements.playIcon.style.display = 'none';
-      this.elements.pauseIcon.style.display = 'block';
-    } else {
-      this.elements.playIcon.style.display = 'block';
-      this.elements.pauseIcon.style.display = 'none';
-    }
+  updatePlayPauseButton(state) {
+    const showPlay = state === 'play';
+    const showPause = state === 'pause';
+    const showSpinner = state === 'loading';
+
+    this.elements.playIcon.style.display = showPlay ? 'block' : 'none';
+    this.elements.pauseIcon.style.display = showPause ? 'block' : 'none';
+    this.elements.playSpinner.style.display = showSpinner ? 'block' : 'none';
+    this.elements.playPauseBtn.disabled = showSpinner;
+
+    // Paused visual state
+    this.elements.playPauseBtn.classList.toggle('paused-state', state === 'play' && this.speechEngine.state === 'PAUSED');
   }
 
   updateSpeed(speed) {
@@ -451,9 +846,17 @@ class UIController {
     this.speechEngine.setRate(speedValue);
     this.storageManager.savePlaybackSpeed(speedValue);
     this.elements.speedSlider.value = speedValue;
-    this.elements.speedValue.textContent = `${speedValue}x`;
-    this.updateTextStats(); // Update reading time estimate
+    this.elements.speedValue.textContent = `${speedValue.toFixed(1)}x`;
+    if (this.elements.speedSliderDisplay) {
+      this.elements.speedSliderDisplay.textContent = `${speedValue.toFixed(1)}x`;
+    }
+    this.updateTextStats();
+    this.updateSpeedPresetActive();
   }
+
+  // ==========================================
+  // Progress tracking and seeking
+  // ==========================================
 
   startProgressTracking() {
     this.progressInterval = setInterval(() => {
@@ -472,10 +875,10 @@ class UIController {
     const totalLength = this.speechEngine.getTotalLength();
 
     this.elements.progressFill.style.width = `${progress}%`;
+    this.elements.progressFill.setAttribute('aria-valuenow', Math.round(progress));
     this.elements.progressPercent.textContent = `${Math.round(progress)}%`;
 
-    // Calculate time
-    const wordsPerChar = 0.2; // Approximate
+    const wordsPerChar = 0.2;
     const wordsRead = currentPos * wordsPerChar;
     const totalWords = totalLength * wordsPerChar;
     const currentTime = wordsRead / (200 * this.speechEngine.rate);
@@ -484,9 +887,76 @@ class UIController {
     this.elements.progressTime.textContent = `${this.formatTime(currentTime)} / ${this.formatTime(totalTime)}`;
   }
 
+  seekToPosition(event) {
+    const text = this.elements.textInput.value;
+    if (!text) return;
+
+    const bar = this.elements.progressBar;
+    const rect = bar.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+    const percent = Math.max(0, Math.min(1, clickX / rect.width));
+    const charOffset = Math.floor(percent * text.length);
+
+    const wasPlaying = this.speechEngine.state === 'PLAYING' ||
+      (this.currentEngine === 'google' && this.googleTTS?.isPlaying);
+
+    if (wasPlaying || this.speechEngine.state === 'PAUSED') {
+      this.stopPlayback();
+      this.savedPosition = charOffset;
+      this.saveCurrentPosition();
+
+      // Restart from new position
+      this.updatePlayPauseButton('loading');
+      if (this.currentEngine === 'google' && this.googleTTS?.isConfigured) {
+        this.showTextDisplay();
+        this.googleTTS.play(text, charOffset).then(() => {
+          this.updatePlayPauseButton('pause');
+        }).catch(() => {
+          this.updatePlayPauseButton('play');
+        });
+      } else {
+        this.speechEngine.play(text, charOffset);
+        this.showTextDisplay();
+        this.startProgressTracking();
+      }
+    } else {
+      // Not playing - just update saved position and show in progress bar
+      this.savedPosition = charOffset;
+      this.saveCurrentPosition();
+      this.elements.progressFill.style.width = `${percent * 100}%`;
+      this.elements.progressPercent.textContent = `${Math.round(percent * 100)}%`;
+      this.checkResumeBanner();
+    }
+  }
+
+  skipForward() {
+    this.skipByChars(500);
+  }
+
+  skipBack() {
+    this.skipByChars(-500);
+  }
+
+  skipByChars(chars) {
+    const text = this.elements.textInput.value;
+    if (!text) return;
+
+    const currentPos = this.speechEngine.getCurrentPosition();
+    const newPos = Math.max(0, Math.min(text.length - 1, currentPos + chars));
+
+    if (this.speechEngine.state === 'PLAYING' || this.speechEngine.state === 'PAUSED') {
+      this.speechEngine.stop();
+      this.updatePlayPauseButton('loading');
+      this.speechEngine.play(text, newPos);
+      this.showTextDisplay();
+      this.startProgressTracking();
+    }
+  }
+
   resetProgress() {
     clearInterval(this.progressInterval);
     this.elements.progressFill.style.width = '0%';
+    this.elements.progressFill.setAttribute('aria-valuenow', 0);
     this.elements.progressPercent.textContent = '0%';
     this.elements.progressTime.textContent = '0:00 / 0:00';
   }
@@ -497,41 +967,76 @@ class UIController {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   }
 
+  // ==========================================
+  // Word highlighting (performant span-based)
+  // ==========================================
+
   handleWordBoundary(data) {
-    // Save current position for resume functionality
     this.savedPosition = data.charIndex;
     this.saveCurrentPosition();
 
-    // Update word highlighting in text display
     if (this.isHighlighting && this.elements.textDisplay) {
       this.highlightWordAt(data.charIndex, data.charLength);
     }
   }
 
   highlightWordAt(charIndex, charLength) {
+    // If we have pre-built spans, use class toggling (fast path)
+    if (this.wordSpans.length > 0) {
+      // Find the span that contains this char index
+      for (let i = 0; i < this.wordSpans.length; i++) {
+        const span = this.wordSpans[i];
+        const start = parseInt(span.dataset.start, 10);
+        const end = parseInt(span.dataset.end, 10);
+        if (charIndex >= start && charIndex < end) {
+          if (this.currentHighlightIndex !== i) {
+            // Remove old highlight
+            if (this.currentHighlightIndex >= 0 && this.currentHighlightIndex < this.wordSpans.length) {
+              this.wordSpans[this.currentHighlightIndex].classList.remove('current-word');
+            }
+            // Add new highlight (always highlight, even if user scrolled away)
+            span.classList.add('current-word');
+            this.currentHighlightIndex = i;
+
+            // Only auto-scroll if the user hasn't manually scrolled away
+            if (!this.userScrolledAway) {
+              const container = this.elements.textDisplay;
+              const spanRect = span.getBoundingClientRect();
+              const containerRect = container.getBoundingClientRect();
+              if (spanRect.top < containerRect.top || spanRect.bottom > containerRect.bottom) {
+                this.isProgrammaticScroll = true;
+                span.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(() => { this.isProgrammaticScroll = false; }, 500);
+              }
+            }
+          }
+          return;
+        }
+      }
+    }
+
+    // Fallback: innerHTML rebuild (for when spans aren't built)
     const text = this.elements.textInput.value;
     if (!text) return;
 
-    // Build highlighted HTML
     const before = this.escapeHtml(text.substring(0, charIndex));
     const word = this.escapeHtml(text.substring(charIndex, charIndex + charLength));
     const after = this.escapeHtml(text.substring(charIndex + charLength));
 
     this.elements.textDisplay.innerHTML = `${before}<mark class="current-word">${word}</mark>${after}`;
 
-    // Smart scroll: only scroll if word is outside visible area
-    const mark = this.elements.textDisplay.querySelector('.current-word');
-    if (mark) {
-      const container = this.elements.textDisplay;
-      const markRect = mark.getBoundingClientRect();
-      const containerRect = container.getBoundingClientRect();
-
-      // Check if word is outside the visible area of the container
-      const isAbove = markRect.top < containerRect.top;
-      const isBelow = markRect.bottom > containerRect.bottom;
-
-      if (isAbove || isBelow) {
-        mark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Only auto-scroll if the user hasn't manually scrolled away
+    if (!this.userScrolledAway) {
+      const mark = this.elements.textDisplay.querySelector('.current-word');
+      if (mark) {
+        const container = this.elements.textDisplay;
+        const markRect = mark.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        if (markRect.top < containerRect.top || markRect.bottom > containerRect.bottom) {
+          this.isProgrammaticScroll = true;
+          mark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setTimeout(() => { this.isProgrammaticScroll = false; }, 500);
+        }
       }
     }
   }
@@ -544,17 +1049,86 @@ class UIController {
 
   showTextDisplay() {
     if (this.elements.textDisplay && this.elements.textInput) {
-      // Copy text to display
-      this.elements.textDisplay.innerHTML = this.escapeHtml(this.elements.textInput.value);
+      const text = this.elements.textInput.value;
+      this.buildWordSpans(text);
       this.elements.textDisplay.style.display = 'block';
       this.elements.textInput.style.display = 'none';
+      this.enterListenMode();
     }
+  }
+
+  buildWordSpans(text) {
+    this.wordSpans = [];
+    this.currentHighlightIndex = -1;
+    const container = this.elements.textDisplay;
+
+    // Split text into tokens (words and whitespace)
+    const tokens = text.split(/(\s+)/);
+    const fragment = document.createDocumentFragment();
+    let charPos = 0;
+
+    tokens.forEach(token => {
+      if (/^\s+$/.test(token)) {
+        // Whitespace - render as text nodes with <br> for newlines
+        const parts = token.split('\n');
+        parts.forEach((part, i) => {
+          if (i > 0) {
+            fragment.appendChild(document.createElement('br'));
+          }
+          if (part) {
+            fragment.appendChild(document.createTextNode(part));
+          }
+        });
+      } else if (token) {
+        // Word - wrap in span with position data
+        const span = document.createElement('span');
+        span.textContent = token;
+        span.dataset.start = charPos;
+        span.dataset.end = charPos + token.length;
+        fragment.appendChild(span);
+        this.wordSpans.push(span);
+      }
+      charPos += token.length;
+    });
+
+    container.innerHTML = '';
+    container.appendChild(fragment);
   }
 
   hideTextDisplay() {
     if (this.elements.textDisplay && this.elements.textInput) {
       this.elements.textDisplay.style.display = 'none';
       this.elements.textInput.style.display = 'block';
+      this.wordSpans = [];
+      this.currentHighlightIndex = -1;
+    }
+    // Reset scroll tracking and hide follow-along button
+    this.userScrolledAway = false;
+    this.hideFollowAlongBtn();
+    // Exit listen mode
+    if (this.elements.appContainer) {
+      this.elements.appContainer.classList.remove('listen-mode');
+    }
+    if (this.elements.editModeBtn) {
+      this.elements.editModeBtn.style.display = 'none';
+    }
+  }
+
+  /**
+   * Show the "Follow along" pill button when user scrolls away during playback.
+   * Only visible if playback is active.
+   */
+  showFollowAlongBtn() {
+    const isPlaying = (this.currentEngine === 'google' && this.googleTTS?.isPlaying) ||
+      this.speechEngine.state === 'PLAYING';
+    if (isPlaying && this.userScrolledAway && this.elements.followAlongBtn) {
+      this.elements.followAlongBtn.style.display = 'block';
+    }
+  }
+
+  hideFollowAlongBtn() {
+    if (this.elements.followAlongBtn) {
+      this.elements.followAlongBtn.style.display = 'none';
     }
   }
 
@@ -574,20 +1148,32 @@ class UIController {
     this.savedPosition = 0;
   }
 
+  // ==========================================
+  // Playback event handlers
+  // ==========================================
+
+  handlePlaybackStarted() {
+    this.updatePlayPauseButton('pause');
+  }
+
   handlePlaybackEnd() {
-    this.updatePlayPauseButton(false);
+    this.updatePlayPauseButton('play');
     this.resetProgress();
     this.hideTextDisplay();
-    this.clearSavedPosition(); // Clear position on completion
+    this.clearSavedPosition();
     this.showToast('Finished reading', 'success');
   }
 
   handlePlaybackError(error) {
-    this.updatePlayPauseButton(false);
+    this.updatePlayPauseButton('play');
     this.resetProgress();
     this.hideTextDisplay();
     this.showToast('Playback error: ' + error.error, 'error');
   }
+
+  // ==========================================
+  // MP3 download
+  // ==========================================
 
   async downloadMP3() {
     const text = this.elements.textInput.value;
@@ -596,21 +1182,16 @@ class UIController {
       return;
     }
 
-    // Check if premium TTS is configured
     if (!this.premiumTTS || !this.premiumTTS.isConfigured) {
-      // Prompt for API key
-      const apiKey = prompt(
-        'MP3 download uses ElevenLabs (best voice quality).\n\n' +
-        'Free tier: 10,000 characters/month\n\n' +
-        'Get your free API key at elevenlabs.io\n\n' +
-        'Enter your ElevenLabs API key:'
+      this._lastTriggerBtn = this.elements.downloadBtn;
+      const apiKey = await this.showConfirm(
+        'MP3 Download',
+        'MP3 download uses ElevenLabs (best voice quality). Free tier: 10,000 characters/month. Get your free API key at elevenlabs.io.',
+        { okText: 'Connect', showInput: true, inputPlaceholder: 'Enter ElevenLabs API key...' }
       );
 
-      if (!apiKey) {
-        return;
-      }
+      if (!apiKey) return;
 
-      // Validate and save API key
       this.showLoading('Validating API key...');
       const validation = await this.premiumTTS.validateApiKey(apiKey);
       this.hideLoading();
@@ -621,32 +1202,24 @@ class UIController {
       }
 
       this.premiumTTS.saveApiKey(apiKey);
-
-      // Show usage info
       const remaining = validation.charactersLimit - validation.charactersUsed;
       this.showToast(`Connected! ${remaining.toLocaleString()} chars remaining this month`, 'success');
     }
 
-    // Show usage estimate
     const estimate = this.premiumTTS.estimateCost(text);
     const voiceName = this.premiumTTS.getSelectedVoiceName();
-    const proceed = confirm(
-      `Generate MP3 with ElevenLabs?\n\n` +
-      `Voice: ${voiceName}\n` +
-      `Characters: ${estimate.characters.toLocaleString()}\n` +
-      `Cost: Free (10K chars/month)\n\n` +
-      `Continue?`
+    this._lastTriggerBtn = this.elements.downloadBtn;
+    const proceed = await this.showConfirm(
+      'Generate MP3',
+      `Voice: ${voiceName} | Characters: ${estimate.characters.toLocaleString()} | Cost: Free (10K chars/month)`,
+      { okText: 'Generate', cancelText: 'Cancel' }
     );
 
-    if (!proceed) {
-      return;
-    }
+    if (!proceed) return;
 
-    // Generate and download MP3
     this.showLoading('Generating MP3 audio...');
 
     try {
-      // Generate filename from first few words
       const filename = text.substring(0, 30).replace(/[^a-z0-9]/gi, '-').toLowerCase() + '.mp3';
       await this.premiumTTS.generateDownload(text, filename);
       this.hideLoading();
@@ -657,6 +1230,10 @@ class UIController {
     }
   }
 
+  // ==========================================
+  // Voice list
+  // ==========================================
+
   initializeVoiceList() {
     if (!this.speechEngine.voices.length) {
       setTimeout(() => this.initializeVoiceList(), 500);
@@ -665,13 +1242,10 @@ class UIController {
 
     this.renderVoiceList();
 
-    // Set initial voice display
     if (this.speechEngine.selectedVoice) {
       this.updateVoiceDisplay(this.speechEngine.selectedVoice);
     }
   }
-
-  // renderVoiceList is defined at the end of the class to support both browser and Google engines
 
   getQualityLabel(quality) {
     const labels = {
@@ -706,13 +1280,19 @@ class UIController {
   }
 
   openVoiceModal() {
+    this._lastTriggerBtn = this.elements.voiceSelectBtn;
     this.elements.voiceModal.style.display = 'flex';
     this.elements.voiceSearch.value = '';
     this.renderVoiceList();
+    setTimeout(() => this.elements.voiceSearch.focus(), 50);
   }
 
   closeVoiceModal() {
     this.elements.voiceModal.style.display = 'none';
+    if (this._lastTriggerBtn) {
+      this._lastTriggerBtn.focus();
+      this._lastTriggerBtn = null;
+    }
   }
 
   filterVoices(query) {
@@ -720,13 +1300,19 @@ class UIController {
   }
 
   openLibraryModal() {
+    this._lastTriggerBtn = this.elements.libraryBtn;
     this.elements.libraryModal.style.display = 'flex';
     this.elements.librarySearch.value = '';
     this.renderLibrary();
+    setTimeout(() => this.elements.librarySearch.focus(), 50);
   }
 
   closeLibraryModal() {
     this.elements.libraryModal.style.display = 'none';
+    if (this._lastTriggerBtn) {
+      this._lastTriggerBtn.focus();
+      this._lastTriggerBtn = null;
+    }
   }
 
   renderLibrary(filter = '') {
@@ -735,7 +1321,7 @@ class UIController {
       : this.storageManager.getSavedTexts();
 
     if (texts.length === 0) {
-      this.elements.libraryList.innerHTML = '<div class="empty-state">No saved texts</div>';
+      this.elements.libraryList.innerHTML = `<div class="empty-state">${filter ? 'No matching texts' : 'No saved texts yet. Use the Save button to store texts here for quick access.'}</div>`;
       return;
     }
 
@@ -749,12 +1335,12 @@ class UIController {
           <div class="library-title">${text.title}</div>
           <div class="library-preview">${preview}...</div>
           <div class="library-meta">
-            ${text.wordCount.toLocaleString()} words • ${date}
+            ${text.wordCount.toLocaleString()} words | ${date}
           </div>
           <div class="library-actions">
             <button class="library-action" data-action="load" data-id="${text.id}">Load</button>
             <button class="library-action" data-action="rename" data-id="${text.id}">Rename</button>
-            <button class="library-action" data-action="delete" data-id="${text.id}">Delete</button>
+            <button class="library-action delete-action" data-action="delete" data-id="${text.id}">Delete</button>
           </div>
         </div>
       `;
@@ -762,7 +1348,6 @@ class UIController {
 
     this.elements.libraryList.innerHTML = html;
 
-    // Attach event listeners
     this.elements.libraryList.querySelectorAll('.library-action').forEach(btn => {
       btn.addEventListener('click', () => {
         this.handleLibraryAction(btn.dataset.action, btn.dataset.id);
@@ -799,10 +1384,14 @@ class UIController {
     }
   }
 
-  renameLibraryItem(id) {
+  async renameLibraryItem(id) {
     const text = this.storageManager.getSavedText(id);
     if (text) {
-      const newTitle = prompt('Enter new title:', text.title);
+      const newTitle = await this.showConfirm('Rename', 'Enter new title:', {
+        okText: 'Rename',
+        showInput: true,
+        inputValue: text.title
+      });
       if (newTitle) {
         this.storageManager.updateSavedText(id, { title: newTitle });
         this.renderLibrary(this.elements.librarySearch.value);
@@ -811,8 +1400,12 @@ class UIController {
     }
   }
 
-  deleteLibraryItem(id) {
-    if (confirm('Delete this saved text?')) {
+  async deleteLibraryItem(id) {
+    const confirmed = await this.showConfirm('Delete Text', 'Delete this saved text?', {
+      okText: 'Delete',
+      cancelText: 'Keep'
+    });
+    if (confirmed) {
       if (this.storageManager.deleteSavedText(id)) {
         this.renderLibrary(this.elements.librarySearch.value);
         this.showToast('Deleted successfully', 'success');
@@ -824,8 +1417,11 @@ class UIController {
     }
   }
 
+  // ==========================================
+  // Keyboard shortcuts
+  // ==========================================
+
   handleKeyboardShortcuts(event) {
-    // Skip if user is typing in an input field
     if (event.target.tagName === 'TEXTAREA' || event.target.tagName === 'INPUT') {
       return;
     }
@@ -838,8 +1434,29 @@ class UIController {
       case 'Escape':
         this.stopPlayback();
         break;
+      case 'ArrowLeft':
+        event.preventDefault();
+        this.skipBack();
+        break;
+      case 'ArrowRight':
+        event.preventDefault();
+        this.skipForward();
+        break;
+      case '+':
+      case '=':
+        event.preventDefault();
+        this.updateSpeed(Math.min(2.5, parseFloat(this.elements.speedSlider.value) + 0.1));
+        break;
+      case '-':
+        event.preventDefault();
+        this.updateSpeed(Math.max(0.5, parseFloat(this.elements.speedSlider.value) - 0.1));
+        break;
     }
   }
+
+  // ==========================================
+  // Loading and toasts
+  // ==========================================
 
   showLoading(message = 'Loading...') {
     this.elements.loadingMessage.textContent = message;
@@ -860,7 +1477,9 @@ class UIController {
     setTimeout(() => {
       toast.style.opacity = '0';
       setTimeout(() => {
-        this.elements.toastContainer.removeChild(toast);
+        if (toast.parentNode) {
+          this.elements.toastContainer.removeChild(toast);
+        }
       }, 300);
     }, duration);
   }
@@ -870,12 +1489,21 @@ class UIController {
   // ==========================================
 
   openSettingsModal() {
+    this._lastTriggerBtn = this.elements.settingsBtn;
     this.elements.settingsModal.style.display = 'flex';
     this.updateEngineUI();
+    setTimeout(() => {
+      const firstBtn = this.elements.settingsModal.querySelector('.engine-btn');
+      if (firstBtn) firstBtn.focus();
+    }, 50);
   }
 
   closeSettingsModal() {
     this.elements.settingsModal.style.display = 'none';
+    if (this._lastTriggerBtn) {
+      this._lastTriggerBtn.focus();
+      this._lastTriggerBtn = null;
+    }
   }
 
   setEngine(engine) {
@@ -883,20 +1511,16 @@ class UIController {
     localStorage.setItem('tts_engine', engine);
     this.updateEngineUI();
 
-    // Stop any current playback when switching engines
     this.stopPlayback();
 
     if (engine === 'google') {
-      // If Google TTS is configured, load voices
       if (this.googleTTS?.isConfigured) {
         this.loadGoogleVoices();
-        // Update voice display to show selected Google voice
         if (this.googleTTS.selectedVoice) {
           this.updateVoiceDisplay({ name: this.googleTTS.selectedVoice.displayName });
         }
       }
     } else {
-      // Re-render browser voices and update display
       this.renderVoiceList();
       if (this.speechEngine.selectedVoice) {
         this.updateVoiceDisplay(this.speechEngine.selectedVoice);
@@ -929,7 +1553,7 @@ class UIController {
   }
 
   // ==========================================
-  // Override playback methods for Google TTS
+  // Playback methods (both engines)
   // ==========================================
 
   startPlayback() {
@@ -939,59 +1563,47 @@ class UIController {
       return;
     }
 
-    // Check for saved position to resume from
-    const savedPos = this.loadSavedPosition();
+    // Hide resume banner if visible
+    this.elements.resumeBanner.style.display = 'none';
 
-    // Use Google TTS if selected and configured
+    // Reset scroll tracking for fresh playback
+    this.userScrolledAway = false;
+    this.hideFollowAlongBtn();
+
+    this.updatePlayPauseButton('loading');
+
     if (this.currentEngine === 'google' && this.googleTTS?.isConfigured) {
-      this.startGooglePlayback(text, savedPos);
+      this.startGooglePlayback(text, 0);
     } else {
-      // Use browser speech synthesis
-      if (savedPos > 0 && savedPos < text.length) {
-        const resumePercent = Math.round((savedPos / text.length) * 100);
-        if (confirm(`Resume from ${resumePercent}%?`)) {
-          this.speechEngine.play(text, savedPos);
-        } else {
-          this.clearSavedPosition();
-          this.speechEngine.play(text);
-        }
-      } else {
-        this.speechEngine.play(text);
-      }
-
+      this.speechEngine.play(text);
       this.showTextDisplay();
-      this.updatePlayPauseButton(true);
       this.startProgressTracking();
     }
   }
 
   async startGooglePlayback(text, savedPos = 0) {
-    // Show text display immediately
     this.showTextDisplay();
-    this.updatePlayPauseButton(true);
 
     try {
-      if (savedPos > 0 && savedPos < text.length) {
-        const resumePercent = Math.round((savedPos / text.length) * 100);
-        if (confirm(`Resume from ${resumePercent}%?`)) {
-          await this.googleTTS.play(text, savedPos);
-        } else {
-          this.clearSavedPosition();
-          await this.googleTTS.play(text);
-        }
+      // Check if we have a prefetched first chunk that matches the current text
+      if (savedPos === 0 && this.prefetchedAudio && this.prefetchedAudio.text === text) {
+        await this.googleTTS.playWithPrefetch(text, this.prefetchedAudio.audioUrl);
+        // Clear the prefetch reference (don't revoke URL - googleTTS owns it now)
+        this.prefetchedAudio = null;
       } else {
-        await this.googleTTS.play(text);
+        // Clear stale prefetch if any
+        this.clearPrefetch();
+        await this.googleTTS.play(text, savedPos);
       }
+      this.updatePlayPauseButton('pause');
     } catch (error) {
-      // Fall back to browser voices on premium failure
       this.fallbackToBrowserVoices('Premium unavailable, using offline voices');
       this.hideTextDisplay();
-      this.updatePlayPauseButton(false);
+      this.updatePlayPauseButton('play');
 
-      // Try playing with browser engine instead
       if (this.speechEngine) {
         this.showTextDisplay();
-        this.updatePlayPauseButton(true);
+        this.updatePlayPauseButton('loading');
         this.speechEngine.play(text, savedPos > 0 ? savedPos : 0);
         this.startProgressTracking();
       }
@@ -1004,7 +1616,7 @@ class UIController {
     } else {
       this.speechEngine.pause();
     }
-    this.updatePlayPauseButton(false);
+    this.updatePlayPauseButton('play');
   }
 
   resumePlayback() {
@@ -1013,7 +1625,7 @@ class UIController {
     } else {
       this.speechEngine.resume();
     }
-    this.updatePlayPauseButton(true);
+    this.updatePlayPauseButton('pause');
   }
 
   stopPlayback() {
@@ -1022,13 +1634,19 @@ class UIController {
     } else {
       this.speechEngine.stop();
     }
-    this.updatePlayPauseButton(false);
+    this.updatePlayPauseButton('play');
     this.resetProgress();
     this.hideTextDisplay();
+    this.checkResumeBanner();
+
+    // Reset scroll tracking
+    this.userScrolledAway = false;
+    this.hideFollowAlongBtn();
   }
 
   togglePlayPause() {
-    // Check state based on current engine
+    if (this.speechEngine.isLoading) return;
+
     if (this.currentEngine === 'google' && this.googleTTS) {
       if (!this.googleTTS.isPlaying && !this.googleTTS.isPaused) {
         this.startPlayback();
@@ -1049,7 +1667,7 @@ class UIController {
   }
 
   // ==========================================
-  // Voice list with Google voices
+  // Voice list rendering
   // ==========================================
 
   renderVoiceList(filter = '') {
@@ -1057,7 +1675,6 @@ class UIController {
     let isGoogleEngine = this.currentEngine === 'google' && this.googleTTS?.isConfigured;
 
     if (isGoogleEngine && this.googleTTS.voicesLoaded) {
-      // Use Google voices
       voices = this.googleTTS.getTopVoices(12);
 
       if (filter) {
@@ -1069,7 +1686,6 @@ class UIController {
 
       this.renderGoogleVoiceList(voices, filter);
     } else {
-      // Use browser voices
       if (filter) {
         const topVoices = this.speechEngine.getTopVoices(8);
         voices = topVoices.filter(voice =>
@@ -1112,7 +1728,7 @@ class UIController {
               <span class="voice-quality ${quality}">${qualityLabel}</span>
             </div>
           </div>
-          <button class="voice-preview" data-voice-uri="${voice.voiceURI}" title="Preview voice">
+          <button class="voice-preview" data-voice-uri="${voice.voiceURI}" title="Preview voice" aria-label="Preview ${displayName}">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
             </svg>
@@ -1147,7 +1763,6 @@ class UIController {
       </div>
     `;
 
-    // Group voices by region for easier selection
     const voicesByRegion = {};
     voices.forEach(voice => {
       const lang = voice.languageCodes?.[0] || 'en-US';
@@ -1158,49 +1773,32 @@ class UIController {
       voicesByRegion[region].push(voice);
     });
 
-    // Render voices grouped by region
     const regionOrder = ['US', 'GB', 'AU', 'IN'];
-    regionOrder.forEach(region => {
-      const regionVoices = voicesByRegion[region];
-      if (regionVoices && regionVoices.length > 0) {
-        regionVoices.forEach(voice => {
-          const isSelected = this.googleTTS.selectedVoice?.name === voice.name;
+    const renderVoice = (voice) => {
+      const isSelected = this.googleTTS.selectedVoice?.name === voice.name;
+      return `
+        <div class="voice-item ${isSelected ? 'selected' : ''}" data-google-voice="${voice.name}">
+          <div class="voice-info">
+            <div class="voice-name">${voice.displayName}</div>
+          </div>
+          <button class="voice-preview" data-google-voice="${voice.name}" title="Preview voice" aria-label="Preview ${voice.displayName}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </button>
+        </div>
+      `;
+    };
 
-          html += `
-            <div class="voice-item ${isSelected ? 'selected' : ''}" data-google-voice="${voice.name}">
-              <div class="voice-info">
-                <div class="voice-name">${voice.displayName}</div>
-              </div>
-              <button class="voice-preview" data-google-voice="${voice.name}" title="Preview voice">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              </button>
-            </div>
-          `;
-        });
+    regionOrder.forEach(region => {
+      if (voicesByRegion[region]) {
+        voicesByRegion[region].forEach(v => { html += renderVoice(v); });
       }
     });
 
-    // Handle any other regions not in the order list
     Object.keys(voicesByRegion).forEach(region => {
       if (!regionOrder.includes(region)) {
-        voicesByRegion[region].forEach(voice => {
-          const isSelected = this.googleTTS.selectedVoice?.name === voice.name;
-
-          html += `
-            <div class="voice-item ${isSelected ? 'selected' : ''}" data-google-voice="${voice.name}">
-              <div class="voice-info">
-                <div class="voice-name">${voice.displayName}</div>
-              </div>
-              <button class="voice-preview" data-google-voice="${voice.name}" title="Preview voice">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              </button>
-            </div>
-          `;
-        });
+        voicesByRegion[region].forEach(v => { html += renderVoice(v); });
       }
     });
 
@@ -1272,5 +1870,4 @@ class UIController {
   }
 }
 
-// Export for use in other modules
 window.UIController = UIController;

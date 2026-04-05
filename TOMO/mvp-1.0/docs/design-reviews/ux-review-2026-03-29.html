@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOMO UX Review - 2026-03-29</title>
+<style>
+  :root {
+    --bg: #111111;
+    --bg-card: #1a1a1a;
+    --bg-card-hover: #1f1f1f;
+    --border: #2a2a2a;
+    --text: #f5f5f5;
+    --text-muted: #999999;
+    --text-dim: #666666;
+    --gold: #F5A623;
+    --gold-dim: rgba(245, 166, 35, 0.15);
+    --red: #e74c3c;
+    --red-dim: rgba(231, 76, 60, 0.15);
+    --orange: #f39c12;
+    --orange-dim: rgba(243, 156, 18, 0.15);
+    --green: #2ecc71;
+    --green-dim: rgba(46, 204, 113, 0.15);
+    --blue: #3498db;
+    --blue-dim: rgba(52, 152, 219, 0.15);
+    --purple: #9b59b6;
+    --purple-dim: rgba(155, 89, 182, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  .page-header {
+    padding: 48px 40px 40px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #161616 0%, var(--bg) 100%);
+  }
+
+  .page-header .kanji {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    font-family: monospace;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .page-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .page-header .subtitle {
+    color: var(--text-muted);
+    font-size: 15px;
+  }
+
+  .page-header .subtitle span {
+    color: var(--text-dim);
+    margin: 0 8px;
+  }
+
+  .page-header .meta-row {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-family: monospace;
+  }
+
+  .meta-pill strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .section {
+    margin-top: 48px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+
+  .section-count {
+    background: var(--gold-dim);
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-family: monospace;
+  }
+
+  .section-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-top: -16px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    position: relative;
+  }
+
+  .card:hover {
+    border-color: #333;
+    background: var(--bg-card-hover);
+  }
+
+  .card.checked {
+    border-color: var(--gold);
+    background: rgba(245, 166, 35, 0.04);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .checkbox-wrap {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .checkbox-wrap input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #444;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.15s ease;
+  }
+
+  .checkbox-wrap input[type="checkbox"]:hover {
+    border-color: var(--gold);
+  }
+
+  .checkbox-wrap input[type="checkbox"]:checked {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .checkbox-wrap input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 6px;
+    height: 11px;
+    border: solid #111;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .card-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .card-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+
+  .card-id {
+    font-family: monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .badge-p0 { background: var(--red-dim); color: var(--red); }
+  .badge-p1 { background: var(--orange-dim); color: var(--orange); }
+  .badge-high { background: var(--red-dim); color: var(--red); }
+  .badge-medium { background: var(--orange-dim); color: var(--orange); }
+  .badge-low { background: var(--blue-dim); color: var(--blue); }
+  .badge-trivial { background: var(--green-dim); color: var(--green); }
+  .badge-none { background: rgba(255,255,255,0.06); color: var(--text-dim); }
+
+  .badge-effort {
+    background: rgba(255,255,255,0.06);
+    color: var(--text-muted);
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .card-screen {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-family: monospace;
+  }
+
+  .card-body p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    line-height: 1.65;
+  }
+
+  .card-body p strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .card-body .label {
+    font-family: monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
+  /* Summary panel */
+  .summary-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #161616;
+    border-top: 1px solid var(--border);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+    transition: transform 0.25s ease;
+    transform: translateY(100%);
+  }
+
+  .summary-panel.visible {
+    transform: translateY(0);
+  }
+
+  .summary-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .summary-count {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .summary-count span {
+    color: var(--gold);
+    font-family: monospace;
+  }
+
+  .summary-breakdown {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    font-family: monospace;
+    color: var(--text-muted);
+  }
+
+  .summary-btn {
+    background: var(--gold);
+    color: #111;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: system-ui, sans-serif;
+    transition: opacity 0.15s;
+  }
+
+  .summary-btn:hover { opacity: 0.85; }
+
+  /* Selected items detail */
+  .selected-section {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .selected-section h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .selected-list {
+    list-style: none;
+  }
+
+  .selected-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 14px;
+  }
+
+  .selected-list .sel-id {
+    font-family: monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    min-width: 70px;
+  }
+
+  .selected-list .sel-title {
+    flex: 1;
+  }
+
+  .selected-empty {
+    color: var(--text-dim);
+    font-size: 14px;
+    font-style: italic;
+    padding: 16px 0;
+  }
+
+  /* Print styles */
+  @media print {
+    body { background: #fff !important; color: #111 !important; font-size: 11pt; }
+    .page-header { background: #fff !important; border-bottom-color: #ccc !important; padding: 24px 20px; }
+    .page-header .kanji { color: #666 !important; }
+    .page-header h1 { font-size: 22pt; }
+    .meta-pill { background: #f5f5f5 !important; border-color: #ddd !important; color: #444 !important; }
+    .meta-pill strong { color: #111 !important; }
+    .container { padding: 0 20px 40px; }
+    .card { background: #fff !important; border-color: #ddd !important; page-break-inside: avoid; }
+    .card-body p { color: #444 !important; }
+    .card-body p strong { color: #111 !important; }
+    .card-title { color: #111 !important; }
+    .card-id { color: #666 !important; }
+    .section-header { border-bottom-color: #ccc !important; }
+    .section-header h2 { color: #111 !important; }
+    .section-count { background: #f0e6cc !important; color: #8a6a10 !important; }
+    .summary-panel { display: none !important; }
+    .checkbox-wrap input[type="checkbox"] { border-color: #999 !important; }
+    .checkbox-wrap input[type="checkbox"]:checked { background: #333 !important; border-color: #333 !important; }
+    .badge { border: 1px solid currentColor; }
+    .selected-section { border-top-color: #ccc !important; }
+    .selected-list li { border-bottom-color: #eee !important; color: #111 !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="kanji">TOMO // Product Review</div>
+  <h1>UX + Design Review</h1>
+  <p class="subtitle">March 29, 2026<span>|</span>Pre-launch audit for TestFlight v1.0</p>
+  <div class="meta-row">
+    <div class="meta-pill"><strong>23</strong> items total</div>
+    <div class="meta-pill"><strong>3</strong> broken things</div>
+    <div class="meta-pill"><strong>6</strong> user experience fixes</div>
+    <div class="meta-pill"><strong>14</strong> look and feel upgrades</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ======== Section 1: Broken Things ======== -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Broken Things (Must Fix Before Launch)</h2>
+      <span class="section-count">3</span>
+    </div>
+
+    <!-- BUG-001 -->
+    <div class="card" data-id="BUG-001" data-section="bugs">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">BUG-001</span>
+            <span class="card-title">After saving a session, the app starts a new recording instead of going back to Journal</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-p0">Blocker</span>
+            <span class="badge badge-effort">Quick fix</span>
+            <span class="card-screen">Session Logger</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's happening</p>
+            <p>You record a session, review it, tap "Save Session." Instead of seeing the success message and landing on your Journal, <strong>the app immediately throws you into a new recording.</strong> You're stuck in a loop.</p>
+            <p class="label">Why it's happening</p>
+            <p>The app has two things fighting each other. One shows the "Session logged" success screen for 5 seconds, then sends you to Journal. The other watches for the Log tab to become active and resets the form. That second one fires too early, before the success screen even shows, and drops you into a fresh recording.</p>
+            <p class="label">The fix</p>
+            <p>Make the form reset only happen when you <strong>leave the Log tab and come back</strong>, not while you're still on it watching the success screen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-002 -->
+    <div class="card" data-id="BUG-002" data-section="bugs">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">BUG-002</span>
+            <span class="card-title">Keyboard covers the stripe picker during onboarding</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-p1">High priority</span>
+            <span class="badge badge-effort">Quick fix</span>
+            <span class="card-screen">Onboarding: About You</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's happening</p>
+            <p>You type your name, the keyboard pops up. You tap your belt color. The stripe picker appears below the belt row, but <strong>the keyboard is still open and blocking it.</strong> Most users will tap "Continue" without ever seeing the stripe options, so everyone gets saved as 0 stripes.</p>
+            <p class="label">The fix</p>
+            <p>When you tap a belt color, <strong>the keyboard automatically closes</strong> and the screen scrolls down to reveal the stripe picker. Two small changes, instant improvement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-003 -->
+    <div class="card" data-id="BUG-003" data-section="bugs">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">BUG-003</span>
+            <span class="card-title">App skips onboarding if a previous account was deleted</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-p1">High priority</span>
+            <span class="badge badge-effort">Quick fix</span>
+            <span class="card-screen">Login / Startup</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's happening</p>
+            <p>If you delete your account (or it gets wiped) and sign up again, <strong>the app skips onboarding entirely</strong> and drops you into the main app with no profile, no name, no gym, nothing. The profile page is blank. Everything that depends on your profile breaks.</p>
+            <p class="label">Why it's happening</p>
+            <p>The app saves a "this person finished onboarding" note on your phone. When the account gets wiped on the server, that note is still on your phone. So the app thinks you already onboarded, even though your profile no longer exists.</p>
+            <p class="label">The fix</p>
+            <p>When the app checks for your profile and finds nothing, <strong>clear that old note</strong> and send you through onboarding again.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== Section 2: User Experience Fixes ======== -->
+  <div class="section">
+    <div class="section-header">
+      <h2>User Experience Fixes</h2>
+      <span class="section-count">6</span>
+    </div>
+    <p class="section-desc">Things that work but could work better for new users.</p>
+
+    <!-- UX-001 -->
+    <div class="card" data-id="UX-001" data-section="ux">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">UX-001</span>
+            <span class="card-title">Remove the "NEAR YOU" label from the gym picker</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-low">Nice to have</span>
+            <span class="badge badge-effort">Quick fix</span>
+            <span class="card-screen">Onboarding: Your Training</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>You just tapped "Enable Location." Of course the gyms are near you. The label is stating the obvious. Each gym card already shows the distance in miles.</p>
+            <p class="label">The fix</p>
+            <p><strong>Remove the "NEAR YOU" label.</strong> The gym cards speak for themselves.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UX-002 -->
+    <div class="card" data-id="UX-002" data-section="ux">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">UX-002</span>
+            <span class="card-title">Make it clear that typing your gym name will search the database</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-low">Nice to have</span>
+            <span class="badge badge-effort">Quick fix</span>
+            <span class="card-screen">Onboarding: Your Training</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>Below the nearby gyms it says "Not here? Type your gym name." That sounds like you're manually typing it in. But there's actually a full search with auto-suggestions built in. Users who aren't near their gym don't realize it will help them find it.</p>
+            <p class="label">The fix</p>
+            <p>Replace the hint text with a visible search box that says <strong>"Search for your gym."</strong> As they type, suggestions appear. If their gym isn't in the database, the app accepts whatever they typed as a new gym.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UX-003 -->
+    <div class="card" data-id="UX-003" data-section="ux">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">UX-003</span>
+            <span class="card-title">Add "Other" to Training Goals</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-low">Nice to have</span>
+            <span class="badge badge-trivial">1 minute</span>
+            <span class="card-screen">Onboarding: Your Training</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>The options are Competition, Fitness, Hobby, and Mental Health. Some people train for self-defense, community, or reasons that don't fit these four.</p>
+            <p class="label">The fix</p>
+            <p>Add an <strong>"Other"</strong> option to the list.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UX-004 -->
+    <div class="card" data-id="UX-004" data-section="ux">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">UX-004</span>
+            <span class="card-title">Replace subjective experience labels with actual time training</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-low">Nice to have</span>
+            <span class="badge badge-effort">Quick fix</span>
+            <span class="card-screen">Onboarding: Your Training</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>The options say "New," "Beginner," "Intermediate," "Experienced." These are subjective. A 2-year white belt might call themselves either "beginner" or "intermediate." We're not getting useful data.</p>
+            <p class="label">The fix</p>
+            <p>Rename the section to <strong>"Total Years of Training"</strong> and change the options to just the time ranges: <strong>"< 6 months", "6mo - 2yr", "2 - 5yr", "5+ yr".</strong> Objective, no judgment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UX-005 -->
+    <div class="card" data-id="UX-005" data-section="ux">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">UX-005</span>
+            <span class="card-title">Teach users what to say during the onboarding chat</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-medium">Important</span>
+            <span class="badge badge-effort">Medium effort</span>
+            <span class="card-screen">Onboarding: Get Started</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>The onboarding chat says "After each session, just talk." But it never explains <strong>what to talk about.</strong> Users finish onboarding and have no idea what to say when they hit record. "Just talk" is vague.</p>
+            <p class="label">The fix</p>
+            <p>Add 1-2 more chat bubbles that coach the user:</p>
+            <p><strong>"Tell me how long you trained, what techniques you drilled, and how your rounds went. The more detail, the better your journal."</strong></p>
+            <p>Then show an example of what good input sounds like:</p>
+            <p><strong>"Like: Trained gi today for about an hour. Worked on half guard sweeps. Hit two in live rolls but got caught in a triangle."</strong></p>
+            <p>This way, the very first time they record, they know exactly what to say.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UX-006 -->
+    <div class="card" data-id="UX-006" data-section="ux">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">UX-006</span>
+            <span class="card-title">Keep Journal empty state simple (no tutorial page)</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-none">Already done</span>
+            <span class="badge badge-none">No work needed</span>
+            <span class="card-screen">Journal</span>
+          </div>
+          <div class="card-body">
+            <p class="label">Context</p>
+            <p>We tried adding a detailed tutorial page to the Journal for first-time users. It caused problems and was reverted. The coaching content belongs in the onboarding chat (UX-005 above), not on the Journal page. <strong>This is just a note to confirm we keep the simple "No Sessions Yet" screen.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== Section 3: Look and Feel ======== -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Look and Feel Upgrades</h2>
+      <span class="section-count">14</span>
+    </div>
+    <p class="section-desc">Design improvements to make TOMO feel like a product built by designers, not generated by a tool. Sorted by impact.</p>
+
+    <!-- DA-018 -->
+    <div class="card" data-id="DA-018" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-018</span>
+            <span class="card-title">Everything looks the same: cards, inputs, chips all use identical styling</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-high">High impact</span>
+            <span class="badge badge-effort">Big lift</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>Every single surface in the app uses the exact same dark gray background with the same border. A session card looks identical to a text input looks identical to a filter chip. <strong>There's no visual depth.</strong> Your eye can't tell what's content vs. what's a button vs. what's a container. This is the single biggest thing that makes an app look template-generated.</p>
+            <p class="label">The fix</p>
+            <p>Create <strong>3 levels of visual depth.</strong> Content cards (like session entries) get a slightly different shade with subtle shadows. Buttons and inputs keep the current look. Background containers go even darker. This creates layers, like how a well-designed room has foreground, midground, and background.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-019 -->
+    <div class="card" data-id="DA-019" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-019</span>
+            <span class="card-title">Gold is used on everything, so it means nothing</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-high">High impact</span>
+            <span class="badge badge-effort">Big lift</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>Gold appears on about 30 different elements: buttons, selected chips, dots, tab icons, borders, spinners, badges. <strong>When your signature color is on everything, it stops being a signature.</strong> It just becomes noise. Think of how a luxury brand uses its accent color on maybe 2-3 things per page. That's what makes it pop.</p>
+            <p class="label">The fix</p>
+            <p><strong>Save gold for moments that matter:</strong> the main action button on each screen, the TOMO logo, and key brand moments. Everything else that's "selected" or "active" should use a subtle white highlight instead. This way, when something IS gold, your eye immediately knows "this is important."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-020 -->
+    <div class="card" data-id="DA-020" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-020</span>
+            <span class="card-title">Every screen has the same exact header, no personality</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-medium">Medium impact</span>
+            <span class="badge badge-effort">Medium effort</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>"Journal." "Insights." "Profile." All in the same size, same weight, same position. It looks like someone typed different words into the same template. <strong>Each screen should feel like it was designed on purpose.</strong></p>
+            <p class="label">The fix</p>
+            <p>Give each screen its own typographic personality. The Journal could drop its title (the tab already says "Journal"). Insights could add a subtitle. Onboarding titles could highlight the first word in gold. Small differences that signal intentional design.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-021 -->
+    <div class="card" data-id="DA-021" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-021</span>
+            <span class="card-title">The bottom tab bar looks like every other app</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-medium">Medium impact</span>
+            <span class="badge badge-effort">Medium effort</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>The tab bar at the bottom is the most-seen element in the entire app, and it's completely stock. Icons, labels, a line at the top. <strong>Every dark-mode app template ships with this exact bar.</strong></p>
+            <p class="label">The fix</p>
+            <p>Remove the text labels (the icons are clear enough with only 3 tabs). Add a small gold dot under the active tab. Give the center gold "+" button more depth. These are small touches, but the tab bar is seen on every single screen, so the impact is huge.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-022 -->
+    <div class="card" data-id="DA-022" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-022</span>
+            <span class="card-title">Profile page looks like a generic settings screen</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-medium">Medium impact</span>
+            <span class="badge badge-effort">Big lift</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>Big centered circle at the top, name below it, then a list of settings rows. <strong>This is the default profile page of every app since 2015.</strong> For a BJJ training journal, this page should feel like looking at your fighter card, not your account settings.</p>
+            <p class="label">The fix</p>
+            <p>Redesign as a left-aligned "fighter card." Name big and bold, belt shown as a visual bar, gym name below. Add a stats strip: <strong>total sessions logged, sessions this week, member since.</strong> Settings rows move below the stats. The profile becomes about your training identity, not account management.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-023 -->
+    <div class="card" data-id="DA-023" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-023</span>
+            <span class="card-title">Session cards in the Journal all look identical</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-medium">Medium impact</span>
+            <span class="badge badge-effort">Quick fix</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>A 2-hour competition prep with 6 rounds of sparring looks exactly the same as a 30-minute light drilling session. Every card is the same gray box. <strong>Your training journal should develop visual texture over time</strong>, not look like a spreadsheet.</p>
+            <p class="label">The fix</p>
+            <p>Add a <strong>colored stripe on the left edge</strong> of each card: blue for Gi sessions, orange for No-Gi. This one small change transforms the Journal from "list of gray boxes" into a color-coded training history you can scan at a glance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-024 -->
+    <div class="card" data-id="DA-024" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-024</span>
+            <span class="card-title">The monospace font is used for two different purposes without clear rules</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-low">Polish</span>
+            <span class="badge badge-effort">Quick fix</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>JetBrains Mono (the monospace font) is used for tiny uppercase labels AND for regular-sized data values. These look very different but there's no formal rule about when to use which. It's subtle, but it contributes to a feeling of "not quite intentional."</p>
+            <p class="label">The fix</p>
+            <p>Define two clear roles: <strong>"label" style</strong> (small, uppercase, letter-spaced) and <strong>"data" style</strong> (normal size, bold). Once the rules exist, applying them consistently makes the whole app feel more considered.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-025 -->
+    <div class="card" data-id="DA-025" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-025</span>
+            <span class="card-title">Onboarding progress bar is nearly invisible</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-low">Polish</span>
+            <span class="badge badge-effort">Quick fix</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>The progress bar at the top of onboarding screens is 3 pixels tall and the track is almost the same shade as the background. You can see the gold fill, but you can't tell how far along you are because the track is invisible.</p>
+            <p class="label">The fix</p>
+            <p>Make it slightly thicker (4px) and make the track more visible. <strong>Add small dot markers at each step</strong> (25%, 50%, 75%, 100%) so users feel momentum through the flow.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-026 -->
+    <div class="card" data-id="DA-026" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-026</span>
+            <span class="card-title">Login screen looks like a template</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-low">Polish</span>
+            <span class="badge badge-effort">Quick fix</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>The TOMO logo is centered with "BJJ TRAINING JOURNAL" underneath. It looks like every login screen template. The Welcome screen (with the typewriter effect) has real personality. The login screen has none.</p>
+            <p class="label">The fix</p>
+            <p><strong>Left-align the logo</strong> (editorial apps like Linear do this and it immediately looks more premium). Remove the "BJJ TRAINING JOURNAL" text (by the time someone is signing in, they know what the app is). Less is more here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-027 -->
+    <div class="card" data-id="DA-027" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-027</span>
+            <span class="card-title">Everything is spaced exactly the same, creating a monotone rhythm</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-low">Polish</span>
+            <span class="badge badge-effort">Medium effort</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>Nearly every gap between sections is the same size (24px). It's like reading a page where every paragraph has the same spacing. Your eye moves down at a constant pace with no visual "breathing room" between major sections. <strong>Designed apps vary their spacing to create rhythm and emphasis.</strong></p>
+            <p class="label">The fix</p>
+            <p>Tighter spacing within related items (like a label and its input). Medium spacing between sibling elements. <strong>Generous breathing room before big section changes.</strong> The variety creates hierarchy without any other visual changes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-028 -->
+    <div class="card" data-id="DA-028" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-028</span>
+            <span class="card-title">Selectable chips have inconsistent shapes across screens</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-low">Polish</span>
+            <span class="badge badge-effort">Quick fix</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>The filter pills on the Journal screen are fully rounded (pill shape). The chips in the session logger are slightly rounded rectangles. They do the same thing but look different. <strong>A designed system has consistent rules.</strong></p>
+            <p class="label">The fix</p>
+            <p>Standardize: all selectable options use slightly rounded rectangles. Save the fully rounded "pill" shape for status badges (like the Gi/No-Gi label on session cards).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-029 -->
+    <div class="card" data-id="DA-029" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-029</span>
+            <span class="card-title">The recording screen looks like every other voice app</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-medium">Medium impact</span>
+            <span class="badge badge-effort">Medium-big lift</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>Pulsing gold circle with a microphone icon and a small timer. <strong>This is the default recording UI of every voice app ever made.</strong> But this screen is TOMO's signature moment. Every user sees it every single session. If it looks generic, the whole brand feels generic.</p>
+            <p class="label">The fix</p>
+            <p>Replace the mic icon with the TOMO kanji character inside a gold ring. Make the timer massive and bold (it's the most important info during recording). Add subtle audio level bars that move with your voice so you can see the app is actually "hearing" you. <strong>This should be the screen that makes someone say "who designed this?"</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-030 -->
+    <div class="card" data-id="DA-030" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-030</span>
+            <span class="card-title">Belt picker uses generic colored dots instead of belt-shaped bars</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-low">Polish</span>
+            <span class="badge badge-effort">Quick fix</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>During onboarding, you pick your belt by tapping colored circles. White circle, blue circle, purple circle. They look like dots in a color picker, not like BJJ belts. Every BJJ app does this because it's the easy default.</p>
+            <p class="label">The fix</p>
+            <p>Change the circles to <strong>horizontal bars that actually look like belts.</strong> It's a small detail that any practitioner would immediately recognize and appreciate. The kind of thing that signals "someone who trains built this."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-031 -->
+    <div class="card" data-id="DA-031" data-section="design">
+      <div class="card-top">
+        <div class="checkbox-wrap"><input type="checkbox" onchange="updateSummary(this)"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <span class="card-id">DA-031</span>
+            <span class="card-title">Success screen disappears before you can read it</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-low">Polish</span>
+            <span class="badge badge-effort">Quick fix</span>
+          </div>
+          <div class="card-body">
+            <p class="label">What's wrong</p>
+            <p>After you save a session, there's a nice "Session logged" screen with a personalized message. But it auto-disappears after 5 seconds. Some people want to read the message. Others want to close the app immediately. <strong>Neither group has control.</strong></p>
+            <p class="label">The fix</p>
+            <p>Add a <strong>"Done" button</strong> so you can leave immediately if you want. Keep the 5-second auto-dismiss for people who just set their phone down. Best of both worlds.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ======== Selected Items Summary ======== -->
+  <div class="selected-section" id="selectedSection">
+    <h2>Selected Items</h2>
+    <ul class="selected-list" id="selectedList">
+      <li class="selected-empty" id="emptyState">Check the items above that you want to move forward with.</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- Summary bar -->
+<div class="summary-panel" id="summaryPanel">
+  <div class="summary-left">
+    <div class="summary-count"><span id="totalCount">0</span> of 23 selected</div>
+    <div class="summary-breakdown">
+      <span id="bugCount">0 bugs</span>
+      <span id="uxCount">0 ux</span>
+      <span id="designCount">0 design</span>
+    </div>
+  </div>
+  <button class="summary-btn" onclick="scrollToSelected()">View selected</button>
+</div>
+
+<script>
+  function updateSummary(checkbox) {
+    const card = checkbox.closest('.card');
+    card.classList.toggle('checked', checkbox.checked);
+
+    const allChecked = document.querySelectorAll('.card input[type="checkbox"]:checked');
+    const total = allChecked.length;
+
+    let bugs = 0, ux = 0, design = 0;
+    const items = [];
+
+    allChecked.forEach(cb => {
+      const c = cb.closest('.card');
+      const section = c.dataset.section;
+      const id = c.dataset.id;
+      const title = c.querySelector('.card-title').textContent;
+      if (section === 'bugs') bugs++;
+      else if (section === 'ux') ux++;
+      else if (section === 'design') design++;
+      items.push({ id, title, section });
+    });
+
+    document.getElementById('totalCount').textContent = total;
+    document.getElementById('bugCount').textContent = bugs + ' bugs';
+    document.getElementById('uxCount').textContent = ux + ' ux';
+    document.getElementById('designCount').textContent = design + ' design';
+
+    const panel = document.getElementById('summaryPanel');
+    panel.classList.toggle('visible', total > 0);
+
+    const list = document.getElementById('selectedList');
+
+    if (total === 0) {
+      list.innerHTML = '';
+      list.appendChild(createEmpty());
+      return;
+    }
+
+    list.innerHTML = '';
+    items.forEach(item => {
+      const li = document.createElement('li');
+
+      const idSpan = document.createElement('span');
+      idSpan.className = 'sel-id';
+      idSpan.textContent = item.id;
+
+      const titleSpan = document.createElement('span');
+      titleSpan.className = 'sel-title';
+      titleSpan.textContent = item.title;
+
+      const badge = document.createElement('span');
+      badge.className = 'badge badge-' + (item.section === 'bugs' ? 'p1' : item.section === 'ux' ? 'medium' : 'low');
+      badge.textContent = item.section;
+
+      li.appendChild(idSpan);
+      li.appendChild(titleSpan);
+      li.appendChild(badge);
+      list.appendChild(li);
+    });
+  }
+
+  function createEmpty() {
+    const li = document.createElement('li');
+    li.className = 'selected-empty';
+    li.id = 'emptyState';
+    li.textContent = 'Check the items above that you want to move forward with.';
+    return li;
+  }
+
+  function scrollToSelected() {
+    document.getElementById('selectedSection').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOMO | Your training. Remembered.</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ===== MOBILE-FIRST BASE (all phones) ===== */
+  body {
+    background: #111111;
+    color: #e0e0e0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 1.8;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 56px 20px 48px;
+    background: linear-gradient(180deg, #1a1708 0%, #111111 100%);
+  }
+  .hero-logo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 44px;
+    color: #F5A623;
+    letter-spacing: 3px;
+  }
+  .hero-kanji {
+    font-size: 36px;
+    color: #F5A623;
+    margin-left: 8px;
+  }
+  .hero-tagline {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #fff;
+    margin-top: 20px;
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: #999;
+    margin-top: 16px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #111;
+    background: #F5A623;
+    padding: 16px 40px;
+    border-radius: 12px;
+    text-decoration: none;
+    margin-top: 28px;
+    min-height: 56px;
+  }
+  .hero-cta:hover { background: #e6951e; }
+  .hero-cta:active { background: #d4880f; transform: scale(0.98); }
+
+  /* Content */
+  .content { max-width: 720px; margin: 0 auto; padding: 0 20px 64px; }
+
+  /* Section */
+  .section { margin-top: 56px; }
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #F5A623;
+    margin-bottom: 16px;
+  }
+  .section h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .section p {
+    color: #ccc;
+    margin-bottom: 14px;
+    line-height: 1.8;
+    font-size: 17px;
+  }
+
+  /* Steps */
+  .steps { display: flex; flex-direction: column; gap: 0; margin-top: 24px; }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-number {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    color: #F5A623;
+    line-height: 1;
+    min-width: 44px;
+  }
+  .step-content h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .step-content p {
+    font-size: 16px;
+    color: #aaa;
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  /* What to expect list */
+  .expect-list { list-style: none; margin-top: 16px; }
+  .expect-list li {
+    padding: 14px 0;
+    border-bottom: 1px solid #1a1a1a;
+    color: #ccc;
+    font-size: 17px;
+    padding-left: 22px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .expect-list li:last-child { border-bottom: none; }
+  .expect-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 22px;
+    width: 7px;
+    height: 7px;
+    background: #F5A623;
+    border-radius: 50%;
+  }
+
+  /* CTA / Signup */
+  .cta {
+    margin-top: 56px;
+    background: linear-gradient(135deg, #1a1708, #151515);
+    border: 1px solid #333;
+    border-radius: 16px;
+    padding: 40px 24px;
+    text-align: center;
+  }
+  .cta h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .cta p { color: #aaa; font-size: 16px; margin-bottom: 24px; line-height: 1.7; }
+
+  /* Signup form */
+  .signup-form { margin-top: 24px; }
+  .form-row { margin-bottom: 16px; }
+  .form-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 8px;
+  }
+  .form-input, .form-select {
+    width: 100%;
+    padding: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    color: #fff;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 10px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .form-input::placeholder { color: #555; }
+  .form-input:focus, .form-select:focus {
+    border-color: #F5A623;
+    box-shadow: 0 0 0 2px rgba(245, 166, 35, 0.15);
+  }
+  .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 44px;
+  }
+  .form-select option { background: #1a1a1a; color: #fff; }
+  .form-submit {
+    width: 100%;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #111;
+    background: #F5A623;
+    border: none;
+    padding: 18px 32px;
+    border-radius: 12px;
+    cursor: pointer;
+    min-height: 56px;
+    margin-top: 8px;
+  }
+  .form-submit:hover { background: #e6951e; }
+  .form-submit:active { background: #d4880f; transform: scale(0.98); }
+  .form-note {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+  .form-success {
+    text-align: center;
+    padding: 32px 0;
+    display: none;
+  }
+  .form-success h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #22c55e;
+    margin-bottom: 12px;
+  }
+  .form-success p {
+    font-size: 17px;
+    color: #aaa;
+    line-height: 1.7;
+  }
+
+  /* GIF overlay */
+  .gif-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .gif-overlay.active { display: flex; }
+  .gif-overlay img {
+    max-width: 90%;
+    max-height: 60vh;
+    border-radius: 12px;
+  }
+  .gif-overlay-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #666;
+    margin-top: 20px;
+  }
+
+  /* FAQ */
+  .faq-list { margin-top: 24px; }
+  .faq-item {
+    border-bottom: 1px solid #1a1a1a;
+    padding: 20px 0;
+  }
+  .faq-item:first-child { padding-top: 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: #fff;
+    margin-bottom: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    min-height: 44px;
+  }
+  .faq-q::after {
+    content: '+';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    color: #F5A623;
+    flex-shrink: 0;
+    min-width: 44px;
+    text-align: center;
+  }
+  .faq-item.open .faq-q::after {
+    content: '-';
+  }
+  .faq-a {
+    font-size: 16px;
+    color: #aaa;
+    line-height: 1.8;
+    display: none;
+    padding-right: 44px;
+  }
+  .faq-item.open .faq-a { display: block; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid #1a1a1a;
+    margin-top: 56px;
+  }
+  .footer p { font-size: 14px; color: #555; }
+  .footer .meaning { font-style: italic; color: #666; margin-top: 6px; font-size: 15px; }
+  .footer .builder { color: #555; margin-top: 16px; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ===== TABLET+ (min-width: 640px) ===== */
+  @media (min-width: 640px) {
+    .hero { padding: 80px 32px 64px; }
+    .hero-logo { font-size: 56px; }
+    .hero-kanji { font-size: 44px; }
+    .hero-tagline { font-size: 26px; }
+    .content { padding: 0 32px 80px; }
+    .section h2 { font-size: 28px; }
+    .step-number { font-size: 40px; min-width: 52px; }
+    .step-content h3 { font-size: 20px; }
+    .cta { padding: 56px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-logo">TOMO <span class="hero-kanji">友</span></div>
+  <div class="hero-tagline">Your training. Remembered.</div>
+  <p class="hero-sub">A voice-first BJJ journal for iPhone. Talk through your session in 90 seconds and TOMO handles the rest.</p>
+  <a href="#signup" class="hero-cta">Sign Up</a>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <div class="section-label">How It Works</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Train.</h3>
+          <p>Do your thing on the mats.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Talk.</h3>
+          <p>Open TOMO and speak naturally about your session: what you drilled, how rolls went, what clicked.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Done.</h3>
+          <p>TOMO extracts techniques, training details, and notes automatically. Review, edit if needed, save.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta" id="signup">
+    <h2>Get started</h2>
+    <p>Fill this out and you'll get an email with the beta tester agreement right away. Once you agree, Drew will send your TestFlight invite.</p>
+
+    <form id="signup-form" class="signup-form">
+      <div class="form-row">
+        <label class="form-label" for="name">Name</label>
+        <input class="form-input" type="text" id="name" name="name" placeholder="Your full name" required>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="email">Email</label>
+        <input class="form-input" type="email" id="email" name="email" placeholder="you@email.com" required>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="belt">Belt</label>
+        <select class="form-select" id="belt" name="belt" required>
+          <option value="" disabled selected>Select your belt</option>
+          <option value="White">White</option>
+          <option value="Blue">Blue</option>
+          <option value="Purple">Purple</option>
+          <option value="Brown">Brown</option>
+          <option value="Black">Black</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="iphone">iPhone Model</label>
+        <input class="form-input" type="text" id="iphone" name="iphone_model" placeholder="e.g. iPhone 14, iPhone 15 Pro">
+      </div>
+
+      <div class="form-row">
+        <button type="submit" class="form-submit" id="submit-btn">I'm In</button>
+      </div>
+
+      <p class="form-note">Check your email after signing up. The agreement link arrives instantly.</p>
+    </form>
+
+    <div class="form-success" id="form-success">
+      <h3>You're in.</h3>
+      <p>Check your email for the beta tester agreement. Once you agree, Drew will send your TestFlight invite. See you on the mats.</p>
+    </div>
+  </div>
+
+  <script>
+  var SUPABASE_FUNCTION_URL = 'https://whzycopfjvwmsgzfqvig.supabase.co/functions/v1/beta-signup-notify';
+
+  var form = document.getElementById('signup-form');
+  var submitBtn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    submitBtn.textContent = 'Signing up...';
+    submitBtn.disabled = true;
+
+    var payload = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      belt: document.getElementById('belt').value,
+      iphone_model: document.getElementById('iphone').value || null
+    };
+
+    fetch(SUPABASE_FUNCTION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res) { return res.json().then(function(data) { return { ok: res.ok, status: res.status, data: data }; }); })
+    .then(function(result) {
+      if (result.ok) {
+        form.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+        showGifOverlay();
+      } else if (result.status === 409) {
+        alert('This email has already signed up. Check your inbox for the agreement link, or email drew@assemblylabs.co.');
+        submitBtn.textContent = "I'm In";
+        submitBtn.disabled = false;
+      } else {
+        alert(result.data.error || 'Something went wrong. Email drew@assemblylabs.co directly.');
+        submitBtn.textContent = "I'm In";
+        submitBtn.disabled = false;
+      }
+    })
+    .catch(function() {
+      alert('Connection error. Email drew@assemblylabs.co directly.');
+      submitBtn.textContent = "I'm In";
+      submitBtn.disabled = false;
+    });
+  });
+  </script>
+
+  <div class="section">
+    <div class="section-label">What to Expect</div>
+    <ul class="expect-list">
+      <li>Voice-powered session logging -- talk, don't type</li>
+      <li>Your own training profile personalized to your belt level</li>
+      <li>Recommended videos and stats visualizations coming soon</li>
+      <li>Free during beta via Apple TestFlight (iPhone required)</li>
+      <li>Heavily discounted subscription when TOMO launches publicly</li>
+      <li>Your feedback directly shapes the product</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-label">FAQ</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do I need an iPhone?</div>
+        <div class="faq-a">Yes. TOMO is distributed through Apple TestFlight, which requires an iPhone running iOS 16 or later. Android is not supported during the beta.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is it really free?</div>
+        <div class="faq-a">Completely free during the beta. When TOMO launches publicly it will be a paid subscription, but beta testers from Alliance Paoli will get a heavily discounted rate as a thank-you.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is my data private?</div>
+        <div class="faq-a">Yes. Your training data is yours. Nobody else at the gym can see your sessions, notes, or stats. Not your coach, not your training partners.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How much time does it take after each class?</div>
+        <div class="faq-a">About 90 seconds. You talk through your session naturally and TOMO handles the rest. It's designed for when you're exhausted and just want to get to your car.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I report bugs or give feedback?</div>
+        <div class="faq-a">Email drew@assemblylabs.co or grab Drew at the gym. A quick text or voice note about what happened is perfect.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>TOMO (友)</p>
+    <p class="meaning">"Friend" in Japanese. Built for practitioners who take their training seriously.</p>
+    <p class="builder">Built by Assembly Labs, LLC</p>
+  </div>
+</div>
+
+<div class="gif-overlay" id="gif-overlay" onclick="hideGifOverlay()">
+  <img src="john-danaher-golf-clap.gif" alt="Danaher approves">
+  <div class="gif-overlay-text">Tap anywhere to close</div>
+</div>
+
+<script>
+function showGifOverlay() {
+  document.getElementById('gif-overlay').classList.add('active');
+}
+function hideGifOverlay() {
+  document.getElementById('gif-overlay').classList.remove('active');
+}
+</script>
+
+</body>
+</html>

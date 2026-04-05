@@ -13,10 +13,12 @@ class SpeechEngine {
     this.volume = 1.0;
     this.voices = [];
     this.boundaryCallback = null;
+    this.startCallback = null;
     this.endCallback = null;
     this.errorCallback = null;
     this.text = '';
     this.isPaused = false;
+    this.isLoading = false;
   }
 
   async initialize() {
@@ -259,10 +261,12 @@ class SpeechEngine {
   }
 
   chunkText(text) {
-    const maxChunkSize = 30000;
+    // Chrome/Safari have a ~15 second limit per utterance before silently stopping.
+    // Keep chunks small (~2000 chars) so each utterance finishes well within that limit.
+    const maxChunkSize = 2000;
     const chunks = [];
 
-    // First try to split by paragraphs
+    // Split by paragraphs first
     const paragraphs = text.split(/\n\n+/);
     let currentChunk = '';
 
@@ -311,6 +315,7 @@ class SpeechEngine {
     this.currentChunkIndex = 0;
     this.currentCharIndex = startChar;
     this.isPaused = false;
+    this.isLoading = true;
 
     // Find the right chunk for the start character
     if (startChar > 0) {
@@ -326,6 +331,7 @@ class SpeechEngine {
     }
 
     this.state = 'PLAYING';
+    this.startKeepAlive();
     this.speakCurrentChunk();
   }
 
@@ -349,6 +355,14 @@ class SpeechEngine {
 
     // Track current utterance
     this.currentUtterance = utterance;
+
+    // Handle speech actually starting (voice loaded, audio playing)
+    utterance.onstart = () => {
+      if (this.isLoading) {
+        this.isLoading = false;
+        if (this.startCallback) this.startCallback();
+      }
+    };
 
     // Handle boundary events for word tracking
     utterance.onboundary = (event) => {
@@ -411,12 +425,33 @@ class SpeechEngine {
   }
 
   stop() {
+    this.stopKeepAlive();
     this.synth.cancel();
     this.state = 'IDLE';
     this.currentChunkIndex = 0;
     this.currentCharIndex = 0;
     this.isPaused = false;
+    this.isLoading = false;
     this.currentUtterance = null;
+  }
+
+  // Chrome bug workaround: speechSynthesis can pause itself after ~15s.
+  // Periodically calling pause/resume keeps it alive.
+  startKeepAlive() {
+    this.stopKeepAlive();
+    this.keepAliveInterval = setInterval(() => {
+      if (this.state === 'PLAYING' && !this.isPaused) {
+        this.synth.pause();
+        this.synth.resume();
+      }
+    }, 10000);
+  }
+
+  stopKeepAlive() {
+    if (this.keepAliveInterval) {
+      clearInterval(this.keepAliveInterval);
+      this.keepAliveInterval = null;
+    }
   }
 
   setVoice(voice) {

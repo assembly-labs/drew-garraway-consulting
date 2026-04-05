@@ -1,6 +1,6 @@
 # Profile & Settings - Product Requirements Document
 
-**Last Updated:** February 8, 2026
+**Last Updated:** March 30, 2026
 **Status:** MVP Implementation In Progress
 **Components:** `ProfileScreen.tsx`, `Settings.tsx`
 
@@ -147,11 +147,12 @@ Per First Principles:
 | **Gym** | Freely Editable | Gym picker (same as onboarding) | People change gyms | Done |
 | **Target Frequency** | Freely Editable | Chip selector (2/4/5) | Goals change | Partial |
 | **Logging Preference** | Freely Editable | Toggle (Voice/Text) | Preference changes | Done |
-| **Training Goals** | Freely Editable | Multi-select chips | Goals evolve | Progressive |
+| **Training Goals** | Freely Editable | Multi-select chips (6 options + Other) | Goals evolve | Progressive |
 | **Experience Level** | Freely Editable | Chip selector | One-time question | Progressive |
 | **Training Start Date** | Freely Editable | Date picker | May remember later | Progressive |
-| **Birthdate** | **LOCKED** | View only (no edit) | Impacts age-based comparisons + birthday celebrations | **Onboarding** |
-| **Gender** | **LOCKED** | View only (no edit) | Impacts competition categories + peer comparisons | **Onboarding** |
+| **Body Weight** | Freely Editable | Number input with lb/kg toggle | Weight changes over time | Optional at onboarding |
+| **Birthdate** | **LOCKED** | View only (no edit) | Impacts age-based insights, projections, birthday celebrations. Must be 18+. | **Onboarding (mandatory)** |
+| **Gender** | **LOCKED** | View only after set (no edit) | Impacts competition categories + peer comparisons | **Optional at onboarding, progressive at Session 5** |
 
 ---
 
@@ -179,29 +180,60 @@ Allowing changes would corrupt historical data integrity. Age impacts analytics,
 - Special insight: "Happy Birthday! You've trained X sessions in your [age-1] year of life"
 - Optional: birthday badge visible for 24 hours
 
-#### Gender (LOCKED - Captured at Onboarding)
+#### Gender (LOCKED after set - Optional at Onboarding)
 
 **Options:**
 - Male
 - Female
+- (Skip / not provided)
 
 **Why we collect gender:**
-- Weight class context (competition users)
-- Competition category tracking
+- Weight class context (competition users): IBJJF weight classes differ by sex
+- Competition category tracking: men's vs women's divisions
 - Peer comparisons ("How do I compare to other women at my belt?")
-- Gender-specific insights (injury patterns, training frequency norms)
+- Gender-specific insights (injury patterns, training frequency norms, recovery context)
+- Tone calibration for AI responses
 
-**Why it's locked:**
-Gender impacts analytics and peer comparisons across the user's history. Changing it would corrupt comparative data.
+**Why it's optional:**
+Not everyone is comfortable sharing gender, and the app works well without it. Making it optional respects user choice. We explain the value clearly: "Helps personalize competition class and training insights."
 
-**Collection:** **Mandatory at onboarding** (About You screen). Users must select Male or Female before completing onboarding. This ensures 100% data completeness for analytics.
+**Why it's locked after set:**
+Gender impacts analytics and peer comparisons across the user's history. Changing it would corrupt comparative data. Users are warned before committing: "Note: this can't be changed later."
 
-**Display:** Only shown in Profile page, never exposed publicly. Used internally for analytics.
+**Collection flow:**
+1. **Onboarding (About You screen):** Optional. Two chips (Male / Female), neither pre-selected. User can proceed without selecting.
+2. **Progressive profiling (Session 5):** If not set at onboarding, we ask: "One quick question: this helps us personalize your training insights. Male or Female?" with a Skip option.
+3. **Profile screen:** If still not set, shows "+ Add" with lock icon and note that it locks after set.
+4. **After 3 skips:** Stop asking.
 
-**Privacy Considerations:**
-- Required at onboarding (no skip option)
-- Not displayed in any shared/public contexts
-- Used only for internal personalization
+**Display:** Only shown on Profile page, never exposed publicly. Shows value with lock icon after set, or "+ Add" if not set.
+
+#### Body Weight (Freely Editable - Optional)
+
+**Storage:** `body_weight_kg` (always in kg internally), `weight_unit_preference` ('lb' or 'kg')
+
+**Why we collect weight:**
+- IBJJF competition weight class mapping (immediate value when entered)
+- Rolling context: size dynamics affect technique recommendations
+- Weight tracking over time for competition prep users
+- Future: weight cut tracking for tournament preparation
+
+**Display on Profile:**
+```
+Body Weight              165 lb (Feather)
+```
+Shows weight in user's preferred unit with IBJJF class name. If gender is set, shows the correct gendered weight class. If gender is not set, shows both: "Feather (men) / Light (women)".
+
+**Edit:** Tap to edit via inline number input + unit toggle. Changes save immediately. Not locked (weight changes are expected and tracked over time).
+
+**Privacy:** "Only visible to you" note shown during collection and on profile.
+
+#### Injuries / Physical Limitations (Future - FEAT-006)
+
+Not collected at onboarding or via progressive profiling in MVP 1.0. Instead, injuries are tracked per-session during session logging (the `injuries` field on sessions). A persistent injury tracker that aggregates across sessions is planned as FEAT-006 in the features backlog. This will become important for:
+- Technique safety recommendations ("avoid neck cranks with your cervical issue")
+- Recovery-aware insights ("you've mentioned shoulder pain in 4 of your last 10 sessions")
+- Age-adjusted injury context (older practitioners have different recovery profiles)
 
 ---
 
@@ -414,26 +446,27 @@ The progression event log enables:
 **Calculation Formula:**
 ```typescript
 const fields = [
-  // Mandatory at onboarding (7 fields)
+  // Mandatory at onboarding (6 fields)
   profile.name,
   profile.belt,
   profile.stripes !== null,
-  profile.beltHistory.length > 0,            // Initial belt date (captured at onboarding)
+  profile.birthDate,                         // LOCKED after onboarding, mandatory, 18+
   profile.gym !== null,
   profile.targetFrequency !== null,
   profile.loggingPreference !== 'undecided',
 
-  // Progressive profiling (5 fields)
+  // Optional at onboarding / Progressive profiling (6 fields)
+  profile.gender,                            // Optional at onboarding, LOCKED after first set
   profile.trainingGoals.length > 0,
   profile.experienceLevel !== null,
   profile.trainingStartDate,
-  profile.birthDate,                         // LOCKED after set
-  profile.gender,                            // LOCKED after set
+  profile.bodyWeightKg !== null,             // Freely editable
+  profile.beltHistory.length > 0,            // Initial belt date
 ];
 const completion = Math.round((completed / fields.length) * 100);
 ```
 
-**Note:** 12 total fields. 7 captured at onboarding (58% complete), 5 via progressive profiling.
+**Note:** 13 total fields. 7 captured mandatory at onboarding (~54% complete on day 1), 6 optional/progressive.
 
 **Visual Treatment:**
 - Shows when `completion < 100%`
@@ -449,16 +482,17 @@ Questions are triggered at session milestones (accelerated schedule):
 |---------|----------|---------------|-------------------|
 | 2 | "How long have you been training?" | `experienceLevel` | Quick context question |
 | 3 | "When did you start training?" | `trainingStartDate` | Context for progress |
-| 5 | "Why do you train?" | `trainingGoals` | Personalizes experience |
+| 5 | Gender (if not set) + "Why do you train?" | `gender`, `trainingGoals` | Gender personalizes competition/peer context; goals personalize content |
+| 5 | "What's your current weight?" (if not set) | `bodyWeightKg` | Competition class + rolling context |
 
 **Note:** Belt date is now captured at onboarding (mandatory), not via progressive profiling.
 
-**Feb 2026 Update:** Gender and Birthday are now mandatory at onboarding (About You screen). They are no longer part of progressive profiling. This ensures 100% data completeness for analytics and peer comparisons from day one.
+**Mar 2026 Update:** Birthday is mandatory at onboarding (must be 18+). Gender is optional at onboarding but asked at Session 5 via progressive profiling if skipped. Body weight is optional at onboarding and asked at Session 5 if not entered. Training goals expanded to include Self-Defense and Community.
 
 **Skip Tolerance:** Users can skip each question up to 3 times. After 3 skips, we stop asking that question.
 
-**LOCKED field handling:** For birthdate and gender, users are informed these cannot be changed later:
-> "This helps us personalize your experience. Note: this can't be changed later."
+**LOCKED field handling:** For birthdate (set at onboarding) and gender (when first set), users are informed these cannot be changed later:
+> "This helps us adjust your insights and projections. Note: this can't be changed later."
 
 **Belt Timing Adjustments:**
 | Belt | Adjustment | Rationale |
@@ -762,9 +796,15 @@ interface UserProfile {
   // ─────────────────────────────────────────────────────────────
   trainingStartDate: string | null;                   // ISO date (YYYY-MM-DD)
 
-  // LOCKED fields - captured at onboarding, cannot be changed
-  birthDate: string;                                  // ISO date (YYYY-MM-DD) - mandatory at onboarding
-  gender: Gender;                                     // 'male' | 'female' - mandatory at onboarding
+  // LOCKED fields - cannot be changed after first set
+  birthDate: string;                                  // ISO date (YYYY-MM-DD) - mandatory at onboarding, must be 18+
+  gender: Gender | null;                              // 'male' | 'female' | null - optional at onboarding, LOCKED after first set
+
+  // ─────────────────────────────────────────────────────────────
+  // FREELY EDITABLE FIELDS
+  // ─────────────────────────────────────────────────────────────
+  bodyWeightKg: number | null;                        // Always stored in kg (converted from lb if needed)
+  weightUnitPreference: 'lb' | 'kg';                  // User's preferred display unit
 
   // ─────────────────────────────────────────────────────────────
   // METADATA
@@ -776,14 +816,15 @@ interface UserProfile {
 
   // ─────────────────────────────────────────────────────────────
   // PROGRESSIVE PROFILING TRACKING
-  // Note: birthDate and gender removed - now captured at onboarding
+  // Note: birthDate captured mandatory at onboarding
+  // Note: gender asked at onboarding (optional), progressive at Session 5 if skipped
   // ─────────────────────────────────────────────────────────────
   skipCounts: {
     trainingStartDate: number;
     currentBeltDate: number;
     trainingGoals: number;
     experienceLevel: number;
-    birthYear: number;
+    gender: number;                                   // Tracks skips for gender progressive profiling
   };
   lastAskedSession: { [key: string]: number };
 }
@@ -829,9 +870,9 @@ interface GymSelection {
   affiliation?: string;
 }
 
-type TrainingGoal = 'competition' | 'fitness' | 'self-defense' | 'mental' | 'community' | 'hobby';
+type TrainingGoal = 'competition' | 'fitness' | 'self_defense' | 'mental' | 'community' | 'hobby';
 type ExperienceLevel = 'new' | 'beginner' | 'intermediate' | 'experienced';
-type Gender = 'male' | 'female';  // Only two options - mandatory at onboarding
+type Gender = 'male' | 'female';  // Two options - optional at onboarding, LOCKED after first set
 ```
 
 ### Helper Functions

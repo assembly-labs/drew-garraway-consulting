@@ -150,7 +150,7 @@ class TextReaderApp {
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background: var(--success-color);
+      background: var(--success);
       color: white;
       padding: 12px 20px;
       border-radius: 12px;

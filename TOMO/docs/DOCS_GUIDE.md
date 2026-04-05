@@ -19,6 +19,9 @@ This is the project brain for TOMO. Use it to:
 
 | Before you... | Read this first |
 |---------------|-----------------|
+| Check what to build next | `features/README.md` |
+| Start a major feature | `features/<name>/README.md` (strategy, spec, tasks) |
+| Fix a bug or polish item | `mvp-1.0/tracking/ISSUES.md` |
 | Make any product decision | `FIRST_PRINCIPLES.md` |
 | Build a user-facing feature | `personas/PERSONA_PROFILES.md` |
 | Write UI copy or messaging | `brand/BRAND_VOICE_GUIDE.md` |
@@ -34,6 +37,14 @@ docs/
 ├── FIRST_PRINCIPLES.md      # Non-negotiable beliefs (READ FIRST)
 ├── DOCS_GUIDE.md                # This file
 ├── README.md                # Document index
+│
+├── features/                # ACTIVE: Feature backlog + major feature subfolders
+│   ├── README.md            # Prioritized backlog (what to build next)
+│   └── experience-intake/   # FEAT-001 (strategy, spec, tasks)
+│
+├── mvp-1.0/tracking/        # ACTIVE: Session-level tracking
+│   ├── ISSUES.md            # Bugs, polish, design audit items
+│   └── CHANGELOG.md         # What shipped, per session
 │
 ├── brand/                   # Voice, tone, messaging
 │   ├── BRAND_VOICE_GUIDE.md
@@ -120,11 +131,14 @@ data-and-ai/VOICE_LOGGING_*.md  →  VoiceFirstLogger.tsx
 
 ### Building a New Feature
 
-1. Read `FIRST_PRINCIPLES.md` - Does this feature align?
-2. Read `personas/PERSONA_PROFILES.md` - Who is this for? What state are they in?
-3. Read `product/UI_STRATEGY.md` - How does this fit the product architecture?
-4. Check `design-system/tokens.md` - Use existing patterns
-5. Build in `prototype/src/`
+1. Check `features/README.md` - Is this feature in the backlog? What priority?
+2. If major: check the feature subfolder (`features/<name>/`) for strategy, spec, and tasks
+3. Read `FIRST_PRINCIPLES.md` - Does this feature align?
+4. Read `personas/PERSONA_PROFILES.md` - Who is this for? What state are they in?
+5. Check `design-system/tokens.md` - Use existing patterns
+6. Build in `tomo/src/`
+7. Update `features/README.md` status when done
+8. Add entry to `mvp-1.0/tracking/CHANGELOG.md`
 
 ### Writing Copy or Messaging
 

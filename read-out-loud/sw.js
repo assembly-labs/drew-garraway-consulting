@@ -1,8 +1,8 @@
 // Service Worker for offline functionality
-const CACHE_VERSION = 'v2.5.0';
+const CACHE_VERSION = 'v3.2.0';
 const CACHE_NAME = `tts-reader-${CACHE_VERSION}`;
 
-// Assets to cache
+// Assets to cache (relative to service worker scope)
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -23,6 +23,15 @@ const EXTERNAL_ASSETS = [
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js'
 ];
+
+// Resolve relative paths to absolute using SW scope
+function resolveAssetPaths() {
+  const scope = self.registration.scope;
+  return STATIC_ASSETS.map(asset => {
+    if (asset === './') return scope;
+    return new URL(asset, scope).pathname;
+  });
+}
 
 // Install event - cache assets
 self.addEventListener('install', (event) => {
@@ -45,7 +54,7 @@ self.addEventListener('install', (event) => {
           }
         }
       })
-      .then(() => self.skipWaiting()) // Activate immediately
+      .then(() => self.skipWaiting())
       .catch(error => {
         console.error('Service Worker: Cache installation failed', error);
       })
@@ -68,7 +77,7 @@ self.addEventListener('activate', (event) => {
           })
         );
       })
-      .then(() => self.clients.claim()) // Take control of all clients
+      .then(() => self.clients.claim())
   );
 });
 
@@ -77,51 +86,51 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Skip chrome-extension and other non-http protocols
   if (!request.url.startsWith('http')) {
     return;
   }
 
-  // For navigation requests, always try network first with offline fallback
+  // For navigation requests, network-first with offline fallback
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
-        .catch(() => caches.match('/index.html'))
+        .catch(() => {
+          // Try to serve the index.html from cache using the SW scope
+          const scope = self.registration.scope;
+          return caches.match(scope) || caches.match(new URL('./index.html', scope).href);
+        })
     );
     return;
   }
 
-  // For API requests, use network-only strategy
-  if (url.pathname.startsWith('/api/')) {
+  // For API requests, network-only
+  if (url.pathname.includes('/api/')) {
     event.respondWith(fetch(request));
     return;
   }
 
-  // For static assets, use cache-first strategy
-  if (STATIC_ASSETS.some(asset => url.pathname === asset || url.pathname.endsWith(asset))) {
+  // For static assets, cache-first strategy
+  // Match by pathname, stripping query params (cache-busting params like ?v=)
+  const resolvedPaths = resolveAssetPaths();
+  const isStaticAsset = resolvedPaths.some(assetPath => url.pathname === assetPath || url.pathname.endsWith(assetPath));
+
+  if (isStaticAsset) {
     event.respondWith(
-      caches.match(request)
+      caches.match(request, { ignoreSearch: true })
         .then(response => {
           if (response) {
-            // Return cached version
             return response;
           }
-          // If not in cache, fetch from network and cache it
           return fetch(request)
             .then(response => {
-              // Don't cache non-successful responses
               if (!response || response.status !== 200 || response.type !== 'basic') {
                 return response;
               }
-
-              // Clone the response before caching
               const responseToCache = response.clone();
-
               caches.open(CACHE_NAME)
                 .then(cache => {
                   cache.put(request, responseToCache);
                 });
-
               return response;
             });
         })
@@ -129,13 +138,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // For external CDN resources, use cache-first with network fallback
+  // For external CDN resources, cache-first
   if (EXTERNAL_ASSETS.includes(request.url)) {
     event.respondWith(
       caches.match(request)
         .then(response => response || fetch(request))
         .catch(() => {
-          // Return a fallback response if both cache and network fail
           console.warn(`Failed to fetch external resource: ${request.url}`);
           return new Response('External resource unavailable', {
             status: 503,
@@ -146,7 +154,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // For everything else, use network-first strategy
+  // Everything else: network-first
   event.respondWith(
     fetch(request)
       .catch(() => caches.match(request))

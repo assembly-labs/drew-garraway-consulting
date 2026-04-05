@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post-Save Quote Screen</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#0a0a0a; color:#e5e5e5; padding:40px 20px 80px; display:flex; flex-direction:column; align-items:center; }
+
+  .page-title { font-size:20px; font-weight:700; color:#F5A623; margin-bottom:4px; }
+  .page-sub { font-size:12px; color:#525252; margin-bottom:32px; }
+
+  .row { display:flex; gap:32px; flex-wrap:wrap; justify-content:center; margin-bottom:48px; }
+  .col-label { font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:#404040; margin-bottom:8px; text-align:center; }
+
+  /* Phone frame */
+  .phone {
+    width:300px; height:600px;
+    background:#111111;
+    border-radius:32px;
+    border:2px solid #333;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    cursor:pointer;
+    user-select:none;
+  }
+
+  /* Status bar */
+  .sb { height:52px; padding:14px 24px 0; display:flex; justify-content:space-between; align-items:center; flex-shrink:0; }
+  .sb-time { font-size:15px; font-weight:700; color:#fff; }
+  .sb-dots { display:flex; gap:3px; }
+  .sb-dot { width:4px; height:4px; background:#fff; border-radius:50%; }
+
+  /* Quote content area */
+  .quote-area {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    padding:0 40px;
+    padding-top:140px;
+    text-align:center;
+  }
+
+  .quote-text {
+    font-family:'Inter',sans-serif;
+    font-size:17px;
+    font-weight:500;
+    color:#d4d4d4;
+    line-height:28px;
+    text-align:center;
+  }
+
+  .quote-attr {
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    font-weight:600;
+    color:rgba(245,166,35,0.6);
+    margin-top:12px;
+    text-align:center;
+  }
+
+  /* Progress line */
+  .progress-container {
+    position:absolute;
+    bottom:32px;
+    left:40px;
+    right:40px;
+    height:2px;
+    background:rgba(245,166,35,0.1);
+    border-radius:1px;
+    overflow:hidden;
+  }
+
+  .progress-fill {
+    height:100%;
+    background:rgba(245,166,35,0.3);
+    border-radius:1px;
+    width:0%;
+    animation:progressGrow 4s linear forwards;
+  }
+
+  @keyframes progressGrow {
+    from { width:0%; }
+    to { width:100%; }
+  }
+
+  /* Tap hint */
+  .tap-hint {
+    position:absolute;
+    bottom:52px;
+    left:0; right:0;
+    text-align:center;
+    font-size:10px;
+    color:#262626;
+    opacity:0;
+    animation:hintFade 4s ease forwards;
+  }
+
+  @keyframes hintFade {
+    0%, 70% { opacity:0; }
+    85% { opacity:1; }
+    100% { opacity:0; }
+  }
+
+  /* Fade out demo */
+  .phone.fading .quote-area { animation:fadeOut 0.3s ease forwards; }
+  .phone.fading .progress-container { animation:fadeOut 0.3s ease forwards; }
+
+  @keyframes fadeOut {
+    from { opacity:1; }
+    to { opacity:0; }
+  }
+
+  .note { max-width:700px; background:rgba(255,255,255,0.02); border:1px solid #1a1a1a; border-radius:6px; padding:12px 16px; margin-top:8px; }
+  .note p { font-size:11px; color:#333; line-height:1.6; margin-bottom:4px; }
+  .note p:last-child { margin-bottom:0; }
+
+  .divider { border:none; border-top:1px solid #1a1a1a; margin:40px 0; width:100%; max-width:900px; }
+  .footer { color:#262626; font-size:11px; margin-top:40px; }
+</style>
+</head>
+<body>
+
+<div class="page-title">Post-Save Quote Screen</div>
+<p class="page-sub">Tap any phone to simulate dismiss. Progress line animates over 4 seconds.</p>
+
+<div class="row">
+
+  <!-- Example 1: Muhammad Ali -->
+  <div>
+    <div class="col-label">After White Belt Session</div>
+    <div class="phone" onclick="this.classList.add('fading')">
+      <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+      <div class="quote-area">
+        <div class="quote-text">Suffer now and live the rest of your life as a champion.</div>
+        <div class="quote-attr">Muhammad Ali</div>
+      </div>
+      <div class="progress-container"><div class="progress-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- Example 2: Bruce Lee -->
+  <div>
+    <div class="col-label">After Blue Belt Session</div>
+    <div class="phone" onclick="this.classList.add('fading')">
+      <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+      <div class="quote-area">
+        <div class="quote-text">Long-term consistency trumps short-term intensity.</div>
+        <div class="quote-attr">Bruce Lee</div>
+      </div>
+      <div class="progress-container"><div class="progress-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- Example 3: Ronda Rousey (female user) -->
+  <div>
+    <div class="col-label">Female User</div>
+    <div class="phone" onclick="this.classList.add('fading')">
+      <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+      <div class="quote-area">
+        <div class="quote-text">Some people like to watch. I'd rather play.</div>
+        <div class="quote-attr">Ronda Rousey</div>
+      </div>
+      <div class="progress-container"><div class="progress-fill"></div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <!-- Example 4: Danaher (longer quote) -->
+  <div>
+    <div class="col-label">Longer Quote</div>
+    <div class="phone" onclick="this.classList.add('fading')">
+      <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+      <div class="quote-area">
+        <div class="quote-text">Your skills are the most perishable thing you own. You are only as good as your last workout.</div>
+        <div class="quote-attr">John Danaher</div>
+      </div>
+      <div class="progress-container"><div class="progress-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- Example 5: Miyamoto Musashi (short) -->
+  <div>
+    <div class="col-label">Short Quote</div>
+    <div class="phone" onclick="this.classList.add('fading')">
+      <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+      <div class="quote-area">
+        <div class="quote-text">There is nothing outside of yourself that can ever enable you to get better.</div>
+        <div class="quote-attr">Miyamoto Musashi</div>
+      </div>
+      <div class="progress-container"><div class="progress-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- Example 6: Dan Gable -->
+  <div>
+    <div class="col-label">Wrestling Legend</div>
+    <div class="phone" onclick="this.classList.add('fading')">
+      <div class="sb"><span class="sb-time">9:41</span><div class="sb-dots"><span class="sb-dot"></span><span class="sb-dot"></span><span class="sb-dot"></span></div></div>
+      <div class="quote-area">
+        <div class="quote-text">Once you've wrestled, everything else in life is easy.</div>
+        <div class="quote-attr">Dan Gable</div>
+      </div>
+      <div class="progress-container"><div class="progress-fill"></div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="note">
+  <p>Full screen, no UI chrome. Quote centered vertically. Inter 17px for the quote, JetBrains Mono 12px for attribution. Gold progress line at bottom fills over 4 seconds. Tap anywhere to dismiss (fade out 200ms, then navigate to Journal). No visible skip button.</p>
+</div>
+
+<div class="footer">TOMO -- FEAT-009 Post-Save Quote Screen -- March 31, 2026</div>
+
+</body>
+</html>

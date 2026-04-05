@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOMO — Screen Mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   PAGE-LEVEL VARIABLES
+   ============================================================ */
+:root {
+  /* TOMO Exact Tokens */
+  --black:         #111111;
+  --white:         #ffffff;
+  --gold:          #F5A623;
+  --gold-dim:      rgba(245, 166, 35, 0.15);
+  --gold-ultra:    rgba(245, 166, 35, 0.04);
+  --positive:      #22c55e;
+  --pos-dim:       rgba(34, 197, 94, 0.15);
+  --negative:      #ef4444;
+  --neg-dim:       rgba(239, 68, 68, 0.15);
+  --warning:       #f59e0b;
+  --warn-dim:      rgba(245, 158, 11, 0.15);
+  --gray-300:      #d4d4d4;
+  --gray-400:      #c4c4c4;
+  --gray-500:      #a3a3a3;
+  --gray-600:      #8a8a8a;
+  --gray-700:      #4a4a4a;
+  --gray-800:      #1f1f1f;
+  --gray-900:      #161616;
+  --gi:            #3B82F6;
+  --nogi:          #F97316;
+
+  /* Page */
+  --page-bg:    #0a0a0a;
+  --nav-bg:     #141414;
+  --nav-border: #2a2a2a;
+
+  /* Phone frame */
+  --phone-w: 375px;
+  --phone-h: 812px;
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--page-bg);
+  color: var(--gray-400);
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ============================================================
+   SIDEBAR NAV
+   ============================================================ */
+nav {
+  width: 260px;
+  min-width: 260px;
+  background: var(--nav-bg);
+  border-right: 1px solid var(--nav-border);
+  padding: 24px 0 48px;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+nav .nav-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 0 20px 16px;
+  border-bottom: 1px solid var(--nav-border);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+nav .nav-logo span {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--white);
+}
+
+nav .nav-logo .kanji {
+  color: var(--gold);
+  font-size: 16px;
+}
+
+nav h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gray-600);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 20px 6px;
+}
+
+nav a {
+  display: block;
+  padding: 7px 20px;
+  color: var(--gray-500);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+  border-right: 2px solid transparent;
+  line-height: 1.4;
+}
+
+nav a:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.04);
+}
+
+nav a.active {
+  color: var(--gold);
+  background: var(--gold-dim);
+  border-right-color: var(--gold);
+}
+
+nav .nav-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gray-700);
+  padding: 0 20px;
+  margin-top: 24px;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+main {
+  margin-left: 260px;
+  flex: 1;
+  padding: 48px 48px 100px;
+}
+
+/* Section headers */
+.section-header {
+  margin-bottom: 40px;
+  padding-top: 16px;
+}
+
+.section-header + .phone-row {
+  margin-top: 0;
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--nav-border);
+  margin: 64px 0 48px;
+}
+
+.section-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.section-desc {
+  font-size: 14px;
+  color: var(--gray-500);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   PHONE ROW LAYOUT
+   ============================================================ */
+.phone-row {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-bottom: 64px;
+}
+
+/* Each phone+label unit */
+.phone-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.phone-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray-600);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ============================================================
+   IPHONE FRAME
+   ============================================================ */
+.iphone {
+  width: var(--phone-w);
+  height: var(--phone-h);
+  background: var(--black);
+  border-radius: 48px;
+  border: 2px solid #2a2a2a;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow:
+    0 0 0 1px #1a1a1a,
+    0 32px 80px rgba(0,0,0,0.8),
+    0 0 40px rgba(245, 166, 35, 0.06),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* Dynamic island notch */
+.iphone::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 36px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 999;
+  box-shadow: 0 0 0 2px #1a1a1a;
+}
+
+/* Home indicator bar */
+.iphone::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: 5px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 9999px;
+  z-index: 999;
+}
+
+/* Screen content area (below notch, above home indicator) */
+.screen {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--black);
+  overflow: hidden;
+  border-radius: 46px;
+}
+
+/* Content starts below the dynamic island */
+.screen-content {
+  position: absolute;
+  top: 60px;
+  left: 0; right: 0;
+  bottom: 34px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   SHARED SCREEN PRIMITIVES
+   ============================================================ */
+
+/* ---- Labels (monospace eyebrow) ---- */
+.label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-500);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.label-positive { color: var(--positive); }
+.label-negative { color: var(--negative); }
+.label-warning  { color: var(--warning); }
+.label-gold     { color: var(--gold); }
+
+/* ---- Chips ---- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.chip {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-700);
+  background: var(--gray-800);
+  color: var(--gray-400);
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.chip.selected {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.chip.positive {
+  background: var(--pos-dim);
+  border-color: var(--positive);
+  color: var(--positive);
+}
+
+.chip.negative {
+  background: var(--neg-dim);
+  border-color: var(--negative);
+  color: var(--negative);
+}
+
+.chip.pill {
+  border-radius: 9999px;
+}
+
+/* ---- Pill badge ---- */
+.badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+}
+
+.badge-gi    { background: rgba(59,130,246,0.18); color: var(--gi); border: 1px solid rgba(59,130,246,0.35); }
+.badge-nogi  { background: rgba(249,115,22,0.18); color: var(--nogi); border: 1px solid rgba(249,115,22,0.35); }
+.badge-gold  { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(245,166,35,0.3); }
+
+/* ---- Input fields ---- */
+.input-field {
+  background: var(--gray-800);
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-400);
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.input-field.placeholder { color: var(--gray-600); }
+.input-field.filled      { color: var(--white); }
+.input-field.nudge       { border-left: 3px solid var(--gold); background: var(--gold-ultra); }
+
+/* ---- Form group ---- */
+.fg {
+  margin-bottom: 18px;
+}
+
+/* ---- Buttons ---- */
+.btn-gold {
+  background: var(--gold);
+  color: #000;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  cursor: default;
+}
+
+.btn-gold.record {
+  height: 80px;
+  font-size: 17px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--gray-500);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: underline;
+  cursor: default;
+  display: block;
+  width: 100%;
+  padding: 8px;
+}
+
+/* ---- Progress bar ---- */
+.progress-bar {
+  height: 3px;
+  background: var(--gray-800);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 9999px;
+}
+
+/* ---- Section header inside screen ---- */
+.screen-section-hdr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray-600);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 0 6px;
+}
+
+/* ---- Card ---- */
+.card {
+  background: var(--gray-800);
+  border: 1px solid var(--gray-700);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.card.nudge {
+  border-left: 3px solid var(--gold);
+  background: var(--gold-ultra);
+}
+
+/* ---- Divider ---- */
+.s-divider {
+  border: none;
+  border-top: 1px solid var(--gray-700);
+  margin: 12px 0;
+}
+
+/* ---- SVG Icons (inline, reusable classes) ---- */
+svg.icon { display: inline-block; vertical-align: middle; flex-shrink: 0; }
+
+/* ---- Mic circle ---- */
+.mic-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 9999px;
+  border: 3px solid var(--gold);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* ---- Typing dots ---- */
+.typing-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gray-500);
+}
+
+/* ---- Chat bubble ---- */
+.chat-bubble {
+  background: #1e1e1e;
+  border: 1px solid var(--gray-700);
+  border-radius: 12px;
+  border-bottom-left-radius: 4px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* ---- Tab bar ---- */
+.tab-bar {
+  position: absolute;
+  bottom: 34px;
+  left: 0; right: 0;
+  height: 64px;
+  background: var(--black);
+  border-top: 1px solid var(--gray-700);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: default;
+  flex: 1;
+}
+
+.tab-item-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gray-600);
+}
+
+.tab-item-label.active { color: var(--gold); }
+
+.tab-center-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 9999px;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(245,166,35,0.4);
+  flex-shrink: 0;
+}
+
+/* ---- Scrollable inner content ---- */
+.scroll-inner {
+  flex: 1;
+  overflow: hidden;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Status bar area ---- */
+.status-area {
+  height: 10px;
+}
+
+/* ---- Screen title (large) ---- */
+.screen-title-lg {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+/* ---- Inline icon helpers ---- */
+.map-pin-icon { color: var(--gray-500); }
+
+/* ---- Gym pill ---- */
+.gym-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--gray-800);
+  border: 1px solid var(--gray-700);
+  border-radius: 9999px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-300);
+  margin-bottom: 16px;
+}
+
+/* ---- Back nav ---- */
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 20px 12px;
+  flex-shrink: 0;
+}
+
+.nav-cancel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-500);
+  cursor: default;
+}
+
+.nav-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+/* ---- Session card ---- */
+.session-card {
+  background: var(--gray-800);
+  border: 1px solid var(--gray-700);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.session-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.session-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.session-card-sub {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-500);
+}
+
+.session-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray-600);
+}
+
+/* ---- Callout / insight card ---- */
+.insight-card {
+  border-left: 3px solid var(--gold);
+  background: var(--gold-ultra);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-300);
+  line-height: 1.6;
+}
+
+/* ---- Weekly dots ---- */
+.weekly-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.week-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+
+.week-dot.filled  { background: var(--gold); }
+.week-dot.empty   { border: 1.5px solid var(--gray-600); background: transparent; }
+
+/* ---- Belt circles (onboarding) ---- */
+.belt-circles {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.belt-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--gray-700);
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.belt-circle.selected {
+  border: 2.5px solid var(--gold);
+  box-shadow: 0 0 8px rgba(245,166,35,0.4);
+}
+
+/* ---- Stripes ---- */
+.stripe-btns {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.stripe-btn {
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-700);
+  background: var(--gray-800);
+  color: var(--gray-400);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.stripe-btn.selected {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ---- Pill input (birthday display) ---- */
+.date-display {
+  background: var(--gray-800);
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+
+.date-display .age {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+/* ---- Gender pill ---- */
+.gender-pills {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+/* ---- Profile avatar ---- */
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--gray-800);
+  border: 3px solid #0033A0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  margin: 0 auto 12px;
+}
+
+/* ---- Settings row ---- */
+.settings-card {
+  background: var(--gray-800);
+  border: 1px solid var(--gray-700);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+  border-bottom: 1px solid rgba(74,74,74,0.4);
+}
+
+.settings-row:last-child { border-bottom: none; }
+
+.settings-row-key {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-300);
+}
+
+.settings-row-val {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-500);
+  text-align: right;
+}
+
+/* ---- Transcript toggle ---- */
+.transcript-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gray-800);
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  color: var(--gray-500);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ---- Insights paragraph ---- */
+.insight-para {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-300);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+/* ---- Focus next callout ---- */
+.focus-next {
+  background: var(--gold-ultra);
+  border: 1px solid rgba(245,166,35,0.2);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.focus-next .fn-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.focus-next .fn-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-300);
+  line-height: 1.6;
+}
+
+/* ---- Processing viz ---- */
+.audio-viz {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  margin-bottom: 20px;
+}
+
+.viz-bar {
+  width: 6px;
+  background: var(--gold);
+  border-radius: 3px;
+}
+
+/* ---- Bottom sticky ---- */
+.bottom-sticky {
+  padding: 12px 20px 0;
+  flex-shrink: 0;
+}
+
+/* ---- Typewriter effect ---- */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 18px;
+  background: var(--gold);
+  margin-left: 2px;
+  border-radius: 1px;
+  animation: blink 1s infinite;
+  vertical-align: middle;
+}
+
+/* ---- Gold glow accent ---- */
+.gold-kanji-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  border: 1.5px solid rgba(245,166,35,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--gold);
+  margin: 0 auto 20px;
+  box-shadow: 0 0 24px rgba(245,166,35,0.2);
+}
+
+/* ---- Success quote ---- */
+.quote-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--gray-400);
+  text-align: center;
+  line-height: 1.7;
+  font-style: italic;
+}
+
+.quote-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(245,166,35,0.5);
+  text-align: center;
+  letter-spacing: 1px;
+  margin-top: 12px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 860px) {
+  nav { display: none; }
+  main { margin-left: 0; padding: 24px 16px 80px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- =====================================================
+     SIDEBAR
+     ===================================================== -->
+<nav>
+  <div class="nav-logo">
+    <span>TOMO</span>
+    <span class="kanji">友</span>
+  </div>
+
+  <h2>Onboarding</h2>
+  <a href="#welcome">1 — Welcome</a>
+  <a href="#about-you">2 — About You</a>
+  <a href="#your-training">3 — Your Training</a>
+  <a href="#get-started">4 — Get Started</a>
+
+  <h2>Session Logging</h2>
+  <a href="#entry-phase">1 — Entry</a>
+  <a href="#recording-phase">2 — Recording</a>
+  <a href="#processing-phase">3 — Processing</a>
+  <a href="#review-phase">4 — Review</a>
+  <a href="#success-phase">5 — Success</a>
+
+  <h2>Main App</h2>
+  <a href="#journal-list">Journal List</a>
+  <a href="#session-detail">Session Detail</a>
+  <a href="#insights">Insights</a>
+  <a href="#profile">Profile</a>
+
+  <h2>Other</h2>
+  <a href="#auth-screen">Auth Screen</a>
+  <a href="#tab-bar">Tab Bar</a>
+
+  <p class="nav-count">15 screens &middot; 5 flows</p>
+</nav>
+
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
+<main>
+
+<!-- ===================== ONBOARDING ===================== -->
+<div class="section-header">
+  <p class="section-tag">Onboarding</p>
+  <h2 class="section-title">First-launch flow</h2>
+  <p class="section-desc">4 screens. ~60 seconds. Captures belt, gym, training target, and goals before entering the app.</p>
+</div>
+
+<!-- 1. Welcome -->
+<div id="welcome" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen">
+        <div class="screen-content" style="justify-content: space-between; padding: 0;">
+
+          <!-- Progress bar -->
+          <div style="padding: 0 0 0 0; flex-shrink: 0;">
+            <div class="progress-bar" style="margin: 8px 20px 0; border-radius: 0;">
+              <div class="progress-fill" style="width: 25%;"></div>
+            </div>
+          </div>
+
+          <!-- Center content -->
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 28px; text-align: center; gap: 0;">
+            <div style="font-family: 'Unbounded', sans-serif; font-size: 52px; font-weight: 800; color: var(--white); letter-spacing: -1px; line-height: 1; margin-bottom: 6px;">TOMO</div>
+            <div style="font-family: 'Unbounded', sans-serif; font-size: 36px; font-weight: 800; color: var(--gold); margin-bottom: 32px; line-height: 1;">友</div>
+            <div style="font-size: 17px; font-weight: 500; color: var(--gray-400); line-height: 1.5; display: flex; align-items: center; gap: 2px;">
+              Your training. Remembered.
+              <span class="cursor"></span>
+            </div>
+          </div>
+
+          <!-- Bottom button -->
+          <div class="bottom-sticky">
+            <div class="btn-gold">Get Started</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Welcome — 1 of 4</div>
+  </div>
+</div>
+
+<!-- 2. About You -->
+<div id="about-you" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen">
+        <div class="screen-content" style="padding: 0;">
+
+          <!-- Nav bar -->
+          <div class="nav-bar">
+            <div style="display: flex; align-items: center; gap: 6px; color: var(--gray-500); font-size: 13px; font-weight: 600; cursor: default;">
+              <!-- back arrow -->
+              <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </div>
+            <div></div>
+          </div>
+
+          <!-- Progress bar -->
+          <div class="progress-bar" style="margin: 0 20px 18px;">
+            <div class="progress-fill" style="width: 50%;"></div>
+          </div>
+
+          <div class="scroll-inner" style="overflow-y: auto; gap: 0;">
+            <div class="screen-title-lg">About You</div>
+            <div style="font-size: 13px; font-weight: 500; color: var(--gray-500); margin-bottom: 20px; line-height: 1.5;">Help us personalize your experience.</div>
+
+            <!-- First name -->
+            <div class="fg">
+              <div class="label">First Name</div>
+              <div class="input-field filled">Drew</div>
+            </div>
+
+            <!-- Belt -->
+            <div class="fg">
+              <div class="label">Belt</div>
+              <div class="belt-circles">
+                <div class="belt-circle" style="background: #fff; border-color: var(--gray-500);"></div>
+                <div class="belt-circle selected" style="background: #0033A0;"></div>
+                <div class="belt-circle" style="background: #4B0082;"></div>
+                <div class="belt-circle" style="background: #8B4513;"></div>
+                <div class="belt-circle" style="background: #111; border-color: #555;"></div>
+              </div>
+            </div>
+
+            <!-- Stripes -->
+            <div class="fg">
+              <div class="label">Stripes</div>
+              <div class="stripe-btns">
+                <div class="stripe-btn">0</div>
+                <div class="stripe-btn">1</div>
+                <div class="stripe-btn selected">2</div>
+                <div class="stripe-btn">3</div>
+                <div class="stripe-btn">4</div>
+              </div>
+            </div>
+
+            <!-- Birthday -->
+            <div class="fg">
+              <div class="label">Birthday</div>
+              <div class="date-display">
+                <span>March 15, 1998</span>
+                <span class="age">28 years old</span>
+              </div>
+            </div>
+
+            <!-- Gender -->
+            <div class="fg">
+              <div class="label">Gender</div>
+              <div class="gender-pills">
+                <div class="chip pill selected">Male</div>
+                <div class="chip pill">Female</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom button -->
+          <div class="bottom-sticky">
+            <div class="btn-gold">Continue</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">About You — 2 of 4</div>
+  </div>
+</div>
+
+<!-- 3. Your Training -->
+<div id="your-training" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen">
+        <div class="screen-content" style="padding: 0;">
+
+          <div class="nav-bar">
+            <div style="color: var(--gray-500); font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+              <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </div>
+            <div></div>
+          </div>
+
+          <div class="progress-bar" style="margin: 0 20px 18px;">
+            <div class="progress-fill" style="width: 75%;"></div>
+          </div>
+
+          <div class="scroll-inner" style="overflow-y: auto; gap: 0;">
+            <div class="screen-title-lg">Your Training</div>
+            <div style="font-size: 13px; font-weight: 500; color: var(--gray-500); margin-bottom: 20px; line-height: 1.5;">Tell us about your gym and goals.</div>
+
+            <!-- Gym -->
+            <div class="fg">
+              <div class="label">Your Gym</div>
+              <div class="input-field filled" style="display: flex; align-items: center; gap: 8px; border-color: var(--positive); border-left-width: 1px;">
+                <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--positive)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Alliance BJJ Paoli
+              </div>
+            </div>
+
+            <!-- Training target -->
+            <div class="fg">
+              <div class="label">Training Target</div>
+              <div class="chips">
+                <div class="chip pill">1-2x / week</div>
+                <div class="chip pill selected">3-4x / week</div>
+                <div class="chip pill">5+ / week</div>
+              </div>
+            </div>
+
+            <!-- Goals -->
+            <div class="fg">
+              <div class="label">Training Goals</div>
+              <div class="chips" style="flex-wrap: wrap;">
+                <div class="chip pill selected">Competition</div>
+                <div class="chip pill selected">Fitness</div>
+                <div class="chip pill">Self Defense</div>
+                <div class="chip pill">Skill Building</div>
+                <div class="chip pill">Stress Relief</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="bottom-sticky">
+            <div class="btn-gold">Continue</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Your Training — 3 of 4</div>
+  </div>
+</div>
+
+<!-- 4. Get Started (chat payoff) -->
+<div id="get-started" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen">
+        <div class="screen-content" style="padding: 0;">
+
+          <div class="progress-bar" style="margin: 0 20px 0;">
+            <div class="progress-fill" style="width: 100%;"></div>
+          </div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; padding: 28px 20px 0; overflow: hidden;">
+
+            <!-- Gold circle -->
+            <div class="gold-kanji-circle" style="margin-bottom: 28px;">友</div>
+
+            <!-- Chat bubbles -->
+            <div class="chat-bubble">Hey Drew. Blue belt, 2 stripes, training at Alliance BJJ Paoli. Got it.</div>
+            <div class="chat-bubble">After each session, just talk. I'll track your progress and spot the patterns.</div>
+
+            <!-- Typing indicator -->
+            <div class="card" style="display: inline-flex; width: auto; align-self: flex-start; padding: 8px 14px; margin-bottom: 0;">
+              <div class="typing-dots" style="padding: 0;">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="bottom-sticky">
+            <div class="btn-gold">Start Training</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Get Started — 4 of 4</div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ===================== SESSION LOGGING ===================== -->
+<div class="section-header">
+  <p class="section-tag">Session Logging</p>
+  <h2 class="section-title">5-step logging flow</h2>
+  <p class="section-desc">Entry point for after every training session. Voice-first, 90-second target. Exhausted-user optimized.</p>
+</div>
+
+<!-- 5. Entry Phase -->
+<div id="entry-phase" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen">
+        <div class="screen-content" style="padding: 0;">
+
+          <div class="nav-bar">
+            <span class="nav-cancel">Cancel</span>
+            <span></span>
+          </div>
+
+          <div class="scroll-inner" style="overflow-y: auto; gap: 0; padding-bottom: 12px;">
+            <div class="screen-title-lg" style="margin-bottom: 14px;">Log Your Training</div>
+
+            <!-- Gym chip -->
+            <div class="gym-pill">
+              <svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--gray-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Alliance BJJ Paoli
+            </div>
+
+            <!-- Training mode -->
+            <div class="fg">
+              <div class="label">Training Mode</div>
+              <div class="chips">
+                <div class="chip selected" style="flex: 1; justify-content: center;">Gi</div>
+                <div class="chip" style="flex: 1; justify-content: center;">No-Gi</div>
+                <div class="chip" style="flex: 1; justify-content: center;">Other</div>
+              </div>
+            </div>
+
+            <!-- Session kind -->
+            <div class="fg">
+              <div class="label">Session Kind</div>
+              <div class="chips" style="flex-wrap: wrap;">
+                <div class="chip selected">Regular Class</div>
+                <div class="chip">Open Mat</div>
+                <div class="chip">Comp Training</div>
+                <div class="chip">Other</div>
+              </div>
+            </div>
+
+            <!-- Duration -->
+            <div class="fg">
+              <div class="label">Duration</div>
+              <div class="chips">
+                <div class="chip">30</div>
+                <div class="chip">45</div>
+                <div class="chip">60</div>
+                <div class="chip">75</div>
+                <div class="chip selected">90</div>
+                <div class="chip">120</div>
+              </div>
+            </div>
+
+            <!-- Did you spar -->
+            <div class="fg">
+              <div class="label">Did You Spar?</div>
+              <div class="chips">
+                <div class="chip pill">Yes</div>
+                <div class="chip pill">No</div>
+              </div>
+            </div>
+
+            <!-- Prompt -->
+            <div style="font-size: 15px; font-weight: 500; color: var(--gray-500); font-style: italic; margin-bottom: 20px;">What did you work on today?</div>
+
+            <!-- Record button -->
+            <div class="btn-gold record" style="margin-bottom: 10px;">
+              <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+              Record Session
+            </div>
+            <div class="btn-ghost">Just type it</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Entry Phase — 1 of 5</div>
+  </div>
+</div>
+
+<!-- 6. Recording Phase -->
+<div id="recording-phase" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen">
+        <div class="screen-content" style="padding: 0; justify-content: space-between;">
+
+          <div>
+            <div class="nav-bar" style="padding-bottom: 4px;">
+              <span class="nav-cancel">Cancel</span>
+              <span></span>
+            </div>
+            <!-- Small gym label -->
+            <div style="display: flex; align-items: center; gap: 6px; padding: 4px 20px 20px; font-size: 12px; font-weight: 600; color: var(--gray-600);">
+              <svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Alliance BJJ Paoli
+            </div>
+          </div>
+
+          <!-- Center: kanji circle + timer -->
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;">
+            <div class="mic-circle" style="box-shadow: 0 0 32px rgba(245,166,35,0.25), 0 0 64px rgba(245,166,35,0.12);">
+              <span style="font-family: 'Unbounded', sans-serif; font-size: 32px; font-weight: 800; color: var(--gold);">友</span>
+            </div>
+
+            <!-- Timer -->
+            <div style="font-family: 'Unbounded', sans-serif; font-size: 48px; font-weight: 800; color: var(--white); letter-spacing: -1px; line-height: 1;">2:34</div>
+
+            <!-- Prompt -->
+            <div style="font-size: 15px; font-weight: 500; color: var(--gray-500); font-style: italic; text-align: center; padding: 0 32px;">What did you work on today?</div>
+          </div>
+
+          <!-- Stop button -->
+          <div class="bottom-sticky">
+            <div class="btn-gold" style="height: 80px; font-size: 17px; gap: 12px;">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
+              Stop Recording
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Recording Phase — 2 of 5</div>
+  </div>
+</div>
+
+<!-- 7. Processing Phase -->
+<div id="processing-phase" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen">
+        <div class="screen-content" style="align-items: center; justify-content: center; text-align: center; padding: 0 28px;">
+
+          <!-- Audio viz bars -->
+          <div class="audio-viz" style="margin-bottom: 28px;">
+            <div class="viz-bar" style="height: 20px;"></div>
+            <div class="viz-bar" style="height: 38px;"></div>
+            <div class="viz-bar" style="height: 44px;"></div>
+            <div class="viz-bar" style="height: 28px;"></div>
+            <div class="viz-bar" style="height: 16px;"></div>
+          </div>
+
+          <div style="font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 10px;">Analyzing your session...</div>
+          <div style="font-size: 15px; font-weight: 500; color: var(--gray-500);">Extracting techniques and details</div>
+
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Processing Phase — 3 of 5</div>
+  </div>
+</div>
+
+<!-- 8. Review Phase -->
+<div id="review-phase" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen">
+        <div class="screen-content" style="padding: 0;">
+
+          <!-- Header -->
+          <div class="nav-bar" style="border-bottom: 1px solid var(--gray-700); padding-bottom: 10px; margin-bottom: 10px;">
+            <span class="nav-cancel">Cancel</span>
+            <span class="nav-title">Review Session</span>
+            <span style="width: 52px;"></span>
+          </div>
+
+          <div class="scroll-inner" style="overflow-y: auto; gap: 0;">
+
+            <!-- Gym chip -->
+            <div class="gym-pill" style="margin-bottom: 10px;">
+              <svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--gray-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Alliance BJJ Paoli
+            </div>
+
+            <!-- Detail badges -->
+            <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+              <div class="chip pill" style="font-size: 12px; padding: 5px 10px;">
+                <span class="badge badge-gi" style="margin-right: 2px;">Gi</span>
+                <svg class="icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--gray-500)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+              </div>
+              <div class="chip pill" style="font-size: 12px; padding: 5px 10px;">
+                90 min
+                <svg class="icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--gray-500)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+              </div>
+            </div>
+
+            <!-- Warm-up (nudge) -->
+            <div class="fg">
+              <div class="label">Warm-Up</div>
+              <div class="chips" style="margin-bottom: 0;">
+                <div class="chip pill nudge" style="background: var(--gold-ultra); border-left: 3px solid var(--gold);">Yes</div>
+                <div class="chip pill nudge" style="background: var(--gold-ultra); border-left: 3px solid var(--gold);">No</div>
+              </div>
+            </div>
+            <div style="height: 14px;"></div>
+
+            <!-- Techniques -->
+            <div class="fg">
+              <div class="label">Techniques Trained</div>
+              <div class="chips" style="flex-wrap: wrap; margin-bottom: 8px;">
+                <div class="chip selected pill">
+                  Guard Passing
+                  <svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </div>
+                <div class="chip selected pill">
+                  Half Guard Sweeps
+                  <svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </div>
+              </div>
+              <div class="input-field placeholder" style="margin-bottom: 0;">Add technique or topic...</div>
+            </div>
+
+            <!-- Spar -->
+            <div class="fg">
+              <div class="label">Did You Spar?</div>
+              <div class="chips">
+                <div class="chip pill selected">Yes</div>
+                <div class="chip pill">No</div>
+              </div>
+            </div>
+
+            <!-- Rounds -->
+            <div class="fg">
+              <div class="label">Sparring Rounds</div>
+              <div class="chips">
+                <div class="chip">1</div>
+                <div class="chip">2</div>
+                <div class="chip selected">3</div>
+                <div class="chip">4</div>
+                <div class="chip">5</div>
+                <div class="chip">6</div>
+                <div class="chip">7</div>
+              </div>
+            </div>
+
+            <!-- Subs landed (positive) -->
+            <div class="fg">
+              <div class="label label-positive">Submissions Landed</div>
+              <div class="chips">
+                <div class="chip positive pill" style="gap: 8px;">
+                  <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--positive)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  Armbar (2)
+                  <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--positive)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Got caught (negative) -->
+            <div class="fg">
+              <div class="label label-negative">Got Caught</div>
+              <div class="chips">
+                <div class="chip negative pill" style="gap: 8px;">
+                  <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--negative)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  Triangle (1)
+                  <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--negative)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Injuries (nudge) -->
+            <div class="fg">
+              <div class="label label-warning">Injuries</div>
+              <div class="input-field nudge placeholder" style="background: var(--gold-ultra);">Note any injuries...</div>
+            </div>
+
+            <!-- Instructor -->
+            <div class="fg">
+              <div class="label">Instructor</div>
+              <div class="input-field filled">Professor Carlos</div>
+            </div>
+
+            <!-- Session type -->
+            <div class="fg">
+              <div class="label">Session Type</div>
+              <div class="chips" style="flex-wrap: wrap;">
+                <div class="chip selected">Regular Class</div>
+                <div class="chip">Open Mat</div>
+                <div class="chip">Comp Training</div>
+                <div class="chip">Other</div>
+              </div>
+            </div>
+
+            <!-- Transcript -->
+            <div class="fg">
+              <div class="label">Voice Transcript</div>
+              <div class="card">
+                <div style="font-size: 13px; font-weight: 500; color: var(--gray-500); font-style: italic; line-height: 1.6;">"Worked on guard passing today, spent a lot of time on the knee slice. Drilled half guard sweeps, hit a couple armbars while rolling..."</div>
+              </div>
+            </div>
+
+            <div style="height: 10px;"></div>
+
+          </div>
+
+          <div class="bottom-sticky">
+            <div class="btn-gold">Save Session</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Review Phase — 4 of 5</div>
+  </div>
+</div>
+
+<!-- 9. Success Phase -->
+<div id="success-phase" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen" style="background: #000;">
+        <div class="screen-content" style="align-items: center; justify-content: center; padding: 0 32px; text-align: center;">
+          <div class="quote-text">"A black belt is a white belt who never quit."</div>
+          <div class="quote-attr">- Carlson Gracie</div>
+
+          <!-- Progress bar near bottom -->
+          <div style="position: absolute; bottom: 56px; left: 24px; right: 24px;">
+            <div class="progress-bar" style="margin-bottom: 0; height: 3px;">
+              <div class="progress-fill" style="width: 60%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Success Phase — 5 of 5</div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ===================== MAIN APP ===================== -->
+<div class="section-header">
+  <p class="section-tag">Main App</p>
+  <h2 class="section-title">Core app screens</h2>
+  <p class="section-desc">The four main tabs: Journal, Insights, Profile, plus Auth.</p>
+</div>
+
+<!-- 10. Journal List -->
+<div id="journal-list" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen">
+        <div class="screen-content" style="padding: 0;">
+
+          <div style="padding: 4px 20px 0; flex-shrink: 0;">
+            <div class="screen-title-lg">Journal</div>
+
+            <!-- Weekly pulse -->
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--gold);">3 of 4</span>
+              <div class="weekly-dots">
+                <div class="week-dot filled"></div>
+                <div class="week-dot filled"></div>
+                <div class="week-dot filled"></div>
+                <div class="week-dot empty"></div>
+              </div>
+            </div>
+
+            <!-- Filter row -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+              <div style="display: flex; gap: 8px;">
+                <div class="chip pill selected" style="font-size: 12px; padding: 5px 12px;">All</div>
+                <div class="chip pill" style="font-size: 12px; padding: 5px 12px;">Gi</div>
+                <div class="chip pill" style="font-size: 12px; padding: 5px 12px;">No-Gi</div>
+              </div>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: var(--gray-600);">12 sessions</span>
+            </div>
+          </div>
+
+          <div class="scroll-inner" style="overflow-y: auto; gap: 0; padding-top: 0;">
+
+            <!-- TODAY -->
+            <div class="screen-section-hdr">Today</div>
+            <div class="session-card">
+              <div class="session-card-top">
+                <span class="badge badge-gi">Gi</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: var(--gray-600);">90 min</span>
+              </div>
+              <div class="session-card-title">Regular Class</div>
+              <div class="session-card-sub">Guard passing, half guard sweeps</div>
+              <div class="session-card-meta">
+                <svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                3 rounds
+                <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gray-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: auto;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+
+            <!-- YESTERDAY -->
+            <div class="screen-section-hdr">Yesterday</div>
+            <div class="session-card">
+              <div class="session-card-top">
+                <span class="badge badge-nogi">No-Gi</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: var(--gray-600);">60 min</span>
+              </div>
+              <div class="session-card-title">Open Mat</div>
+              <div class="session-card-sub">Leg locks, heel hook defense</div>
+              <div class="session-card-meta">
+                <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gray-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: auto;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Tab bar -->
+          <div class="tab-bar">
+            <div class="tab-item">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+              <span class="tab-item-label active">Journal</span>
+            </div>
+            <div class="tab-center-btn">
+              <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </div>
+            <div class="tab-item">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+              <span class="tab-item-label">Insights</span>
+            </div>
+            <div class="tab-item">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span class="tab-item-label">Profile</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Journal List</div>
+  </div>
+</div>
+
+<!-- 11. Session Detail -->
+<div id="session-detail" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen">
+        <div class="screen-content" style="padding: 0;">
+
+          <!-- Back nav -->
+          <div class="nav-bar">
+            <div style="display: flex; align-items: center; gap: 6px; color: var(--gray-500); font-size: 14px; font-weight: 600; cursor: default;">
+              <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              Back
+            </div>
+            <div></div>
+          </div>
+
+          <div class="scroll-inner" style="overflow-y: auto; gap: 0; padding-bottom: 16px;">
+
+            <!-- Date (tappable) -->
+            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 12px; cursor: default;">
+              <span style="font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 700; color: var(--white);">Monday, March 31, 2026</span>
+              <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gray-500)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+            </div>
+
+            <!-- Training info row -->
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px;">
+              <span class="badge badge-gi">Gi</span>
+              <span style="font-size: 13px; font-weight: 600; color: var(--gray-400);">Regular Class</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--gray-500);">90 min</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--gray-500);">3 rounds</span>
+            </div>
+
+            <!-- Gym -->
+            <div style="display: flex; align-items: center; gap: 6px; color: var(--gray-500); font-size: 13px; font-weight: 500; margin-bottom: 16px;">
+              <svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Alliance BJJ Paoli
+            </div>
+
+            <div class="s-divider"></div>
+
+            <!-- Notes card -->
+            <div style="border-left: 3px solid var(--gray-600); padding: 10px 12px; margin-bottom: 14px; background: var(--gray-800); border-radius: 0 8px 8px 0;">
+              <div class="label" style="margin-bottom: 6px;">My Notes</div>
+              <div style="font-size: 14px; font-weight: 500; color: var(--gray-300); line-height: 1.6;">Felt really good today. Guard passing is clicking — the knee slice felt natural. Need more reps on the D'arce.</div>
+            </div>
+
+            <!-- Lesson topic -->
+            <div class="fg">
+              <div class="label">Lesson Topic</div>
+              <div style="font-size: 14px; font-weight: 600; color: var(--gray-300); margin-bottom: 12px;">Half guard concepts</div>
+            </div>
+
+            <!-- Techniques drilled -->
+            <div class="fg">
+              <div class="label">Techniques Drilled</div>
+              <div class="chips" style="flex-wrap: wrap; margin-bottom: 12px;">
+                <div class="chip pill">Guard Passing</div>
+                <div class="chip pill">Half Guard Sweeps</div>
+              </div>
+            </div>
+
+            <!-- Sparring -->
+            <div class="fg">
+              <div class="label">Sparring</div>
+              <div style="font-size: 14px; font-weight: 600; color: var(--gray-300); margin-bottom: 6px;">3 rounds</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--positive); margin-bottom: 4px;">Subs landed: Armbar (2)</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--negative);">Got caught: Triangle (1)</div>
+            </div>
+
+            <div class="s-divider"></div>
+
+            <!-- Transcript toggle -->
+            <div class="transcript-toggle">
+              <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+              View voice transcript
+              <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: auto;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+
+            <div style="height: 12px;"></div>
+
+            <!-- Delete -->
+            <div style="text-align: center; color: var(--negative); font-size: 14px; font-weight: 600; cursor: default; padding: 8px 0;">Delete this session</div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Session Detail</div>
+  </div>
+</div>
+
+<!-- 12. Insights -->
+<div id="insights" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen">
+        <div class="screen-content" style="padding: 0;">
+
+          <div style="padding: 4px 20px 0; flex-shrink: 0;">
+            <div class="screen-title-lg">Insights</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--gray-600); margin-bottom: 18px; letter-spacing: 1px;">Mar 26 - Apr 1</div>
+          </div>
+
+          <div class="scroll-inner" style="overflow-y: auto; gap: 0; padding-bottom: 80px;">
+
+            <!-- Main insight para -->
+            <div class="insight-para">
+              You trained 4 times this week, hitting your target. Guard passing came up in 3 of 4 sessions, and your submission rate went up to 1.5 per round average.
+            </div>
+
+            <!-- Risk watch callout -->
+            <div class="insight-card">
+              Your sparring volume dropped to 2 rounds average this week. Worth checking in with your coach about adding more live training.
+            </div>
+
+            <div class="s-divider" style="margin: 14px 0;"></div>
+
+            <!-- Focus Next -->
+            <div class="focus-next">
+              <div class="fn-label">Focus Next</div>
+              <div class="fn-text">Your guard passing is clicking. Level up by drilling the D'arce choke from the tight waist position you keep ending up in.</div>
+            </div>
+
+            <!-- Stats mini-grid -->
+            <div class="label" style="margin-top: 14px;">This Week</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px;">
+              <div class="card" style="text-align: center; padding: 12px 8px;">
+                <div style="font-family: 'Unbounded', sans-serif; font-size: 28px; font-weight: 800; color: var(--gold); line-height: 1;">4</div>
+                <div class="label" style="margin-bottom: 0; margin-top: 4px; font-size: 10px;">Sessions</div>
+              </div>
+              <div class="card" style="text-align: center; padding: 12px 8px;">
+                <div style="font-family: 'Unbounded', sans-serif; font-size: 28px; font-weight: 800; color: var(--positive); line-height: 1;">6</div>
+                <div class="label" style="margin-bottom: 0; margin-top: 4px; font-size: 10px; color: var(--positive);">Subs Landed</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Tab bar -->
+          <div class="tab-bar">
+            <div class="tab-item">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+              <span class="tab-item-label">Journal</span>
+            </div>
+            <div class="tab-center-btn">
+              <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </div>
+            <div class="tab-item">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+              <span class="tab-item-label active">Insights</span>
+            </div>
+            <div class="tab-item">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span class="tab-item-label">Profile</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Insights</div>
+  </div>
+</div>
+
+<!-- 13. Profile -->
+<div id="profile" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen">
+        <div class="screen-content" style="padding: 0;">
+
+          <div style="padding: 4px 20px 0; flex-shrink: 0;">
+            <div class="screen-title-lg" style="margin-bottom: 18px;">Profile</div>
+          </div>
+
+          <div class="scroll-inner" style="overflow-y: auto; gap: 0; padding-bottom: 80px;">
+
+            <!-- Avatar -->
+            <div style="text-align: center; margin-bottom: 20px;">
+              <div class="avatar">DG</div>
+              <div style="font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 6px;">Drew</div>
+              <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0,51,160,0.15); border: 1px solid rgba(0,51,160,0.35); border-radius: 9999px; padding: 5px 14px;">
+                <div style="width: 14px; height: 5px; background: #0033A0; border-radius: 2px;"></div>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: #6699ff; letter-spacing: 0.5px;">Blue Belt &middot; 2 stripes</span>
+              </div>
+            </div>
+
+            <!-- Settings card -->
+            <div class="label">Training</div>
+            <div class="settings-card" style="margin-bottom: 16px;">
+              <div class="settings-row">
+                <span class="settings-row-key">Belt</span>
+                <span class="settings-row-val">Blue &middot; 2 stripes</span>
+              </div>
+              <div class="settings-row">
+                <span class="settings-row-key">Training Target</span>
+                <span class="settings-row-val">4x / week</span>
+              </div>
+              <div class="settings-row">
+                <span class="settings-row-key">Logging Preference</span>
+                <span class="settings-row-val">Voice</span>
+              </div>
+              <div class="settings-row">
+                <span class="settings-row-key">Sessions Logged</span>
+                <span class="settings-row-val" style="color: var(--gold); font-family: 'Unbounded', sans-serif; font-size: 14px; font-weight: 700;">47</span>
+              </div>
+            </div>
+
+            <!-- Personal info card -->
+            <div class="label">Personal Info</div>
+            <div class="settings-card" style="margin-bottom: 16px;">
+              <div class="settings-row">
+                <span class="settings-row-key">Birthday</span>
+                <span class="settings-row-val">28 years old</span>
+              </div>
+              <div class="settings-row">
+                <span class="settings-row-key">Gender</span>
+                <span class="settings-row-val">Male</span>
+              </div>
+              <div class="settings-row">
+                <span class="settings-row-key">Body Weight</span>
+                <span class="settings-row-val">170 lb</span>
+              </div>
+            </div>
+
+            <!-- Gym card -->
+            <div class="label">Gym</div>
+            <div class="settings-card" style="margin-bottom: 24px;">
+              <div class="settings-row">
+                <span class="settings-row-key">Alliance BJJ Paoli</span>
+                <span class="settings-row-val">47 sessions</span>
+              </div>
+            </div>
+
+            <!-- Sign out -->
+            <div style="text-align: center; color: var(--negative); font-size: 14px; font-weight: 600; cursor: default; padding: 8px 0;">Sign Out</div>
+
+          </div>
+
+          <!-- Tab bar -->
+          <div class="tab-bar">
+            <div class="tab-item">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+              <span class="tab-item-label">Journal</span>
+            </div>
+            <div class="tab-center-btn">
+              <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </div>
+            <div class="tab-item">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+              <span class="tab-item-label">Insights</span>
+            </div>
+            <div class="tab-item">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span class="tab-item-label active">Profile</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Profile</div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ===================== OTHER ===================== -->
+<div class="section-header">
+  <p class="section-tag">Other</p>
+  <h2 class="section-title">Auth and navigation</h2>
+  <p class="section-desc">Sign-in screen and tab bar component.</p>
+</div>
+
+<!-- 14. Auth Screen -->
+<div id="auth-screen" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone">
+      <div class="screen">
+        <div class="screen-content" style="padding: 0; justify-content: space-between;">
+
+          <!-- Center -->
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 28px 24px;">
+            <div style="font-family: 'Unbounded', sans-serif; font-size: 40px; font-weight: 800; color: var(--white); letter-spacing: 6px; line-height: 1; margin-bottom: 4px;">TOMO</div>
+            <div style="font-family: 'Unbounded', sans-serif; font-size: 28px; font-weight: 800; color: var(--gold); margin-bottom: 6px;">友</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: var(--gray-600); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 36px;">BJJ Training Journal</div>
+
+            <!-- Email -->
+            <div style="width: 100%;">
+              <div class="label" style="margin-bottom: 6px;">Email</div>
+              <div class="input-field placeholder" style="margin-bottom: 14px;">you@email.com</div>
+
+              <div class="label" style="margin-bottom: 6px;">Password</div>
+              <div class="input-field filled" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <span style="letter-spacing: 3px; color: var(--white);">&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;</span>
+                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </div>
+
+              <div style="text-align: right; margin-bottom: 24px;">
+                <span style="font-size: 13px; font-weight: 500; color: var(--gray-500); text-decoration: underline; cursor: default;">Forgot password?</span>
+              </div>
+
+              <div class="btn-gold" style="margin-bottom: 16px;">Sign In</div>
+
+              <div style="text-align: center; font-size: 13px; font-weight: 500; color: var(--gray-500);">
+                Don't have an account? <span style="color: var(--gold); text-decoration: underline; cursor: default;">Sign Up</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Auth Screen</div>
+  </div>
+</div>
+
+<!-- 15. Tab Bar (standalone) -->
+<div id="tab-bar" class="phone-row">
+  <div class="phone-unit">
+    <div class="iphone" style="height: 120px; width: 375px; border-radius: 20px;">
+      <div class="screen" style="border-radius: 18px; background: var(--black);">
+        <div style="position: absolute; bottom: 0; left: 0; right: 0;">
+          <div class="tab-bar" style="position: static; height: 74px; padding: 0 16px;">
+            <div class="tab-item">
+              <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+              <span class="tab-item-label active" style="font-size: 10px;">Journal</span>
+            </div>
+            <div style="width: 64px; display: flex; justify-content: center; flex-shrink: 0;">
+              <div class="tab-center-btn" style="width: 60px; height: 60px; margin-top: -18px;">
+                <svg class="icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              </div>
+            </div>
+            <div class="tab-item">
+              <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+              <span class="tab-item-label" style="font-size: 10px;">Insights</span>
+            </div>
+            <div class="tab-item">
+              <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span class="tab-item-label" style="font-size: 10px;">Profile</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Tab Bar — Journal Active</div>
+  </div>
+
+  <!-- Tab bar: Log active (center) -->
+  <div class="phone-unit">
+    <div class="iphone" style="height: 120px; width: 375px; border-radius: 20px;">
+      <div class="screen" style="border-radius: 18px; background: var(--black);">
+        <div style="position: absolute; bottom: 0; left: 0; right: 0;">
+          <div class="tab-bar" style="position: static; height: 74px; padding: 0 16px;">
+            <div class="tab-item">
+              <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+              <span class="tab-item-label" style="font-size: 10px;">Journal</span>
+            </div>
+            <div style="width: 64px; display: flex; justify-content: center; flex-shrink: 0;">
+              <div class="tab-center-btn" style="width: 60px; height: 60px; margin-top: -18px; box-shadow: 0 6px 24px rgba(245,166,35,0.6);">
+                <svg class="icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              </div>
+            </div>
+            <div class="tab-item">
+              <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+              <span class="tab-item-label" style="font-size: 10px;">Insights</span>
+            </div>
+            <div class="tab-item">
+              <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span class="tab-item-label" style="font-size: 10px;">Profile</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Tab Bar — Log Pressed</div>
+  </div>
+</div>
+
+</main>
+
+<!-- =====================================================
+     SIDEBAR ACTIVE STATE SCRIPT
+     ===================================================== -->
+<script>
+  // Highlight active nav link based on scroll position
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  function updateActive() {
+    let currentId = '';
+    sections.forEach(s => {
+      const rect = s.getBoundingClientRect();
+      if (rect.top <= 120) currentId = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + currentId);
+    });
+  }
+
+  document.querySelector('main').addEventListener('scroll', updateActive);
+  window.addEventListener('scroll', updateActive);
+  updateActive();
+</script>
+
+</body>
+</html>
