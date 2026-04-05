@@ -13,7 +13,7 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const DREW_EMAIL = 'drew@assemblylabs.co';
-const AGREEMENT_BASE_URL = 'https://assemblylabs.co/alliance/tomo/agreement.html';
+const AGREEMENT_BASE_URL = 'https://traintomo.com/agreement.html';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',

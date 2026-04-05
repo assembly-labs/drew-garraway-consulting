@@ -1,6 +1,6 @@
 # TOMO Features Backlog
 
-**Last Updated:** 2026-03-30
+**Last Updated:** 2026-04-04
 **Purpose:** Prioritized list of planned features. Major features get their own subfolder with strategy docs, specs, and task breakdowns.
 
 ---
@@ -40,7 +40,8 @@ This is the **single source of truth** for "what are we building next?"
 | ID | Feature | Priority | Status | Subfolder | Summary |
 |----|---------|----------|--------|-----------|---------|
 | FEAT-001 | **Experience Intake** | **P1** | Exploring | [experience-intake/](experience-intake/) | Conversational intake for experienced practitioners. Solves cold-start, lost context, and trust gap for anyone with 6mo+ training. |
-| FEAT-002 | **Insights Tab** | **P0** | Ready | [insights-tab/](insights-tab/) | TOMO's core differentiator. Approach B (weekly first). SPEC + TASKS complete. 10 tasks, ~3.5-4hrs. Depends on FEAT-008 for full personalization. (Also DA-001) |
+| FEAT-002 | **Insights Tab** | **P0** | Shipped | [insights-tab/](insights-tab/) | Weekly debriefs with psychology-informed prompts. Belt-adapted tone, defense trending, experimentation validation. Shipped Session 38. |
+| FEAT-009 | **Insights Intelligence** | **P2** | Exploring | [insights-tab/](insights-tab/) | Mood tracking, pre-session intentions, plateau detection, competition routing, feedback fading. Pickup: `INSIGHTS_INTELLIGENCE.md` |
 | FEAT-008 | **User Profile Expansion** | **P0** | Shipped | -- | Birthday (mandatory, 18+), gender (mandatory), body weight (optional), expanded training goals (self-defense, community). Both editable from Profile with smart warnings (age bracket / gender switch). Shipped to TestFlight Mar 30. |
 | FEAT-003 | **Review Phase Redesign** | **P1** | Open | -- | Review phase shows 10+ fields simultaneously. Violates 90-second principle. Needs summary card + collapsible details. (Also DA-003 in ISSUES.md) |
 | FEAT-004 | **Processing Skip Upgrade** | **P2** | Open | -- | "Skip to manual entry" link is too subtle during 150s wait. Delay 10-15s then fade in with gold text. (Also DA-016 in ISSUES.md) |
@@ -56,6 +57,7 @@ Move features here when they ship to TestFlight with a date and link to the CHAN
 
 | ID | Feature | Shipped | CHANGELOG Entry |
 |----|---------|---------|-----------------|
+| FEAT-002 | Insights Tab | 2026-04-04 | CHANGELOG.md: Session 38 |
 | FEAT-008 | User Profile Expansion | 2026-03-30 | CHANGELOG.md: Session 32 |
 
 ---

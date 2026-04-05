@@ -8,46 +8,44 @@
 
 ## Quick Navigation
 
+These are **foundational docs** that apply across all versions of TOMO. For MVP-specific docs (tracking, features, deployment, design system), see `mvp-1.0/docs/`.
+
 | I need to... | Go to... |
 |--------------|----------|
-| See what we're building next | `features/` (prioritized backlog + feature subfolders) |
-| Check bugs and polish items | `mvp-1.0/tracking/ISSUES.md` |
-| See what shipped recently | `mvp-1.0/tracking/CHANGELOG.md` |
 | Understand the product philosophy | `FIRST_PRINCIPLES.md` |
 | Learn how to use these docs | `DOCS_GUIDE.md` |
 | Understand user personas | `personas/` |
-| Check data/AI/visualization strategy | `data-and-ai/` |
-| Review design system | `design-system/` |
 | See research findings | `research/` |
 | Understand BJJ curriculum | `domain-knowledge/` |
 | Check brand voice | `brand/` |
 | Review project status | `project/` |
-| iOS deployment plans | `deployment/` |
+| Check product strategy | `product/` |
+| Legal / privacy | `legal/` |
 | Investor/partner materials | `RFP/` |
+
+**For MVP 1.0 work, go to `../mvp-1.0/docs/`:**
+| Check bugs and polish items | `../mvp-1.0/docs/tracking/ISSUES.md` |
+| See what shipped recently | `../mvp-1.0/docs/tracking/CHANGELOG.md` |
+| See what we're building next | `../mvp-1.0/docs/features/README.md` |
+| iOS deployment | `../mvp-1.0/docs/DEPLOYMENT_GUIDE.md` |
 
 ---
 
 ## Folder Structure
 
 ```
-docs/
+docs/                            # Foundational (version-independent)
 ├── FIRST_PRINCIPLES.md          # Non-negotiable product beliefs
-├── DOCS_GUIDE.md                    # Guide for using this knowledge base
-├── README.md                    # This file - master index
-│
-├── features/                    # ACTIVE: Feature backlog + major feature subfolders
-│   └── experience-intake/       # FEAT-001: Experience Intake (P1, exploring)
-├── mvp-1.0/tracking/            # ACTIVE: ISSUES.md (bugs) + CHANGELOG.md (shipped)
+├── DOCS_GUIDE.md                # Guide for using this knowledge base
+├── README.md                    # This file
 ├── brand/                       # Voice, tone, philosophy
-├── data-and-ai/                 # Data capture, AI strategy & visualization
-├── deployment/                  # iOS TestFlight plans
-├── design-system/               # Visual design tokens & components
-├── development/                 # Development practices & standards
-├── domain-knowledge/            # BJJ-specific reference material
-├── personas/                    # User personas and psychology
-├── product/                     # Features & UI strategy
-├── project/                     # Project status, tasks & roadmaps
 ├── research/                    # Market, user & psychology research
+├── personas/                    # User personas and psychology
+├── domain-knowledge/            # BJJ-specific reference material
+├── product/                     # Features & UI strategy, belt personalization
+├── legal/                       # Privacy policy, terms
+├── development/                 # Development practices & standards
+├── project/                     # Project status, tasks & roadmaps
 └── RFP/                         # Investor/partner materials
 ```
 
@@ -64,11 +62,6 @@ Contains guidelines for how TOMO speaks to users, including the "Dedicated Train
 **Purpose:** Data capture strategy, AI processing, and data visualization.
 
 Everything related to how we collect data from exhausted users, process it with AI, and visualize it through charts and infographics. Includes the 90-second rule, voice conversation design, and infographic strategy.
-
-### `deployment/`
-**Purpose:** iOS TestFlight deployment plans and checklists.
-
-Technical documentation for deploying to iOS, including TestFlight setup, EAS build configuration, and deployment checklists.
 
 ### `design-system/`
 **Purpose:** Visual design tokens, CSS components, and interactive previews.
@@ -164,8 +157,8 @@ Request for Proposal documents, development contracts, and business-facing docum
 |----------|----------|--------|
 | **Features Backlog** | `features/README.md` | **Active** |
 | **Experience Intake** | `features/experience-intake/` | **Active** (Exploring) |
-| Bugs & Polish | `mvp-1.0/tracking/ISSUES.md` | **Active** |
-| Session Changelog | `mvp-1.0/tracking/CHANGELOG.md` | **Active** |
+| Bugs & Polish | `tracking/ISSUES.md` | **Active** |
+| Session Changelog | `tracking/CHANGELOG.md` | **Active** |
 
 ### Product
 
@@ -194,8 +187,8 @@ Request for Proposal documents, development contracts, and business-facing docum
 
 | Document | Location | Status |
 |----------|----------|--------|
-| iOS TestFlight Plan | `deployment/IOS_TESTFLIGHT_DEPLOYMENT_PLAN.md` | Active |
-| iOS Deployment Checklist | `deployment/IOS_DEPLOYMENT_CHECKLIST.md` | Active |
+| iOS TestFlight Plan | `mvp-1.0/IOS_TESTFLIGHT_DEPLOYMENT_PLAN.md` | Active |
+| iOS Deployment Checklist | `mvp-1.0/IOS_DEPLOYMENT_CHECKLIST.md` | Active |
 
 ### Business / RFP
 

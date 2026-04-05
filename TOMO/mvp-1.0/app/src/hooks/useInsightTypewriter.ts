@@ -1,7 +1,7 @@
 /**
  * useInsightTypewriter — Sequential paragraph typing animation for Insights screen.
  *
- * Ports the typewriter logic from GetStartedScreen's ChatBubble (25ms/char).
+ * Ports the typewriter logic from GetStartedScreen's ChatBubble (12ms/char).
  * Handles sequential paragraph reveal, 200ms pause between paragraphs,
  * and a skip() escape hatch to reveal everything instantly.
  */
@@ -84,7 +84,7 @@ export function useInsightTypewriter(
           charIndexRef.current = 0;
           setActiveIndex(activeIndexRef.current);
           if (activeIndexRef.current < totalItems) {
-            timerRef.current = setTimeout(typeNextChar, 25);
+            timerRef.current = setTimeout(typeNextChar, 12);
           } else {
             setIsComplete(true);
           }
@@ -98,7 +98,7 @@ export function useInsightTypewriter(
         next[idx] = fullText.slice(0, charIndexRef.current);
         return next;
       });
-      timerRef.current = setTimeout(typeNextChar, 25);
+      timerRef.current = setTimeout(typeNextChar, 12);
     };
 
     // Initial delay before first paragraph begins

@@ -6,14 +6,14 @@ Automated beta tester onboarding flow for Alliance Paoli BJJ gym. Goal: 5-30+ te
 
 ## Live URLs (after PR merge)
 
-- **One-pager + signup:** `https://assemblylabs.co/alliance/tomo/`
-- **Beta agreement:** `https://assemblylabs.co/alliance/tomo/agreement.html`
+- **One-pager + signup:** `https://traintomo.com/`
+- **Beta agreement:** `https://traintomo.com/agreement.html`
 - **PR:** https://github.com/assembly-labs/assembly-labs/pull/1
 
 ## Tester Flow
 
 ```
-1. Gym sends text to members with link to assemblylabs.co/alliance/tomo/
+1. Gym sends text to members with link to traintomo.com/
 2. Tester reads one-pager, fills out signup form (name, email, belt, iPhone model)
 3. [AUTO] Edge function inserts into beta_signups table
 4. [AUTO] Edge function emails tester with link to agreement page
@@ -32,8 +32,8 @@ Only one manual step: sending the TestFlight invite after NDA is signed.
 
 | Deliverable | File | Hosted URL |
 |-------------|------|------------|
-| One-pager + signup form | `assembly-labs/alliance/tomo/index.html` | `assemblylabs.co/alliance/tomo/` |
-| Beta tester agreement | `assembly-labs/alliance/tomo/agreement.html` | `assemblylabs.co/alliance/tomo/agreement.html` |
+| One-pager + signup form | `assembly-labs/alliance/tomo/index.html` | `traintomo.com/` |
+| Beta tester agreement | `assembly-labs/alliance/tomo/agreement.html` | `traintomo.com/agreement.html` |
 | Danaher GIF overlay | `assembly-labs/alliance/tomo/john-danaher-golf-clap.gif` | (loaded by index.html) |
 | Gym text message | `TOMO/docs/legal/ALLIANCE_PAOLI_GYM_MESSAGE.html` | Local only (copy/paste) |
 | DB migration | `tomo/supabase/migrations/20260328100000_beta_signup_tables.sql` | Run via `supabase db push` |
@@ -115,4 +115,4 @@ Edge functions use native Deno.connectTls for SMTP (v1 SmtpClient library was in
 
 > Hey Alliance Paoli family, Drew Garraway, blue belt from class, is offering his BJJ training journal app TOMO to our team for testing. Completely free to use. It helps you track your training, remember what you drilled, and stay consistent on your journey. Check out the details and sign up here: [LINK]
 
-Replace [LINK] with `https://assemblylabs.co/alliance/tomo/`
+Replace [LINK] with `https://traintomo.com/`

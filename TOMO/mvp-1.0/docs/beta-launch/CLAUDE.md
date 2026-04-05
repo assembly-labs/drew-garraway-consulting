@@ -21,8 +21,8 @@ Full flow tested and verified. All infrastructure deployed. Only remaining step:
 
 ## Live URLs
 
-- **One-pager + signup:** https://assemblylabs.co/alliance/tomo/
-- **Agreement:** https://assemblylabs.co/alliance/tomo/agreement.html
+- **One-pager + signup:** https://traintomo.com/
+- **Agreement:** https://traintomo.com/agreement.html
 
 ## Key Files
 

@@ -8,13 +8,13 @@ Copy everything below the line into a new Claude Code conversation.
 
 Read these files before responding:
 - `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/CLAUDE.md`
-- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/docs/mvp-1.0/tracking/ISSUES.md`
-- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/docs/mvp-1.0/tracking/CHANGELOG.md`
-- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/tomo/src/screens/onboarding/AboutYouScreen.tsx`
-- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/tomo/src/screens/onboarding/YourTrainingScreen.tsx`
-- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/tomo/src/screens/onboarding/GetStartedScreen.tsx`
-- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/tomo/src/screens/ProfileScreen.tsx`
-- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/tomo/src/screens/SessionLoggerScreen.tsx`
+- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/mvp-1.0/docs/tracking/ISSUES.md`
+- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/mvp-1.0/docs/tracking/CHANGELOG.md`
+- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/mvp-1.0/app/src/screens/onboarding/AboutYouScreen.tsx`
+- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/mvp-1.0/app/src/screens/onboarding/YourTrainingScreen.tsx`
+- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/mvp-1.0/app/src/screens/onboarding/GetStartedScreen.tsx`
+- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/mvp-1.0/app/src/screens/ProfileScreen.tsx`
+- `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/mvp-1.0/app/src/screens/SessionLoggerScreen.tsx`
 - `/Users/drewgarraway/Documents/GitHub/drew-garraway-consulting/TOMO/docs/product/BELT_PERSONALIZATION_SYSTEM.md`
 
 ## Your Role
