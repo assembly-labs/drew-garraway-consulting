@@ -377,6 +377,16 @@ export function GetStartedScreen({ navigation, route }: Props) {
 
   const handlePayoffComplete = async () => {
     await refreshProfile();
+    // Defense-in-depth: if refreshProfile didn't land an onboarding-complete
+    // profile (e.g. silent save failure earlier), bring the user back to the
+    // form with a visible error instead of leaving them on a dead-end screen.
+    const current = await profileService.get();
+    if (!current?.onboarding_complete) {
+      showToast('Something went wrong saving your profile. Please try again.', 'error');
+      setShowPayoff(false);
+      setSaving(false);
+      mainOpacity.setValue(1);
+    }
   };
 
   // ---- Payoff mode ----

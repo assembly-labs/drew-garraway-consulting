@@ -22,6 +22,49 @@ When resolved: move the entry to CHANGELOG.md under the appropriate date, mark a
 
 ---
 
+## Active
+
+### ONB-001 Stuck on onboarding payoff (silent profile save failure)
+**Priority:** P0
+**Area:** GetStartedScreen, profileService.create, profiles table migration
+**Added:** 2026-04-08
+**Status:** Code fix shipped on branch `fix/onboarding-silent-profile-save-failure`. DB migration + TestFlight ship pending.
+
+External tester Rachel was stranded on the onboarding payoff screen. Tapping "Start Training" did nothing. Root cause: her TestFlight build predated FEAT-008, so it didn't send `birth_date`. The Mar 30 FEAT-008 migration made `birth_date NOT NULL` on prod. Her upsert was rejected, `profileService.create` swallowed the error and returned `null`, `handleStart` ignored the null and transitioned to the payoff screen anyway. `refreshProfile` on Start Training found no profile row, so `authState` stayed `needs_onboarding` and `RootNavigator` never swapped stacks.
+
+**Fix shipped on branch (not yet on main):**
+1. `profileService.create` throws on error + reports to Sentry (no more silent nulls).
+2. `handlePayoffComplete` re-verifies the saved profile after refresh and bounces the user back to the form with an error toast if the profile didn't land.
+3. New migration `20260408000000_profile_birth_date_nullable.sql` drops `NOT NULL` on `birth_date`. Keeps the 18+ enforcement trigger.
+
+**Action items before this is fully closed:**
+- [ ] Apply new migration to prod Supabase (SQL editor: run the contents of `20260408000000_profile_birth_date_nullable.sql`)
+- [ ] Manually create Rachel's profile row in Supabase so she can unblock herself immediately (birth_date placeholder: `1990-01-01`)
+- [ ] Run stuck-user discovery query below and heal any other orphans
+- [ ] Merge branch + cut TestFlight hotfix build
+- [ ] Adopt process rule: never tighten schema constraints until the corresponding app build is live for all testers
+
+**Stuck-user discovery query (run in Supabase SQL editor):**
+```sql
+SELECT u.id, u.email, u.created_at
+FROM auth.users u
+LEFT JOIN profiles p ON p.id = u.id
+WHERE p.id IS NULL
+  AND u.created_at > '2026-03-30'
+ORDER BY u.created_at DESC;
+```
+
+**Bulk-heal query (run after the schema migration; sets onboarding_complete=false so they redo onboarding on a fresh build):**
+```sql
+INSERT INTO profiles (id, name, belt, stripes, onboarding_complete, logging_preference)
+SELECT u.id, 'Friend', 'white', 0, false, 'voice'
+FROM auth.users u
+LEFT JOIN profiles p ON p.id = u.id
+WHERE p.id IS NULL AND u.created_at > '2026-03-30';
+```
+
+---
+
 ## Completed: Session 33 (2026-03-30) -- Insights Tab Wiring + Message-Style Render
 
 ### CR-001 Insights Tab Missing from Navigation
