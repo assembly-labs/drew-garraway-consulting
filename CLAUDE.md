@@ -202,10 +202,70 @@ When the user asks to "test", "review", "stage", "launch", etc., follow these pr
 
 ### "Launch" / "Deploy" / "Ship" / "Go Live"
 
+**Before merging, run `predeploy-check` from the repo root.** The script blocks oversized files and shows recent deploy status. Installed at `~/.local/bin/predeploy-check`.
+
 1. Ensure all changes are committed
-2. Verify CI checks pass
-3. Merge PR to `main` — triggers auto-deploy
-4. Share production URL with user
+2. Verify CI checks pass (PR-level build/lint)
+3. **Run `predeploy-check`** — blocks if any file exceeds Cloudflare Pages 25 MB limit or if sensitive files are staged
+4. Merge PR to `main` — triggers auto-deploy
+5. **Watch the deploy workflow until it exits green:**
+   ```bash
+   gh run list --workflow=deploy-site.yml --limit 1
+   gh run watch <run-id> --exit-status
+   ```
+6. **Verify the live URL with content check, not just status code:**
+   ```bash
+   predeploy-check --verify https://drewgarraway.com/path/to/page.html
+   ```
+   Cloudflare Pages returns HTTP 200 with the root `index.html` when a file is missing (SPA fallback). Status code alone is a lie — always check the title tag or content-type.
+7. Only after the verify passes, share the production URL with user.
+
+---
+
+## Deployment Discipline (mandatory)
+
+**This section exists because deploys have failed silently multiple times.** Read `~/.claude/projects/-Users-drewgarraway/memory/feedback_deployment_discipline.md` for the full rules.
+
+### Hard limits
+
+- **Cloudflare Pages: 25 MB per file.** Anything over breaks the deploy with "Pages only supports files up to 25 MiB in size". Applies to all drewgarraway.com content: FHM, Scout landing, Gather, Read Out Loud, Kaijutsu landing.
+- **GitHub: 100 MB per file** (warns at 50 MB).
+
+### Asset compression standards
+
+| Asset type | Command | Target size |
+|---|---|---|
+| Spoken-word audio (FHM podcasts, etc.) | `ffmpeg -i in.m4a -c:a aac -b:a 48k -ac 1 -movflags +faststart out.m4a` | ~10 MB per 30 min |
+| AS7MR audio (higher quality) | `ffmpeg -i in.m4a -c:a aac -b:a 96k -movflags +faststart out.m4a` | Check `feedback_as7mr_deploy_process.md` |
+| Images | `pngquant --quality=65-85` or `cwebp -q 80` | <200 KB hero, <30 KB thumbnail |
+| Video | H.264 MP4 with `+faststart` | <20 MB for web embed |
+
+**Verify audio optimization:** `afinfo file.m4a | grep optimized` must say "optimized" (not "not optimized"). Otherwise duration/seeking breaks around the 4-minute mark.
+
+### The SPA fallback trap
+
+When a file is missing from a Cloudflare Pages deploy, Pages does NOT return 404. It falls back to serving the root `index.html` with HTTP 200 status. This means:
+
+- `curl -I` shows `HTTP/2 200` → looks fine
+- Browser loads the URL → looks fine
+- Actual content is the WRONG page → site is silently broken
+
+**Never trust a 200 status alone.** Always verify by:
+
+```bash
+# Check the title tag matches the expected page
+curl -sL "https://drewgarraway.com/path/to/page.html?v=$RANDOM" | grep -i "<title>"
+
+# For assets, check content-type header
+curl -sI "https://drewgarraway.com/path/to/file.m4a?v=$RANDOM" | grep -i content-type
+# Expected: audio/mp4. If it says text/html, you're hitting the fallback.
+```
+
+Use `?v=$RANDOM` to bust Cloudflare's edge cache.
+
+### PR checks ≠ deploy checks
+
+PR checks (build/lint defined in `pr-checks.yml`) run on the PR branch. The deploy workflow (`deploy-site.yml`) runs on `main` push AFTER merge. **A green PR is not a green deploy.** Deploys can and do fail silently after green PR checks. Always check `gh run list --workflow=deploy-site.yml --limit 1` after merging.
 
 ### "Commit" / "Save"
 
