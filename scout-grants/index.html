@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scout Grant Pipeline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1A3E67;
+      --navy-dark: #0f2744;
+      --navy-light: #2a5a8f;
+      --sage: #83A07F;
+      --sage-dark: #5D7A5A;
+      --sage-light: #a8c4a5;
+      --sage-bg: rgba(131, 160, 127, 0.1);
+      --sage-border: rgba(131, 160, 127, 0.3);
+      --coral: #F2895E;
+      --coral-dark: #D96A3F;
+      --coral-bg: rgba(242, 137, 94, 0.08);
+      --coral-border: rgba(242, 137, 94, 0.3);
+      --cream: #f5f1e8;
+      --cream-dark: #ebe5d8;
+      --white: #ffffff;
+      --charcoal: #333333;
+      --text-muted: #6b7280;
+      --border: #e0dcd3;
+      --radius: 12px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: 1.125rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    /* ---- HEADER ---- */
+    header {
+      text-align: center;
+      padding: 2.5rem 0 2rem;
+      border-bottom: 2px solid var(--navy);
+      margin-bottom: 2.5rem;
+    }
+
+    .logo {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2.25rem;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .verified {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--sage-dark);
+      background: var(--sage-bg);
+      border: 1px solid var(--sage-border);
+      padding: 0.2rem 0.75rem;
+      border-radius: 100px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    /* ---- TLDR BOX ---- */
+    .tldr {
+      background: var(--navy);
+      color: var(--cream);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .tldr-label {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.1rem;
+      color: var(--coral);
+      margin-bottom: 0.5rem;
+    }
+
+    .tldr ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .tldr li {
+      padding: 0.3rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .tldr li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.7rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--coral);
+    }
+
+    .tldr strong {
+      color: #fff;
+    }
+
+    /* ---- SECTION HEADERS ---- */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.5rem;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+    }
+
+    .section-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    .tag-urgent {
+      background: var(--coral-bg);
+      border: 1.5px solid var(--coral-border);
+      color: var(--coral-dark);
+    }
+
+    .tag-priority {
+      background: var(--sage-bg);
+      border: 1.5px solid var(--sage-border);
+      color: var(--sage-dark);
+    }
+
+    .tag-plan {
+      background: rgba(26, 62, 103, 0.06);
+      border: 1.5px solid rgba(26, 62, 103, 0.2);
+      color: var(--navy);
+    }
+
+    .tag-draft {
+      background: rgba(131, 160, 127, 0.12);
+      border: 1.5px solid var(--sage-border);
+      color: var(--sage-dark);
+    }
+
+    /* ---- DRAFT CARDS ---- */
+    .draft-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .draft-card:hover { box-shadow: 0 4px 20px rgba(26, 62, 103, 0.08); }
+    .draft-card .draft-body { flex: 1; min-width: 14rem; }
+    .draft-card .draft-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--navy);
+      margin-bottom: 0.15rem;
+    }
+    .draft-card .draft-title a {
+      color: var(--navy);
+      text-decoration: none;
+      border-bottom: 1.5px solid transparent;
+    }
+    .draft-card .draft-title a:hover { border-bottom-color: var(--coral); }
+    .draft-card .draft-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+    .draft-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      align-self: flex-start;
+    }
+    .badge-draft {
+      background: var(--sage-bg);
+      border: 1.5px solid var(--sage-border);
+      color: var(--sage-dark);
+    }
+    .badge-review {
+      background: var(--coral-bg);
+      border: 1.5px solid var(--coral-border);
+      color: var(--coral-dark);
+    }
+
+    .section-note {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ---- GRANT CARDS ---- */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(26, 62, 103, 0.08);
+    }
+
+    .card.is-urgent {
+      border-color: var(--coral);
+      border-width: 2px;
+      background: var(--coral-bg);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .card-name {
+      font-weight: 700;
+      font-size: 1.15rem;
+      line-height: 1.3;
+      color: var(--navy);
+    }
+
+    .card-name a {
+      color: var(--navy);
+      text-decoration: none;
+      border-bottom: 1.5px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    .card-name a:hover {
+      border-bottom-color: var(--coral);
+    }
+
+    .card-amount {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--sage-dark);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .deadline-hot {
+      color: var(--coral-dark);
+      font-weight: 700;
+    }
+
+    .card-desc {
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--charcoal);
+    }
+
+    .card-desc strong {
+      color: var(--navy);
+    }
+
+    .card-who {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy-light);
+    }
+
+    /* ---- CONTEXT BOX ---- */
+    .context {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-top: 3rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--charcoal);
+    }
+
+    .context h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .context p + p {
+      margin-top: 0.75rem;
+    }
+
+    .context .bottom-line {
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid var(--navy);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    footer .brand {
+      font-family: 'DM Serif Display', Georgia, serif;
+      color: var(--navy);
+      font-size: 1rem;
+    }
+
+    /* ---- MOBILE ---- */
+    @media (max-width: 640px) {
+      body { font-size: 1.05rem; }
+      .page { padding: 1.25rem 1rem 3rem; }
+      .logo { font-size: 1.85rem; }
+      .card { padding: 1.25rem; }
+      .card-top { flex-direction: column; gap: 0.15rem; }
+      .card-amount { font-size: 1.05rem; }
+      .card-name { font-size: 1.1rem; }
+      .section-header h2 { font-size: 1.3rem; }
+      .tldr { padding: 1.25rem; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+      <div class="logo">Scout Grant Pipeline</div>
+      <div class="tagline">Funding opportunities for Search with Scout</div>
+      <div class="verified">Verified April 5, 2026</div>
+    </header>
+
+    <!-- TLDR -->
+    <div class="tldr">
+      <div class="tldr-label">Here's the short version</div>
+      <ul>
+        <li><strong>17 grants verified.</strong> Organized below by deadline urgency.</li>
+        <li><strong>2 due this month.</strong> Knight Cities (Apr 30) and NBCU Local Impact (Apr 24).</li>
+        <li><strong>Big one:</strong> IMLS NLG-L, up to $1M, due ~November 2026. Draft is already written.</li>
+        <li><strong>Two tracks:</strong> Tredyffrin applies as the library (ready now) or Scout applies as a for-profit (needs Delaware entity first).</li>
+        <li><strong>Application templates already exist</strong> for the top 5 grants. You're building on existing work, not starting from scratch.</li>
+      </ul>
+    </div>
+
+    <!-- ================================ -->
+    <!-- DRAFTS READY FOR REVIEW -->
+    <!-- ================================ -->
+    <div class="section-header">
+      <h2>Drafts Ready for Review</h2>
+      <span class="section-tag tag-draft">New</span>
+    </div>
+    <p class="section-note">Four Scout-branded HTML drafts, generated April 9, 2026. Each file has a meta card, research citations, an open-questions block, and a full narrative. Open in browser, print-friendly, mobile-friendly.</p>
+
+    <div class="draft-card">
+      <div class="draft-body">
+        <div class="draft-title"><a href="applications/01-imls-nlg-l.html">IMLS National Leadership Grants (NLG-L)</a></div>
+        <div class="draft-note">Community-Centered Implementation track, $100,000 request, anticipated deadline November 13, 2026. Scout&rsquo;s #1 priority grant. Full narrative with statement of need, project design, budget, capacity, sustainability, and digital products plan.</div>
+      </div>
+      <span class="draft-badge badge-draft">Draft v0.1</span>
+    </div>
+
+    <div class="draft-card">
+      <div class="draft-body">
+        <div class="draft-title"><a href="applications/02-nbcu-local-impact.html">NBCUniversal Local Impact Grants 2026</a></div>
+        <div class="draft-note">Friends of Tredyffrin Township Libraries as applicant, $40,000 request, Community Engagement category. Deadline April 24, 2026. Philadelphia market (NBC10). Heaviest flag: confirm Friends 501(c)(3) entity, financial thresholds, and prior Comcast funding before submission.</div>
+      </div>
+      <span class="draft-badge badge-review">Urgent review</span>
+    </div>
+
+    <div class="draft-card">
+      <div class="draft-body">
+        <div class="draft-title"><a href="applications/03-knight-cities-challenge.html">Knight Cities Challenge 2026</a></div>
+        <div class="draft-note">Scout applies directly (for-profits accepted). Philadelphia pilot with Tredyffrin, Free Library of Philadelphia as Year 2 scaling target. $200,000 maximum request. Idea-phase answers drafted at ~80% of likely character limits. Deadline April 30, 2026.</div>
+      </div>
+      <span class="draft-badge badge-review">Urgent review</span>
+    </div>
+
+    <div class="draft-card">
+      <div class="draft-body">
+        <div class="draft-title"><a href="applications/04-william-penn-children-families.html">William Penn Foundation Children &amp; Families LOI</a></div>
+        <div class="draft-note">Stage 1 pre-RFP draft. Framed as family literacy and out-of-school learning for caregivers of children ages 0 to 8. $75,000 to $150,000 range. RFP opens June 17, 2026; deadline July 30, 2026. Full rewrite required against published RFP.</div>
+      </div>
+      <span class="draft-badge badge-draft">Pre-RFP draft</span>
+    </div>
+
+    <!-- ================================ -->
+    <!-- URGENT -->
+    <!-- ================================ -->
+    <div class="section-header">
+      <h2>Due This Month</h2>
+      <span class="section-tag tag-urgent">Urgent</span>
+    </div>
+    <p class="section-note">These close in April. Worth a shot even if the application isn't perfect.</p>
+
+    <div class="card is-urgent">
+      <div class="card-top">
+        <div class="card-name"><a href="https://knightfoundation.org/knight-cities-challenge/" target="_blank" rel="noopener">Knight Cities Challenge</a></div>
+        <div class="card-amount">Up to $200K</div>
+      </div>
+      <div class="card-meta">
+        <span>Knight Foundation</span>
+        <span class="deadline-hot">Due April 30, 2026</span>
+      </div>
+      <div class="card-desc">
+        <strong>Best immediate opportunity.</strong> Just relaunched April 1. Philadelphia is one of 26 eligible cities. For-profits can apply (no entity paperwork needed). They want projects that improve local information access -- that's literally what Scout does. Up to $200K, one-year projects.
+      </div>
+      <div class="card-who">Scout applies directly</div>
+    </div>
+
+    <div class="card is-urgent">
+      <div class="card-top">
+        <div class="card-name"><a href="https://www.localimpactgrants.com/" target="_blank" rel="noopener">NBCUniversal Local Impact Grants</a></div>
+        <div class="card-amount">$2.5M pool</div>
+      </div>
+      <div class="card-meta">
+        <span>Comcast / NBCUniversal</span>
+        <span class="deadline-hot">Due April 24, 2026</span>
+      </div>
+      <div class="card-desc">
+        <strong>Unrestricted money.</strong> Philly is an eligible market. Categories include Youth Education and Community Engagement. The catch: nonprofits only, so Tredyffrin would apply. Library must have $100K-$1M in total expenses and no prior big Comcast/NBCU funding.
+      </div>
+      <div class="card-who">Tredyffrin applies (501(c)(3) only)</div>
+    </div>
+
+    <!-- ================================ -->
+    <!-- TOP PRIORITY -->
+    <!-- ================================ -->
+    <div class="section-header">
+      <h2>Top Priority</h2>
+      <span class="section-tag tag-priority">Write these first</span>
+    </div>
+    <p class="section-note">Biggest dollars, strongest fit. Start here after the April deadlines.</p>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://www.imls.gov/grants/available/national-leadership-grants-libraries" target="_blank" rel="noopener">IMLS National Leadership Grants (NLG-L)</a></div>
+        <div class="card-amount">$25K -- $1M</div>
+      </div>
+      <div class="card-meta">
+        <span>Institute of Museum and Library Services</span>
+        <span>Due ~November 2026</span>
+      </div>
+      <div class="card-desc">
+        <strong>The #1 grant for Scout.</strong> IMLS has signaled language technology and conversational discovery as a priority area in recent guidance to the field. The "Community-Centered" track gives $25K-$100K with no cost match required. A full draft application already exists. IMLS survived elimination attempts this year and is funded, but the agency is still a political target, so apply while it's operational.
+      </div>
+      <div class="card-who">Tredyffrin applies, Scout is tech partner</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://www.imls.gov/grants/available/national-leadership-grants-libraries" target="_blank" rel="noopener">IMLS Sparks! Ignition</a></div>
+        <div class="card-amount">$10K -- $25K</div>
+      </div>
+      <div class="card-meta">
+        <span>IMLS (sub-category of NLG-L)</span>
+        <span>Due ~November 2026</span>
+      </div>
+      <div class="card-desc">
+        <strong>Smaller, faster version of NLG-L.</strong> Specifically for "promising and groundbreaking new tools." You apply through the same NLG-L application and pick the Sparks category. Good for a Scout pilot without the weight of a full NLG-L proposal.
+      </div>
+      <div class="card-who">Tredyffrin applies, Scout is tech partner</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://seedfund.nsf.gov/" target="_blank" rel="noopener">NSF SBIR Phase I</a></div>
+        <div class="card-amount">$275K</div>
+      </div>
+      <div class="card-meta">
+        <span>National Science Foundation</span>
+        <span>Rolling (portal reopening any day now)</span>
+      </div>
+      <div class="card-desc">
+        <strong>Non-dilutive startup funding.</strong> Designed for pre-revenue companies. Phase II goes up to $1M. The SBIR program was paused but Congress just reauthorized it through 2031. NSF should reopen submissions within weeks. There will be a rush, so have a Project Pitch ready. Draft template exists. <strong>Requires Delaware entity + SAM.gov.</strong>
+      </div>
+      <div class="card-who">Scout applies (entity formation required)</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://pa-gov.libguides.com/LSTA" target="_blank" rel="noopener">PA LSTA Statewide Grants</a></div>
+        <div class="card-amount">$5K -- $150K</div>
+      </div>
+      <div class="card-meta">
+        <span>PA Office of Commonwealth Libraries</span>
+        <span>TBD -- no 2026 cycle announced yet</span>
+      </div>
+      <div class="card-desc">
+        <strong>Fastest path to a funded pilot once it opens.</strong> Short application, quick turnaround. Federal LSTA money was restored, so the funding is there -- PA just hasn't opened applications yet. Subscribe to The Compendium (compendium.ocl-pa.org) and contact the Bureau of Library Development directly. Draft template exists.
+      </div>
+      <div class="card-who">Tredyffrin applies, Scout is tech partner</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://www.imls.gov/grants/available/laura-bush-21st-century-librarian-program" target="_blank" rel="noopener">IMLS Laura Bush 21st Century Librarian</a></div>
+        <div class="card-amount">$25K -- $1M</div>
+      </div>
+      <div class="card-meta">
+        <span>IMLS</span>
+        <span>Due ~November 2026</span>
+      </div>
+      <div class="card-desc">
+        <strong>Same deadline as NLG-L, different angle.</strong> This one is about training and workforce. Frame it as: training librarians to use conversational discovery tools. You can apply to both NLG-L and Laura Bush in the same cycle.
+      </div>
+      <div class="card-who">Tredyffrin applies, Scout is tech partner</div>
+    </div>
+
+    <!-- ================================ -->
+    <!-- STRONG FIT -->
+    <!-- ================================ -->
+    <div class="section-header">
+      <h2>Strong Fit</h2>
+      <span class="section-tag tag-priority">Apply when ready</span>
+    </div>
+    <p class="section-note">No deadline pressure. Good opportunities on a rolling or upcoming cycle.</p>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://echoinggreen.org/fellowship/apply/" target="_blank" rel="noopener">Echoing Green Fellowship</a></div>
+        <div class="card-amount">$100K / 18 months</div>
+      </div>
+      <div class="card-meta">
+        <span>Echoing Green</span>
+        <span>Apps open ~Sep/Oct 2026 (3-week window)</span>
+      </div>
+      <div class="card-desc">
+        <strong>Social enterprise fellowship for 2-founder teams.</strong> For-profits are eligible. You only repay if your company is valued over $5M or makes $2M+ in profit. Otherwise it's free money. The "two librarians who built the fix from inside" narrative is exactly what they fund. <strong>The window is only 3 weeks -- sign up for alerts now.</strong>
+      </div>
+      <div class="card-who">Scout applies (for-profit eligible)</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://www.sep.benfranklin.org/" target="_blank" rel="noopener">Ben Franklin Technology Partners (SE PA)</a></div>
+        <div class="card-amount">$50K -- $500K</div>
+      </div>
+      <div class="card-meta">
+        <span>Ben Franklin Technology Partners</span>
+        <span>Rolling -- apply anytime</span>
+      </div>
+      <div class="card-desc">
+        <strong>PA's biggest tech development org.</strong> Equity investment (not a grant) -- they need dollar-for-dollar matching funds. Chester County is in their territory. EdTech is in scope. They approved $6.5M across 28 companies in 2024 alone. Good option if matching funds are feasible.
+      </div>
+      <div class="card-who">Scout applies (for-profit, needs match)</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://chescocf.org/receive/apply-for-grants/" target="_blank" rel="noopener">Chester County Community Foundation</a></div>
+        <div class="card-amount">$1K -- $25K</div>
+      </div>
+      <div class="card-meta">
+        <span>CCCF</span>
+        <span>Rolling -- decisions monthly</span>
+      </div>
+      <div class="card-desc">
+        <strong>Local, low-friction, and friendly to libraries.</strong> Nonprofits only, so Tredyffrin applies. Monthly grant decisions. Email grants@chescocf.org. Also running special "America250" mini-grants in 2026.
+      </div>
+      <div class="card-who">Tredyffrin applies</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://www.fcc.gov/general/e-rate-schools-libraries-usf-program" target="_blank" rel="noopener">FCC E-Rate</a></div>
+        <div class="card-amount">20-40% savings</div>
+      </div>
+      <div class="card-meta">
+        <span>FCC / USAC</span>
+        <span>Form 470 opens ~July 2026</span>
+      </div>
+      <div class="card-desc">
+        <strong>Not a Scout grant, but huge library savings.</strong> 20-40% off internet and all network equipment every year. The FCC just expanded eligible services to include software. If Tredyffrin isn't already filing, start now for FY2027.
+      </div>
+      <div class="card-who">Tredyffrin files</div>
+    </div>
+
+    <!-- ================================ -->
+    <!-- PLAN FOR LATER -->
+    <!-- ================================ -->
+    <div class="section-header">
+      <h2>Plan for Later</h2>
+      <span class="section-tag tag-plan">2027 cycles</span>
+    </div>
+    <p class="section-note">Missed the 2026 window on these. Get positioned for next round.</p>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://lyrasis.org/catalyst-fund/" target="_blank" rel="noopener">Lyrasis Catalyst Fund</a></div>
+        <div class="card-amount">$5K -- $50K</div>
+      </div>
+      <div class="card-meta">
+        <span>Lyrasis</span>
+        <span>Next cycle: early 2027</span>
+      </div>
+      <div class="card-desc">
+        <strong>Library tech innovation fund.</strong> Past winners include natural-language and conversational tools. Requires Lyrasis membership, so check whether Tredyffrin or CCLS is a member. Contact CatalystFund@lyrasis.org to talk 2027 concepts early.
+      </div>
+      <div class="card-who">Tredyffrin applies (membership required)</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://williampennfoundation.org/funding/funding-opportunities" target="_blank" rel="noopener">William Penn Foundation</a></div>
+        <div class="card-amount">$25K -- $500K</div>
+      </div>
+      <div class="card-meta">
+        <span>William Penn Foundation</span>
+        <span>Children & Families RFP: Jun 17 -- Jul 30, 2026</span>
+      </div>
+      <div class="card-desc">
+        <strong>Big Philly foundation, RFP-based.</strong> No library-tech RFP right now, but the Children & Families RFP (opens June) could work if Scout is framed as educational. They awarded $47.6M in February 2026 alone.
+      </div>
+      <div class="card-who">Varies by RFP</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://www.gse.upenn.edu/news/applications-open-17th-annual-milken-penn-gse-education-business-plan-competition" target="_blank" rel="noopener">Milken-Penn GSE Competition</a></div>
+        <div class="card-amount">$25K -- $50K</div>
+      </div>
+      <div class="card-meta">
+        <span>UPenn Graduate School of Education</span>
+        <span>Next cycle: ~January 2027</span>
+      </div>
+      <div class="card-desc">
+        <strong>Top edtech pitch competition.</strong> UPenn is local. Live pitch event. $2M+ awarded across all years. We missed the 2026 window (Feb 11). Get on the list for the 18th annual.
+      </div>
+      <div class="card-who">Scout applies</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://www.neh.gov/grants/odh/digital-humanities-advancement-grants" target="_blank" rel="noopener">NEH Digital Humanities Advancement</a></div>
+        <div class="card-amount">$75K -- $350K</div>
+      </div>
+      <div class="card-meta">
+        <span>National Endowment for the Humanities</span>
+        <span>Next cycle: ~mid-2026 or Jan 2027</span>
+      </div>
+      <div class="card-desc">
+        <strong>Stable federal program.</strong> Library discovery fits if framed around humanities access and information equity. Two deadlines per year.
+      </div>
+      <div class="card-who">Tredyffrin or academic partner</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://sloan.org/grants/apply" target="_blank" rel="noopener">Sloan Foundation</a></div>
+        <div class="card-amount">$50K -- $250K</div>
+      </div>
+      <div class="card-meta">
+        <span>Alfred P. Sloan Foundation</span>
+        <span>Rolling -- send a Letter of Inquiry anytime</span>
+      </div>
+      <div class="card-desc">
+        <strong>Interested in public knowledge infrastructure.</strong> Send a Letter of Inquiry first, then they invite a full proposal. No deadline, but response takes months.
+      </div>
+      <div class="card-who">Scout or academic partner</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://www.asugsvsummit.com/gsv-cup" target="_blank" rel="noopener">ASU+GSV Summit Cup</a></div>
+        <div class="card-amount">Up to $250K</div>
+      </div>
+      <div class="card-meta">
+        <span>ASU+GSV Summit</span>
+        <span>Express interest for 2027 now</span>
+      </div>
+      <div class="card-desc">
+        <strong>Premier edtech startup competition.</strong> 3,000+ nominations. 2026 Demo Day was April 14. Register interest for the 2027 cohort.
+      </div>
+      <div class="card-who">Scout applies</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-name"><a href="https://www.dgliteracy.org/grant-programs/" target="_blank" rel="noopener">Dollar General Literacy Foundation</a></div>
+        <div class="card-amount">Up to $10K</div>
+      </div>
+      <div class="card-meta">
+        <span>Dollar General</span>
+        <span>Next cycle: January 2027</span>
+      </div>
+      <div class="card-desc">
+        <strong>Small but simple.</strong> Libraries within 15 miles of a Dollar General can apply. Adult/Family grants up to $10K, Youth Literacy up to $5K. Both 2026 windows have closed.
+      </div>
+      <div class="card-who">Tredyffrin applies</div>
+    </div>
+
+    <!-- ================================ -->
+    <!-- CONTEXT -->
+    <!-- ================================ -->
+    <div class="context">
+      <h3>Federal Funding Context</h3>
+      <p>The current administration tried to eliminate IMLS entirely. A federal court blocked it and Congress funded the agency through FY2026 with a slight increase. But the FY2027 budget proposes elimination again. Bottom line: IMLS is funded and awarding grants right now, but it's not guaranteed long-term.</p>
+      <p>NSF SBIR was paused for months after authorization lapsed in September 2025. Congress reauthorized it through 2031 in March 2026. The portal should reopen within weeks.</p>
+      <p>The Dept of Education's IES was gutted (staff dropped from 200 to 31). Their SBIR program is unreliable -- use NSF SBIR instead.</p>
+      <p class="bottom-line">Apply to federal library grants aggressively while they exist. Foundation and corporate grants are more stable.</p>
+    </div>
+
+    <footer>
+      <div class="brand">Search with Scout</div>
+      <p>Built by librarians, for librarians. For internal use only.</p>
+    </footer>
+
+  </div>
+</body>
+</html>

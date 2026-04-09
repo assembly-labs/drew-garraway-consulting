@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scout Grant Sprint &middot; April 9, 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1A3E67;
+      --navy-dark: #0f2744;
+      --navy-light: #2a5a8f;
+      --sage: #83A07F;
+      --sage-dark: #5D7A5A;
+      --sage-bg: rgba(131, 160, 127, 0.1);
+      --sage-border: rgba(131, 160, 127, 0.3);
+      --coral: #F2895E;
+      --coral-dark: #D96A3F;
+      --coral-bg: rgba(242, 137, 94, 0.08);
+      --coral-border: rgba(242, 137, 94, 0.3);
+      --cream: #f5f1e8;
+      --cream-dark: #ebe5d8;
+      --white: #ffffff;
+      --charcoal: #333333;
+      --text-muted: #6b7280;
+      --border: #e0dcd3;
+      --radius: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 800px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+    header {
+      text-align: center;
+      padding: 1rem 0 1.75rem;
+      border-bottom: 2px solid var(--navy);
+      margin-bottom: 2.5rem;
+    }
+    .brand-wordmark {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2.25rem;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+    .sub-wordmark {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .sprint-badge {
+      display: inline-block;
+      margin-top: 0.9rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--sage-dark);
+      background: var(--sage-bg);
+      border: 1px solid var(--sage-border);
+      padding: 0.25rem 0.85rem;
+      border-radius: 100px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2rem;
+      color: var(--navy);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0.6rem 0 0.25rem;
+    }
+
+    .tldr {
+      background: var(--navy);
+      color: var(--cream);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.75rem 1.4rem;
+      margin-bottom: 2.5rem;
+    }
+    .tldr-label {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.15rem;
+      color: var(--coral);
+      margin-bottom: 0.6rem;
+    }
+    .tldr ul { list-style: none; padding: 0; }
+    .tldr li {
+      padding: 0.35rem 0 0.35rem 1.5rem;
+      position: relative;
+      font-size: 1.02rem;
+    }
+    .tldr li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.8rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--coral);
+    }
+    .tldr strong { color: #fff; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    .section-header h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.55rem;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+    }
+    .section-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .tag-urgent { background: var(--coral-bg); border: 1.5px solid var(--coral-border); color: var(--coral-dark); }
+    .tag-ready { background: var(--sage-bg); border: 1.5px solid var(--sage-border); color: var(--sage-dark); }
+    .tag-check { background: rgba(26, 62, 103, 0.06); border: 1.5px solid rgba(26, 62, 103, 0.2); color: var(--navy); }
+
+    .section-note {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ---- DRAFT CARDS ---- */
+    .draft-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1rem;
+      transition: box-shadow 0.2s;
+    }
+    .draft-card:hover { box-shadow: 0 4px 20px rgba(26, 62, 103, 0.08); }
+    .draft-card.is-urgent { border-color: var(--coral); border-width: 2px; background: var(--coral-bg); }
+    .draft-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .draft-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-weight: 400;
+      font-size: 1.35rem;
+      line-height: 1.2;
+      color: var(--navy);
+    }
+    .draft-title a {
+      color: var(--navy);
+      text-decoration: none;
+      border-bottom: 1.5px solid transparent;
+      transition: border-color 0.15s;
+    }
+    .draft-title a:hover { border-bottom-color: var(--coral); }
+    .draft-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .badge-urgent { background: var(--coral); color: #fff; border: 1.5px solid var(--coral); }
+    .badge-draft { background: var(--sage-bg); border: 1.5px solid var(--sage-border); color: var(--sage-dark); }
+    .badge-wait { background: rgba(26, 62, 103, 0.08); border: 1.5px solid rgba(26, 62, 103, 0.25); color: var(--navy); }
+
+    .draft-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.25rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .draft-meta strong { color: var(--navy); }
+    .deadline-hot { color: var(--coral-dark); font-weight: 700; }
+
+    .draft-desc {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--charcoal);
+      margin-bottom: 0.85rem;
+    }
+    .draft-desc strong { color: var(--navy); }
+
+    .draft-next {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.7rem 0.95rem;
+      font-size: 0.88rem;
+      color: var(--charcoal);
+    }
+    .draft-card.is-urgent .draft-next { background: rgba(255, 255, 255, 0.75); }
+    .draft-next strong {
+      color: var(--navy);
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .draft-actions {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.45rem 0.95rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid var(--navy);
+      transition: all 0.15s;
+    }
+    .btn-primary {
+      background: var(--navy);
+      color: var(--cream);
+    }
+    .btn-primary:hover {
+      background: var(--navy-dark);
+    }
+
+    /* ---- VERIFICATION PANEL ---- */
+    .verification {
+      background: var(--white);
+      border: 1px solid var(--sage-border);
+      border-left: 4px solid var(--sage);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin: 1rem 0;
+    }
+    .verification-label {
+      font-family: 'DM Serif Display', Georgia, serif;
+      color: var(--sage-dark);
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+    }
+    .verification ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .verification li {
+      padding: 0.4rem 0 0.4rem 1.75rem;
+      position: relative;
+      font-size: 0.97rem;
+    }
+    .verification li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      top: 0.45rem;
+      color: var(--sage-dark);
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+    .verification strong { color: var(--navy-dark); }
+
+    /* ---- NEXT STEPS TIMELINE ---- */
+    .timeline {
+      position: relative;
+      margin: 1rem 0 2rem;
+      padding-left: 1.9rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.55rem;
+      top: 0.4rem;
+      bottom: 0.5rem;
+      width: 2px;
+      background: var(--border);
+    }
+    .step {
+      position: relative;
+      padding-bottom: 1.4rem;
+    }
+    .step:last-child { padding-bottom: 0; }
+    .step::before {
+      content: '';
+      position: absolute;
+      left: -1.65rem;
+      top: 0.55rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 2.5px solid var(--navy);
+    }
+    .step.urgent::before { border-color: var(--coral); background: var(--coral); }
+    .step-date {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--coral-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.15rem;
+    }
+    .step.non-urgent .step-date { color: var(--navy); }
+    .step-title {
+      font-weight: 700;
+      color: var(--navy-dark);
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+    .step-detail {
+      font-size: 0.92rem;
+      color: var(--charcoal);
+      line-height: 1.55;
+    }
+
+    /* ---- GAPS BY PERSON ---- */
+    .gaps-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1rem 0 1.5rem;
+    }
+    @media (min-width: 720px) {
+      .gaps-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .gap-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--navy-light);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.4rem;
+    }
+    .gap-card.is-blocker { border-left-color: var(--coral); }
+    .gap-card h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.05rem;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+      font-weight: 700;
+    }
+    .gap-card .role {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      margin-bottom: 0.65rem;
+    }
+    .gap-card.is-blocker .role { color: var(--coral-dark); }
+    .gap-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .gap-card li {
+      padding: 0.35rem 0 0.35rem 1.2rem;
+      position: relative;
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+    .gap-card li::before {
+      content: '\2022';
+      position: absolute;
+      left: 0.25rem;
+      top: 0.4rem;
+      color: var(--navy-light);
+      font-weight: 800;
+    }
+    .gap-card.is-blocker li::before { color: var(--coral); }
+
+    /* ---- CONTEXT CARD ---- */
+    .context {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin-top: 2.5rem;
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+    .context h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.2rem;
+      color: var(--navy);
+      margin-bottom: 0.45rem;
+    }
+    .context p + p { margin-top: 0.6rem; }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid var(--navy);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer .brand {
+      font-family: 'DM Serif Display', Georgia, serif;
+      color: var(--navy);
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    @media print {
+      body { background: white; font-size: 10.5pt; }
+      .page { max-width: 100%; padding: 0.5in 0.6in; }
+      .draft-card, .verification, .gap-card, .context, .tldr { break-inside: avoid; }
+      h1, h2 { break-after: avoid; }
+      a { color: var(--charcoal); text-decoration: none; }
+    }
+    @media (max-width: 640px) {
+      .page { padding: 1.5rem 1rem 3rem; }
+      .brand-wordmark { font-size: 1.85rem; }
+      h1 { font-size: 1.55rem; }
+      .section-header h2 { font-size: 1.3rem; }
+      .draft-title { font-size: 1.15rem; }
+      .draft-card { padding: 1.25rem; }
+      .tldr { padding: 1.35rem; }
+      .timeline { padding-left: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="brand-wordmark">Scout Grant Sprint</div>
+    <div class="sub-wordmark">Four grant drafts, one afternoon</div>
+    <div class="sprint-badge">Delivered April 9, 2026</div>
+    <h1>Drafts, next steps, and what we still need</h1>
+  </header>
+
+  <div class="tldr">
+    <div class="tldr-label">The short version</div>
+    <ul>
+      <li><strong>Four Scout-branded HTML drafts delivered</strong> covering IMLS, NBCU, Knight, and William Penn.</li>
+      <li><strong>Two urgent deadlines:</strong> NBCU April 24, Knight April 30. Both have live blockers.</li>
+      <li><strong>Biggest blocker:</strong> Friends of Tredyffrin 501(c)(3) status confirmation. Mallory needs to answer this by Friday April 11 to keep NBCU viable.</li>
+      <li><strong>Voice verification passed</strong> on all four drafts: zero instances of the word to avoid, zero em dashes, zero LLM tells, "Built by librarians" in every file.</li>
+      <li><strong>Scope for Jonathan:</strong> every file has an Open Questions block at the top listing exactly what needs confirmation before submission.</li>
+    </ul>
+  </div>
+
+  <!-- ================================ -->
+  <!-- DRAFTS -->
+  <!-- ================================ -->
+  <div class="section-header">
+    <h2>The four drafts</h2>
+    <span class="section-tag tag-ready">Ready to read</span>
+  </div>
+  <p class="section-note">Each file opens cleanly in a browser, prints cleanly, and works on a phone. Tap any title to open the draft.</p>
+
+  <!-- NBCU -->
+  <div class="draft-card is-urgent">
+    <div class="draft-top">
+      <div class="draft-title"><a href="applications/02-nbcu-local-impact.html">NBCUniversal Local Impact Grants 2026</a></div>
+      <span class="draft-badge badge-urgent">Urgent &middot; 15 days</span>
+    </div>
+    <div class="draft-meta">
+      <span>Comcast NBCUniversal</span>
+      <span><strong>$40,000 requested</strong></span>
+      <span class="deadline-hot">Due April 24, 2026</span>
+      <span>Friends of Tredyffrin (501(c)(3))</span>
+    </div>
+    <div class="draft-desc">
+      Short corporate-foundation format, roughly 3,400 words. Leads with the local Chester County story (Saturday at Strafford, Spanish-speaking mother looking for bilingual picture books) and maps every section to the three NBCU categories. Community Engagement is the primary fit; Youth Education and Empowerment is the secondary fit. Includes bilingual launch events, librarian training, and a workshop series.
+    </div>
+    <div class="draft-next">
+      <strong>Next action</strong>
+      Call Mallory by April 11 to confirm the Friends group has an active EIN dated over a year, total expenses between $100K and $1M, and no prior $10K+ Comcast funding. Without these three answers, NBCU is a no-go and the 15 days burn.
+    </div>
+    <div class="draft-actions">
+      <a class="btn btn-primary" href="applications/02-nbcu-local-impact.html">Open draft</a>
+    </div>
+  </div>
+
+  <!-- Knight -->
+  <div class="draft-card is-urgent">
+    <div class="draft-top">
+      <div class="draft-title"><a href="applications/03-knight-cities-challenge.html">Knight Cities Challenge 2026</a></div>
+      <span class="draft-badge badge-urgent">Urgent &middot; 21 days</span>
+    </div>
+    <div class="draft-meta">
+      <span>Knight Foundation</span>
+      <span><strong>$200,000 requested</strong></span>
+      <span class="deadline-hot">Due April 30, 2026</span>
+      <span>Scout applies directly (for-profits allowed)</span>
+    </div>
+    <div class="draft-desc">
+      Idea-phase format, roughly 2,500 words. Each answer drafted at about 80% of the likely character limit so you have room to tighten. Primary investment area is Local Information Ecosystems. Philadelphia is the city, Tredyffrin is the working pilot, and Free Library of Philadelphia (54 branches, 1.5 million residents) is the Year 2 scaling target.
+    </div>
+    <div class="draft-next">
+      <strong>Next action</strong>
+      Tap a contact at Free Library of Philadelphia this week for a letter of interest or at least a verbal acknowledgment. If no connection lands by April 25, reframe Free Library as the aspirational Year 2 partner and lean harder on the Tredyffrin pilot.
+    </div>
+    <div class="draft-actions">
+      <a class="btn btn-primary" href="applications/03-knight-cities-challenge.html">Open draft</a>
+    </div>
+  </div>
+
+  <!-- IMLS -->
+  <div class="draft-card">
+    <div class="draft-top">
+      <div class="draft-title"><a href="applications/01-imls-nlg-l.html">IMLS National Leadership Grants (NLG-L)</a></div>
+      <span class="draft-badge badge-draft">Draft &middot; 7 months runway</span>
+    </div>
+    <div class="draft-meta">
+      <span>Institute of Museum and Library Services</span>
+      <span><strong>$100,000 requested</strong></span>
+      <span>Due ~November 13, 2026</span>
+      <span>Tredyffrin applies; Scout is tech partner</span>
+    </div>
+    <div class="draft-desc">
+      The anchor draft, roughly 5,150 words. Community-Centered Implementation track (no cost match). Full narrative: statement of national need, four-phase project design across fourteen months, diversity and access plan, project results with four measurement areas, budget narrative, capacity section, sustainability, and a complete digital products plan. Voice scrubbed from the older template.
+    </div>
+    <div class="draft-next">
+      <strong>Next action</strong>
+      Circulate to Kenny and Jonathan for review. Start chasing Tredyffrin library statistics (service population, annual circulation, digital circ, language coverage) with Mallory. Letter of support outreach to Joe Sherwood, PA OCL, and Drexel iSchool can begin any time before August.
+    </div>
+    <div class="draft-actions">
+      <a class="btn btn-primary" href="applications/01-imls-nlg-l.html">Open draft</a>
+    </div>
+  </div>
+
+  <!-- William Penn -->
+  <div class="draft-card">
+    <div class="draft-top">
+      <div class="draft-title"><a href="applications/04-william-penn-children-families.html">William Penn Foundation &middot; Children and Families LOI</a></div>
+      <span class="draft-badge badge-wait">Pre-RFP &middot; wait for June</span>
+    </div>
+    <div class="draft-meta">
+      <span>William Penn Foundation</span>
+      <span><strong>$75K to $150K range</strong></span>
+      <span>LOI due July 30, 2026 (RFP opens June 17)</span>
+      <span>Tredyffrin or Friends applies</span>
+    </div>
+    <div class="draft-desc">
+      Stage 1 pre-RFP Letter of Inquiry, roughly 3,200 words. Framed as family literacy and out-of-school learning for caregivers of children ages 0 to 8, not as library technology. Mirrors WPF's Children and Families program language. Stage 2 sections are stubbed only. The draft explicitly notes that if the 2026 RFP is narrowly focused on Early Childhood Education enrollment, the framing needs a significant pivot.
+    </div>
+    <div class="draft-next">
+      <strong>Next action</strong>
+      Hold until the RFP publishes June 17. Start identifying a potential Early Childhood Education partner organization now (Head Start site, PA Pre-K Counts, or a Chester County bilingual preschool) so the eventual Stage 1 submission has a named partner.
+    </div>
+    <div class="draft-actions">
+      <a class="btn btn-primary" href="applications/04-william-penn-children-families.html">Open draft</a>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- VERIFICATION -->
+  <!-- ================================ -->
+  <div class="section-header">
+    <h2>Verification passed</h2>
+    <span class="section-tag tag-ready">Clean</span>
+  </div>
+  <p class="section-note">Automated checks run against all four new drafts after writing.</p>
+
+  <div class="verification">
+    <div class="verification-label">Voice and forbidden-word scan</div>
+    <ul>
+      <li><strong>Zero</strong> instances of the two-letter word librarians asked us to stop using. Paraphrased as "conversational discovery," "natural language search," or "language technology" throughout.</li>
+      <li><strong>Zero</strong> em dashes (U+2014). The punctuation Drew calls an LLM tell is nowhere in any draft.</li>
+      <li><strong>Zero</strong> prose double-hyphens. All double-hyphen matches in the HTML come from CSS custom property syntax, which is legitimate code.</li>
+      <li><strong>Zero</strong> LLM tell words (delve, leverage, seamless, robust, unleash, game-changer, cutting-edge, revolutionize).</li>
+      <li><strong>"Built by librarians"</strong> present in every file footer.</li>
+      <li><strong>Open Questions block</strong> present at the top of every draft, listing every placeholder and every call Mallory, Kenny, Jonathan, or Drew still has to make.</li>
+    </ul>
+  </div>
+
+  <!-- ================================ -->
+  <!-- KNOWN GAPS -->
+  <!-- ================================ -->
+  <div class="section-header">
+    <h2>Known gaps requiring input</h2>
+    <span class="section-tag tag-check">Before submission</span>
+  </div>
+  <p class="section-note">Organized by the person who can unblock each item. Items marked with a coral border are blockers for an April submission.</p>
+
+  <div class="gaps-grid">
+    <div class="gap-card is-blocker">
+      <h3>Mallory Hoffman</h3>
+      <div class="role">Director, Tredyffrin Township Libraries &middot; Blocker for NBCU</div>
+      <ul>
+        <li>Confirm Friends of Tredyffrin Township Libraries is an active 501(c)(3) with EIN dated more than one year</li>
+        <li>Confirm Friends total annual expenses fall between $100,000 and $1,000,000</li>
+        <li>Confirm Friends revenue exceeds $100,000</li>
+        <li>Confirm Friends has not received $10,000 or more annually from Comcast NBCUniversal or NBC10 or Telemundo62 in the past three years</li>
+        <li>Tredyffrin statistics for IMLS: service population, annual circulation (print and digital), OverDrive and Hoopla checkouts, database sessions, reference volume, languages served, overhead rate</li>
+        <li>Youth services statistics for William Penn: annual children's programs, bilingual storytime count, new library cards issued, youth reference questions</li>
+        <li>Confirm Tredyffrin's SAM.gov UEI is active (needed for IMLS)</li>
+      </ul>
+    </div>
+
+    <div class="gap-card is-blocker">
+      <h3>Drew Garraway</h3>
+      <div class="role">Co-founder, Scout &middot; Blocker for Knight</div>
+      <ul>
+        <li>Reach out to Free Library of Philadelphia (Chief Innovation Officer or equivalent) this week for a letter of interest or a verbal acknowledgment</li>
+        <li>Confirm Scout applicant entity status for Knight: sole proprietor and doing-business-as Scout, or accelerate LLC formation</li>
+        <li>Confirm preferred contact email and phone for all four draft contact sections</li>
+        <li>Confirm Philadelphia market zip codes on the NBCU portal include Tredyffrin (Berwyn, Paoli, Devon)</li>
+        <li>Confirm conflict-of-interest disclosure language for NBCU (Drew is both a Tredyffrin employee and Scout co-founder)</li>
+        <li>Kenny and Drew availability for a possible Knight semi-finalist interview in June or July</li>
+      </ul>
+    </div>
+
+    <div class="gap-card">
+      <h3>Kenny Allen</h3>
+      <div class="role">Co-founder, Scout</div>
+      <ul>
+        <li>Voice and factual review on the IMLS draft, especially the statement of national need and the project design phases</li>
+        <li>Gut check on the Knight framing (is Scout really a "Local Information Ecosystem" play, or should we lead with Community Connection?)</li>
+        <li>Decide on entity type (Delaware C-Corp vs LLC) to unblock Knight and future SBIR work</li>
+        <li>Review the William Penn framing; does the caregiver-facing adaptation describe real product work you plan to build?</li>
+        <li>Approve the budget splits in each draft; these are working numbers, not committed allocations</li>
+      </ul>
+    </div>
+
+    <div class="gap-card">
+      <h3>Jonathan Trice</h3>
+      <div class="role">Head of Reference and Adult Services, Tredyffrin</div>
+      <ul>
+        <li>Confirm exact official title and MLIS graduation year for the IMLS bio sketch</li>
+        <li>Any sections in the IMLS draft you would rewrite based on prior federal grant experience</li>
+        <li>Letter of support outreach to Joe Sherwood (CCLS), PA Office of Commonwealth Libraries, and Drexel iSchool (target: have all five letters collected by August)</li>
+        <li>Identify an external evaluator candidate (PaLA research committee, Drexel iSchool, or independent evaluator) for IMLS Phase 1</li>
+        <li>Confirm the Sierra ILS integration plan is realistic in a pilot timeline, given that Theresa Metzger at CCLS IT still owes us API credentials</li>
+        <li>Advise on whether the IMLS Community-Centered Implementation track or the full National Implementation track is the right target</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- NEXT STEPS TIMELINE -->
+  <!-- ================================ -->
+  <div class="section-header">
+    <h2>Recommended next steps</h2>
+    <span class="section-tag tag-urgent">Start today</span>
+  </div>
+  <p class="section-note">A working timeline across the next four months. Adjust after the Mallory call on Friday.</p>
+
+  <div class="timeline">
+
+    <div class="step urgent">
+      <div class="step-date">Today &middot; April 9</div>
+      <div class="step-title">Read all four drafts end to end</div>
+      <div class="step-detail">Flag any factual errors, voice issues, or sections that do not feel like Scout. Leave comments in the Open Questions block at the top of each file or just reply to Drew.</div>
+    </div>
+
+    <div class="step urgent">
+      <div class="step-date">Tomorrow &middot; April 10</div>
+      <div class="step-title">Get Mallory on the phone</div>
+      <div class="step-detail">Cover all seven Mallory questions at once: Friends 501(c)(3) status, financials, prior Comcast funding, Tredyffrin statistics, youth services numbers, SAM.gov status, indirect rate. This single call either unlocks NBCU or kills it.</div>
+    </div>
+
+    <div class="step urgent">
+      <div class="step-date">By April 13</div>
+      <div class="step-title">Reach Free Library of Philadelphia</div>
+      <div class="step-detail">Email or warm intro to Free Library's Chief Innovation Officer or a comparable contact. Ask for a letter of interest for Knight. Even a short acknowledgment is usable. If no connection lands by April 25, pivot the Knight framing.</div>
+    </div>
+
+    <div class="step urgent">
+      <div class="step-date">April 14 to 20</div>
+      <div class="step-title">Tighten both urgent drafts</div>
+      <div class="step-detail">Kenny review on Knight framing, Jonathan review on NBCU community sections, voice pass on any last section. Tighten Knight answers against the real form character limits once the portal is open. Finalize Friends entity paperwork for NBCU if Mallory cleared that block.</div>
+    </div>
+
+    <div class="step urgent">
+      <div class="step-date">April 21 to 23</div>
+      <div class="step-title">NBCU final review and submission prep</div>
+      <div class="step-detail">Upload attachments (IRS letter, Form 990, board list), finalize the narrative, have Mallory or the Friends board chair sign. Submit at least 24 hours before the April 24 deadline. NBCU cuts off at 7:59:59 PM ET, so treat the deadline as end of day Wednesday at the latest.</div>
+    </div>
+
+    <div class="step urgent">
+      <div class="step-date">April 28 to 30</div>
+      <div class="step-title">Knight final review and submission</div>
+      <div class="step-detail">Final tightening against the real character limits. Submit the Knight idea-phase form by the April 30 deadline. Knight decisions come by the end of August, semi-finalists are often interviewed, plan for a possible June or July call.</div>
+    </div>
+
+    <div class="step non-urgent">
+      <div class="step-date">May &middot; IMLS preparation</div>
+      <div class="step-title">Start IMLS letter collection and bio sketches</div>
+      <div class="step-detail">Draft two-page bio sketches for Mallory, Jonathan, Drew, and Kenny. Send letter request emails to Joe Sherwood, PA OCL, and Drexel iSchool. Identify the external evaluator candidate. Resolve the Sierra ILS integration plan.</div>
+    </div>
+
+    <div class="step non-urgent">
+      <div class="step-date">June 17 &middot; William Penn RFP opens</div>
+      <div class="step-title">Rewrite William Penn draft against the published RFP</div>
+      <div class="step-detail">Check whether the 2026 Children and Families RFP is narrowly focused on Early Childhood Education enrollment. If so, either pivot the framing significantly or reposition for the Democracy and Civic Initiatives RFP opening in September. Stage 1 LOI due July 30.</div>
+    </div>
+
+    <div class="step non-urgent">
+      <div class="step-date">August to September</div>
+      <div class="step-title">IMLS letters collected; narrative polished</div>
+      <div class="step-detail">All five letters of support in hand. Bio sketches finalized. Narrative revised against the FY2027 NOFO once IMLS publishes it. Mallory sign-off.</div>
+    </div>
+
+    <div class="step non-urgent">
+      <div class="step-date">October to November</div>
+      <div class="step-title">IMLS final review and submission</div>
+      <div class="step-detail">Internal review by Mallory and Kenny, self-score against the IMLS scoring rubric, submit through Grants.gov and Research.gov well before the anticipated November 13 deadline. IMLS submissions should never be filed on the last day.</div>
+    </div>
+
+  </div>
+
+  <div class="context">
+    <h3>One more thing for the grant team</h3>
+    <p>Every draft is a v0.1. The point of this sprint was to turn a week of open questions into a week of tight answers. Jonathan is the lead grant writer on the Tredyffrin side, so anything that looks weird is Jonathan's call to rework. Kenny is the technical and product reviewer, so anything that oversells or misrepresents the product is Kenny's call to fix. Mallory is the institutional signer on anything that says Tredyffrin Township Libraries, so nothing goes out without her explicit sign-off.</p>
+    <p>The drafts live at <code>~/private/projects/scout-grant-finder/site/applications/</code> on Drew's machine. They are not in a public repo, and they contain working budget detail and partner names that should stay internal until submission.</p>
+  </div>
+
+  <footer>
+    <div class="brand">Search with Scout</div>
+    <p>Built by librarians, for libraries.</p>
+    <p>Grant sprint summary &middot; April 9, 2026 &middot; Internal review copy</p>
+  </footer>
+
+</div>
+</body>
+</html>

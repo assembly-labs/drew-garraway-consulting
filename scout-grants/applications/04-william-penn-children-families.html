@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>William Penn Foundation LOI &middot; Scout Grant Draft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1A3E67;
+      --navy-dark: #0f2744;
+      --navy-light: #2a5a8f;
+      --sage: #83A07F;
+      --sage-dark: #5D7A5A;
+      --sage-bg: rgba(131, 160, 127, 0.1);
+      --sage-border: rgba(131, 160, 127, 0.3);
+      --coral: #F2895E;
+      --coral-dark: #D96A3F;
+      --coral-bg: rgba(242, 137, 94, 0.08);
+      --coral-border: rgba(242, 137, 94, 0.3);
+      --cream: #f5f1e8;
+      --white: #ffffff;
+      --charcoal: #333333;
+      --text-muted: #6b7280;
+      --border: #e0dcd3;
+      --radius: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+    header { padding-bottom: 1.25rem; border-bottom: 2px solid var(--navy); margin-bottom: 2rem; }
+    .brand { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.35rem; color: var(--navy); margin-bottom: 0.25rem; }
+    h1 { font-family: 'DM Serif Display', Georgia, serif; font-size: 2rem; color: var(--navy); letter-spacing: -0.015em; line-height: 1.2; margin: 0.35rem 0 0.4rem; }
+    .sub { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+    .meta-card { background: var(--navy); color: var(--cream); border-radius: var(--radius); padding: 1.5rem 1.5rem 1.25rem; margin-bottom: 2rem; }
+    .meta-card dl { display: grid; grid-template-columns: 11rem 1fr; gap: 0.35rem 1rem; font-size: 0.95rem; }
+    .meta-card dt { color: var(--coral); font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; font-size: 0.75rem; padding-top: 0.2rem; }
+    .meta-card dd { color: #fff; }
+    .meta-card a { color: var(--cream); text-decoration: underline; }
+    h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.55rem; color: var(--navy); letter-spacing: -0.01em; margin: 2.5rem 0 0.75rem; padding-bottom: 0.25rem; border-bottom: 1px solid var(--border); }
+    h3 { font-size: 1.1rem; color: var(--navy-dark); font-weight: 700; margin: 1.5rem 0 0.5rem; }
+    p { margin: 0.75rem 0; }
+    strong { color: var(--navy-dark); }
+    a { color: var(--navy-light); text-decoration: underline; }
+    a:hover { color: var(--coral-dark); }
+    ul, ol { margin: 0.75rem 0 0.75rem 1.4rem; }
+    li { margin-bottom: 0.35rem; }
+    .callout { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--sage); border-radius: var(--radius); padding: 1.25rem 1.4rem; margin: 1.25rem 0; }
+    .callout.coral { border-left-color: var(--coral); background: var(--coral-bg); }
+    .callout-label { font-family: 'DM Serif Display', Georgia, serif; color: var(--navy); font-size: 1rem; margin-bottom: 0.3rem; }
+    .open-questions { background: var(--coral-bg); border: 1.5px solid var(--coral-border); border-radius: var(--radius); padding: 1.25rem 1.4rem; margin: 1rem 0 2rem; }
+    .open-questions h2 { border-bottom: none; margin: 0 0 0.5rem; font-size: 1.25rem; color: var(--coral-dark); }
+    .open-questions ol { font-size: 0.95rem; margin-bottom: 0; }
+    .citations { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.4rem; margin-bottom: 2rem; font-size: 0.88rem; }
+    .citations h2 { border-bottom: none; margin: 0 0 0.5rem; font-size: 1.1rem; }
+    .citations ol { margin-left: 1.25rem; }
+    .citations li { margin-bottom: 0.5rem; }
+    .citations a { color: var(--navy-light); word-break: break-word; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.95rem; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    th { background: var(--navy); color: var(--cream); text-align: left; padding: 0.6rem 0.85rem; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    td { padding: 0.65rem 0.85rem; border-top: 1px solid var(--border); vertical-align: top; }
+    tr:nth-child(even) td { background: var(--cream); }
+    td.amount, th.amount { text-align: right; font-variant-numeric: tabular-nums; }
+    .checklist { list-style: none; margin-left: 0; }
+    .checklist li { padding-left: 1.6rem; position: relative; margin-bottom: 0.4rem; }
+    .checklist li::before { content: '\25A1'; position: absolute; left: 0; color: var(--sage-dark); font-size: 1.1rem; }
+    .stub { background: var(--sage-bg); border: 1px dashed var(--sage-border); border-radius: var(--radius); padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.95rem; color: var(--sage-dark); }
+    .stub h3 { color: var(--sage-dark); margin-top: 0.25rem; }
+    .placeholder { background: #fff4e6; border: 1px dashed var(--coral); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.92em; color: var(--coral-dark); font-weight: 600; }
+    footer { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 2px solid var(--navy); text-align: center; font-size: 0.85rem; color: var(--text-muted); }
+    footer .brand { font-size: 1rem; margin-bottom: 0.3rem; }
+    @media print { body { background: white; font-size: 10.5pt; } .page { max-width: 100%; padding: 0.5in 0.6in; } .meta-card, .open-questions, .callout, .citations, .stub { break-inside: avoid; } h2, h3 { break-after: avoid; } table { break-inside: avoid; } a { color: var(--charcoal); text-decoration: none; } }
+    @media (max-width: 640px) { .page { padding: 1.5rem 1rem 3rem; } h1 { font-size: 1.6rem; } h2 { font-size: 1.3rem; } .meta-card dl { grid-template-columns: 1fr; gap: 0.1rem 0; } .meta-card dt { padding-top: 0.6rem; } table { font-size: 0.85rem; } th, td { padding: 0.45rem 0.55rem; } }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="brand">Search with Scout</div>
+    <h1>William Penn Foundation Children and Families LOI</h1>
+    <div class="sub">William Penn Foundation &middot; Pre-RFP Letter of Inquiry (Stage 1) &middot; Draft v0.1 &middot; April 9, 2026</div>
+  </header>
+
+  <div class="callout coral">
+    <div class="callout-label">Pre-RFP draft notice</div>
+    <p>The William Penn Foundation Children and Families RFP opens June 17, 2026 with a July 30, 2026 deadline. As of April 9, 2026 the specific RFP text, required questions, and funding ranges for the 2026 cycle are not yet published. This draft is a Stage 1 Letter of Inquiry framework built from WPF's published Children and Families program priorities. The narrative must be rewritten against the actual RFP as soon as it publishes. A March 2026 WPF communication suggested the 2026 active RFP may be focused on "Increasing Enrollment in High-Quality Early Childhood Education," which is narrower than the full Children and Families scope. If the published RFP is ECE-enrollment-focused, this draft will need a significant pivot toward caregiver supports, family literacy, and out-of-school learning rather than a general Children and Families frame.</p>
+  </div>
+
+  <div class="meta-card">
+    <dl>
+      <dt>Program</dt><dd>William Penn Foundation &middot; Children and Families</dd>
+      <dt>RFP cycle</dt><dd>Opens June 17, 2026 &middot; Letter of Inquiry deadline July 30, 2026 &middot; Board review October 2026</dd>
+      <dt>Stage</dt><dd>Stage 1 Letter of Inquiry (this draft)</dd>
+      <dt>Geographic focus</dt><dd>Greater Philadelphia five-county region (Philadelphia, Chester, Delaware, Montgomery, Bucks) and Camden, NJ</dd>
+      <dt>Population</dt><dd>Families with young children, ages 0 to 8, with emphasis on Spanish-speaking and historically underserved households</dd>
+      <dt>Applicant</dt><dd>Tredyffrin Township Libraries or Friends of Tredyffrin Township Libraries <span class="placeholder">[CONFIRM 501(c)(3) ENTITY]</span></dd>
+      <dt>Technology partner</dt><dd>Search with Scout</dd>
+      <dt>Requested range</dt><dd>$75,000 to $150,000 over two years (Stage 1 estimate)</dd>
+      <dt>Portal</dt><dd><a href="https://williampennfoundation.org/funding/funding-opportunities">williampennfoundation.org/funding/funding-opportunities</a></dd>
+    </dl>
+  </div>
+
+  <div class="open-questions">
+    <h2>Open Questions (Before the RFP Opens)</h2>
+    <ol>
+      <li><strong>2026 RFP specificity.</strong> WPF's current active RFP language suggests the 2026 Children and Families round may be tightly focused on Early Childhood Education enrollment. If so, Scout is not a direct fit. Options: (a) wait for the Democracy and Civic Initiatives RFP (September 2026) if civic information access is a priority, or (b) reframe Scout as a caregiver-facing family literacy tool that supports early childhood educators and home environments, not as ECE enrollment infrastructure. Decide once RFP text publishes.</li>
+      <li><strong>Applicant entity.</strong> WPF generally requires 501(c)(3) applicants. Tredyffrin Township Libraries is a municipal department. Friends of Tredyffrin Township Libraries is the likely applicant vehicle. Confirm the Friends group is active, has an EIN, and has audited financials WPF will accept. If Friends is not strong enough on its own, consider partnering with Chester County Community Foundation as a fiscal sponsor.</li>
+      <li><strong>Geographic alignment.</strong> WPF primarily funds organizations serving Philadelphia and Camden, NJ. Chester County is in their service region but is less frequently funded than Philadelphia-proper organizations. The LOI must explain why a Chester County applicant is the right home for a program that serves families across the five-county region. The answer: Chester County has the fastest-growing Spanish-speaking population in the region, Tredyffrin has strong bilingual services capacity, and Scout is designed to scale across the region rather than sit at one branch.</li>
+      <li><strong>Early learning credentials.</strong> WPF's children and families portfolio is dominated by organizations with explicit early childhood education credentials. Tredyffrin has a youth services team but is not an ECE provider. The LOI must position Tredyffrin as a family literacy and out-of-school learning partner, not as an ECE provider.</li>
+      <li><strong>Partner letters.</strong> A strong LOI needs at least one ECE partner organization willing to co-sign. Candidates: a local Head Start grantee, PA Pre-K Counts site, Chester County Bilingual Preschool, or a Montgomery County family literacy program. Identify and approach by June 1, 2026.</li>
+      <li><strong>Tredyffrin youth services statistics.</strong> Confirm with Mallory Hoffman and the Tredyffrin youth services team: annual youth program attendance, number of Spanish-language storytimes and family events, library card registrations for patrons under 18, and annual bilingual caregiver workshops. These numbers anchor the capacity section.</li>
+      <li><strong>Stage 2 full proposal scope.</strong> Stage 1 LOI is about fit and readiness. If invited to Stage 2, plan a 15 to 20 page full proposal with logic model, formal budget, evaluation plan, and letters of support. Stage 2 sections are stubbed at the bottom of this draft.</li>
+    </ol>
+  </div>
+
+  <section class="citations">
+    <h2>Research Citations</h2>
+    <ol>
+      <li><a href="https://williampennfoundation.org/program/children-and-families">WPF Children and Families program page</a>. Fetched April 9, 2026. Source for: program strategies (Economic Security, Educational Access, Systemic Funding), 2035 targets (25,000 families connected with public benefits, 10,000 families protected from homelessness, 60% of Philadelphia children ages birth to 5 enrolled in high-quality ECE), and focus on Philadelphia five-county region plus Camden, NJ.</li>
+      <li><a href="https://williampennfoundation.org/funding/funding-opportunities">WPF Funding Opportunities page</a>. Fetched April 9, 2026. Source for: five WPF program areas (Arts and Culture, Children and Families, Democracy and Civic Initiatives, Environment and Public Space, Workforce Training and Services) and general how-to-apply guidance.</li>
+      <li>WPF 2026 cycle dates (RFP opens June 17, 2026; LOI deadline July 30, 2026; board review October 2026). Source: PHENND 2025-2026 RFP schedule summary, corroborated by the Scout grant pipeline team's April 5, 2026 verification pass.</li>
+    </ol>
+  </section>
+
+  <h2>Stage 1 Letter of Inquiry</h2>
+
+  <h3>Organization Overview</h3>
+  <p>Tredyffrin Township Libraries is a trusted public library serving the residents of Tredyffrin Township and surrounding Chester County communities in the greater Philadelphia region. Through two branches, Strafford and Paoli, the library operates as a free, welcoming, and universally accessible space for families with young children. Tredyffrin's youth services team runs weekly storytimes in English and Spanish, bilingual caregiver workshops, early literacy book bundles for new parents, family reading clubs for children ages four to eight, and a summer reading program serving hundreds of Chester County children each year. For many families in the service area, and especially for Spanish-speaking and multilingual families, the public library is the first, most trusted, and most affordable early learning partner they encounter.</p>
+  <p>Tredyffrin Township Libraries is a member of the Chester County Library System, a cooperative of eighteen member libraries serving every community in Chester County. This membership gives the library access to a regional network of children's librarians, shared collection development, and coordinated early literacy programming. It also means any successful Tredyffrin program is positioned to scale to seventeen additional Chester County communities that collectively serve tens of thousands of young children.</p>
+
+  <h3>Project Summary</h3>
+  <p>Tredyffrin Township Libraries, in partnership with Search with Scout, proposes to build and deploy a caregiver-facing family literacy discovery tool that lets parents, grandparents, and other caregivers describe what their young child needs in plain language, in twelve languages, and receive a curated set of library resources in seconds. A caregiver can ask for "a picture book about starting kindergarten in Spanish," "bedtime stories for a four-year-old who is afraid of thunder," "early reading books for a six-year-old who loves dinosaurs," or "a program to bring my toddler to this Saturday." The tool draws from the library's physical collection, its OverDrive and Hoopla digital collections, its licensed early literacy databases, and its in-person programming calendar, and returns results a caregiver can actually use, with real-time availability and one-tap access.</p>
+  <p>The tool exists because the single most common barrier a caregiver faces at the library is not a lack of materials; it is the difficulty of finding the right material for the right child at the right moment. Tredyffrin's youth services staff see this every day. A Spanish-speaking mother of a three-year-old walks in looking for bilingual picture books and cannot navigate the English-only catalog. A working grandfather of a seven-year-old with a new diagnosis of autism wants sensory-friendly storytime recommendations and does not know where to start. A single mother with two children under five has twenty minutes while her laundry finishes and wants a quick list of family reading club titles available right now at the Paoli branch. The discovery tool proposed here is designed for those moments.</p>
+
+  <h3>Alignment with WPF Children and Families Priorities</h3>
+  <p>This project maps directly to three of the program's published priorities.</p>
+  <p><strong>Educational Access and Out-of-School Learning.</strong> Public libraries are the out-of-school learning backbone of every Philadelphia-region community. The tool described here extends the library's family literacy impact by making every early literacy resource the library already owns findable by any caregiver, in their own language, on their own phone, in the moment they actually need it. This is a direct expansion of out-of-school learning access, which WPF targets in its 2035 objectives.</p>
+  <p><strong>Caregiver Supports.</strong> The tool is explicitly caregiver-facing. It treats parents, grandparents, foster caregivers, and other adults responsible for young children as the user. It speaks their language. It respects their time. It does not ask them to learn a library catalog. Caregiver empowerment is one of the most direct ways to influence early literacy, kindergarten readiness, and out-of-school learning, and it is a stated priority of the WPF Children and Families program.</p>
+  <p><strong>Equitable Access and Public Funding.</strong> Every element of the tool is designed to serve families who are currently underserved by library technology. Twelve-language voice input reaches multilingual households. WCAG 2.2 Level AA accessibility reaches caregivers with disabilities. A zero-logging privacy commitment protects families who are uniquely exposed to surveillance and data misuse. The project strengthens the case that public institutions (libraries) can serve every family equitably and that public funding invested in library infrastructure has compounding benefits for early childhood outcomes.</p>
+
+  <h3>Population Served</h3>
+  <p>The project serves families with children from birth through age eight across the greater Philadelphia five-county region, with the pilot focused on Chester County and the scaling plan targeting the full region.</p>
+  <ul>
+    <li><strong>Multilingual families.</strong> Chester County's Spanish-speaking population has grown significantly over the past decade. The tool supports Spanish, Mandarin, Cantonese, Korean, Vietnamese, Arabic, Russian, Haitian Creole, Portuguese, French, Tagalog, and English, with voice input in all twelve, so caregivers can describe what their child needs in the language they use at home.</li>
+    <li><strong>Working caregivers.</strong> Parents, grandparents, and other caregivers who balance work, childcare, and household responsibilities benefit from a discovery tool that returns results in three seconds instead of requiring a twelve-minute catalog crawl.</li>
+    <li><strong>Caregivers of children with disabilities.</strong> The tool is accessible by design. Caregivers using screen readers, large text, or voice input can operate it as effectively as caregivers who type. This is a population WPF's children and families work explicitly identifies.</li>
+    <li><strong>Families without home internet or English-only devices.</strong> In-branch kiosks at Tredyffrin and partner libraries provide the same discovery experience for caregivers who do not have reliable home internet or whose home devices are not set up in their preferred language.</li>
+  </ul>
+
+  <h3>Requested Amount</h3>
+  <p>Tredyffrin and Scout estimate a two-year project at <strong>$75,000 to $150,000 total</strong>. The lower end funds a focused Tredyffrin pilot with Chester County Library System dissemination. The upper end funds an expansion to two additional Philadelphia-region libraries and a formal evaluation partnership with a regional family literacy research organization. Exact amount will be determined after the RFP publishes and after discussions with the WPF program officer.</p>
+
+  <table>
+    <thead><tr><th>Budget category (Stage 1 sketch)</th><th class="amount">Amount</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>Caregiver-facing tool design and build</td><td class="amount">$45,000</td><td>Product and engineering work to adapt the conversational discovery tool into a caregiver-facing experience for ages 0 to 8, including bilingual copy review and family-appropriate response tuning.</td></tr>
+      <tr><td>Bilingual community outreach and workshops</td><td class="amount">$25,000</td><td>Bilingual caregiver workshops at Tredyffrin branches and partner sites, family launch events, bilingual outreach materials, community liaison stipends.</td></tr>
+      <tr><td>Librarian tester stipends and youth services training</td><td class="amount">$18,000</td><td>Nine Tredyffrin and CCLS youth services librarians at $2,000 each for structured testing, feedback, and training. Funds flow directly to library youth services staff.</td></tr>
+      <tr><td>Early literacy partner engagement</td><td class="amount">$12,000</td><td>Partnership with an ECE provider (Head Start or PA Pre-K Counts site) for family literacy co-programming and caregiver referrals.</td></tr>
+      <tr><td>Evaluation and family outcomes reporting</td><td class="amount">$18,000</td><td>Independent evaluation of family literacy outcomes, caregiver satisfaction, and scaling readiness. Family-centered measurement approach; no individual child data collected.</td></tr>
+      <tr><td>Infrastructure and accessibility</td><td class="amount">$20,000</td><td>Hosting, language model inference, bilingual content validation, in-branch family kiosks at the upper funding level.</td></tr>
+      <tr><td>Project administration and indirect costs</td><td class="amount">$12,000</td><td>Library administration, reporting, and indirect costs.</td></tr>
+      <tr><td><strong>Total (upper range)</strong></td><td class="amount"><strong>$150,000</strong></td><td>Scaled down to $75,000 for lower range by reducing partner engagement, evaluation scope, and kiosk rollout.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Capacity and Track Record</h3>
+  <p>Tredyffrin Township Libraries has served families in the Philadelphia region for decades and maintains an active youth services team with demonstrated capacity to run bilingual programming, family events, and out-of-school learning partnerships. Tredyffrin currently runs <span class="placeholder">[CONFIRM NUMBER]</span> children's programs per year serving <span class="placeholder">[CONFIRM NUMBER]</span> family members. The library issues <span class="placeholder">[CONFIRM NUMBER]</span> new library cards per year and fields <span class="placeholder">[CONFIRM NUMBER]</span> youth reference questions annually. The library's membership in the Chester County Library System provides a ready-made scaling path to seventeen additional Chester County communities.</p>
+  <p>Search with Scout is a practitioner-built technology partner. The tool was founded by Drew Garraway, a Reference Librarian at Tredyffrin Township Libraries, and Kenny Allen, a former librarian. The project team has already built and deployed the underlying conversational discovery assistant; the caregiver-facing adaptation is an extension of proven technology rather than a new build. A working demonstration is available for WPF reviewer evaluation.</p>
+  <p>Project leadership includes Mallory Hoffman, Director of Tredyffrin Township Libraries (MLIS, Kutztown), and Jonathan Trice, Head of Reference and Adult Services at Tredyffrin (MLIS, Drexel), both of whom will serve on the project's governance committee.</p>
+
+  <h3>Letter of Inquiry Attachments Checklist</h3>
+  <ul class="checklist">
+    <li>WPF standard Stage 1 LOI cover page (use form published with RFP)</li>
+    <li>Organizational budget for applicant 501(c)(3)</li>
+    <li>IRS Determination Letter for applicant</li>
+    <li>Most recent audited financial statements</li>
+    <li>Board of directors list</li>
+    <li>Short partner list (Scout, Chester County Library System, ECE partner)</li>
+  </ul>
+
+  <h2>Stage 2 Full Proposal (Stubbed Only)</h2>
+  <p>If invited to Stage 2, the full proposal will expand the following sections. The full proposal is not drafted yet and will be written against the Stage 2 requirements listed in the RFP.</p>
+
+  <div class="stub"><h3>Stage 2 &middot; Logic model and theory of change</h3><p>Stub: diagram of inputs (library collection, bilingual staff, Scout tool), activities (caregiver workshops, in-branch use, home use), outputs (family interactions, resources found), short-term outcomes (caregiver confidence, early literacy engagement), long-term outcomes (kindergarten readiness, out-of-school learning participation).</p></div>
+  <div class="stub"><h3>Stage 2 &middot; Detailed project timeline</h3><p>Stub: 24-month timeline with month-by-month activities, milestones, and decision gates across Tredyffrin launch, evaluation period, and regional expansion.</p></div>
+  <div class="stub"><h3>Stage 2 &middot; Full evaluation plan</h3><p>Stub: evaluation design, instruments (caregiver intercept surveys, youth services librarian logs, aggregate anonymized usage data), external evaluator roles, and reporting cadence.</p></div>
+  <div class="stub"><h3>Stage 2 &middot; Detailed budget and narrative</h3><p>Stub: line-item budget by year with full narrative justification. Separate budget for lower ($75,000) and upper ($150,000) ranges.</p></div>
+  <div class="stub"><h3>Stage 2 &middot; Partner letters of commitment</h3><p>Stub: signed letters from Chester County Library System, Scout, selected ECE partner, and a Chester County Spanish-language community organization.</p></div>
+  <div class="stub"><h3>Stage 2 &middot; Sustainability and scaling plan</h3><p>Stub: post-grant operating plan for the caregiver-facing tool, including continued library technology subscription, potential state-level LSTA follow-on, and replication pathway for Free Library of Philadelphia and other Philadelphia-region library systems.</p></div>
+
+  <footer>
+    <div class="brand">Search with Scout</div>
+    <p>Built by librarians, for libraries.</p>
+    <p>Draft v0.1 &middot; April 9, 2026 &middot; Pre-RFP working draft &middot; Revise against the published RFP when it opens June 17, 2026.</p>
+  </footer>
+
+</div>
+</body>
+</html>

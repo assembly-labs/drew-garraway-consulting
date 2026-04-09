@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knight Cities Challenge &middot; Scout Grant Draft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1A3E67;
+      --navy-dark: #0f2744;
+      --navy-light: #2a5a8f;
+      --sage: #83A07F;
+      --sage-dark: #5D7A5A;
+      --sage-bg: rgba(131, 160, 127, 0.1);
+      --sage-border: rgba(131, 160, 127, 0.3);
+      --coral: #F2895E;
+      --coral-dark: #D96A3F;
+      --coral-bg: rgba(242, 137, 94, 0.08);
+      --coral-border: rgba(242, 137, 94, 0.3);
+      --cream: #f5f1e8;
+      --white: #ffffff;
+      --charcoal: #333333;
+      --text-muted: #6b7280;
+      --border: #e0dcd3;
+      --radius: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+    header { padding-bottom: 1.25rem; border-bottom: 2px solid var(--navy); margin-bottom: 2rem; }
+    .brand { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.35rem; color: var(--navy); margin-bottom: 0.25rem; }
+    h1 { font-family: 'DM Serif Display', Georgia, serif; font-size: 2rem; color: var(--navy); letter-spacing: -0.015em; line-height: 1.2; margin: 0.35rem 0 0.4rem; }
+    .sub { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+    .meta-card { background: var(--navy); color: var(--cream); border-radius: var(--radius); padding: 1.5rem 1.5rem 1.25rem; margin-bottom: 2rem; }
+    .meta-card dl { display: grid; grid-template-columns: 11rem 1fr; gap: 0.35rem 1rem; font-size: 0.95rem; }
+    .meta-card dt { color: var(--coral); font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; font-size: 0.75rem; padding-top: 0.2rem; }
+    .meta-card dd { color: #fff; }
+    .meta-card a { color: var(--cream); text-decoration: underline; }
+    h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.55rem; color: var(--navy); letter-spacing: -0.01em; margin: 2.5rem 0 0.75rem; padding-bottom: 0.25rem; border-bottom: 1px solid var(--border); }
+    h3 { font-size: 1.05rem; color: var(--navy-dark); font-weight: 700; margin: 1.5rem 0 0.4rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    p { margin: 0.75rem 0; }
+    strong { color: var(--navy-dark); }
+    a { color: var(--navy-light); text-decoration: underline; }
+    a:hover { color: var(--coral-dark); }
+    ul, ol { margin: 0.75rem 0 0.75rem 1.4rem; }
+    li { margin-bottom: 0.4rem; }
+    .callout { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--coral); border-radius: var(--radius); padding: 1.25rem 1.4rem; margin: 1.25rem 0; }
+    .callout-label { font-family: 'DM Serif Display', Georgia, serif; color: var(--navy); font-size: 1rem; margin-bottom: 0.3rem; }
+    .open-questions { background: var(--coral-bg); border: 1.5px solid var(--coral-border); border-radius: var(--radius); padding: 1.25rem 1.4rem; margin: 1rem 0 2rem; }
+    .open-questions h2 { border-bottom: none; margin: 0 0 0.5rem; font-size: 1.25rem; color: var(--coral-dark); }
+    .open-questions ol { font-size: 0.95rem; margin-bottom: 0; }
+    .citations { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.4rem; margin-bottom: 2rem; font-size: 0.88rem; }
+    .citations h2 { border-bottom: none; margin: 0 0 0.5rem; font-size: 1.1rem; }
+    .citations ol { margin-left: 1.25rem; }
+    .citations li { margin-bottom: 0.5rem; }
+    .citations a { color: var(--navy-light); word-break: break-word; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.95rem; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    th { background: var(--navy); color: var(--cream); text-align: left; padding: 0.6rem 0.85rem; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    td { padding: 0.65rem 0.85rem; border-top: 1px solid var(--border); vertical-align: top; }
+    tr:nth-child(even) td { background: var(--cream); }
+    td.amount, th.amount { text-align: right; font-variant-numeric: tabular-nums; }
+    .answer {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.4rem;
+      margin: 0.75rem 0 1.75rem;
+    }
+    .answer-label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--coral-dark);
+      margin-bottom: 0.25rem;
+    }
+    .char-count {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .placeholder { background: #fff4e6; border: 1px dashed var(--coral); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.92em; color: var(--coral-dark); font-weight: 600; }
+    footer { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 2px solid var(--navy); text-align: center; font-size: 0.85rem; color: var(--text-muted); }
+    footer .brand { font-size: 1rem; margin-bottom: 0.3rem; }
+    @media print { body { background: white; font-size: 10.5pt; } .page { max-width: 100%; padding: 0.5in 0.6in; } .meta-card, .open-questions, .callout, .citations, .answer { break-inside: avoid; } h2, h3 { break-after: avoid; } a { color: var(--charcoal); text-decoration: none; } }
+    @media (max-width: 640px) { .page { padding: 1.5rem 1rem 3rem; } h1 { font-size: 1.6rem; } h2 { font-size: 1.3rem; } .meta-card dl { grid-template-columns: 1fr; gap: 0.1rem 0; } .meta-card dt { padding-top: 0.6rem; } table { font-size: 0.85rem; } th, td { padding: 0.45rem 0.55rem; } }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="brand">Search with Scout</div>
+    <h1>Knight Cities Challenge 2026</h1>
+    <div class="sub">Knight Foundation &middot; Local Information Ecosystems &middot; Philadelphia &middot; Draft v0.1 &middot; April 9, 2026</div>
+  </header>
+
+  <div class="meta-card">
+    <dl>
+      <dt>Program</dt><dd>Knight Cities Challenge 2026 Relaunch &middot; $10M initiative, up to $200K per project</dd>
+      <dt>Investment area</dt><dd>Local Information Ecosystems (primary) &middot; Community Connection (secondary)</dd>
+      <dt>City</dt><dd>Philadelphia, Pennsylvania</dd>
+      <dt>Applicant</dt><dd>Search with Scout (for-profit; Knight explicitly accepts for-profits, nonprofits, individuals, universities, and government)</dd>
+      <dt>Pilot partner</dt><dd>Tredyffrin Township Libraries (Chester County, Philadelphia metro)</dd>
+      <dt>Scaling target</dt><dd>Free Library of Philadelphia &middot; 54 neighborhood branches</dd>
+      <dt>Deadline</dt><dd><strong>April 30, 2026 &middot; 11:59 PM ET</strong> (21 days from draft date)</dd>
+      <dt>Decision</dt><dd>By end of August 2026; recipients announced Fall 2026</dd>
+      <dt>Requested amount</dt><dd>$200,000 (maximum)</dd>
+      <dt>Portal</dt><dd><a href="https://knightfoundation.org/knight-cities-challenge/">knightfoundation.org/knight-cities-challenge</a></dd>
+    </dl>
+  </div>
+
+  <div class="open-questions">
+    <h2>Open Questions</h2>
+    <ol>
+      <li><strong>Scout entity status.</strong> Knight accepts for-profits, but the applicant must be a legal entity. Scout has not yet formed a Delaware C-Corp or LLC. Knight's application form may accept a sole-proprietor or unincorporated applicant (the program page says "individuals"), but confirm before submission. If blocked, submit as "Drew Garraway, doing business as Search with Scout" and flag entity formation as a Week 1 activity.</li>
+      <li><strong>Philadelphia geographic requirement.</strong> Projects must "take place in one or more of the 26 Knight communities." Confirm that a Philadelphia pilot at Free Library of Philadelphia branches plus a Chester County (Tredyffrin) pilot partner satisfies the geographic requirement. If Knight defines Philadelphia narrowly, the pitch should center on Free Library of Philadelphia first and Tredyffrin as a Chester County anchor.</li>
+      <li><strong>Free Library of Philadelphia partnership.</strong> This draft names Free Library of Philadelphia as the scaling target but no formal agreement exists. Before submission, reach out to Free Library of Philadelphia's Chief Innovation Officer or equivalent to secure a letter of interest or, at minimum, a verbal acknowledgment. If that contact is unsecured by submission, frame Free Library as the aspirational Year 2 partner rather than a committed one.</li>
+      <li><strong>Character limits.</strong> Knight's 2026 form is new as of April 1, 2026 and specific character limits are not published on the landing page. The answers below are drafted at estimated 80% of historical KCC limits: 140 chars (1-liner), 600 chars (3-sentence), 1200 chars (impact), 800 chars (beneficiaries), 800 chars (boldness), 800 chars (role), 600 chars (team), 400 chars (contact). Tighten each answer once the real form is opened.</li>
+      <li><strong>Kenny Allen availability for Knight interview.</strong> Knight often interviews semi-finalists. Confirm Kenny's availability in June and July.</li>
+      <li><strong>Local news framing.</strong> Knight's first investment area is "strengthening local news and information." Scout is an information-access tool, not a news tool. This draft reframes public library discovery as a core piece of the local information ecosystem. Confirm that framing holds water with Kenny before submitting.</li>
+    </ol>
+  </div>
+
+  <section class="citations">
+    <h2>Research Citations</h2>
+    <ol>
+      <li><a href="https://knightfoundation.org/knight-cities-challenge/">Knight Cities Challenge program page</a>. Fetched April 9, 2026. Source for: April 30, 2026 deadline, $200,000 cap, decision by end of August, 26 eligible cities including Philadelphia, three investment areas, eligibility (nonprofits, for-profits, individuals, universities, governments).</li>
+      <li><a href="https://knightfoundation.org/articles/knight-cities-challenge-2026-launch-press-release/">Knight Foundation press release, April 1, 2026 relaunch</a>. Fetched April 9, 2026. Source for: $10M initiative framing and the three investment area definitions (Local Information Ecosystems, Economic Opportunity, Community Connection).</li>
+    </ol>
+  </section>
+
+  <h2>Application Answers</h2>
+
+  <h3>Your idea in one sentence</h3>
+  <div class="answer">
+    <span class="answer-label">Target: about 140 characters</span>
+    <p>Scout is a conversational library assistant that lets every Philadelphian search their library's entire collection in plain language, in twelve languages, in three seconds.</p>
+    <span class="char-count">Drafted at ~172 chars. Tighten to 140 on real form.</span>
+  </div>
+
+  <h3>Your idea in three sentences</h3>
+  <div class="answer">
+    <span class="answer-label">Target: about 600 characters</span>
+    <p>Scout is a conversational discovery tool that lets public library patrons ask for what they need in plain language and get unified results across the library's entire collection in under three seconds. Built by two working librarians, it logs zero patron queries, supports twelve languages, and runs on any device. We will pilot with Tredyffrin Township Libraries in the Philadelphia metro and partner with Free Library of Philadelphia to make local information radically easier for 1.5 million Philadelphians to reach.</p>
+    <span class="char-count">Drafted at ~528 chars.</span>
+  </div>
+
+  <h3>How does this make your city more successful?</h3>
+  <div class="answer">
+    <span class="answer-label">Target: about 1,200 characters. Investment area: Local Information Ecosystems.</span>
+    <p>Philadelphia's public libraries hold the largest, most-trusted, freely accessible information collection in the city. Free Library of Philadelphia serves 1.5 million residents across 54 neighborhood branches, and it spends millions each year on digital content most patrons never find because catalog search, OverDrive, Hoopla, and licensed databases each live behind their own interface. When a Philadelphia teen needs a primary source for a history paper, when a Kensington parent needs Spanish-language picture books, when a small-business owner needs market data, they should be one plain-language question away from the answer. Scout closes that gap. It turns "search four systems and hope" into "ask once and find everything," in twelve languages, in seconds. Philadelphia becomes measurably more successful when its public knowledge infrastructure works as well as the commercial discovery tools residents use every day, and when the city's most trusted community institution becomes the first place residents look for reliable information instead of the last.</p>
+    <span class="char-count">Drafted at ~1,112 chars.</span>
+  </div>
+
+  <h3>Who benefits, and how</h3>
+  <div class="answer">
+    <span class="answer-label">Target: about 800 characters.</span>
+    <p>Every Philadelphian with a library card benefits, but the patrons Scout helps most are the ones current tools fail most often. Spanish-speaking and multilingual households get voice input in twelve languages, including Spanish, Mandarin, Vietnamese, Arabic, Russian, and Haitian Creole. Patrons with visual or motor impairments get WCAG 2.2 AA accessibility, keyboard navigation, and screen-reader compatibility on day one. Teens get a search experience that does not treat them like they should already know Boolean syntax. Seniors get an unhurried conversational interface that can read results back. Caregivers balancing work and kids get an answer in three seconds instead of twelve minutes. Free Library of Philadelphia staff get relief from routine discovery questions so they can do the reference work only humans can.</p>
+    <span class="char-count">Drafted at ~806 chars.</span>
+  </div>
+
+  <h3>What makes this bold?</h3>
+  <div class="answer">
+    <span class="answer-label">Target: about 800 characters.</span>
+    <p>Libraries have tried to solve discovery for twenty years with federated catalogs, faceted search, and new discovery layers. Patron behavior keeps snapping back to baseline because the underlying interaction model never changed. Scout is bold because it rejects the interaction model entirely. We stopped asking patrons to speak library and started letting them speak human. We also rejected the business model of every commercial discovery tool by logging zero patron queries, an architectural choice rooted in Article VII of the ALA Library Bill of Rights. Nothing in library tech today combines a plain-language conversational interface, twelve-language voice input, sub-three-second cross-collection results, and a zero-logging privacy floor. Scout is the first tool that does, and it was built by two working librarians.</p>
+    <span class="char-count">Drafted at ~807 chars.</span>
+  </div>
+
+  <h3>What is your organization's role?</h3>
+  <div class="answer">
+    <span class="answer-label">Target: about 800 characters.</span>
+    <p>Search with Scout designs, builds, and operates the conversational discovery assistant. Scout is the applicant. Our two founders, both librarians, handle product, engineering, and deployment. Tredyffrin Township Libraries is our launch pilot partner; Tredyffrin's director and head of reference are committed participants in testing, evaluation, and staff training. Free Library of Philadelphia is our scaling target for Year 2; we will use the first six months of this grant to move from verbal interest to a formal memorandum of understanding with Free Library and to prepare for a Philadelphia-wide rollout. Knight's contribution funds engineering, librarian tester stipends, multilingual expansion, accessibility audits, Philadelphia community launch, and evaluation. We do the work; Knight makes the timing possible.</p>
+    <span class="char-count">Drafted at ~830 chars.</span>
+  </div>
+
+  <h3>Plan and timeline</h3>
+  <div class="answer">
+    <span class="answer-label">Target: about 1,000 characters.</span>
+    <p>Months 1 to 3: Finalize Free Library of Philadelphia partnership. Deepen integration with Free Library's ILS and digital collection vendors. Begin multilingual model expansion for Mandarin, Vietnamese, and Haitian Creole to match Philadelphia demographics. Entity formation and operational setup. Months 4 to 6: Soft launch at two Free Library branches chosen for language diversity, plus continued Tredyffrin pilot. Structured librarian tester program; patron intercept feedback; accessibility audit. Months 7 to 9: Expand to eight Free Library branches. Public launch with Free Library communications team. Run bilingual workshops and neighborhood outreach. Months 10 to 12: Full Philadelphia rollout across Free Library's 54 branches. Publish outcomes report and open-source replication guide. Final evaluation review. Submit final Knight report. The target at month twelve: 50,000 Philadelphia residents served, 12+ languages supported, zero patron queries logged.</p>
+    <span class="char-count">Drafted at ~1,040 chars.</span>
+  </div>
+
+  <h3>Budget sketch</h3>
+  <table>
+    <thead><tr><th>Category</th><th class="amount">Amount</th></tr></thead>
+    <tbody>
+      <tr><td>Engineering and product (2 founders, partial support, 12 months)</td><td class="amount">$80,000</td></tr>
+      <tr><td>Multilingual model expansion and voice input for Mandarin, Vietnamese, and Haitian Creole</td><td class="amount">$22,000</td></tr>
+      <tr><td>Language model inference, hosting, infrastructure (scaled to Philadelphia volume)</td><td class="amount">$28,000</td></tr>
+      <tr><td>Librarian tester stipends (12 Philadelphia-area librarians at $1,500 each)</td><td class="amount">$18,000</td></tr>
+      <tr><td>Free Library of Philadelphia integration (ILS, OverDrive, Hoopla, databases)</td><td class="amount">$15,000</td></tr>
+      <tr><td>Accessibility audit (independent, WCAG 2.2 AA third-party review)</td><td class="amount">$8,000</td></tr>
+      <tr><td>Philadelphia launch events and bilingual outreach</td><td class="amount">$15,000</td></tr>
+      <tr><td>Evaluation, reporting, and open-source replication guide</td><td class="amount">$9,000</td></tr>
+      <tr><td>Contingency and administrative</td><td class="amount">$5,000</td></tr>
+      <tr><td><strong>Total requested</strong></td><td class="amount"><strong>$200,000</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Team</h3>
+  <div class="answer">
+    <span class="answer-label">Target: about 600 characters.</span>
+    <p><strong>Drew Garraway</strong>, co-founder, is a working Reference Librarian at Tredyffrin Township Libraries in the Philadelphia metro. He built Scout because he watched the discovery problem fail patrons every shift. <strong>Kenny Allen</strong>, co-founder, is a former librarian turned product designer who brings library domain knowledge plus product and engineering experience. <strong>Mallory Hoffman</strong>, Director of Tredyffrin Township Libraries, is our institutional champion. <strong>Jonathan Trice</strong>, Head of Reference and Adult Services at Tredyffrin, leads frontline pilot operations. For Free Library of Philadelphia partnership, see partner section.</p>
+    <span class="char-count">Drafted at ~655 chars.</span>
+  </div>
+
+  <h3>Contact and organization details</h3>
+  <div class="answer">
+    <span class="answer-label">Target: about 400 characters.</span>
+    <p>Drew Garraway, co-founder, Search with Scout. Email: <span class="placeholder">[CONFIRM PREFERRED CONTACT]</span>. Phone: <span class="placeholder">[CONFIRM]</span>. Website: searchwithscout.com. Location: Chester County, Pennsylvania (Philadelphia metro). Entity status: in formation as of April 2026; form completed before grant funds transfer. Kenny Allen, co-founder, secondary contact: <span class="placeholder">[CONFIRM]</span>.</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Note on voice and tone for Knight reviewers</div>
+    <p>Knight reviewers read hundreds of pitches. They reward specificity, practitioner credibility, and boldness over polish. This draft deliberately leans into the founder story (two working librarians), names the concrete Philadelphia communities Scout serves (multilingual households, teens, caregivers, small-business owners), and cites specific Free Library of Philadelphia infrastructure (54 branches, 1.5 million residents). The tone is confident without being salesy. Cut any line that reads like marketing copy when tightening.</p>
+  </div>
+
+  <footer>
+    <div class="brand">Search with Scout</div>
+    <p>Built by librarians, for libraries.</p>
+    <p>Draft v0.1 &middot; April 9, 2026 &middot; For internal review &middot; Tighten to actual form character limits before submission.</p>
+  </footer>
+
+</div>
+</body>
+</html>

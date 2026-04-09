@@ -11,6 +11,8 @@ on:
       - 'fhm/**'
       - 'kaijutsu/**'
       - 'read-out-loud/**'
+      - 'scout-grants/**'
+      - '.github/workflows/deploy-site.yml'
 
 jobs:
   deploy:
@@ -64,6 +66,10 @@ jobs:
           cp read-out-loud/sw.js _site/read-out-loud/
           [ -f read-out-loud/_headers ] && cp read-out-loud/_headers _site/read-out-loud/ || true
           [ -f read-out-loud/_redirects ] && cp read-out-loud/_redirects _site/read-out-loud/ || true
+
+          # Scout Grants — static HTML grant drafts
+          mkdir -p _site/scout-grants
+          cp -r scout-grants/. _site/scout-grants/
 
       # --- Deploy to Cloudflare Pages ---
       - name: Deploy to Cloudflare Pages

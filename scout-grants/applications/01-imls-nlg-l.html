@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMLS National Leadership Grant · Scout Grant Draft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1A3E67;
+      --navy-dark: #0f2744;
+      --navy-light: #2a5a8f;
+      --sage: #83A07F;
+      --sage-dark: #5D7A5A;
+      --sage-bg: rgba(131, 160, 127, 0.1);
+      --sage-border: rgba(131, 160, 127, 0.3);
+      --coral: #F2895E;
+      --coral-dark: #D96A3F;
+      --coral-bg: rgba(242, 137, 94, 0.08);
+      --coral-border: rgba(242, 137, 94, 0.3);
+      --cream: #f5f1e8;
+      --cream-dark: #ebe5d8;
+      --white: #ffffff;
+      --charcoal: #333333;
+      --text-muted: #6b7280;
+      --border: #e0dcd3;
+      --radius: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+    header {
+      text-align: left;
+      padding-bottom: 1.25rem;
+      border-bottom: 2px solid var(--navy);
+      margin-bottom: 2rem;
+    }
+    .brand {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.35rem;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      margin-bottom: 0.25rem;
+    }
+    h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2rem;
+      color: var(--navy);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0.35rem 0 0.4rem;
+    }
+    .sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .meta-card {
+      background: var(--navy);
+      color: var(--cream);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.5rem 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .meta-card dl {
+      display: grid;
+      grid-template-columns: 11rem 1fr;
+      gap: 0.35rem 1rem;
+      font-size: 0.95rem;
+    }
+    .meta-card dt {
+      color: var(--coral);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      padding-top: 0.2rem;
+    }
+    .meta-card dd { color: #fff; }
+    .meta-card a { color: var(--cream); text-decoration: underline; }
+    h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.55rem;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      margin: 2.75rem 0 0.75rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.1rem;
+      color: var(--navy-dark);
+      font-weight: 700;
+      margin: 1.75rem 0 0.5rem;
+    }
+    h4 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--navy);
+      font-weight: 700;
+      margin: 1.25rem 0 0.4rem;
+    }
+    p { margin: 0.75rem 0; }
+    ul, ol { margin: 0.75rem 0 0.75rem 1.4rem; }
+    li { margin-bottom: 0.35rem; }
+    strong { color: var(--navy-dark); }
+    em { font-style: italic; color: var(--charcoal); }
+    a { color: var(--navy-light); text-decoration: underline; }
+    a:hover { color: var(--coral-dark); }
+    .callout {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--sage);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.4rem;
+      margin: 1.25rem 0;
+      font-size: 0.98rem;
+    }
+    .callout.coral { border-left-color: var(--coral); background: var(--coral-bg); }
+    .callout.navy { border-left-color: var(--navy); }
+    .callout-label {
+      font-family: 'DM Serif Display', Georgia, serif;
+      color: var(--navy);
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.5rem;
+      font-size: 0.95rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    th {
+      background: var(--navy);
+      color: var(--cream);
+      text-align: left;
+      padding: 0.6rem 0.85rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    td {
+      padding: 0.65rem 0.85rem;
+      border-top: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: var(--cream); }
+    td.amount, th.amount { text-align: right; font-variant-numeric: tabular-nums; }
+    .checklist {
+      list-style: none;
+      margin-left: 0;
+    }
+    .checklist li {
+      padding-left: 1.6rem;
+      position: relative;
+      margin-bottom: 0.4rem;
+    }
+    .checklist li::before {
+      content: '\25A1';
+      position: absolute;
+      left: 0;
+      color: var(--sage-dark);
+      font-size: 1.1rem;
+      top: -0.05rem;
+    }
+    .open-questions {
+      background: var(--coral-bg);
+      border: 1.5px solid var(--coral-border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.4rem;
+      margin: 1rem 0 2rem;
+    }
+    .open-questions h2 {
+      border-bottom: none;
+      margin: 0 0 0.5rem;
+      font-size: 1.25rem;
+      color: var(--coral-dark);
+    }
+    .open-questions ol {
+      font-size: 0.95rem;
+      margin-bottom: 0;
+    }
+    .citations {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.4rem;
+      margin-bottom: 2rem;
+      font-size: 0.88rem;
+    }
+    .citations h2 {
+      border-bottom: none;
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+    }
+    .citations ol { margin-left: 1.25rem; }
+    .citations li { margin-bottom: 0.5rem; }
+    .citations a { color: var(--navy-light); word-break: break-word; }
+    footer {
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid var(--navy);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer .brand { font-size: 1rem; margin-bottom: 0.3rem; }
+    .toc {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.4rem;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+    .toc-label {
+      font-family: 'DM Serif Display', Georgia, serif;
+      color: var(--navy);
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+    }
+    .toc ol { margin-left: 1.2rem; margin-bottom: 0; }
+    .toc a { color: var(--navy); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; color: var(--coral-dark); }
+    .placeholder {
+      background: #fff4e6;
+      border: 1px dashed var(--coral);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.92em;
+      color: var(--coral-dark);
+      font-weight: 600;
+    }
+    @media print {
+      body { background: white; font-size: 10.5pt; }
+      .page { max-width: 100%; padding: 0.5in 0.6in; }
+      .meta-card, .open-questions, .callout, .citations, .toc { break-inside: avoid; }
+      h2, h3, h4 { break-after: avoid; }
+      table { break-inside: avoid; }
+      a { color: var(--charcoal); text-decoration: none; }
+    }
+    @media (max-width: 640px) {
+      .page { padding: 1.5rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.3rem; }
+      .meta-card dl { grid-template-columns: 1fr; gap: 0.1rem 0; }
+      .meta-card dt { padding-top: 0.6rem; }
+      table { font-size: 0.85rem; }
+      th, td { padding: 0.45rem 0.55rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="brand">Search with Scout</div>
+    <h1>IMLS National Leadership Grants for Libraries</h1>
+    <div class="sub">Institute of Museum and Library Services &middot; Community-Centered Implementation track &middot; Draft v0.1 &middot; April 9, 2026</div>
+  </header>
+
+  <div class="meta-card">
+    <dl>
+      <dt>Program</dt><dd>National Leadership Grants for Libraries (NLG-L), FY2027 cycle</dd>
+      <dt>Track</dt><dd>Community-Centered Implementation Grant</dd>
+      <dt>Award range</dt><dd>$25,000 to $100,000 (no cost share required)</dd>
+      <dt>Project period</dt><dd>Up to 24 months; proposed 14 months</dd>
+      <dt>Deadline</dt><dd>Anticipated November 13, 2026 (FY2027 NOFO pending)</dd>
+      <dt>Lead applicant</dt><dd>Tredyffrin Township Libraries (Chester County, PA)</dd>
+      <dt>Technology partner</dt><dd>Search with Scout</dd>
+      <dt>Registrations required</dt><dd>SAM.gov (active UEI), Grants.gov, Research.gov</dd>
+      <dt>Portal</dt><dd><a href="https://www.imls.gov/find-funding/funding-opportunities/grant-programs/national-leadership-grants-for-libraries">imls.gov/find-funding/.../national-leadership-grants-for-libraries</a></dd>
+      <dt>Requested amount</dt><dd>$100,000</dd>
+    </dl>
+  </div>
+
+  <section class="abstract">
+    <h2>Reviewer-Facing Abstract</h2>
+    <p>Tredyffrin Township Libraries, partnering with Search with Scout, will pilot a conversational discovery assistant that lets public library patrons search across the entire library collection (physical catalog, OverDrive, Hoopla, and licensed databases) through a single natural-language interface. Patrons describe what they need in their own words, in any of twelve languages, and receive unified results with real-time availability in under three seconds. The project addresses a persistent national problem: patrons must navigate four or more disconnected discovery systems to find materials their library already owns, and most give up before they succeed. Over fourteen months, Tredyffrin will deploy the assistant, measure impact on discovery success, digital collection use, and equitable access, and publish a replication guide for public libraries nationwide. The assistant is built by two working librarians and logs zero patron queries, aligning technical design with the profession's commitment to intellectual freedom.</p>
+  </section>
+
+  <div class="open-questions">
+    <h2>Open Questions (Pre-Submission)</h2>
+    <ol>
+      <li><strong>Tredyffrin library statistics.</strong> Confirm with Mallory Hoffman: current service population, annual circulation (print + digital), OverDrive and Hoopla checkouts, database session counts, reference volume, languages served, and annual operating budget.</li>
+      <li><strong>Active registrations.</strong> Confirm Tredyffrin's SAM.gov UEI is active and Grants.gov account is usable. If expired, renewal can take four weeks.</li>
+      <li><strong>Overhead rate.</strong> Confirm Tredyffrin's federally negotiated indirect cost rate, or the de minimis rate of 15% if none is on file.</li>
+      <li><strong>FY2027 NOFO release.</strong> IMLS webpage currently states the FY2027 NOFO is not yet posted. Revise this draft against the published NOFO as soon as it appears, paying close attention to page limits, required appendices, and the review criteria rubric.</li>
+      <li><strong>Jonathan Trice title and MLIS year.</strong> Confirm exact title (Head of Reference and Adult Services) and Drexel MLIS graduation year for the bio sketch.</li>
+      <li><strong>Catalog integration readiness.</strong> Confirm status of Sierra ILS API credentials (blocked pending Theresa Metzger, CCLS IT). If blocked at time of submission, propose Phase 1 begins with OverDrive and Hoopla connectors while ILS access is negotiated.</li>
+      <li><strong>Letters of support.</strong> Request letters from Mallory Hoffman, Joe Sherwood (CCLS Executive Director), a PA Office of Commonwealth Libraries representative, and Drexel iSchool faculty. Confirm each by August 2026.</li>
+      <li><strong>External evaluator.</strong> Identify a candidate (PaLA research committee, Drexel iSchool, or an independent evaluator) and confirm availability.</li>
+      <li><strong>Digital products plan.</strong> Confirm the replication guide and evaluation framework can be released under a Creative Commons license, which IMLS typically requires.</li>
+    </ol>
+  </div>
+
+  <section class="citations">
+    <h2>Research Citations</h2>
+    <ol>
+      <li><a href="https://www.imls.gov/find-funding/funding-opportunities/grant-programs/national-leadership-grants-for-libraries">IMLS National Leadership Grants for Libraries program page</a>. Fetched April 9, 2026. Source for: five project tracks, Community-Centered Implementation range ($25K to $100K, no match), projected November 13, 2026 deadline, and current FY2027 NOFO-pending status.</li>
+      <li><a href="https://www.imls.gov/grants/available/national-leadership-grants-libraries">IMLS grants available listing</a>. Fetched April 9, 2026. Source for: track definitions and project period lengths.</li>
+      <li><a href="https://www.imls.gov/sites/default/files/2026-01/fy26-ols-nlgl-NOFO.pdf">FY2026 NLG-L Notice of Funding Opportunity (PDF)</a>. Used as structural reference only; FY2027 NOFO will supersede.</li>
+      <li><a href="https://www.imls.gov/find-funding/how-to-apply/funding-opportunities">IMLS Funding Opportunities page</a>. Fetched April 9, 2026. Source for: dear-colleague priority framing (paraphrased, not quoted, to comply with Scout voice rules).</li>
+    </ol>
+  </section>
+
+  <div class="toc">
+    <div class="toc-label">Contents</div>
+    <ol>
+      <li><a href="#title">Project Title</a></li>
+      <li><a href="#statement-need">Statement of National Need</a></li>
+      <li><a href="#project-design">Project Design and Activities</a></li>
+      <li><a href="#diversity">Diversity, Equity, and Access Plan</a></li>
+      <li><a href="#results">Project Results and Performance Measurement</a></li>
+      <li><a href="#budget">Budget Narrative</a></li>
+      <li><a href="#schedule">Schedule of Completion</a></li>
+      <li><a href="#capacity">Organizational Capacity</a></li>
+      <li><a href="#sustainability">Sustainability Plan</a></li>
+      <li><a href="#digital">Digital Products Plan</a></li>
+      <li><a href="#bios">Biographical Sketches</a></li>
+      <li><a href="#letters">Letters of Support</a></li>
+      <li><a href="#attachments">Attachments Checklist</a></li>
+    </ol>
+  </div>
+
+  <h2 id="title">1. Project Title</h2>
+  <p><strong>Ask Once, Find Everything: A Conversational Discovery Pilot for Public Libraries at Tredyffrin Township Libraries</strong></p>
+  <p>Alternate working titles under consideration:</p>
+  <ul>
+    <li>Bridging the Discovery Gap: Deploying a Natural-Language Library Assistant Across a Multi-Vendor Collection</li>
+    <li>One Question, Every Collection: A Community-Centered Pilot of Conversational Library Discovery</li>
+  </ul>
+
+  <h2 id="statement-need">2. Statement of National Need</h2>
+
+  <h3>The discovery problem is national, structural, and measurable.</h3>
+  <p>Public libraries serve as one of the last free, equitable points of access to information in American communities. The nation's approximately 9,250 public library systems collectively spend hundreds of millions of dollars each year on digital collections, licensed databases, and physical materials. Yet the tools patrons use to search those collections have not kept pace with the discovery experiences patrons encounter everywhere else in their lives.</p>
+
+  <p>A typical public library patron must navigate four or more disconnected systems to find materials their library already owns. The online public access catalog searches print and media holdings. OverDrive has its own application for ebooks and digital audiobooks. Hoopla has another. Licensed databases covering genealogy, consumer health, small business research, legal forms, and local history each have separate interfaces, separate search logic, and separate authentication. A patron who wants "a good audiobook for a long car ride in Spanish" must search four to five systems independently, assuming the patron knows those systems exist at all.</p>
+
+  <p>The outcome is predictable. Most patrons never venture beyond the front-page catalog. Digital collection use, despite representing a significant share of most libraries' acquisition budgets, remains a fraction of what collection development officers target. Reference librarians spend meaningful portions of their shifts performing discovery searches that patrons could perform themselves if the tools were more forgiving.</p>
+
+  <h3>The problem is sharpest where libraries matter most.</h3>
+  <p>This failure is not distributed evenly. Patrons who rely on libraries most are the ones current discovery tools fail most often. Non-English-speaking patrons face interfaces available only in English and controlled vocabulary rooted in Anglophone subject headings. Patrons with visual, motor, or cognitive impairments encounter accessibility barriers that vary across each platform, so a patron who masters OverDrive still has to relearn Hoopla. Rural and small libraries without dedicated reference staff have no professional to bridge the gap between a patron's need and the library's holdings during weekend or evening hours. Teens and new adults, trained by commercial platforms to expect instant, conversational, comprehensive results, read the friction of legacy catalog search as a signal that the library has nothing for them.</p>
+
+  <p>Every day that libraries cannot offer a comparable discovery experience, they lose relevance in the eyes of patrons, boards, and funders, and with it the political support and appropriations that sustain public library service.</p>
+
+  <h3>Prior approaches have not solved the problem.</h3>
+  <p>The field has tried to solve this with federated search, discovery layers, and improved faceted navigation. Libraries have spent two decades deploying those approaches with limited patron adoption. Reviewers of this proposal will likely recognize the pattern: a vendor layer is installed, staff are trained, a six-month circulation bump is observed, and patron behavior then returns to baseline because the underlying interaction model, keyword input evaluated against controlled vocabulary, still does not match how patrons actually describe what they want.</p>
+
+  <p>The gap is not about database coverage. It is about the interaction layer itself. Patrons need a single point of entry that understands their plain-language request, searches every collection their library offers, and returns real-time availability in seconds, on any device, in any language.</p>
+
+  <h3>Alignment with IMLS priorities.</h3>
+  <p>This project responds directly to IMLS's strategic commitment to supporting libraries as civic centers of learning and to advancing the adoption of emerging technologies that measurably improve public library service. Recent IMLS guidance to the field has identified large language models and related language technologies as a priority area, urging the field to explore responsible, privacy-preserving applications of those tools in library service. This proposal paraphrases that guidance rather than quoting it, but the alignment is direct: Search with Scout is a privacy-first, accessibility-first, practitioner-built application of conversational language technology to the most common patron workflow in any public library.</p>
+
+  <h3>Why now.</h3>
+  <p>Three factors make this the right moment for a Community-Centered Implementation pilot. First, large language models have reached a level of capability where natural-language library search is technically feasible, affordable, and reliable for the first time. Second, public concern about patron privacy and responsible technology use is high, and public libraries are uniquely positioned to model privacy-preserving, intellectual-freedom-aligned deployment of conversational tools. Third, the field has an active IMLS signal to explore these approaches, and a practitioner-led team ready to deploy, measure, and disseminate a replicable model.</p>
+
+  <h2 id="project-design">3. Project Design and Activities</h2>
+
+  <p>Tredyffrin Township Libraries will deploy Search with Scout, a conversational discovery assistant, across all Tredyffrin branches and service channels over a fourteen-month pilot. The project is organized into four phases with defined deliverables and milestones at each transition.</p>
+
+  <h3>Phase 1 (Months 1 to 3): Integration and Baseline</h3>
+  <p>The first phase establishes technical integration and collects a clean baseline against which pilot outcomes can be measured. The project team will complete API integration with Tredyffrin's Sierra ILS (the migration target identified in the library's current catalog integration planning) and configure connectors for OverDrive, Hoopla, and the library's licensed databases. Concurrently, Jonathan Trice and the Tredyffrin reference team will capture ninety days of baseline data covering catalog search volume, digital circulation, reference desk question counts, and language coverage of current service. The project team will recruit eight to twelve librarian testers drawn from Tredyffrin staff and neighboring Chester County Library System member libraries. Phase 1 concludes with a staff orientation session and a go/no-go review of integration completeness.</p>
+
+  <h3>Phase 2 (Months 4 to 6): Soft Launch and Iteration</h3>
+  <p>The assistant is deployed first to staff-only terminals. Recruited testers run structured query protocols that exercise vocabulary variety, language coverage, accessibility features, and edge cases (ambiguous requests, multi-language queries, requests that should be handed off to a reference librarian). Weekly feedback sessions surface defects and response-quality issues, which are triaged and patched. Patron-facing deployment begins at one to two branches toward the end of Phase 2 so the team can observe real patron interactions before full rollout. Phase 2 concludes with an interim evaluation report and a decision gate on full deployment.</p>
+
+  <h3>Phase 3 (Months 7 to 12): Full Deployment and Measurement</h3>
+  <p>The assistant is made available to all Tredyffrin patrons through the library website and in-branch kiosks. Anonymized, aggregated usage analytics are captured monthly. Patron intercept surveys are administered each quarter. Staff surveys are administered in month eight and month twelve. An external evaluator reviews progress at the midpoint and collects qualitative data through structured staff interviews. Phase 3 is where the project produces most of its evidence base for effectiveness and equity.</p>
+
+  <h3>Phase 4 (Months 10 to 14): Documentation and Dissemination</h3>
+  <p>Dissemination overlaps Phase 3 deliberately, so findings reach the field as they emerge rather than only at project close. Deliverables include a replicable implementation guide for other public libraries, a public evaluation report with anonymized data, presentations at the Pennsylvania Library Association annual conference, the Public Library Association conference, and the American Library Association annual conference, and a free webinar series for library directors evaluating conversational discovery tools. A final report is submitted to IMLS.</p>
+
+  <h3>Key deliverables.</h3>
+  <ul>
+    <li>A fully deployed, privacy-preserving conversational discovery assistant covering Tredyffrin's physical catalog, OverDrive, Hoopla, and licensed databases.</li>
+    <li>A replication guide for public libraries, including technical integration notes, change management recommendations, and evaluation instruments.</li>
+    <li>An evaluation report with quantitative impact data and qualitative staff and patron findings.</li>
+    <li>Conference presentations, a webinar series, and a final IMLS report.</li>
+    <li>An open-source evaluation framework other libraries can adopt without license cost.</li>
+  </ul>
+
+  <h2 id="diversity">4. Diversity, Equity, and Access Plan</h2>
+
+  <p>Search with Scout is designed to serve the patrons current library discovery tools fail most often. This plan summarizes how the pilot will advance IMLS's commitment to ensuring that all people have access to information and ideas.</p>
+
+  <h3>Language equity.</h3>
+  <p>The assistant accepts voice and text input in twelve languages: Spanish, Mandarin, Cantonese, Korean, Vietnamese, Arabic, Russian, Haitian Creole, Portuguese, French, Tagalog, and English. Non-English-speaking patrons can describe what they need in their own language, including idiomatic and colloquial phrasings that controlled vocabulary cannot match. Results are returned with translated metadata where available and preserve the patron's language throughout the dialog.</p>
+
+  <h3>Accessibility.</h3>
+  <p>The assistant meets WCAG 2.2 Level AA standards. It is fully navigable by keyboard and compatible with JAWS, NVDA, and VoiceOver. High-contrast mode and scalable text are built in. Voice input provides an alternative for patrons who cannot or prefer not to type. These are not add-on features; they are baseline requirements of the project and part of every release the team ships.</p>
+
+  <h3>Privacy as equity.</h3>
+  <p>Low-income patrons, immigrants, and members of marginalized communities are disproportionately harmed by surveillance. The assistant logs zero patron queries. No search content, no patron identity, no IP address beyond session, and no reading history is stored in any database. This design is rooted in Article VII of the American Library Association Library Bill of Rights and the profession's commitment to intellectual freedom. It is a precondition of the project, not a feature to be negotiated.</p>
+
+  <h3>Community reach and measurement.</h3>
+  <p>Evaluation metrics explicitly track usage by language of query (not patron identity), usage of accessibility features (voice input, screen reader, large text), and adoption at branches serving lower-income communities. The project team will not collect patron demographic data, which would violate the privacy commitment. Instead, language and accessibility signals function as aggregate equity indicators.</p>
+
+  <h2 id="results">5. Project Results and Performance Measurement</h2>
+
+  <p>Project results are organized in four measurement areas. Each area pairs a target with an instrument, a baseline, and a responsible team member.</p>
+
+  <h3>Area 1: Patron Discovery Success</h3>
+  <p>The project will measure whether the assistant succeeds at the core job. Target: at least 85 percent of patron queries return at least one relevant result. Instrument: anonymized query-outcome logs (query text is not stored; only outcome flags and relevance classification produced by the assistant itself). Patron satisfaction target: at least 4.0 on a 5-point scale from optional post-session micro-surveys. Baseline: Phase 1 catalog failure rates captured from reference desk interaction logs during the ninety-day pre-deployment window.</p>
+
+  <h3>Area 2: Collection Utilization</h3>
+  <p>Target: a measurable increase in digital collection circulation (OverDrive and Hoopla checkouts) and in database session counts after full deployment, compared with the ninety-day baseline. Instrument: vendor-provided usage reports that Tredyffrin already receives. The project will also track cross-format discovery rate, the percentage of assistant responses that surface materials outside the physical catalog, with a target of at least 40 percent.</p>
+
+  <h3>Area 3: Equity and Access</h3>
+  <p>Target: measurable usage in non-English languages, proportional to the community's language profile, and measurable use of accessibility features. Instrument: aggregate session-level signals (language of query, voice input active, screen reader active). No individual patron identity is captured.</p>
+
+  <h3>Area 4: Staff Impact</h3>
+  <p>Target: a 20 to 30 percent reduction in routine directional and discovery reference questions at the Tredyffrin reference desk during Phase 3, measured against the Phase 1 baseline. A corresponding qualitative target: staff report that freed time is being redirected to programming, collection development, outreach, and complex reference work. Instrument: the existing Tredyffrin reference statistics log and structured staff interviews at months 8 and 12.</p>
+
+  <h3>Evaluation methodology.</h3>
+  <p>The project will use a pre/post comparison design anchored by the ninety-day baseline. Quantitative data is collected monthly. Patron intercept surveys are administered quarterly. Staff surveys are administered twice. An external evaluator, identified during Phase 1, will review data at month 7 (midpoint) and month 13 (final), and will co-author the final evaluation report. The evaluation framework will be released under a Creative Commons license so other libraries can adopt it.</p>
+
+  <h2 id="budget">6. Budget Narrative</h2>
+
+  <p>Tredyffrin requests $100,000 for a fourteen-month Community-Centered Implementation pilot. The Community-Centered Implementation track does not require cost share at this level. Tredyffrin will contribute in-kind support, described in the Organizational Capacity section, on top of the requested amount.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th class="amount">Amount</th>
+        <th>Purpose and Justification</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Discovery assistant infrastructure and language model inference</td>
+        <td class="amount">$18,000</td>
+        <td>Language model API calls, hosting, content delivery, monitoring, and logging infrastructure for the privacy-preserving session layer. Inference is the largest direct operating expense of the assistant.</td>
+      </tr>
+      <tr>
+        <td>Librarian tester stipends</td>
+        <td class="amount">$24,000</td>
+        <td>Twelve working librarians at $2,000 each, compensated for structured testing protocols, weekly feedback sessions, and documentation over six months. Funds flow directly to library workers, consistent with IMLS's field-leadership framing.</td>
+      </tr>
+      <tr>
+        <td>Technical partner compensation (integration and support)</td>
+        <td class="amount">$30,000</td>
+        <td>Two developer-librarians at $15,000 each for ILS integration, OverDrive/Hoopla connector work, bug fixes, deployment, and staff support across all fourteen months. Ensures the project is delivered by practitioners, not contracted out to a vendor unfamiliar with library workflow.</td>
+      </tr>
+      <tr>
+        <td>External evaluation</td>
+        <td class="amount">$10,000</td>
+        <td>Independent midpoint and final evaluation by an external evaluator identified during Phase 1. Covers instrument design review, structured staff interviews, data analysis, and co-authored final report.</td>
+      </tr>
+      <tr>
+        <td>Travel and dissemination</td>
+        <td class="amount">$8,000</td>
+        <td>Registration and travel for presentations at the Pennsylvania Library Association, Public Library Association, and American Library Association annual conferences. Webinar platform fees for the free director-facing webinar series.</td>
+      </tr>
+      <tr>
+        <td>Supplies, survey tools, and accessibility testing software</td>
+        <td class="amount">$5,000</td>
+        <td>Licensed survey platform for patron and staff surveys, accessibility testing tools (beyond the free baseline), and testing devices for staff and branch kiosks.</td>
+      </tr>
+      <tr>
+        <td>Indirect costs</td>
+        <td class="amount">$5,000</td>
+        <td>Tredyffrin Township Libraries administrative overhead at <span class="placeholder">[CONFIRM TREDYFFRIN RATE]</span>. Defaults to the federal de minimis rate of 15% of modified total direct costs if no negotiated rate exists.</td>
+      </tr>
+      <tr>
+        <td><strong>Total requested</strong></td>
+        <td class="amount"><strong>$100,000</strong></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout navy">
+    <div class="callout-label">Budget notes for reviewers</div>
+    <p>Approximately 54 percent of direct funding in this budget is paid directly to library workers (librarian testers plus the partner team, both of whom are credentialed librarians). The project team considers this a feature, not a side effect. IMLS funds should reach the people doing the work.</p>
+  </div>
+
+  <h2 id="schedule">7. Schedule of Completion</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Phase</th>
+        <th>Key Activities</th>
+        <th>Deliverable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1 to 3</td><td>Phase 1</td><td>ILS integration, connector configuration, baseline data capture, staff orientation, tester recruitment</td><td>Integration readiness memo; baseline report</td></tr>
+      <tr><td>4 to 6</td><td>Phase 2</td><td>Staff-only soft launch, structured testing, weekly iteration, one to two branch rollout</td><td>Interim evaluation report; rollout decision memo</td></tr>
+      <tr><td>7 to 12</td><td>Phase 3</td><td>Full public deployment, monthly analytics, quarterly patron surveys, month 7 external midpoint review</td><td>Midpoint external evaluation; staff survey results</td></tr>
+      <tr><td>10 to 14</td><td>Phase 4</td><td>Drafting replication guide, conference presentations, webinar series, final report</td><td>Replication guide; final evaluation report; IMLS final report</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="capacity">8. Organizational Capacity</h2>
+
+  <h3>Tredyffrin Township Libraries (lead applicant)</h3>
+  <p>Tredyffrin Township Libraries serves the residents of Tredyffrin Township and surrounding communities in Chester County, Pennsylvania, through <span class="placeholder">[CONFIRM: two branches, service population, annual circulation, annual operating budget]</span>. The library is a member of the Chester County Library System, a cooperative of eighteen member libraries, and operates under the Pennsylvania Library Code with annual reporting to the Pennsylvania Office of Commonwealth Libraries. Tredyffrin has an established record of technology adoption and of collaborative work with neighboring libraries on shared services, professional development, and disaster response. The library currently employs <span class="placeholder">[CONFIRM FTE COUNT]</span> staff and offers programming and reference services in person and online. Tredyffrin will provide in-kind staff time, access to its integrated library system and digital vendor accounts, patron feedback infrastructure, and board-level institutional commitment for the duration of the pilot.</p>
+
+  <h3>Search with Scout (technology partner)</h3>
+  <p>Search with Scout is a practitioner-built conversational discovery assistant for public libraries. The project was founded by two working librarians who identified the discovery gap through daily reference shifts and built the assistant from inside the profession. Scout's architecture is privacy-first, accessibility-first, and vendor-agnostic across integrated library systems and digital collection providers. A working demonstration is live for reviewer evaluation. The team contributes directly to the pilot as the technical partner under this grant and is committed to the open-source release of the evaluation framework and replication guide produced by the project.</p>
+
+  <h3>Project team</h3>
+  <p><strong>Mallory Hoffman, Director of Tredyffrin Township Libraries.</strong> Mallory brings more than twenty years of public library leadership experience, including prior service as Executive Director of another Pennsylvania public library. She holds an MLIS from Kutztown University. As institutional lead, Mallory will chair the project steering committee, sign off on staff time allocations, and review major deliverables.</p>
+
+  <p><strong>Jonathan Trice, Head of Reference and Adult Services, Tredyffrin Township Libraries.</strong> Jonathan holds an MLIS from Drexel University and leads Tredyffrin's reference and adult services team. Jonathan brings frontline expertise in patron discovery, prior grant writing experience, and direct authority to coordinate staff testing and feedback. Jonathan is the day-to-day grant lead for this project.</p>
+
+  <p><strong>Drew Garraway, Reference Librarian, Tredyffrin Township Libraries, and co-founder, Search with Scout.</strong> Drew works the Tredyffrin reference desk, where the discovery problem presented itself as a daily frustration. Drew is responsible for the assistant's conversation design, librarian-facing onboarding, and library community engagement during the pilot.</p>
+
+  <p><strong>Kenny Allen, co-founder, Search with Scout.</strong> Kenny is a former librarian turned product designer and brings both library domain expertise and technology product development experience. Kenny is responsible for product and user experience design, technical architecture, and dissemination materials.</p>
+
+  <h2 id="sustainability">9. Sustainability Plan</h2>
+
+  <p>The pilot is designed so that successful deployment at Tredyffrin creates a self-sustaining path forward without requiring future IMLS funding for continued operation at the pilot site.</p>
+
+  <p><strong>Operational sustainability at Tredyffrin.</strong> After the pilot period, Tredyffrin can continue operating the assistant through a standard library technology subscription sized to its service population, which is comparable to existing library technology line items. The pilot provides the evidence Tredyffrin's board needs to evaluate the subscription against measured outcomes rather than a vendor promise.</p>
+
+  <p><strong>Replication at other libraries.</strong> The replication guide produced in Phase 4 is the project's main sustainability contribution to the field. It captures everything another library needs to evaluate, plan, and deploy a conversational discovery assistant: technical prerequisites, change management recommendations, evaluation instruments, staff training notes, and common pitfalls. The guide is released under a Creative Commons license and hosted through IMLS-recognized channels (IMLS project pages, the American Library Association, and state library association repositories).</p>
+
+  <p><strong>Open evaluation framework.</strong> The evaluation framework developed during this project (survey instruments, measurement definitions, dashboards, and the open-source analytics notebook) will be released as a standalone toolkit. Libraries considering any conversational discovery tool, not only Search with Scout, can use this framework to evaluate vendor claims against their own patron population.</p>
+
+  <p><strong>Network effects across libraries.</strong> Because the assistant's architecture is vendor-agnostic, deployments at additional libraries contribute back to shared improvements in connector coverage, accessibility, and multilingual response quality. Tredyffrin's pilot data (aggregate and anonymized) becomes a reference point that other libraries can cite in their own planning.</p>
+
+  <p><strong>Follow-on funding.</strong> A successful Community-Centered Implementation pilot creates the evidence base needed for larger federal and foundation applications that can support multi-library scaling, including a possible future National Implementation track proposal at the $300,000 level. The project team has already mapped compatible follow-on opportunities.</p>
+
+  <h2 id="digital">10. Digital Products Plan</h2>
+
+  <p>This project will produce the following digital products, all released under open licenses so that the field can freely adopt and adapt them.</p>
+
+  <h3>Digital products produced</h3>
+  <ul>
+    <li><strong>Replication guide.</strong> PDF and HTML. Creative Commons Attribution 4.0 license. Hosted on Tredyffrin's website, the Scout project site, and deposited with IMLS project pages.</li>
+    <li><strong>Open evaluation framework.</strong> Instrument bank, measurement definitions, and an open-source Jupyter notebook for analysis. MIT License for code; CC-BY 4.0 for documentation. Hosted on a public code repository with archival deposit.</li>
+    <li><strong>Staff training materials.</strong> Short video walkthroughs and printable reference cards. CC-BY 4.0. Hosted with the replication guide.</li>
+    <li><strong>Final evaluation report.</strong> Narrative report with aggregate, anonymized data tables. CC-BY 4.0. Deposited with IMLS and mirrored on partner sites.</li>
+  </ul>
+
+  <h3>Privacy protections for digital products</h3>
+  <p>No patron-identifiable data, no individual query text, and no session-level content will be released in any digital product. All published metrics are aggregated at or above the weekly branch level. The open evaluation framework is designed to enforce this aggregation by default so libraries adopting it cannot accidentally over-collect.</p>
+
+  <h3>Preservation and access</h3>
+  <p>Digital products will be deposited with the Internet Archive and with a disciplinary repository (for example, the Institute of Museum and Library Services project archive and the Humanities Commons Digital Library Federation collection) so access is durable beyond the Tredyffrin website or the Scout project site.</p>
+
+  <h2 id="bios">11. Biographical Sketches</h2>
+  <p>Full two-page biographical sketches will be attached per IMLS format requirements for each of the four team members listed above (Mallory Hoffman, Jonathan Trice, Drew Garraway, Kenny Allen). A short summary of each is included in the Organizational Capacity section. <span class="placeholder">[DRAFT BIOS IN APPENDIX; CONFIRM IMLS FORMAT IN FY2027 NOFO]</span></p>
+
+  <h2 id="letters">12. Letters of Support</h2>
+  <ul class="checklist">
+    <li>Mallory Hoffman, Director, Tredyffrin Township Libraries. Institutional commitment, staff time, catalog and vendor API access, board awareness.</li>
+    <li>Joe Sherwood, Executive Director, Chester County Library System. Regional scaling potential across the eighteen member libraries of CCLS.</li>
+    <li>Representative of the Pennsylvania Office of Commonwealth Libraries. Alignment with the state library plan and LSTA priorities.</li>
+    <li>Drexel iSchool faculty member. Academic validation and willingness to collaborate on evaluation framework review.</li>
+    <li>Patron or community organization letter. Equity and access testimonial grounded in the Tredyffrin service area. Candidates: Chester County Spanish-language community organizations and a local accessibility advocacy organization.</li>
+  </ul>
+
+  <h2 id="attachments">13. Attachments Checklist</h2>
+  <table>
+    <thead>
+      <tr><th>Attachment</th><th>Owner</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Biographical sketches (4 team members)</td><td>Drew / Jonathan</td><td>Draft needed</td></tr>
+      <tr><td>Letters of support (5)</td><td>Jonathan</td><td>Requests to send by August 2026</td></tr>
+      <tr><td>Tredyffrin organizational profile and annual report</td><td>Mallory</td><td>Pending</td></tr>
+      <tr><td>Budget detail worksheet (IMLS form)</td><td>Jonathan</td><td>To complete against FY2027 NOFO form</td></tr>
+      <tr><td>Schedule of completion (Gantt format)</td><td>Drew</td><td>Draft inline; format to match NOFO</td></tr>
+      <tr><td>Digital products plan (standalone)</td><td>Kenny</td><td>Draft inline; extract to standalone</td></tr>
+      <tr><td>Data management plan</td><td>Kenny</td><td>Pending; confirm requirement in FY2027 NOFO</td></tr>
+      <tr><td>Indirect cost rate agreement or de minimis attestation</td><td>Mallory</td><td>Pending</td></tr>
+    </tbody>
+  </table>
+
+  <h2>References and Further Reading</h2>
+  <p>The project team will include a formal references section in the final narrative, covering American Library Association Library Bill of Rights (Article VII), the Public Library Association's planning documents on discovery, WCAG 2.2 Level AA accessibility guidelines, and the most recent Pennsylvania Office of Commonwealth Libraries state plan. Citations will be formatted per the FY2027 NOFO instructions once published.</p>
+
+  <footer>
+    <div class="brand">Search with Scout</div>
+    <p>Built by librarians, for libraries.</p>
+    <p>Draft v0.1 &middot; April 9, 2026 &middot; Internal review copy &middot; Not for submission without final voice and fact pass.</p>
+  </footer>
+
+</div>
+</body>
+</html>
