@@ -24,7 +24,7 @@ When resolved: move the entry to CHANGELOG.md under the appropriate date, mark a
 
 ## Active
 
-_No active blockers. Next work: TestFlight hotfix build for ONB-001 code fix (pending Drew's approval)._
+_No active blockers._
 
 ---
 
@@ -51,9 +51,9 @@ Apple's TestFlight external review lag (24-48h) meant her group never received t
 - Rachel's orphaned auth user (`00377fc7-89dc-4b8c-9860-7b2c342d3ea9`) deleted via admin API
 - Stuck-user discovery query run against prod: only Rachel was affected (verified she was the only auth.user without a profile row created after 2026-03-30)
 - Rachel can now sign up fresh with her existing `rmgb2000@gmail.com` address; her old TestFlight build will succeed because the schema is now permissive
+- **TestFlight hotfix build submitted 2026-04-08 at 22:08 UTC** from main. Submission ID `6f90d77c-1415-4675-951e-734071b2ea40`. Internal testers get it in 5-10 minutes after Apple processing. External testers (Rachel) get it after Apple's external review (24-48h), but she's already unblocked via the schema fix.
 
-**Still pending:**
-- [ ] TestFlight hotfix build to ship the code fix to testers (awaiting Drew's approval)
+_All action items complete. ONB-001 is fully closed._
 
 ---
 

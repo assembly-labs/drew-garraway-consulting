@@ -30,9 +30,20 @@ Append-only record of work sessions. Most recent at top.
 - R-007 (new): Schema-tightening migrations running ahead of app builds for external testers. Mitigated by the new CLAUDE.md rule + Sentry reporting on profile save failures. Status: mitigated.
 
 **Next action:**
-- Drew sends Rachel the instructions to delete + reinstall + re-signup (she can now reach Journal with her old build)
-- Cut TestFlight hotfix build when Drew approves (runs `bash build.sh` from `TOMO/mvp-1.0/app/`)
-- Consider moving Rachel and other external testers to internal testing to bypass Apple review lag going forward
+- ~~Drew sends Rachel the instructions to delete + reinstall + re-signup~~ **Done** (Drew confirmed message sent)
+- ~~Cut TestFlight hotfix build when Drew approves~~ **Done** (shipped 2026-04-08 22:08 UTC from main)
+- Consider moving Rachel and other external testers to internal testing to bypass Apple review lag going forward (T-009, backlog)
+
+**TestFlight build details:**
+- Source: `main` branch after PRs #40 and #41 merged
+- Submission ID: `6f90d77c-1415-4675-951e-734071b2ea40`
+- EAS submission URL: https://expo.dev/accounts/dgarraway/projects/tomo/submissions/6f90d77c-1415-4675-951e-734071b2ea40
+- App Store Connect: https://appstoreconnect.apple.com/apps/6760957435/testflight/ios
+- Apple processing: 5-10 min after submission, then available to internal testers
+- External tester availability: 24-48h (Apple review gate)
+- IPA size: 17.5 MB
+
+**Session outcome:** ONB-001 fully closed. Code fix, DB migration, documentation, process rules, and TestFlight hotfix all shipped in a single session. Rachel unblocked via schema fix (she can use her existing build); the new hotfix will reach her after Apple review but she doesn't need it to get past the onboarding bug.
 
 ---
 
