@@ -1,6 +1,6 @@
 # Risks
 
-**Last updated:** 2026-04-02
+**Last updated:** 2026-04-08
 
 ---
 
@@ -35,6 +35,15 @@
 **Likelihood:** Low | **Impact:** Low (for now)
 **Description:** Free tier covers current usage easily. But audio storage + edge function invocations could hit limits if user count grows past ~50-100 active users.
 **Mitigation:** Not a concern until post-launch. Monitor usage dashboard monthly once on the App Store. Upgrade plan ($25/mo) when approaching limits.
+
+### R-007: Schema migrations running ahead of app builds (MITIGATED)
+**Likelihood:** Low (post-mitigation) | **Impact:** High
+**Description:** Supabase migrations run against prod instantly, but TestFlight external builds take 24-48h to reach testers (Apple review gate). If a tightening constraint (NOT NULL, CHECK, FK) is added before every tester has the app build that populates it, older builds hit the constraint, fail silently, and strand users. This happened with `profiles.birth_date NOT NULL` in FEAT-008 (Mar 30) and stranded Rachel for 7 days (ONB-001).
+**Mitigation:**
+1. Two-phase migration rule adopted as hard rule (D-104). Documented in TOMO/CLAUDE.md under "CRITICAL: Schema Migration Rules" with pre-push checklist.
+2. Service-layer error handling hardened: `profileService.create` now throws on error and reports to Sentry instead of silently returning null. Next silent-failure-class bug will surface in Sentry within minutes.
+3. `handlePayoffComplete` re-verifies the saved profile and bounces the user back to the form with an error toast if the save didn't land.
+**Residual risk:** Low. The rule is written down but relies on the operator (Drew or future Claude) to actually check the pre-push checklist. Consider automating: add a CI check that diffs migration files against the app build's code for mismatches.
 
 ---
 

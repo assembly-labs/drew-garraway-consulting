@@ -68,13 +68,26 @@ Apple's external TestFlight review lag (24-48h on first-to-group) meant Rachel's
 ### Testing
 
 - `npx tsc --noEmit` -- zero errors
-- Manual QA on device pending (recommended before TestFlight ship): verify (a) Start Logging with valid profile still reaches the payoff and Journal normally, (b) simulated profile save failure surfaces the toast and keeps the user on the logging-preference screen, (c) "Start Training" on the payoff advances to Journal on the happy path.
+- Local device QA deferred to post-merge (Drew skipping local test at his request)
+- TestFlight hotfix build pending Drew's explicit approval
 
-### Follow-up
+### Production actions taken (2026-04-08 evening)
 
-- Apply migration `20260408000000_profile_birth_date_nullable.sql` to prod Supabase before shipping the next TestFlight build.
-- Run the stuck-user discovery query (see ISSUES.md ONB-001) to find and manually heal any other orphaned accounts.
-- Adopt the rule: never tighten schema constraints until the corresponding app build is live for all testers.
+- **Migration applied to prod Supabase** via `supabase db push`. Verified in `supabase migration list` (20260408000000 shows on both local and remote).
+- **Rachel's orphaned auth user deleted** via admin API. She was `rmgb2000@gmail.com`, user_id `00377fc7-89dc-4b8c-9860-7b2c342d3ea9`, stuck since 2026-04-01 (7 days). Zero collateral data (verified: no sessions, insights, or user_gyms rows existed for her).
+- **Stuck-user discovery query run against prod.** Rachel was the only affected account. At the time of the fix, auth.users had 3 rows total: Drew's primary, Drew's assemblylabs account, and Rachel. Only Rachel was missing a profile row.
+- **PR #40 merged to main.** Code fix + migration + CLAUDE.md schema rules shipped together.
+- **CRITICAL: Schema Migration Rules section added to TOMO/CLAUDE.md.** New rule: never tighten schema constraints (NOT NULL, CHECK, etc.) before the corresponding app build is live for every tester. Includes two-phase migration pattern and pre-push checklist.
+
+### Communication to Rachel
+
+Drew to send: delete TOMO, reinstall from TestFlight, sign up fresh with `rmgb2000@gmail.com`. Her old build will now succeed because the schema is permissive.
+
+### Follow-up (tracked in project-management/TASKS.md)
+
+- TestFlight hotfix build pending Drew's approval
+- Consider moving external testers to internal testing to bypass Apple's 24-48h review lag
+- Add Sentry alert on any `area=onboarding` event so future silent failures are caught within minutes
 
 ---
 

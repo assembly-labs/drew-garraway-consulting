@@ -24,44 +24,36 @@ When resolved: move the entry to CHANGELOG.md under the appropriate date, mark a
 
 ## Active
 
+_No active blockers. Next work: TestFlight hotfix build for ONB-001 code fix (pending Drew's approval)._
+
+---
+
+## Completed: Session 41 (2026-04-08) -- ONB-001 Stuck onboarding payoff
+
 ### ONB-001 Stuck on onboarding payoff (silent profile save failure)
 **Priority:** P0
 **Area:** GetStartedScreen, profileService.create, profiles table migration
 **Added:** 2026-04-08
-**Status:** Code fix shipped on branch `fix/onboarding-silent-profile-save-failure`. DB migration + TestFlight ship pending.
+**Status:** Done (2026-04-08, Session 41)
 
-External tester Rachel was stranded on the onboarding payoff screen. Tapping "Start Training" did nothing. Root cause: her TestFlight build predated FEAT-008, so it didn't send `birth_date`. The Mar 30 FEAT-008 migration made `birth_date NOT NULL` on prod. Her upsert was rejected, `profileService.create` swallowed the error and returned `null`, `handleStart` ignored the null and transitioned to the payoff screen anyway. `refreshProfile` on Start Training found no profile row, so `authState` stayed `needs_onboarding` and `RootNavigator` never swapped stacks.
+External tester Rachel (rmgb2000@gmail.com) was stranded on the onboarding payoff screen for 7 days. Tapping "Start Training" did nothing. Root cause: her TestFlight build predated FEAT-008, so it didn't send `birth_date`. The Mar 30 FEAT-008 migration made `birth_date NOT NULL` on prod. Her upsert was rejected, `profileService.create` swallowed the error and returned `null`, `handleStart` ignored the null and transitioned to the payoff screen anyway. `refreshProfile` on "Start Training" found no profile row, so `authState` stayed `needs_onboarding` and `RootNavigator` never swapped stacks.
 
-**Fix shipped on branch (not yet on main):**
-1. `profileService.create` throws on error + reports to Sentry (no more silent nulls).
-2. `handlePayoffComplete` re-verifies the saved profile after refresh and bounces the user back to the form with an error toast if the profile didn't land.
-3. New migration `20260408000000_profile_birth_date_nullable.sql` drops `NOT NULL` on `birth_date`. Keeps the 18+ enforcement trigger.
+Apple's TestFlight external review lag (24-48h) meant her group never received the post-FEAT-008 app build. The DB migration and the app that understood it shipped out of sync.
 
-**Action items before this is fully closed:**
-- [ ] Apply new migration to prod Supabase (SQL editor: run the contents of `20260408000000_profile_birth_date_nullable.sql`)
-- [ ] Manually create Rachel's profile row in Supabase so she can unblock herself immediately (birth_date placeholder: `1990-01-01`)
-- [ ] Run stuck-user discovery query below and heal any other orphans
-- [ ] Merge branch + cut TestFlight hotfix build
-- [ ] Adopt process rule: never tighten schema constraints until the corresponding app build is live for all testers
+**Fix (merged to main via PR #40):**
+1. `profileService.create` now throws on error and reports to Sentry (tags: `area=onboarding`, `operation=profile_create`). Return type tightened from `Profile | null` to `Profile`.
+2. `handlePayoffComplete` re-verifies the saved profile after `refreshProfile`. If the profile didn't land, it bounces the user back to the logging-preference form with an error toast.
+3. Migration `20260408000000_profile_birth_date_nullable.sql` drops `NOT NULL` on `profiles.birth_date`. Keeps the 18+ enforcement trigger (null passes through; check fires for non-null values).
+4. Added "CRITICAL: Schema Migration Rules" section to `TOMO/CLAUDE.md` with two-phase migration pattern and pre-push checklist.
 
-**Stuck-user discovery query (run in Supabase SQL editor):**
-```sql
-SELECT u.id, u.email, u.created_at
-FROM auth.users u
-LEFT JOIN profiles p ON p.id = u.id
-WHERE p.id IS NULL
-  AND u.created_at > '2026-03-30'
-ORDER BY u.created_at DESC;
-```
+**Production actions taken:**
+- Migration `20260408000000` applied to prod Supabase via `supabase db push`
+- Rachel's orphaned auth user (`00377fc7-89dc-4b8c-9860-7b2c342d3ea9`) deleted via admin API
+- Stuck-user discovery query run against prod: only Rachel was affected (verified she was the only auth.user without a profile row created after 2026-03-30)
+- Rachel can now sign up fresh with her existing `rmgb2000@gmail.com` address; her old TestFlight build will succeed because the schema is now permissive
 
-**Bulk-heal query (run after the schema migration; sets onboarding_complete=false so they redo onboarding on a fresh build):**
-```sql
-INSERT INTO profiles (id, name, belt, stripes, onboarding_complete, logging_preference)
-SELECT u.id, 'Friend', 'white', 0, false, 'voice'
-FROM auth.users u
-LEFT JOIN profiles p ON p.id = u.id
-WHERE p.id IS NULL AND u.created_at > '2026-03-30';
-```
+**Still pending:**
+- [ ] TestFlight hotfix build to ship the code fix to testers (awaiting Drew's approval)
 
 ---
 
