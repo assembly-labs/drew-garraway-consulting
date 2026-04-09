@@ -121,13 +121,22 @@ function parseFileMeta(filename) {
     return { exam: 'series-7', chapter: parseInt(s7Match[1]), type: 'chapter' };
   }
 
+  // Series 63 chapter pattern
+  const s63Match = filename.match(/series-63-chapter-(\d+)/);
+  if (s63Match) {
+    return { exam: 'series-63', chapter: parseInt(s63Match[1]), type: 'chapter' };
+  }
+
   // SIE chapter pattern
   const sieMatch = filename.match(/sie-chapter-(\d+)/);
   if (sieMatch) {
     return { exam: 'sie', chapter: parseInt(sieMatch[1]), type: 'chapter' };
   }
 
-  // Study tools
+  // Study tools (check series-63 before series-7 because 'series-7-' is not a substring of 'series-63-')
+  if (filename.includes('series-63-')) {
+    return { exam: 'series-63', chapter: null, type: 'tool' };
+  }
   if (filename.includes('series-7-')) {
     return { exam: 'series-7', chapter: null, type: 'tool' };
   }
@@ -175,7 +184,7 @@ function buildDocument(filePath, relativePath) {
 function collectFiles() {
   const files = [];
 
-  const examDirs = ['series-7', 'sie'];
+  const examDirs = ['series-7', 'series-63', 'sie'];
   for (const dir of examDirs) {
     const dirPath = path.join(PAGES_DIR, dir);
     if (!fs.existsSync(dirPath)) continue;
@@ -216,7 +225,7 @@ function main() {
   console.log('');
 
   const documents = [];
-  const stats = { 'series-7': 0, sie: 0, other: 0 };
+  const stats = { 'series-7': 0, 'series-63': 0, sie: 0, other: 0 };
 
   for (const file of files) {
     console.log(`Indexing: ${file.relative}`);
@@ -224,6 +233,7 @@ function main() {
     documents.push(doc);
 
     if (doc.exam === 'series-7') stats['series-7']++;
+    else if (doc.exam === 'series-63') stats['series-63']++;
     else if (doc.exam === 'sie') stats.sie++;
     else stats.other++;
   }
@@ -251,6 +261,7 @@ function main() {
   console.log('');
   console.log(`Total documents: ${documents.length}`);
   console.log(`  Series 7: ${stats['series-7']}`);
+  console.log(`  Series 63: ${stats['series-63']}`);
   console.log(`  SIE: ${stats.sie}`);
   console.log(`  Other: ${stats.other}`);
   console.log('');
