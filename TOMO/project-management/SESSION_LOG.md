@@ -4,6 +4,38 @@ Append-only record of work sessions. Most recent at top.
 
 ---
 
+## 2026-04-08 -- Session 41: ONB-001 Onboarding Payoff Dead-End (Rachel bug)
+
+**What happened:**
+- External tester Rachel (rmgb2000@gmail.com) reported being stuck on the onboarding payoff screen. Tapping "Start Training" did nothing.
+- Visual diagnosis: her payoff screen showed only 3 chat bubbles, but the current code shows 5. Proof she was on a pre-Mar-31 TestFlight build.
+- Root cause traced: her old build didn't send `birth_date` during profile upsert. The Mar 30 FEAT-008 migration made `profiles.birth_date NOT NULL`, so her insert was rejected by Postgres. `profileService.create` swallowed the error with `console.error` and returned null. `handleStart` ignored the null and transitioned to the payoff screen anyway. On "Start Training" tap, `refreshProfile` found no profile row, so `authState` stayed `needs_onboarding` and she was trapped.
+- Contributing cause: Apple's TestFlight external review lag (24-48h). Her external tester group never received the post-FEAT-008 app build even though it had been submitted. The DB migration and the app that understood it shipped out of sync.
+- Code fix shipped via PR #40 (merged to main):
+  - `profileService.create` throws on error, reports to Sentry
+  - `handlePayoffComplete` re-verifies profile after refresh, bounces with toast if it didn't land
+  - New migration drops `NOT NULL` on `birth_date` (keeps 18+ trigger)
+  - Added "CRITICAL: Schema Migration Rules" section to TOMO/CLAUDE.md (two-phase pattern + pre-push checklist)
+- Production actions executed directly:
+  - Migration `20260408000000` applied to prod Supabase via `supabase db push`
+  - Rachel's orphaned auth user deleted via admin API (zero collateral data)
+  - Stuck-user discovery query confirmed Rachel was the only affected account
+
+**Decisions made:**
+- D-103 (new): Drop `NOT NULL` on `profiles.birth_date` rather than rolling back the whole FEAT-008 migration. Keeps the 18+ enforcement trigger intact while unblocking older clients.
+- D-104 (new): All future schema-tightening migrations follow the two-phase pattern (permissive first, tighten in a follow-up migration after full tester rollout).
+- Local device test skipped at Drew's explicit request. TestFlight hotfix build deferred pending Drew's approval.
+
+**Risks updated:**
+- R-007 (new): Schema-tightening migrations running ahead of app builds for external testers. Mitigated by the new CLAUDE.md rule + Sentry reporting on profile save failures. Status: mitigated.
+
+**Next action:**
+- Drew sends Rachel the instructions to delete + reinstall + re-signup (she can now reach Journal with her old build)
+- Cut TestFlight hotfix build when Drew approves (runs `bash build.sh` from `TOMO/mvp-1.0/app/`)
+- Consider moving Rachel and other external testers to internal testing to bypass Apple review lag going forward
+
+---
+
 ## 2026-04-04 -- Session 38: Insights Prompt Enhancement + Sports Psychology Research
 
 **What happened:**

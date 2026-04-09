@@ -1,6 +1,6 @@
 # Tasks
 
-**Last updated:** 2026-04-04 (Session 38)
+**Last updated:** 2026-04-08 (Session 41)
 
 Statuses: `backlog` | `ready` | `in-progress` | `blocked` | `done` | `cut`
 
@@ -20,6 +20,9 @@ Tracks: `app` | `studio`
 | T-003 | Experience Intake (FEAT-001) | backlog | P1 | none | Conversational intake for experienced practitioners. Solves cold-start. |
 | T-004 | Processing Skip Upgrade (FEAT-004) | backlog | P2 | none | Gold "skip to manual" link after 10-15s delay. |
 | T-005 | Shake-to-Report Bug Reporter | done | P1 | none | Shake to open feedback modal (Bug/Idea), auto-screenshot, submit to Sentry. Needs native rebuild + on-device test. |
+| T-007 | ONB-001 code fix merged | done | P0 | none | profileService.create throws + Sentry, handlePayoffComplete guard, migration drops birth_date NOT NULL, CLAUDE.md schema rules. Merged via PR #40 (2026-04-08, Session 41). Migration applied to prod + Rachel's orphaned user deleted. |
+| T-008 | TestFlight hotfix build (ONB-001) | ready | P0 | T-007 | Cut a new TestFlight build from main containing the ONB-001 fix so every tester gets the silent-failure protection. Run `cd mvp-1.0/app && bash build.sh` when Drew approves. No code changes needed first. |
+| T-009 | Move external testers to internal testing | backlog | P1 | T-008 | Bypass Apple's 24-48h external review lag so schema/app sync issues are contained. Requires adding testers to App Store Connect team (Apple ID invite). Cap is 100 internal testers. |
 
 ### Design Audit (references mvp-1.0/docs/tracking/ISSUES.md, DA-/DS- prefixes)
 
