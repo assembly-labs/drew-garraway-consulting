@@ -130,3 +130,71 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run lint --if-present
+
+  # Deploy file-size guard — Cloudflare Pages has a 25 MiB per-file hard limit.
+  # Any file in a deploy path that exceeds this blocks every drewgarraway.com
+  # deploy until removed (this has happened 3+ times, most recently Apr 9 2026
+  # with the FHM Series 63 audio). This job fails fast on PR so nothing
+  # oversized reaches main. If this job fails, compress the file before merging.
+  # See: .github/workflows/deploy-site.yml for the deploy paths this mirrors,
+  # and feedback_deployment_discipline.md memory for asset compression rules.
+  check-deploy-file-sizes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan drewgarraway.com deploy paths for files over 25 MiB
+        run: |
+          set -eu
+          MAX_BYTES=$((25 * 1024 * 1024))   # 25 MiB — Cloudflare Pages hard limit
+          WARN_BYTES=$((24 * 1024 * 1024))  # 24 MiB — near-limit warning
+
+          # Mirror the deploy paths in .github/workflows/deploy-site.yml.
+          # Keep in sync when new projects are added to drewgarraway.com.
+          DEPLOY_PATHS="index.html robots.txt sitemap.xml fhm kaijutsu read-out-loud scout-grants"
+
+          EXISTING=""
+          for p in $DEPLOY_PATHS; do
+            if [ -e "$p" ]; then
+              EXISTING="$EXISTING $p"
+            fi
+          done
+
+          if [ -z "$EXISTING" ]; then
+            echo "No deploy paths present in this checkout. Nothing to scan."
+            exit 0
+          fi
+
+          echo "Scanning: $EXISTING"
+          echo ""
+
+          # Emit "size path" for every file under the deploy paths.
+          # -printf is a GNU find feature; ubuntu-latest has GNU find.
+          FILELIST=$(find $EXISTING -type f -printf '%s %p\n')
+          TOTAL=$(printf '%s\n' "$FILELIST" | grep -c . || true)
+          echo "Total files scanned: $TOTAL"
+          echo ""
+
+          OVERSIZED=$(printf '%s\n' "$FILELIST" | awk -v max="$MAX_BYTES" '$1 > max { printf "  %.2f MiB  %s\n", $1/1048576, substr($0, index($0, $2)) }')
+          NEAR_LIMIT=$(printf '%s\n' "$FILELIST" | awk -v warn="$WARN_BYTES" -v max="$MAX_BYTES" '$1 > warn && $1 <= max { printf "  %.2f MiB  %s\n", $1/1048576, substr($0, index($0, $2)) }')
+
+          if [ -n "$NEAR_LIMIT" ]; then
+            echo "::warning::Files between 24 and 25 MiB (near Cloudflare Pages 25 MiB limit):"
+            printf '%s\n' "$NEAR_LIMIT"
+            echo ""
+          fi
+
+          if [ -n "$OVERSIZED" ]; then
+            echo "::error::Files exceed the Cloudflare Pages 25 MiB per-file limit."
+            echo "::error::These will block every drewgarraway.com deploy. Compress before merging."
+            echo ""
+            echo "Oversized files:"
+            printf '%s\n' "$OVERSIZED"
+            echo ""
+            echo "Compression guides:"
+            echo "  Audio: ffmpeg -i in.m4a -c:a aac -b:a 48k -ac 1 -movflags +faststart out.m4a"
+            echo "  Images: pngquant --quality=65-85, cwebp -q 80"
+            echo "  See ~/.claude/projects/-Users-drewgarraway/memory/feedback_deployment_discipline.md"
+            exit 1
+          fi
+
+          echo "All files in drewgarraway.com deploy paths are under 25 MiB."
