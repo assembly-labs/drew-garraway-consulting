@@ -69,7 +69,7 @@ Apple's external TestFlight review lag (24-48h on first-to-group) meant Rachel's
 
 - `npx tsc --noEmit` -- zero errors
 - Local device QA deferred to post-merge (Drew skipping local test at his request)
-- TestFlight hotfix build pending Drew's explicit approval
+- **TestFlight hotfix build submitted 2026-04-08 at 22:08 UTC** (built from main after PRs #40 and #41 merged). Submission ID: `6f90d77c-1415-4675-951e-734071b2ea40`. Apple processing expected to complete in 5-10 minutes, then available to internal testers immediately. External testers (Rachel) will receive it after 24-48h Apple review; she can continue using her existing build in the meantime since the schema is already permissive.
 
 ### Production actions taken (2026-04-08 evening)
 
@@ -85,8 +85,8 @@ Drew to send: delete TOMO, reinstall from TestFlight, sign up fresh with `rmgb20
 
 ### Follow-up (tracked in project-management/TASKS.md)
 
-- TestFlight hotfix build pending Drew's approval
-- Consider moving external testers to internal testing to bypass Apple's 24-48h review lag
+- ~~TestFlight hotfix build pending Drew's approval~~ **Shipped 2026-04-08 22:08 UTC**
+- Consider moving external testers to internal testing to bypass Apple's 24-48h review lag (T-009, backlog)
 - Add Sentry alert on any `area=onboarding` event so future silent failures are caught within minutes
 
 ---
