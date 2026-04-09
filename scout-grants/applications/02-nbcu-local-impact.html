@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBCUniversal Local Impact Grant &middot; Scout Grant Draft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1A3E67;
+      --navy-dark: #0f2744;
+      --navy-light: #2a5a8f;
+      --sage: #83A07F;
+      --sage-dark: #5D7A5A;
+      --sage-bg: rgba(131, 160, 127, 0.1);
+      --sage-border: rgba(131, 160, 127, 0.3);
+      --coral: #F2895E;
+      --coral-dark: #D96A3F;
+      --coral-bg: rgba(242, 137, 94, 0.08);
+      --coral-border: rgba(242, 137, 94, 0.3);
+      --cream: #f5f1e8;
+      --cream-dark: #ebe5d8;
+      --white: #ffffff;
+      --charcoal: #333333;
+      --text-muted: #6b7280;
+      --border: #e0dcd3;
+      --radius: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+    header { padding-bottom: 1.25rem; border-bottom: 2px solid var(--navy); margin-bottom: 2rem; }
+    .brand { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.35rem; color: var(--navy); margin-bottom: 0.25rem; }
+    h1 { font-family: 'DM Serif Display', Georgia, serif; font-size: 2rem; color: var(--navy); letter-spacing: -0.015em; line-height: 1.2; margin: 0.35rem 0 0.4rem; }
+    .sub { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+    .meta-card { background: var(--navy); color: var(--cream); border-radius: var(--radius); padding: 1.5rem 1.5rem 1.25rem; margin-bottom: 2rem; }
+    .meta-card dl { display: grid; grid-template-columns: 11rem 1fr; gap: 0.35rem 1rem; font-size: 0.95rem; }
+    .meta-card dt { color: var(--coral); font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; font-size: 0.75rem; padding-top: 0.2rem; }
+    .meta-card dd { color: #fff; }
+    .meta-card a { color: var(--cream); text-decoration: underline; }
+    h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.55rem; color: var(--navy); letter-spacing: -0.01em; margin: 2.5rem 0 0.75rem; padding-bottom: 0.25rem; border-bottom: 1px solid var(--border); }
+    h3 { font-size: 1.1rem; color: var(--navy-dark); font-weight: 700; margin: 1.5rem 0 0.5rem; }
+    p { margin: 0.75rem 0; }
+    ul, ol { margin: 0.75rem 0 0.75rem 1.4rem; }
+    li { margin-bottom: 0.35rem; }
+    strong { color: var(--navy-dark); }
+    a { color: var(--navy-light); text-decoration: underline; }
+    a:hover { color: var(--coral-dark); }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.95rem; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    th { background: var(--navy); color: var(--cream); text-align: left; padding: 0.6rem 0.85rem; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    td { padding: 0.65rem 0.85rem; border-top: 1px solid var(--border); vertical-align: top; }
+    tr:nth-child(even) td { background: var(--cream); }
+    td.amount, th.amount { text-align: right; font-variant-numeric: tabular-nums; }
+    .callout { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--sage); border-radius: var(--radius); padding: 1.25rem 1.4rem; margin: 1.25rem 0; }
+    .callout.coral { border-left-color: var(--coral); background: var(--coral-bg); }
+    .callout-label { font-family: 'DM Serif Display', Georgia, serif; color: var(--navy); font-size: 1rem; margin-bottom: 0.3rem; }
+    .open-questions { background: var(--coral-bg); border: 1.5px solid var(--coral-border); border-radius: var(--radius); padding: 1.25rem 1.4rem; margin: 1rem 0 2rem; }
+    .open-questions h2 { border-bottom: none; margin: 0 0 0.5rem; font-size: 1.25rem; color: var(--coral-dark); }
+    .open-questions ol { font-size: 0.95rem; margin-bottom: 0; }
+    .citations { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.4rem; margin-bottom: 2rem; font-size: 0.88rem; }
+    .citations h2 { border-bottom: none; margin: 0 0 0.5rem; font-size: 1.1rem; }
+    .citations ol { margin-left: 1.25rem; }
+    .citations li { margin-bottom: 0.5rem; }
+    .citations a { color: var(--navy-light); word-break: break-word; }
+    .checklist { list-style: none; margin-left: 0; }
+    .checklist li { padding-left: 1.6rem; position: relative; margin-bottom: 0.4rem; }
+    .checklist li::before { content: '\25A1'; position: absolute; left: 0; color: var(--sage-dark); font-size: 1.1rem; }
+    .placeholder { background: #fff4e6; border: 1px dashed var(--coral); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.92em; color: var(--coral-dark); font-weight: 600; }
+    footer { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 2px solid var(--navy); text-align: center; font-size: 0.85rem; color: var(--text-muted); }
+    footer .brand { font-size: 1rem; margin-bottom: 0.3rem; }
+    @media print { body { background: white; font-size: 10.5pt; } .page { max-width: 100%; padding: 0.5in 0.6in; } .meta-card, .open-questions, .callout, .citations { break-inside: avoid; } h2, h3 { break-after: avoid; } table { break-inside: avoid; } a { color: var(--charcoal); text-decoration: none; } }
+    @media (max-width: 640px) { .page { padding: 1.5rem 1rem 3rem; } h1 { font-size: 1.6rem; } h2 { font-size: 1.3rem; } .meta-card dl { grid-template-columns: 1fr; gap: 0.1rem 0; } .meta-card dt { padding-top: 0.6rem; } table { font-size: 0.85rem; } th, td { padding: 0.45rem 0.55rem; } }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="brand">Search with Scout</div>
+    <h1>NBCUniversal Local Impact Grants 2026</h1>
+    <div class="sub">Comcast NBCUniversal Foundation &middot; NBC10 / Telemundo62 Philadelphia Market &middot; Draft v0.1 &middot; April 9, 2026</div>
+  </header>
+
+  <div class="meta-card">
+    <dl>
+      <dt>Program</dt><dd>NBCUniversal Local Impact Grants 2026 (9th Consecutive Year)</dd>
+      <dt>Funder</dt><dd>Comcast NBCUniversal &middot; $2.5M pool across 11 NBC and Telemundo markets</dd>
+      <dt>Primary category</dt><dd>Community Engagement</dd>
+      <dt>Secondary fit</dt><dd>Youth Education and Empowerment</dd>
+      <dt>Market</dt><dd>Philadelphia (NBC10 WCAU and Telemundo62 WWSI)</dd>
+      <dt>Deadline</dt><dd><strong>April 24, 2026 &middot; 7:59:59 PM ET</strong> (15 days from draft date)</dd>
+      <dt>Applicant</dt><dd>Friends of Tredyffrin Township Libraries (501(c)(3)) <span class="placeholder">[CONFIRM ENTITY WITH MALLORY]</span></dd>
+      <dt>Requested amount</dt><dd>$40,000 (within 30% of total expenses cap; see Budget)</dd>
+      <dt>Applicant eligibility check</dt><dd>501(c)(3) in market, EIN active 1+ year, total expenses $100K to $1M, revenue over $100K, not a prior NBCU Local Impact winner, not a recipient of $10K+ from Comcast NBCUniversal in past 3 years</dd>
+      <dt>Portal</dt><dd><a href="https://www.localimpactgrants.com/">localimpactgrants.com</a></dd>
+      <dt>Funds type</dt><dd>Unrestricted</dd>
+    </dl>
+  </div>
+
+  <div class="open-questions">
+    <h2>Open Questions (Decide Before Submission)</h2>
+    <ol>
+      <li><strong>Applicant entity.</strong> Tredyffrin Township Libraries is a municipal department, not a standalone 501(c)(3). NBCU Local Impact requires a 501(c)(3) applicant. This draft assumes "Friends of Tredyffrin Township Libraries" is the applicant entity. Confirm with Mallory Hoffman by April 11 that the Friends group exists, has an active EIN dated more than one year old, has total annual expenses between $100,000 and $1,000,000, and has revenue above $100,000. If the Friends group is outside that range, consider a fiscal sponsor (NBCU allows fiscally sponsored applicants).</li>
+      <li><strong>Prior Comcast or NBCU funding.</strong> Confirm the Friends group has not received $10,000 or more per year from Comcast NBCUniversal or NBC10/Telemundo62 in any of the past three years. Any prior grant at that level disqualifies.</li>
+      <li><strong>Philadelphia market zip code.</strong> NBCU lists eligible zip codes for each market in a linked document on the application portal. Confirm Tredyffrin (Berwyn, Paoli, Devon) zip codes are included in the NBC10 Philadelphia service area.</li>
+      <li><strong>Form 990.</strong> NBCU typically requires the most recent Form 990. Confirm the Friends group has one on file.</li>
+      <li><strong>Board chair contact.</strong> Applications require a board contact. Identify the Friends group board chair for signature.</li>
+      <li><strong>Scout technology partner disclosure.</strong> NBCU is funding the Friends group, not Scout directly. The application describes the assistant as the tool the project will deploy. Confirm with Mallory how to characterize the Scout partnership in the narrative (vendor relationship, in-kind gift, or pilot partner).</li>
+      <li><strong>Drew Garraway conflict disclosure.</strong> Drew is both a Tredyffrin Township Libraries employee and a Scout co-founder. Flag this clearly in the project description and in any conflict-of-interest attestation.</li>
+    </ol>
+  </div>
+
+  <section class="citations">
+    <h2>Research Citations</h2>
+    <ol>
+      <li><a href="https://www.localimpactgrants.com/">NBCUniversal Local Impact Grants program page</a>. Fetched April 9, 2026. Source for: application window (March 24 to April 24, 2026), eligibility rules (501(c)(3), total expenses $100K-$1M, revenue over $100K, prior funding restriction, 30% of total expenses cap), three funding categories, and 11 market structure.</li>
+      <li><a href="https://www.nbcuniversal.com/article/nbcuniversal-local-impact-grants-return-9th-consecutive-year-provide-25-million-nonprofits-2026">NBCUniversal corporate announcement, 2026 cycle</a>. Fetched April 9, 2026. Source for: $2.5 million pool, 9th consecutive year framing, and category definitions.</li>
+      <li><a href="https://opportunitiesforyouth.org/2026/03/31/nbcuniversal-local-impact-grants-2026-2-5-million-funding-opportunity-for-nonprofits-supporting-youth-storytelling-and-community-engagement/">Opportunities for Youth summary of 2026 guidelines</a>. Fetched April 9, 2026. Source for: category language cross-check.</li>
+    </ol>
+  </section>
+
+  <h2>Section 1 &middot; Applicant Information</h2>
+  <p><strong>Legal name:</strong> Friends of Tredyffrin Township Libraries <span class="placeholder">[CONFIRM]</span><br>
+  <strong>EIN:</strong> <span class="placeholder">[CONFIRM]</span><br>
+  <strong>Address:</strong> 582 Upper Gulph Road, Wayne, PA 19087 (Strafford Branch) and 20 Martin Avenue, Paoli, PA 19301 (Paoli Branch) <span class="placeholder">[CONFIRM FRIENDS ADDRESS IF DIFFERENT]</span><br>
+  <strong>Executive contact:</strong> Mallory Hoffman, Director, Tredyffrin Township Libraries<br>
+  <strong>Grant contact:</strong> Jonathan Trice, Head of Reference and Adult Services, Tredyffrin Township Libraries<br>
+  <strong>Board chair contact:</strong> <span class="placeholder">[CONFIRM]</span><br>
+  <strong>Total organizational expenses (FY most recently closed):</strong> <span class="placeholder">[CONFIRM WITH FRIENDS BOARD]</span><br>
+  <strong>Total organizational revenue (FY most recently closed):</strong> <span class="placeholder">[CONFIRM WITH FRIENDS BOARD]</span><br>
+  <strong>Has organization received $10,000 or more annually from Comcast NBCUniversal or NBC10 / Telemundo62 in any of the past three years?</strong> <span class="placeholder">[CONFIRM NO]</span></p>
+
+  <h2>Section 2 &middot; Project Title</h2>
+  <p><strong>Scout at the Library: A Conversational Discovery Tool for Chester County Families</strong></p>
+
+  <h2>Section 3 &middot; Executive Summary</h2>
+  <p>Friends of Tredyffrin Township Libraries requests $40,000 in unrestricted funding from the NBCUniversal Local Impact Grants program to support the public launch of Search with Scout, a conversational discovery assistant built by two working librarians from inside the profession. Scout lets Chester County patrons describe what they need in plain language, in any of twelve languages, and returns unified results across the library's physical catalog, OverDrive, Hoopla, and licensed databases in under three seconds. The project serves an NBC10 Philadelphia market community that is demographically diverse and increasingly multilingual, and it delivers on all three NBCUniversal Local Impact priorities: community engagement with local public institutions, storytelling pathways for young patrons who want to find their next favorite book or research topic, and youth education support through a discovery tool that treats every student as a legitimate researcher.</p>
+
+  <p>The project is practitioner-built, privacy-preserving, and designed to be replicable across every public library in the Philadelphia region. Tredyffrin Township Libraries is the pilot site and operational home. Scout is the technology. Funds will support community launch events, librarian training, bilingual patron outreach, and community feedback sessions, with the unrestricted balance directed to operational support for the Friends group.</p>
+
+  <h2>Section 4 &middot; Community Need (Local Chester County Focus)</h2>
+
+  <p>Chester County, Pennsylvania sits at the western edge of the NBC10 Philadelphia market. Tredyffrin Township, one of the county's larger communities, is home to a growing immigrant population, a rising share of multilingual households, and school-age families balancing work, caregiving, and information needs that routinely outstrip what any single digital platform can serve. The township is also home to Tredyffrin Township Libraries, a two-branch public library that serves as the most-trusted free resource in the community for families who cannot afford commercial streaming, ebook, and research subscriptions.</p>
+
+  <p>The community need this project addresses is concrete and local. On a typical Saturday at the Strafford and Paoli branches, a Spanish-speaking parent approaches the reference desk looking for bilingual picture books for a four-year-old. The catalog returns English-only titles. The librarian walks the patron through OverDrive, which has a handful of Spanish titles, and then Hoopla, which has an audiobook series, and then a database of Spanish-language educational content, and then a curated reading list the library keeps in a binder. Twelve minutes later the family leaves with two books. On that same Saturday, dozens of other families approach the same desk and leave with less, not because the library does not own what they need, but because the search experience fails them.</p>
+
+  <p>This pattern repeats across every public library in the Philadelphia region. The problem is not the collection. The problem is the search. And because the problem compounds for multilingual families, young patrons using screen readers, and teens who do not know the library has exactly what they are looking for, the community members this project serves are the exact community members NBCUniversal Local Impact funding is designed to reach.</p>
+
+  <h3>Why local, why now</h3>
+  <p>Chester County's Latino population has grown significantly over the past decade. The county's libraries report increased Spanish-language reference questions and rising demand for bilingual materials. Tredyffrin Township Libraries is well-positioned to pilot a bilingual, voice-enabled discovery experience because the staff has asked for a tool like this for years and because Tredyffrin sits inside a countywide system (the Chester County Library System, eighteen member libraries) that can replicate a successful pilot across Chester County. A win at Tredyffrin is a win for West Chester, Coatesville, Kennett Square, and every other Chester County community NBC10 reaches.</p>
+
+  <h2>Section 5 &middot; Project Description</h2>
+
+  <p>Search with Scout is a conversational discovery assistant for public libraries. A patron opens Scout on a phone, tablet, library computer, or in-branch kiosk and describes what they need in their own words: "I need picture books in Spanish about starting school," "audiobooks for a road trip that my teenager will actually listen to," "something about starting a food truck." Scout searches the library's physical catalog, OverDrive, Hoopla, and licensed databases at the same time and returns unified results with real-time availability in under three seconds. If the patron wants to narrow down ("do you have that on audio, in Spanish, under 6 hours?"), Scout refines the results conversationally. The whole experience feels like asking a knowledgeable friend rather than filling out a search form.</p>
+
+  <p>What makes Scout different from commercial alternatives is that it is built by two working librarians, logs zero patron queries, and runs across every digital platform the library already pays for. The assistant was designed to hold the library's values in its architecture. Zero query logging is not a feature; it is a design rule rooted in Article VII of the American Library Association Library Bill of Rights. Multilingual voice input is not a premium add-on; it is the baseline because the pilot community is multilingual. Accessibility is not a stretch goal; the assistant meets WCAG 2.2 Level AA from day one.</p>
+
+  <p>For this project, the Friends of Tredyffrin Township Libraries will use NBCU Local Impact funding to support community launch and adoption activities, including:</p>
+  <ul>
+    <li>Bilingual patron outreach across Tredyffrin branches, Chester County schools, and local community organizations serving Spanish-speaking families.</li>
+    <li>A family launch event at the Strafford branch, co-hosted with a Chester County community partner, where families try Scout alongside library staff and a local NBC10 community reporter, should NBC10 wish to cover the story.</li>
+    <li>Four bilingual, free "Ask Once, Find Everything" workshops across both branches during the funding period, with childcare and light refreshments, so working parents can participate.</li>
+    <li>Librarian and volunteer training so every reference shift at Tredyffrin can guide patrons through Scout in both English and Spanish.</li>
+    <li>Printed, bilingual wayfinding materials for branches, schools, and community centers so families who encounter the tool off-site can find their way back to the library.</li>
+    <li>Unrestricted operational support for the Friends of Tredyffrin Township Libraries to sustain ongoing volunteer coordination, outreach materials, and community events through the grant year.</li>
+  </ul>
+
+  <h2>Section 6 &middot; NBCUniversal Focus Area Alignment</h2>
+
+  <div class="callout">
+    <div class="callout-label">Primary category: Community Engagement</div>
+    <p>NBCU describes Community Engagement as "programs that help foster community unity by enabling individuals to engage with and volunteer in their regions." This project meets that definition directly. Scout is the interaction layer between Chester County residents and the community institution they own and fund (their public library). Volunteer librarian testers, volunteer community translators, and a volunteer-driven Friends organization are the operational backbone of the project. Community launch events, workshops, and bilingual outreach are designed to pull new community members into active engagement with the library they have been paying for without fully using. "Engage with and volunteer in their region" is precisely what happens when a family discovers that their library has 300 Spanish-language audiobooks and signs up for a library card on the spot.</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Secondary category: Youth Education and Empowerment</div>
+    <p>NBCU describes this category as "in-school and community-based programs that equip youth with the tools they need to succeed." Public libraries are the original community-based youth education program. Scout serves every Chester County student who does not know how to find peer-reviewed sources, the student who needs a Spanish-language research database for an AP History paper, the elementary student whose parent cannot help them find the right-level reader, and the teen who assumed the library had nothing for them. Scout treats every student as a legitimate researcher and lets them ask questions in their own words, which is the single most empowering thing a discovery tool can do for a young patron.</p>
+  </div>
+
+  <p>The project touches the Next Generation Storytellers category as well. Search with Scout exists because two working librarians decided to tell a different story about what public library discovery could be, and the tool surfaces voices and authors whose work was previously buried under controlled vocabulary and platform silos. The main alignment, however, is Community Engagement plus Youth Education.</p>
+
+  <h2>Section 7 &middot; Outcomes and Metrics</h2>
+  <p>The Friends group will report on the following outcomes to NBCUniversal at the close of the grant period. Every metric is aggregated and anonymized to honor the library's zero-logging privacy commitment.</p>
+  <table>
+    <thead><tr><th>Outcome</th><th>Metric</th><th>Target</th></tr></thead>
+    <tbody>
+      <tr><td>Community events</td><td>Bilingual launch events and workshops delivered</td><td>5 events, 250+ attendees total</td></tr>
+      <tr><td>Volunteer engagement</td><td>Volunteer hours logged (testers, translators, event support)</td><td>400 hours</td></tr>
+      <tr><td>Patron adoption</td><td>Unique patron sessions with the discovery assistant during grant period</td><td>3,000 sessions</td></tr>
+      <tr><td>Multilingual reach</td><td>Percentage of sessions conducted in a non-English language</td><td>At least 12%</td></tr>
+      <tr><td>Accessibility use</td><td>Sessions that activate voice input or screen reader</td><td>Tracked as program signal</td></tr>
+      <tr><td>Collection use lift</td><td>Change in OverDrive and Hoopla circulation at Tredyffrin during grant period compared with prior-year quarter</td><td>10% increase</td></tr>
+      <tr><td>Staff impact</td><td>Routine discovery questions at Tredyffrin reference desks</td><td>20% reduction, freeing staff for complex reference and programming</td></tr>
+      <tr><td>New library cards</td><td>Cards issued during events and post-event two-week window</td><td>150 new cards</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Section 8 &middot; Budget</h2>
+
+  <p>The Friends of Tredyffrin Township Libraries requests $40,000 in unrestricted funds. NBCU requires that the grant not exceed 30 percent of the applicant's total organizational expenses. The requested amount is consistent with that cap assuming Friends expenses in the $135,000 to $1,000,000 range. Confirm exact cap against most recent Form 990 before submission.</p>
+
+  <table>
+    <thead><tr><th>Category</th><th class="amount">Amount</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>Bilingual community events and workshops</td><td class="amount">$9,000</td><td>Venue support, bilingual facilitation, childcare, light refreshments, and accessibility accommodations for five events across Strafford and Paoli branches.</td></tr>
+      <tr><td>Printed, bilingual outreach materials</td><td class="amount">$5,000</td><td>English/Spanish posters, bookmarks, rack cards, and school-distribution inserts. Translation and design by local bilingual contractors where possible.</td></tr>
+      <tr><td>Librarian and volunteer training</td><td class="amount">$6,000</td><td>Training sessions for Tredyffrin staff and Friends volunteers on the discovery assistant, including accessibility and multilingual support practices.</td></tr>
+      <tr><td>Community outreach stipends</td><td class="amount">$6,000</td><td>Stipends for bilingual community liaisons who help run events and follow up with families in neighborhood settings (schools, community centers, places of worship).</td></tr>
+      <tr><td>Evaluation and patron feedback</td><td class="amount">$3,500</td><td>Anonymized patron feedback collection at events, bilingual intercept surveys, and public outcomes report.</td></tr>
+      <tr><td>Accessibility equipment</td><td class="amount">$3,000</td><td>Branch kiosk upgrades, large-text and high-contrast displays for patrons with low vision, and assistive listening support at events.</td></tr>
+      <tr><td>Unrestricted operational support for Friends of Tredyffrin Township Libraries</td><td class="amount">$7,500</td><td>NBCU Local Impact grants are unrestricted. The balance supports Friends volunteer coordination, insurance, administrative costs, and general operations through the grant year.</td></tr>
+      <tr><td><strong>Total requested</strong></td><td class="amount"><strong>$40,000</strong></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Section 9 &middot; Timeline</h2>
+  <table>
+    <thead><tr><th>Month</th><th>Activities</th></tr></thead>
+    <tbody>
+      <tr><td>June 2026</td><td>Grant period begins. Staff and volunteer training sessions. Branch kiosk and accessibility equipment installed. Printed materials translated and produced.</td></tr>
+      <tr><td>July 2026</td><td>Family launch event at Strafford branch, bilingual, co-hosted with a Chester County community partner. Press invitation extended to NBC10 community desk.</td></tr>
+      <tr><td>August 2026</td><td>First bilingual workshop at Paoli branch. Begin neighborhood outreach through community liaisons.</td></tr>
+      <tr><td>September 2026</td><td>Back-to-school partnership with Tredyffrin Easttown School District. Workshop at Strafford branch for families with school-age children.</td></tr>
+      <tr><td>October 2026</td><td>Workshop at Paoli branch focused on teen patrons and high school students. Midpoint patron feedback review.</td></tr>
+      <tr><td>November 2026</td><td>Workshop at Strafford branch focused on senior and caregiver patrons. Accessibility showcase.</td></tr>
+      <tr><td>December 2026</td><td>Year-end patron feedback, outcomes report drafted.</td></tr>
+      <tr><td>January to May 2027</td><td>Sustained operations, optional additional workshops, and final outcomes report submitted to NBCU.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Section 10 &middot; Organizational Profile</h2>
+  <p>Friends of Tredyffrin Township Libraries is a volunteer-led 501(c)(3) organization that supports Tredyffrin Township Libraries through fundraising, events, volunteer coordination, and unrestricted operating support. The Friends group has <span class="placeholder">[CONFIRM YEARS ACTIVE]</span> years of continuous operation and an active board of community members drawn from Tredyffrin Township and surrounding Chester County communities. The organization holds Form 990 filings current and has no history of Comcast NBCUniversal funding above the disqualification threshold.</p>
+  <p>Tredyffrin Township Libraries, the operational partner for this project, is a municipal public library serving Tredyffrin Township and surrounding Chester County communities through the Strafford and Paoli branches. The library is a member of the Chester County Library System and operates under the Pennsylvania Library Code. Tredyffrin has served the Main Line community for decades and is a trusted public institution with strong name recognition among Chester County families.</p>
+
+  <h2>Section 11 &middot; 501(c)(3) Verification Attachments</h2>
+  <ul class="checklist">
+    <li>IRS Determination Letter for Friends of Tredyffrin Township Libraries</li>
+    <li>Most recent Form 990</li>
+    <li>Current fiscal-year budget</li>
+    <li>Board of directors list</li>
+    <li>Signed authorization from Friends board chair</li>
+    <li>W-9 for payment processing</li>
+  </ul>
+
+  <footer>
+    <div class="brand">Search with Scout</div>
+    <p>Built by librarians, for libraries.</p>
+    <p>Draft v0.1 &middot; April 9, 2026 &middot; For internal review &middot; Do not submit until Friends entity, financial thresholds, and prior-funding disclosure are confirmed.</p>
+  </footer>
+
+</div>
+</body>
+</html>
