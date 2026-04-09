@@ -1,0 +1,15 @@
+# Cloudflare Pages _redirects file
+# Format: <source> <destination> <status>
+# Rules are evaluated top to bottom; first match wins.
+#
+# IMPORTANT: _redirects is processed BEFORE static file serving, so these
+# redirects fire even if _site/fhm/ still exists in the deploy.
+
+# ---------------------------------------------------------------------------
+# FHM (Franklin Hugh Money) — moved to its own domain on 2026-04-09
+# Old URL: drewgarraway.com/fhm/...
+# New URL: franklinhughmoney.com/...
+# Repo:    https://github.com/assembly-labs/fhm
+# ---------------------------------------------------------------------------
+/fhm/*  https://franklinhughmoney.com/:splat  301
+/fhm    https://franklinhughmoney.com/        301
