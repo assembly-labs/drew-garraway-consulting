@@ -151,6 +151,36 @@ When working on TOMO, **only use active files inside `mvp-1.0/`**. If you encoun
 
 ---
 
+## CRITICAL: Schema Migration Rules
+
+> **NEVER tighten schema constraints before the corresponding app build is live for every tester.**
+
+Supabase migrations run against prod instantly, but new TestFlight builds take 24-48h to reach external testers (Apple review gate). If you add a `NOT NULL`, `CHECK`, or other tightening constraint to a column before every tester has the app build that populates it, older builds will hit the constraint, fail the write, and strand users.
+
+This exact bug happened with `profiles.birth_date NOT NULL` in the FEAT-008 migration (2026-03-30). External tester Rachel was stuck on the onboarding payoff screen for 7 days because her TestFlight build predated the migration. See CHANGELOG Session 41 (2026-04-08) and ISSUES.md ONB-001 for the full postmortem.
+
+### Rules for every schema change
+
+1. **New fields start nullable.** Always. Add the column with no constraints, ship the app build that populates it, wait for full tester rollout, THEN add `NOT NULL` in a follow-up migration.
+
+2. **Two-phase tightening.** Splitting a schema change into (a) permissive migration + app build, (b) tightening migration is the default. One-shot strict migrations are only acceptable when every client is guaranteed to be on a compatible build (e.g. new installs only, cold cache).
+
+3. **Check external TestFlight approval before tightening.** App Store Connect → TestFlight → External Testing → verify the target build is "Ready to Test" for all external groups. "Waiting for Review" or "In Review" means testers are still on the old build.
+
+4. **Write failures must be loud, not silent.** Any service method that hits the database must throw on error and report to Sentry. Returning null on failure hides migration-mismatch bugs for days. See `profileService.create` for the reference pattern.
+
+5. **Every migration needs a rollback plan** documented in the migration file header. If the constraint tightens, the rollback is usually `DROP NOT NULL` / `DROP CONSTRAINT`.
+
+### Before running `supabase db push` against prod
+
+- [ ] Is this migration additive or tightening?
+- [ ] If tightening, are ALL testers on a compatible app build?
+- [ ] Does the corresponding app code handle both old and new shapes during the rollout window?
+- [ ] Is there a rollback SQL snippet in the migration file header?
+- [ ] Are related service methods throwing on errors (not swallowing them)?
+
+---
+
 ## Project Structure
 
 ```

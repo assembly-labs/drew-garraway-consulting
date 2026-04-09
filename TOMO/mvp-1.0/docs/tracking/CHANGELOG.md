@@ -31,6 +31,97 @@ Each entry follows this format:
 
 ---
 
+## 2026-04-08 -- Session 41: Fix silent onboarding save failure (Rachel bug)
+
+**Type:** Fix
+
+### Context
+
+External tester Rachel was stuck on the onboarding payoff screen. She could see the "Start Training" CTA but tapping it did nothing. The gym name and belt info displayed correctly (those come from local onboarding state), but the app never advanced to the Journal tab.
+
+Root cause: her TestFlight build was from before the Mar 30 FEAT-008 migration. That migration added `birth_date NOT NULL` to the `profiles` table. Her build's `profileService.create` upsert was rejected by Postgres (null value in column "birth_date"), but `profileService.create` caught the error with `console.error` and returned `null` silently. `handleStart` in `GetStartedScreen` did not check the return value, so it transitioned to the payoff screen anyway. On "Start Training" tap, `refreshProfile` tried to load her profile row, found nothing, and `authState` stayed at `'needs_onboarding'`. The `RootNavigator` never swapped stacks, so she was trapped.
+
+Apple's external TestFlight review lag (24-48h on first-to-group) meant Rachel's external tester group never received the post-FEAT-008 app build, even though it had been submitted days earlier. The DB migration and the app that understood it shipped out of sync.
+
+### Changes
+
+**`src/services/supabase.ts`**
+- `profileService.create` now throws on error instead of returning `null`. Return type tightened from `Profile | null` to `Profile`.
+- All error paths (auth missing, Postgres error, missing data) report to Sentry with `{ area: 'onboarding', operation: 'profile_create' }` tags and anonymized extras.
+- Imported `@sentry/react-native`.
+- Kept the previously-staged `.insert()` → `.upsert()` change (also relevant: lets failed partial inserts re-try cleanly).
+
+**`src/screens/onboarding/GetStartedScreen.tsx`**
+- `handlePayoffComplete` now re-verifies the saved profile via `profileService.get()` after `refreshProfile`. If the loaded profile is missing or `onboarding_complete` is false, it shows an error toast, flips `showPayoff` back to false, and resets `mainOpacity` so the user lands on the logging-preference form with a retry path instead of a dead-end payoff screen.
+
+**`supabase/migrations/20260408000000_profile_birth_date_nullable.sql` (new)**
+- Drops `NOT NULL` constraint on `profiles.birth_date`.
+- Keeps the `enforce_minimum_age` trigger (null birth_date passes through; 18+ check still fires for non-null values).
+- This is a backwards-compatible hotfix that lets older app builds save profiles again while longer-term FEAT-008 validation stays enforced on the client.
+
+### Why
+
+- The silent-null return pattern masked a fatal onboarding bug that only surfaced via user reports. Throwing + Sentry makes future regressions visible within minutes instead of days.
+- `birth_date NOT NULL` should have been landed AFTER all testers were on the FEAT-008 app build, not before. Dropping the constraint until the release cycle catches up unblocks everyone on older builds and prevents future orphaned accounts.
+- The payoff-screen guard is defense-in-depth. Even if another save path fails silently, users can't get trapped on a screen with no working exit.
+
+### Testing
+
+- `npx tsc --noEmit` -- zero errors
+- Manual QA on device pending (recommended before TestFlight ship): verify (a) Start Logging with valid profile still reaches the payoff and Journal normally, (b) simulated profile save failure surfaces the toast and keeps the user on the logging-preference screen, (c) "Start Training" on the payoff advances to Journal on the happy path.
+
+### Follow-up
+
+- Apply migration `20260408000000_profile_birth_date_nullable.sql` to prod Supabase before shipping the next TestFlight build.
+- Run the stuck-user discovery query (see ISSUES.md ONB-001) to find and manually heal any other orphaned accounts.
+- Adopt the rule: never tighten schema constraints until the corresponding app build is live for all testers.
+
+---
+
+## 2026-04-06 -- Session 40: Insights Auto-Refresh + Unread Badge
+
+**Type:** Feature
+
+### Changes
+
+**Insights Auto-Refresh Polling (InsightsScreen.tsx)**
+- After logging a session, if the user opens Insights while the weekly debrief is still generating, the screen now auto-polls every 3 seconds
+- Insight appears automatically without manual pull-to-refresh
+- Polling stops after 30 seconds or when the insight arrives, whichever comes first
+- Added `fetchInFlightRef` guard so polling and pull-to-refresh can't overlap
+
+**Unread Badge Dot (new: useInsightsBadge.ts, MainTabNavigator.tsx)**
+- Gold dot appears on the Insights tab icon when unread insights exist
+- New context/provider/hook (`useInsightsBadge`) follows the same pattern as `useAuth`
+- `hasUnread()` added to `insightService` -- count-only query, no rows fetched
+- Badge check fires after `maybeTriggerWeeklyInsight` resolves in SessionLoggerScreen
+- Badge clears optimistically when any insight is viewed (no network delay)
+
+**Wiring (App.tsx, SessionLoggerScreen.tsx)**
+- `InsightsBadgeProvider` wraps inside `AuthProvider`, outside `ToastProvider`
+- Session save chains `checkForUnread()` after insight generation completes
+
+### Why
+- Users had no signal that a new insight was ready after logging a session
+- The "generating" placeholder required manual pull-to-refresh, which felt broken
+- Badge dot solves the case where the user stays on Journal tab after logging
+
+### Testing
+- `npx tsc --noEmit` -- zero errors
+- Shipped to TestFlight (build submitted 2026-04-06)
+
+### Files Changed
+| File | Change |
+|------|--------|
+| `src/services/insights-service.ts` | Added `hasUnread()` method |
+| `src/hooks/useInsightsBadge.ts` | New file -- context + provider + hook |
+| `App.tsx` | Wrapped with `InsightsBadgeProvider` |
+| `src/navigation/MainTabNavigator.tsx` | Gold badge dot on Insights tab |
+| `src/screens/SessionLoggerScreen.tsx` | Chained `checkForUnread()` after insight generation |
+| `src/screens/InsightsScreen.tsx` | Auto-poll + `clearBadge()` + fetch guard |
+
+---
+
 ## 2026-04-04 -- Session 39: Architecture Decomposition + Codebase Review
 
 **Type:** Refactor

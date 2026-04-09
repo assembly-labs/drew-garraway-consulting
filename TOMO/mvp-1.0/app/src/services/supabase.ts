@@ -21,6 +21,7 @@ import { createClient } from '@supabase/supabase-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
 import * as FileSystem from 'expo-file-system/legacy';
+import * as Sentry from '@sentry/react-native';
 import type {
   Profile,
   ProfileInsert,
@@ -107,14 +108,21 @@ export const profileService = {
     return data as Profile;
   },
 
-  /** Create a new profile (during onboarding) */
-  async create(profile: ProfileInsert): Promise<Profile | null> {
+  /**
+   * Create or update a profile (during onboarding).
+   * Throws on failure so the caller can show an error and keep the user on
+   * the onboarding screen instead of silently transitioning to the payoff
+   * and stranding them with no profile row.
+   */
+  async create(profile: ProfileInsert): Promise<Profile> {
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return null;
+    if (!user) {
+      throw new Error('Not authenticated');
+    }
 
     const { data, error } = await supabase
       .from('profiles')
-      .insert({
+      .upsert({
         id: user.id,
         ...profile,
         onboarding_complete: true,
@@ -124,7 +132,22 @@ export const profileService = {
 
     if (error) {
       console.error('Failed to create profile:', error.message);
-      return null;
+      Sentry.captureException(error, {
+        tags: { area: 'onboarding', operation: 'profile_create' },
+        extra: {
+          user_id: user.id,
+          profile_fields: Object.keys(profile),
+        },
+      });
+      throw new Error(`Failed to save profile: ${error.message}`);
+    }
+    if (!data) {
+      const missingDataError = new Error('Profile save returned no data');
+      Sentry.captureException(missingDataError, {
+        tags: { area: 'onboarding', operation: 'profile_create' },
+        extra: { user_id: user.id },
+      });
+      throw missingDataError;
     }
     return data as Profile;
   },
