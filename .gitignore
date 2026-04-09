@@ -167,5 +167,21 @@ gather/gather-build-plan.md
 # Build artifact - assembled for Cloudflare Pages deploy
 _site/
 
+# ============================================
+# HEAVY SOURCE MEDIA — KEEP LOCAL, NEVER COMMIT
+# ============================================
+# Uncompressed audio/video source files exceed the Cloudflare Pages
+# 25 MB per-file limit and will break every drewgarraway.com deploy.
+# Store heavy originals in one of these gitignored directories; the
+# compressed, web-ready versions go in the normal assets/ paths.
+# Backstop: .github/workflows/pr-checks.yml check-deploy-file-sizes job.
+# Rules: ~/.claude/projects/-Users-drewgarraway/memory/feedback_deployment_discipline.md
+**/_audio-source/
+**/_media-source/
+**/_raw-audio/
+**/_raw-media/
+**/_source-audio/
+**/_source-video/
+
 # Note: Archived projects are in _archived/ folder
 # See _archived/README.md for redeployment instructions
