@@ -9,7 +9,6 @@ on:
       - 'robots.txt'
       - 'sitemap.xml'
       - '_redirects'
-      - 'fhm/**'
       - 'kaijutsu/**'
       - 'read-out-loud/**'
       - 'scout-grants/**'
@@ -24,18 +23,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # --- Build FHM (only project that needs a build step) ---
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Build FHM
-        working-directory: fhm
-        run: |
-          npm ci
-          npm run build
-
       # --- Assemble _site/ directory ---
+      # No build step needed: all remaining projects on drewgarraway.com are
+      # static HTML/CSS/JS. FHM (the only project that required Node + npm)
+      # was extracted to its own repo and domain (franklinhughmoney.com) on
+      # 2026-04-09. Old /fhm/* URLs are 301-redirected via the _redirects file
+      # at the repo root.
       - name: Assemble site
         run: |
           mkdir -p _site
@@ -45,13 +38,6 @@ jobs:
           [ -f robots.txt ] && cp robots.txt _site/ || true
           [ -f sitemap.xml ] && cp sitemap.xml _site/ || true
           [ -f _redirects ] && cp _redirects _site/ || true
-
-          # FHM — only web-servable files (no source, no dev tooling)
-          mkdir -p _site/fhm
-          cp fhm/index.html _site/fhm/
-          [ -f fhm/robots.txt ] && cp fhm/robots.txt _site/fhm/ || true
-          cp -r fhm/assets _site/fhm/
-          cp -r fhm/pages _site/fhm/
 
           # Kaijutsu — static HTML + images
           mkdir -p _site/kaijutsu
