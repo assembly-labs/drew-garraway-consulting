@@ -8,6 +8,7 @@ on:
       - 'index.html'
       - 'robots.txt'
       - 'sitemap.xml'
+      - '_redirects'
       - 'fhm/**'
       - 'kaijutsu/**'
       - 'read-out-loud/**'
@@ -43,6 +44,7 @@ jobs:
           cp index.html _site/
           [ -f robots.txt ] && cp robots.txt _site/ || true
           [ -f sitemap.xml ] && cp sitemap.xml _site/ || true
+          [ -f _redirects ] && cp _redirects _site/ || true
 
           # FHM — only web-servable files (no source, no dev tooling)
           mkdir -p _site/fhm
