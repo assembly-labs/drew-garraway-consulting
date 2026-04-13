@@ -25,7 +25,7 @@ jobs:
         with:
           filters: |
             tomo:
-              - 'TOMO/prototype/**'
+              - 'TOMO/mvp-1.0/app/**'
             scout:
               - 'scout/**'
             f_this_app:
@@ -33,24 +33,23 @@ jobs:
             gather:
               - 'gather/prototype/**'
 
-  # TOMO - React 19 + Vite + TypeScript
+  # TOMO - React Native + Expo + TypeScript
   check-tomo:
     needs: detect-changes
     if: needs.detect-changes.outputs.tomo == 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: TOMO/prototype
+        working-directory: TOMO/mvp-1.0/app
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: TOMO/prototype/package-lock.json
+          cache-dependency-path: TOMO/mvp-1.0/app/package-lock.json
       - run: npm ci
-      - run: npm run build
-      - run: npm run lint --if-present
+      - run: npx tsc --noEmit
 
   # Scout - React 18 + Vite + TypeScript
   check-scout:

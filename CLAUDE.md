@@ -147,7 +147,7 @@ Quality checks are defined in `.github/workflows/pr-checks.yml`:
 
 | Project | Checks Run |
 |---------|------------|
-| TOMO | build, lint |
+| TOMO | typecheck (`tsc --noEmit`) |
 | Scout | build, lint |
 | F_This_App | build, lint |
 | Gather | build, lint |
