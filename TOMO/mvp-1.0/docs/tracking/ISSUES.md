@@ -22,38 +22,85 @@ When resolved: move the entry to CHANGELOG.md under the appropriate date, mark a
 
 ---
 
-## Active
+## Open: Journal UX Audit (2026-04-12)
 
-_No active blockers._
+### JRN-001 Journal has no search
+**Priority:** P1
+**Area:** JournalScreen
+**Added:** 2026-04-12
+**Status:** Open
+
+Users cannot search their sessions. At 50+ sessions, finding "the class where I worked on arm triangles" requires scrolling the entire list. The journal is the relaxed browsing state where exploration is encouraged, but exploration without search is just scrolling. Every session has searchable fields: techniques_drilled, notes, instructor, lesson_topic. This gap gets worse every week the user logs.
+
+### JRN-002 "Earlier" date group is a black hole
+**Priority:** P1
+**Area:** JournalScreen, journal-helpers.ts
+**Added:** 2026-04-12
+**Status:** Open
+
+Date grouping has five buckets: Today, Yesterday, This Week, This Month, Earlier. After two months, 80% of sessions collapse into one undifferentiated "Earlier" section with no way to jump to a specific month or week. Needs month-based sub-grouping within Earlier (e.g., "March 2026", "February 2026") or a calendar/month navigation view. The `groupSessionsByDate()` function in journal-helpers.ts is the place to fix this.
+
+### JRN-003 Mood is captured but not displayed on SessionDetail
+**Priority:** P1
+**Area:** SessionDetailScreen
+**Added:** 2026-04-12
+**Status:** Open
+
+ENH-05 added mood_rating capture (5 gold dots in success phase). The value is stored in the sessions table. But SessionDetailScreen doesn't display it anywhere. The user gives TOMO data and sees nothing back. Broken feedback loop. Mood is the #1 retention predictor per our sports psych research (0.62 automaticity increase per valence point). Fix: show the mood rating in the session detail header or as a small visual near the date.
+
+### JRN-004 Session cards don't indicate content richness
+**Priority:** P1
+**Area:** JournalScreen (SessionCard component)
+**Added:** 2026-04-12
+**Status:** Open
+
+A bare "60 min gi class" with no notes looks identical to a rich session with notes, 8 techniques, sparring rounds, and injuries. No visual signal for: has notes (most valuable), has mood, has injuries, number of techniques. Users have to tap into every session to know what's inside. Fix: add subtle indicators on the card -- a small notes icon if notes exist, a mood dot if mood was recorded, an injury dot if injuries present.
+
+### JRN-005 Narrative summary built but not used
+**Priority:** P1
+**Area:** SessionDetailScreen, journal-helpers.ts
+**Added:** 2026-04-12
+**Status:** Open
+
+`generateNarrativeSummary()` exists in journal-helpers.ts, fully functional, generating natural language like "90-minute gi class. Drilled knee slice passing. Sparred 3 rounds -- landed an armbar, got caught in a triangle." It is not used anywhere in the UI. The session detail screen opens with a wall of labeled sections instead of a human-readable sentence. Fix: render the narrative summary at the top of SessionDetailScreen, above the sections, as the "at a glance" view. This is the difference between a database record and a journal entry.
+
+### JRN-006 Audio recordings cannot be replayed
+**Priority:** P1
+**Area:** SessionDetailScreen
+**Added:** 2026-04-12
+**Status:** Open
+
+Users record voice memos during session logging. The audio file is stored in Supabase storage (audio_path field). The transcript is shown (collapsible at bottom of detail screen). But there is no play button. The original recording -- with tone, emotion, the sound of their voice after training -- is permanently inaccessible from the app. Fix: add an audio player near the transcript section. Use signed URL from audioService. This is an emotional connection feature, not just a utility.
+
+### JRN-007 Empty sections clutter SessionDetail
+**Priority:** P1
+**Area:** SessionDetailScreen
+**Added:** 2026-04-12
+**Status:** Open
+
+If a user didn't spar, didn't log techniques, didn't record an instructor, and didn't warm up, the detail screen still shows four sections reading "Not recorded." Empty sections take up scroll space and make the screen feel barren instead of clean. Fix: hide sections that have no data. Show only what exists. Optionally add a single "Add more details" link at the bottom that reveals the empty fields for editing.
+
+### JRN-008 Filters too narrow (gi/nogi only)
+**Priority:** P2
+**Area:** JournalScreen
+**Added:** 2026-04-12
+**Status:** Open
+
+Filter pills only offer All / Gi / No-Gi. Can't filter by session kind (class, open mat, competition training), by sparring (did I spar?), by time range, or by technique. The data model supports all of this. A blue belt wants "all my open mat sessions where I sparred" and can't get there. Fix: expand filter to include session kind at minimum. Consider a "more filters" expandable row for sparring toggle and date range. Don't overload the UI -- progressive disclosure.
 
 ---
 
-## Completed: Session 41 (2026-04-08) -- ONB-001 Stuck onboarding payoff
+## Open: Post-ENH (2026-04-11)
 
-### ONB-001 Stuck on onboarding payoff (silent profile save failure)
-**Priority:** P0
-**Area:** GetStartedScreen, profileService.create, profiles table migration
-**Added:** 2026-04-08
-**Status:** Done (2026-04-08, Session 41)
+### ENH-DEPLOY Deploy mood_rating migration and generate-weekly edge function
+**Priority:** P1
+**Area:** Supabase, Edge Functions
+**Added:** 2026-04-11
+**Status:** Open
 
-External tester Rachel (rmgb2000@gmail.com) was stranded on the onboarding payoff screen for 7 days. Tapping "Start Training" did nothing. Root cause: her TestFlight build predated FEAT-008, so it didn't send `birth_date`. The Mar 30 FEAT-008 migration made `birth_date NOT NULL` on prod. Her upsert was rejected, `profileService.create` swallowed the error and returned `null`, `handleStart` ignored the null and transitioned to the payoff screen anyway. `refreshProfile` on "Start Training" found no profile row, so `authState` stayed `needs_onboarding` and `RootNavigator` never swapped stacks.
-
-Apple's TestFlight external review lag (24-48h) meant her group never received the post-FEAT-008 app build. The DB migration and the app that understood it shipped out of sync.
-
-**Fix (merged to main via PR #40):**
-1. `profileService.create` now throws on error and reports to Sentry (tags: `area=onboarding`, `operation=profile_create`). Return type tightened from `Profile | null` to `Profile`.
-2. `handlePayoffComplete` re-verifies the saved profile after `refreshProfile`. If the profile didn't land, it bounces the user back to the logging-preference form with an error toast.
-3. Migration `20260408000000_profile_birth_date_nullable.sql` drops `NOT NULL` on `profiles.birth_date`. Keeps the 18+ enforcement trigger (null passes through; check fires for non-null values).
-4. Added "CRITICAL: Schema Migration Rules" section to `TOMO/CLAUDE.md` with two-phase migration pattern and pre-push checklist.
-
-**Production actions taken:**
-- Migration `20260408000000` applied to prod Supabase via `supabase db push`
-- Rachel's orphaned auth user (`00377fc7-89dc-4b8c-9860-7b2c342d3ea9`) deleted via admin API
-- Stuck-user discovery query run against prod: only Rachel was affected (verified she was the only auth.user without a profile row created after 2026-03-30)
-- Rachel can now sign up fresh with her existing `rmgb2000@gmail.com` address; her old TestFlight build will succeed because the schema is now permissive
-- **TestFlight hotfix build submitted 2026-04-08 at 22:08 UTC** from main. Submission ID `6f90d77c-1415-4675-951e-734071b2ea40`. Internal testers get it in 5-10 minutes after Apple processing. External testers (Rachel) get it after Apple's external review (24-48h), but she's already unblocked via the schema fix.
-
-_All action items complete. ONB-001 is fully closed._
+Two deployment steps needed before ENH-05 works end-to-end:
+1. Run migration `supabase/migrations/20260411000000_add_mood_rating.sql` via `supabase db push` or Supabase dashboard.
+2. Deploy updated edge function: `supabase functions deploy generate-weekly --no-verify-jwt` (the `--no-verify-jwt` flag is REQUIRED — has caused P0 outages 3 times).
 
 ---
 
@@ -666,9 +713,9 @@ No DELETE policy existed on `profiles` or `sessions` tables. While RLS blocked u
 **Priority:** P2
 **Area:** Database (Supabase — PostGIS)
 **Added:** 2026-03-25
-**Status:** Blocked — Supabase support ticket filed
+**Status:** Migration ready — apply via Dashboard SQL Editor
 
-Supabase advisory flags `spatial_ref_sys` (PostGIS system table) as "rls_disabled_in_public". Table is owned by `supabase_admin` — no user-accessible role can ALTER it, REVOKE grants on it, or SET ROLE to the owner. Contains zero user data (EPSG coordinate reference definitions only). Exhaustively tried: ALTER TABLE, REVOKE, SET ROLE, pg_class UPDATE, SECURITY DEFINER function, ALTER EXTENSION SET SCHEMA — all blocked by permissions. Support ticket filed requesting Supabase run the fix as `supabase_admin`.
+Supabase advisory flags `spatial_ref_sys` (PostGIS system table) as "rls_disabled_in_public". Table is owned by `supabase_admin` — previous ALTER attempts blocked by permissions (Session 20, March 25). REVOKE workaround applied in `20260325000000_security_hardening.sql`. Migration `20260412000001_spatial_ref_sys_rls.sql` created to enable RLS (no policy — REVOKE already blocks access). PostGIS functions bypass RLS as extension owner, so gym search is unaffected. **Action required:** Run `ALTER TABLE public.spatial_ref_sys ENABLE ROW LEVEL SECURITY;` in Supabase Dashboard SQL Editor. If permissions still block it, re-file Supabase support ticket.
 
 ---
 

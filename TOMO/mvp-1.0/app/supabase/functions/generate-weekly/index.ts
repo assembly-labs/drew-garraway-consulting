@@ -42,6 +42,7 @@ interface WeeklyInsightParagraph {
 interface WeeklyInsightOutput {
   paragraphs: WeeklyInsightParagraph[];
   focusNext: string;
+  lens?: string; // ENH-03: tracks which lens was used so next week can rotate
 }
 
 interface WeeklyInsightResponse {
@@ -93,6 +94,35 @@ const BELT_TONE: Record<string, { tone: string; depth: string; encouragement: st
   },
 };
 
+// --- Lens Rotation ---
+
+const INSIGHT_LENSES = [
+  'technique_patterns',
+  'training_rhythm',
+  'energy_intensity',
+  'training_partnerships',
+  'position_tendencies',
+  'recovery_rest',
+] as const;
+
+type InsightLens = (typeof INSIGHT_LENSES)[number];
+
+const LENS_DESCRIPTIONS: Record<InsightLens, string> = {
+  technique_patterns: 'Focus on which techniques appeared, their repetition across sessions, and connections between them.',
+  training_rhythm: 'Focus on when they trained (days, times), session length patterns, and consistency vs. their target.',
+  energy_intensity: 'Focus on effort signals — session duration, sparring volume, notes mentioning energy/fatigue.',
+  training_partnerships: 'Focus on who they trained with (if mentioned), sparring dynamics, partner patterns.',
+  position_tendencies: 'Focus on which positions they spent time in — guard, top, back, etc. — and whether it\'s expanding or narrowing.',
+  recovery_rest: 'Focus on rest days, training density, injury mentions, and sustainable patterns.',
+};
+
+function selectLens(lastLens: string | null | undefined): InsightLens {
+  if (!lastLens) return INSIGHT_LENSES[0];
+  const lastIndex = INSIGHT_LENSES.indexOf(lastLens as InsightLens);
+  if (lastIndex === -1) return INSIGHT_LENSES[0];
+  return INSIGHT_LENSES[(lastIndex + 1) % INSIGHT_LENSES.length];
+}
+
 // --- Prompt Builders ---
 
 function buildSystemPrompt(input: Record<string, unknown>): string {
@@ -105,10 +135,18 @@ function buildSystemPrompt(input: Record<string, unknown>): string {
   const sessionsThisWeek = (input.sessionsThisWeek as number) || 0;
   const totalSessionsAllTime = (input.totalSessionsAllTime as number) || 0;
   const isFirstInsight = totalSessionsAllTime <= sessionsThisWeek;
+  const daysSinceLastSession = input.daysSinceLastSession as number | undefined;
+  const isReturning = typeof daysSinceLastSession === 'number' && daysSinceLastSession >= 14;
+
+  // ENH-03: use pre-selected lens (injected as _selectedLens by caller)
+  const lens = (input._selectedLens as InsightLens | undefined) ?? selectLens(input.lastLens as string | null | undefined);
+  const lensDescription = LENS_DESCRIPTIONS[lens];
 
   let prompt = `You are a BJJ training partner reviewing someone's week. You watched their rolls, you know what they drilled. You're the friend who notices things.
 
 YOUR JOB: Say the 1-3 most important things about their week. That's it. Not every data point needs coverage. Only what matters.
+
+LEAD WITH DISCOVERY: Your opening paragraph must be the observation with the highest surprise value — something the user vaguely sensed but couldn't articulate. Patterns they can't see from inside their own training. Save confirmatory data (session count, mode breakdown, frequency) for later paragraphs or omit entirely if space is tight. The first sentence should make them stop scrolling.
 
 PICK WHAT TO SAY using this priority:
 1. Injury or recurring pain -- always comes first if present
@@ -117,6 +155,8 @@ PICK WHAT TO SAY using this priority:
 4. A meaningful change -- volume up/down, something new, a milestone
 
 If only one thing matters, say one thing. Do not pad.
+
+PRIMARY LENS THIS WEEK: ${lensDescription} Lead your observations through this lens. Other dimensions are secondary — use them only if something urgent (injury, major milestone) demands it.
 
 RULES:
 - NEVER restate what they logged. They know what they did. Tell them what it MEANS.
@@ -201,6 +241,43 @@ Frame at least one observation through what matters to them.`;
   // Gender context
   if (gender === 'Female' || gender === 'female') {
     prompt += `\n\nGENDER: Female. Frame size differences as leverage problems, not limitations. Never patronize.`;
+  }
+
+  // ENH-02: Focus Echo — check if last week's focus appeared this week
+  const lastFocusNext = input.lastFocusNext as string | null | undefined;
+  if (lastFocusNext) {
+    prompt += `
+
+FOCUS FOLLOW-UP: Last week's recommendation was: '${lastFocusNext}'. Check the session data — did this topic appear in their sessions this week? If yes, name the follow-through specifically. If no, don't mention it — they may have had different priorities.`;
+  }
+
+  // ENH-05: Mood data interpretation
+  prompt += `
+
+MOOD DATA: If mood ratings are present, look for mood-training correlations (mood by day of week, mood by training mode, mood trend over weeks). A declining mood trend over 3+ weeks is a retention signal — acknowledge it gently. Never say 'your mood declined.' Say 'your sessions this month feel different from last month.' Frame as a question, not a diagnosis.`;
+
+  // ENH-07: Plateau detection — reframe stagnation as unseen progress
+  const plateauSignal = input.plateauSignal as boolean | undefined;
+  const plateauContext = input.plateauContext as string | undefined;
+  if (plateauSignal && plateauContext) {
+    prompt += `
+
+PLATEAU DETECTED: ${plateauContext}. DO NOT say 'plateau' or 'stuck.' Shift your lens entirely. Find a dimension of progress the user hasn't been tracking. If technique diversity is flat, look at positioning depth or sparring changes. If frequency is declining, look at session quality. Never show a flat line without reframing it.`;
+  }
+
+  // ENH-08: Historical comparison instruction
+  const historicalComparison = input.historicalComparison as { date: string; summary: string; monthsAgo: number } | null | undefined;
+  if (historicalComparison) {
+    prompt += `
+
+HISTORICAL COMPARISON: You have a session from ${historicalComparison.monthsAgo} months ago. Weave a brief 1-2 sentence comparison showing how their training evolved. If the comparison isn't interesting, skip it entirely.`;
+  }
+
+  // ENH-06: Returning after a gap
+  if (isReturning && typeof daysSinceLastSession === 'number') {
+    prompt += `
+
+RETURNING AFTER A GAP: The user hasn't trained in ${daysSinceLastSession} days. Do NOT reference the gap duration or say 'welcome back' or 'you've been away.' Frame this as 'first week back.' Do NOT compare to the prior week (there isn't one). Focus only on what they did THIS week. One paragraph max. Brief and warm.`;
   }
 
   prompt += `
@@ -289,6 +366,12 @@ function buildUserMessage(input: Record<string, unknown>): string {
     parts.push(`Detected patterns: ${detectedPatterns.join(', ')}`);
   }
 
+  // ENH-02: Focus Echo
+  const lastFocusNext = input.lastFocusNext as string | null | undefined;
+  if (lastFocusNext) {
+    parts.push(`\nLast week's focus: ${lastFocusNext}`);
+  }
+
   if (input.priorWeekDelta) {
     const d = input.priorWeekDelta as Record<string, unknown>;
     parts.push(`\nCOMPARED TO LAST WEEK:`);
@@ -322,6 +405,23 @@ function buildUserMessage(input: Record<string, unknown>): string {
     quarterlyPriorities.forEach((p: string, i: number) => {
       parts.push(`${i + 1}. ${p}`);
     });
+  }
+
+  // ENH-08: Historical session data
+  const historicalComparison = input.historicalComparison as { date: string; summary: string; monthsAgo: number } | null | undefined;
+  if (historicalComparison) {
+    parts.push(`\nHISTORICAL SESSION (${historicalComparison.monthsAgo} months ago, ${historicalComparison.date}): ${historicalComparison.summary}`);
+  }
+
+  // ENH-05: Mood data
+  const moodAverage = input.moodAverage as number | null | undefined;
+  const moodCount = input.moodCount as number | null | undefined;
+  const moodTrend = input.moodTrend as (number | null)[] | null | undefined;
+  if (moodAverage !== null && moodAverage !== undefined && moodCount) {
+    parts.push(`\nMood this week: ${moodAverage.toFixed(1)}/5 (from ${moodCount} session${moodCount !== 1 ? 's' : ''})`);
+    if (moodTrend && moodTrend.length > 0) {
+      parts.push(`Mood trend (last 4 weeks): [${moodTrend.map((v) => v !== null ? v.toFixed(1) : 'N/A').join(', ')}]`);
+    }
   }
 
   return parts.join('\n');
@@ -446,8 +546,12 @@ Deno.serve(async (req) => {
     }
 
     // --- Build Prompts ---
-    const systemPrompt = buildSystemPrompt(input);
-    const userMessage = buildUserMessage(input);
+    // ENH-03: select lens before building prompts so it's available to both
+    const selectedLens = selectLens(input.lastLens as string | null | undefined);
+    // Inject selected lens into input so buildSystemPrompt can use it
+    const inputWithLens = { ...input, _selectedLens: selectedLens };
+    const systemPrompt = buildSystemPrompt(inputWithLens);
+    const userMessage = buildUserMessage(inputWithLens);
 
     // --- Call Claude ---
     let insightData: WeeklyInsightOutput | null = null;
@@ -495,8 +599,13 @@ Deno.serve(async (req) => {
       try {
         const parsed = JSON.parse(rawText);
         insightData = validateOutput(parsed);
+        // ENH-03: stamp the lens used so next week can rotate away from it
+        if (insightData) {
+          insightData = { ...insightData, lens: selectedLens };
+        }
       } catch (parseErr) {
-        error = `insight_parse_failed: ${(parseErr as Error).message} | raw: ${rawText.slice(0, 200)}`;
+        console.error('Weekly insight parse failed:', parseErr, '| raw:', rawText.slice(0, 500));
+        error = 'insight_parse_failed';
       }
     } catch (apiErr) {
       const isTimeout = apiErr instanceof DOMException && apiErr.name === 'AbortError';
@@ -506,7 +615,8 @@ Deno.serve(async (req) => {
           { status: 504, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
         );
       }
-      error = `insight_api_failed: ${(apiErr as Error).message}`;
+      console.error('Weekly insight API failed:', apiErr);
+      error = 'insight_api_failed';
     }
 
     // --- Handle Parse/Validation Failures ---
@@ -553,7 +663,7 @@ Deno.serve(async (req) => {
         success: true,
         data: insightData,
         stored: false,
-        error: `storage_failed: ${insertError.message}`,
+        error: 'storage_failed',
         metadata: {
           model: MODEL,
           schema_version: SCHEMA_VERSION,
@@ -584,10 +694,9 @@ Deno.serve(async (req) => {
       headers: { 'Content-Type': 'application/json', ...corsHeaders },
     });
   } catch (err) {
-    // Top-level catch for any unhandled errors
     console.error('Weekly insight generation error:', err);
     return new Response(
-      JSON.stringify({ error: `Internal error: ${(err as Error).message}` }),
+      JSON.stringify({ error: 'Something went wrong. Please try again.' }),
       { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
     );
   }

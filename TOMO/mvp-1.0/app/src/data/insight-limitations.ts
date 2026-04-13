@@ -30,7 +30,7 @@ const LIMITATIONS: Record<InsightLimitationState, InsightLimitation> = {
   no_sessions: {
     state: 'no_sessions',
     message:
-      'Your weekly debrief lives here. Log a session and TOMO will have something to work with.',
+      'Log a session this week and TOMO will build your debrief from there.',
     missing: ['sessions'],
   },
 

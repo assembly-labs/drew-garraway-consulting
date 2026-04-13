@@ -21,7 +21,6 @@ import { createClient } from '@supabase/supabase-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
 import * as FileSystem from 'expo-file-system/legacy';
-import * as Sentry from '@sentry/react-native';
 import type {
   Profile,
   ProfileInsert,
@@ -108,17 +107,10 @@ export const profileService = {
     return data as Profile;
   },
 
-  /**
-   * Create or update a profile (during onboarding).
-   * Throws on failure so the caller can show an error and keep the user on
-   * the onboarding screen instead of silently transitioning to the payoff
-   * and stranding them with no profile row.
-   */
-  async create(profile: ProfileInsert): Promise<Profile> {
+  /** Create or update a profile (during onboarding) */
+  async create(profile: ProfileInsert): Promise<Profile | null> {
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
-      throw new Error('Not authenticated');
-    }
+    if (!user) return null;
 
     const { data, error } = await supabase
       .from('profiles')
@@ -132,22 +124,7 @@ export const profileService = {
 
     if (error) {
       console.error('Failed to create profile:', error.message);
-      Sentry.captureException(error, {
-        tags: { area: 'onboarding', operation: 'profile_create' },
-        extra: {
-          user_id: user.id,
-          profile_fields: Object.keys(profile),
-        },
-      });
-      throw new Error(`Failed to save profile: ${error.message}`);
-    }
-    if (!data) {
-      const missingDataError = new Error('Profile save returned no data');
-      Sentry.captureException(missingDataError, {
-        tags: { area: 'onboarding', operation: 'profile_create' },
-        extra: { user_id: user.id },
-      });
-      throw missingDataError;
+      return null;
     }
     return data as Profile;
   },
@@ -344,6 +321,31 @@ export const sessionService = {
       techniques: Array.from(techniqueSet),
       submissions: Array.from(submissionSet),
     };
+  },
+
+  /**
+   * Save optional mood rating (1-5) to a session.
+   * ENH-05: Mood Pulse — called from SuccessPhase, non-blocking.
+   * Uses a direct Supabase update instead of sessionService.update()
+   * to avoid setting edited_after_ai = true for a user-optional field.
+   */
+  async updateMood(id: string, moodRating: number): Promise<void> {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    const { error } = await supabase
+      .from('sessions')
+      .update({
+        mood_rating: moodRating,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', id)
+      .eq('user_id', user.id);
+
+    if (error) {
+      console.error('Failed to save mood rating:', error.message);
+      // Non-critical — do not throw
+    }
   },
 };
 

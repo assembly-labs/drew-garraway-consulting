@@ -173,8 +173,9 @@ Deno.serve(async (req) => {
       .createSignedUrl(audioPath, SIGNED_URL_EXPIRY_SECONDS);
 
     if (signedUrlError || !signedUrlData?.signedUrl) {
+      console.error('Signed URL generation failed:', signedUrlError);
       return new Response(
-        JSON.stringify({ error: `Failed to generate signed URL: ${signedUrlError?.message}` }),
+        JSON.stringify({ error: 'Failed to access audio file. Please try again.' }),
         { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
       );
     }
@@ -182,7 +183,8 @@ Deno.serve(async (req) => {
     // --- Send to AssemblyAI ---
     const assemblyAiKey = Deno.env.get('ASSEMBLYAI_API_KEY');
     if (!assemblyAiKey) {
-      return new Response(JSON.stringify({ error: 'ASSEMBLYAI_API_KEY not configured' }), {
+      console.error('ASSEMBLYAI_API_KEY not configured');
+      return new Response(JSON.stringify({ error: 'Transcription service not available. Please try again later.' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json', ...corsHeaders },
       });
@@ -219,8 +221,9 @@ Deno.serve(async (req) => {
       const submitData = await submitResponse.json();
       transcriptId = submitData.id;
     } catch (err) {
+      console.error('Transcription request failed:', err);
       return new Response(
-        JSON.stringify({ error: `AssemblyAI request failed: ${(err as Error).message}` }),
+        JSON.stringify({ error: 'Transcription request failed. Please try again.' }),
         { status: 502, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
       );
     }
@@ -250,10 +253,11 @@ Deno.serve(async (req) => {
       }
 
       if (pollData.status === 'error') {
+        console.error('Transcription failed:', pollData.error);
         return new Response(
           JSON.stringify({
             success: false,
-            error: `Transcription failed: ${pollData.error}`,
+            error: 'Transcription failed. Please try recording again.',
           }),
           { status: 502, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
         );
@@ -270,9 +274,9 @@ Deno.serve(async (req) => {
     );
 
   } catch (err) {
-    // Top-level catch for any unhandled errors
+    console.error('Transcribe audio error:', err);
     return new Response(
-      JSON.stringify({ error: `Internal error: ${(err as Error).message}` }),
+      JSON.stringify({ error: 'Something went wrong. Please try again.' }),
       { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
     );
   }

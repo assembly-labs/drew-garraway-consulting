@@ -16,5 +16,8 @@ export type { ProcessingPhaseProps } from './ProcessingPhase';
 export { ReviewPhase } from './ReviewPhase';
 export type { ReviewPhaseProps } from './ReviewPhase';
 
+export { SuccessPhase } from './SuccessPhase';
+export type { SuccessPhaseProps } from './SuccessPhase';
+
 export type { Phase, EntryFields, ReviewFields, Submission } from './types';
 export { PIPELINE_TIMEOUT_MS, RECORDING_PROMPTS, autoWidthChip } from './types';

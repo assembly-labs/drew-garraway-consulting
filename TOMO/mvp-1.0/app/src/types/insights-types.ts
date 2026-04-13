@@ -136,6 +136,27 @@ export interface WeeklyInsightInput {
   } | null;
 
   quarterlyPriorities: string[] | null;
+
+  // ENH-02: Focus Echo — last week's recommended focus
+  lastFocusNext?: string | null;
+
+  // ENH-03: Angle Shift — last lens used (to rotate away from it)
+  lastLens?: string | null;
+
+  // ENH-05: Mood Pulse — aggregated mood data
+  moodAverage?: number | null;
+  moodCount?: number | null;
+  moodTrend?: (number | null)[] | null;
+
+  // ENH-06: Quiet Week — days since last session
+  daysSinceLastSession?: number;
+
+  // ENH-07: The Reframe — plateau detection
+  plateauSignal?: boolean;
+  plateauContext?: string;
+
+  // ENH-08: One Year Ago — historical session comparison
+  historicalComparison?: { date: string; summary: string; monthsAgo: number } | null;
 }
 
 export interface WeeklyInsightOutput {
@@ -157,6 +178,7 @@ export interface WeeklyInsightParagraph {
 export interface WeeklyInsightOutputV2 {
   paragraphs: WeeklyInsightParagraph[];
   focusNext: string;
+  lens?: string; // ENH-03: which lens was used (for rotation next week)
 }
 
 // ===========================================
@@ -323,8 +345,8 @@ export interface ChatRequest {
   insightId: string;
   tier: InsightTier;
   userMessage: string;
-  // Sent on first message only
-  context?: {
+  // Sent on first message only — string (serialized) or structured object
+  context?: string | {
     insightData: WeeklyInsightOutput | MonthlyInsightOutput | QuarterlyInsightOutput;
     userContext: string;
     belt: BeltLevel;

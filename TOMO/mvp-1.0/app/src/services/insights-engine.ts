@@ -497,6 +497,196 @@ function computeAge(birthDate: string | null): number | undefined {
   return age;
 }
 
+/**
+ * Compute average mood_rating for a set of sessions.
+ * Returns null if no sessions have mood ratings.
+ */
+function computeMoodAverage(sessions: Session[]): number | null {
+  const rated = sessions.filter((s) => s.mood_rating !== null && s.mood_rating !== undefined);
+  if (rated.length === 0) return null;
+  const sum = rated.reduce((acc, s) => acc + (s.mood_rating as number), 0);
+  return Number((sum / rated.length).toFixed(2));
+}
+
+/**
+ * Compute mood averages for the last N weeks (oldest first).
+ * Returns array of length N — null where no mood data exists for that week.
+ */
+function computeMoodTrend(sessions: Session[], weeksBack: number): (number | null)[] {
+  const result: (number | null)[] = [];
+  for (let i = weeksBack - 1; i >= 0; i--) {
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() - i * 7);
+    const { start, end } = getWeekBounds(targetDate);
+    const weekSessions = filterSessions(sessions, start, end);
+    result.push(computeMoodAverage(weekSessions));
+  }
+  return result;
+}
+
+// ===========================================
+// ENH-07: PLATEAU DETECTION
+// ===========================================
+
+/**
+ * Detect plateau signals over a 4-week sliding window.
+ * Fires when 2+ of checks 1-3 are true, OR 1+ of 1-3 AND either 4 or 5.
+ */
+export function computePlateauSignal(
+  sessions: Session[],
+  belt: BeltLevel,
+  moodTrend: (number | null)[] | null,
+  accountCreatedAt?: string
+): { signal: boolean; context: string | undefined } {
+  const activeSessions = sessions.filter((s) => s.deleted_at === null);
+  if (activeSessions.length < 4) return { signal: false, context: undefined };
+
+  // Bucket sessions into 4 weeks (current + prior 3)
+  const weekBuckets: Session[][] = [];
+  for (let i = 0; i < 4; i++) {
+    const d = new Date();
+    d.setDate(d.getDate() - i * 7);
+    const { start, end } = getWeekBounds(d);
+    weekBuckets.unshift(filterSessions(activeSessions, start, end)); // oldest first
+  }
+
+  // Skip if any week has zero sessions (not enough data)
+  if (weekBuckets.some((w) => w.length === 0)) return { signal: false, context: undefined };
+
+  const signals: string[] = [];
+
+  // 1. Technique diversity flat: same top 3 techniques for 4 consecutive weeks
+  const weekTop3s = weekBuckets.map((w) => {
+    const freq = computeTechniqueFrequency(w);
+    return new Set(Object.keys(freq).slice(0, 3));
+  });
+  const firstTop3 = weekTop3s[0];
+  const techFlat =
+    firstTop3.size >= 3 &&
+    weekTop3s.every(
+      (s) => s.size >= 3 && [...firstTop3].every((t) => s.has(t))
+    );
+  if (techFlat) signals.push('technique_diversity_flat');
+
+  // 2. Frequency flat/declining: session counts flat (within +/-1) or monotonically declining for 3+ weeks
+  const weekCounts = weekBuckets.map((w) => w.length);
+  const freqFlat = weekCounts.slice(1).every(
+    (c, i) => Math.abs(c - weekCounts[i]) <= 1
+  );
+  const freqDeclining = weekCounts.slice(1).every(
+    (c, i) => c <= weekCounts[i]
+  ) && weekCounts[0] > weekCounts[weekCounts.length - 1];
+  if (freqFlat || freqDeclining) signals.push('frequency_flat');
+
+  // 3. No new techniques: zero techniques this week not in prior 3 weeks
+  const priorTechniques = new Set(
+    weekBuckets
+      .slice(0, 3)
+      .flatMap((w) => w.flatMap((s) => s.techniques_drilled.map((t) => t.toLowerCase().trim())))
+  );
+  const thisWeekTechniques = weekBuckets[3].flatMap((s) =>
+    s.techniques_drilled.map((t) => t.toLowerCase().trim())
+  );
+  const hasNewTechniques = thisWeekTechniques.some((t) => !priorTechniques.has(t));
+  if (!hasNewTechniques) signals.push('no_new_techniques');
+
+  // 4. Mood declining (optional): 3+ consecutive drops
+  let moodDeclining = false;
+  if (moodTrend && moodTrend.length >= 3) {
+    const nonNull = moodTrend.filter((v): v is number => v !== null);
+    if (nonNull.length >= 3) {
+      let consecutiveDrops = 0;
+      for (let i = 1; i < nonNull.length; i++) {
+        if (nonNull[i] < nonNull[i - 1]) {
+          consecutiveDrops++;
+        } else {
+          consecutiveDrops = 0;
+        }
+      }
+      moodDeclining = consecutiveDrops >= 2; // 3+ data points = 2+ drops
+    }
+  }
+
+  // 5. Danger zone (optional): account age 4-7 months AND white belt
+  let dangerZone = false;
+  if (accountCreatedAt && belt === 'white') {
+    const monthsOld = Math.floor(
+      (Date.now() - new Date(accountCreatedAt).getTime()) / (1000 * 60 * 60 * 24 * 30)
+    );
+    dangerZone = monthsOld >= 4 && monthsOld <= 7;
+  }
+
+  // Compound signal: 2+ of checks 1-3, OR 1+ of 1-3 AND either 4 or 5
+  const coreCount = signals.length;
+  const hasPlateau =
+    coreCount >= 2 || (coreCount >= 1 && (moodDeclining || dangerZone));
+
+  if (!hasPlateau) return { signal: false, context: undefined };
+
+  if (moodDeclining) signals.push('mood_declining');
+  if (dangerZone) signals.push('danger_zone');
+
+  const context = signals.join(', ');
+  return { signal: true, context };
+}
+
+// ===========================================
+// ENH-08: HISTORICAL SESSION LOOKUP
+// ===========================================
+
+/**
+ * Find a session from 12, 6, or 3 months ago (prioritize longer) within +/- 7 days.
+ * Only fires in the first 7 days of each month.
+ */
+export function findHistoricalSession(
+  sessions: Session[]
+): { date: string; summary: string; monthsAgo: number } | null {
+  // Rate limit: first 7 days of each month only
+  if (new Date().getDate() > 7) return null;
+
+  const activeSessions = sessions.filter((s) => s.deleted_at === null);
+  if (activeSessions.length === 0) return null;
+
+  const today = new Date();
+  const targets = [12, 6, 3]; // prefer longer comparisons
+
+  for (const monthsAgo of targets) {
+    const targetDate = new Date(today);
+    targetDate.setMonth(targetDate.getMonth() - monthsAgo);
+    const targetTime = targetDate.getTime();
+    const windowMs = 7 * 24 * 60 * 60 * 1000; // +/- 7 days
+
+    const match = activeSessions.find((s) => {
+      const sessionTime = new Date(s.date + 'T00:00:00').getTime();
+      return Math.abs(sessionTime - targetTime) <= windowMs;
+    });
+
+    if (match) {
+      const techniques = match.techniques_drilled.slice(0, 5).join(', ');
+      const notesExcerpt = match.notes ? match.notes.slice(0, 100) : '';
+      const parts = [
+        `Date: ${match.date}`,
+        `Mode: ${match.training_mode}`,
+        `Duration: ${match.duration_minutes}min`,
+      ];
+      if (techniques) parts.push(`Techniques: ${techniques}`);
+      if (notesExcerpt) parts.push(`Notes: ${notesExcerpt}`);
+
+      return {
+        date: match.date,
+        summary: parts.join('. '),
+        monthsAgo,
+      };
+    }
+  }
+
+  return null;
+}
+
+// ===========================================
+// BUILD WEEKLY INPUT (for Haiku edge function)
+// ===========================================
+
 export function buildWeeklyInput(
   sessions: Session[],
   profile: ProfileContext,
@@ -513,6 +703,25 @@ export function buildWeeklyInput(
   const weekSessions = filterSessions(sessions, weekStart, weekEnd);
   const instructors = [...new Set(weekSessions.map(s => s.instructor).filter(Boolean))] as string[];
   const lessonTopics = [...new Set(weekSessions.map(s => s.lesson_topic).filter(Boolean))] as string[];
+
+  // ENH-05: Mood aggregation
+  const moodAverage = computeMoodAverage(weekSessions);
+  const moodCount = weekSessions.filter((s) => s.mood_rating !== null && s.mood_rating !== undefined).length;
+  const moodTrend = computeMoodTrend(sessions, 4);
+
+  // ENH-06: Days since last session (before this week, using prior week or beyond)
+  const activeSessions = sessions.filter((s) => s.deleted_at === null);
+  const priorSessions = activeSessions.filter((s) => s.date < weekStart);
+  let daysSinceLastSession: number | undefined;
+  if (priorSessions.length > 0) {
+    const sorted = [...priorSessions].sort((a, b) => b.date.localeCompare(a.date));
+    const lastDate = sorted[0].date;
+    const today = toDateString(new Date());
+    const msPerDay = 1000 * 60 * 60 * 24;
+    daysSinceLastSession = Math.floor(
+      (new Date(today).getTime() - new Date(lastDate).getTime()) / msPerDay
+    );
+  }
 
   return {
     // Profile fields for the prompt
@@ -554,6 +763,21 @@ export function buildWeeklyInput(
         }
       : null,
     quarterlyPriorities,
+    // ENH-05: Mood Pulse
+    moodAverage: moodAverage,
+    moodCount: moodCount > 0 ? moodCount : null,
+    moodTrend,
+    // ENH-06: Quiet Week
+    daysSinceLastSession,
+    // ENH-07: The Reframe — plateau detection
+    ...(() => {
+      const plateau = computePlateauSignal(sessions, profile.belt, moodTrend);
+      return plateau.signal
+        ? { plateauSignal: true, plateauContext: plateau.context }
+        : {};
+    })(),
+    // ENH-08: One Year Ago — historical session comparison
+    historicalComparison: findHistoricalSession(sessions),
   };
 }
 

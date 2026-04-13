@@ -244,10 +244,12 @@ Deno.serve(async (req) => {
         const parsed = JSON.parse(rawText);
         extracted = validateExtraction(parsed);
       } catch (parseErr) {
-        error = `extraction_parse_failed: ${(parseErr as Error).message} | raw: ${rawText.slice(0, 200)}`;
+        console.error('Extraction parse failed:', parseErr, '| raw:', rawText.slice(0, 500));
+        error = 'extraction_parse_failed';
       }
     } catch (apiErr) {
-      error = `extraction_api_failed: ${(apiErr as Error).message}`;
+      console.error('Extraction API failed:', apiErr);
+      error = 'extraction_api_failed';
     }
 
     // --- Merge Pre-Selected Values ---
@@ -274,9 +276,9 @@ Deno.serve(async (req) => {
     });
 
   } catch (err) {
-    // Top-level catch for any unhandled errors
+    console.error('Extract session error:', err);
     return new Response(
-      JSON.stringify({ error: `Internal error: ${(err as Error).message}` }),
+      JSON.stringify({ error: 'Something went wrong. Please try again.' }),
       { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
     );
   }

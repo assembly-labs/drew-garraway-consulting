@@ -1,9 +1,9 @@
 /**
  * PreInsightSection — Mode A pre-insight holding message.
  *
- * Contains QuoteTypewriter (tightly coupled internal component) and
- * PreInsightLimitation (the exported component). These are kept in one file
- * because PreInsightLimitation renders QuoteTypewriter.
+ * Contains QuoteTypewriter (tightly coupled internal component),
+ * PreInsightLimitation (the exported component), and
+ * ReturnWelcome (ENH-06: warm re-entry after 14+ day gap).
  *
  * Extracted from InsightsScreen.tsx.
  */
@@ -14,6 +14,8 @@ import { useInsightTypewriter } from '../../hooks/useInsightTypewriter';
 import { getRandomQuote } from '../../data/quotes';
 import { EmberText } from './EmberText';
 import { styles } from './styles';
+import type { Insight } from '../../types/insights-types';
+import { CollapsedWeekRow } from './CollapsedWeekRow';
 
 // ===========================================
 // QUOTE TYPEWRITER (internal — not exported)
@@ -60,6 +62,40 @@ function QuoteTypewriter({
 }
 
 // ===========================================
+// RETURN WELCOME (ENH-06 — exported)
+// ===========================================
+
+/**
+ * Shown when the user returns after a 14+ day gap and the limitation state
+ * is 'no_sessions'. Replaces the standard limitation message with a warm,
+ * gap-neutral re-entry message and the most recent insight if available.
+ */
+export function ReturnWelcome({
+  lastInsight,
+}: {
+  lastInsight: Insight | null;
+}) {
+  const [expanded, setExpanded] = React.useState(false);
+
+  return (
+    <View style={styles.preInsightContainer}>
+      <Text style={styles.preInsightText}>
+        Pick up where you left off. The mat will be there.
+      </Text>
+      {lastInsight ? (
+        <View style={styles.returnLastInsightWrapper}>
+          <CollapsedWeekRow
+            insight={lastInsight}
+            expanded={expanded}
+            onToggle={() => setExpanded((v) => !v)}
+          />
+        </View>
+      ) : null}
+    </View>
+  );
+}
+
+// ===========================================
 // PRE-INSIGHT LIMITATION (exported)
 // ===========================================
 
@@ -69,12 +105,14 @@ export function PreInsightLimitation({
   gender,
   hasBeenSeen,
   onSeen,
+  hasPastInsights = false,
 }: {
   limitation: { message: string };
   belt: string;
   gender: string | null;
   hasBeenSeen: boolean;
   onSeen: () => void;
+  hasPastInsights?: boolean;
 }) {
   const input = useMemo(
     () => ({ paragraphs: [{ text: limitation.message, isWatch: false }], focusNext: '' }),
@@ -106,7 +144,7 @@ export function PreInsightLimitation({
         isComplete={isComplete || hasBeenSeen}
         style={styles.preInsightText}
       />
-      {showQuote && (
+      {showQuote && !hasPastInsights && (
         <QuoteTypewriter belt={belt} gender={gender} />
       )}
     </Pressable>

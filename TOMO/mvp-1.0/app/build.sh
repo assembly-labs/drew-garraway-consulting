@@ -38,3 +38,8 @@ eas submit --platform ios --path "$IPA_PATH" --non-interactive
 echo ""
 echo "=== DONE: Build submitted to TestFlight ==="
 echo "Check status: https://appstoreconnect.apple.com/apps/6760957435/testflight/ios"
+
+echo ""
+echo "=== NEXT: Create release page ==="
+echo "Create site/updates/$(date +%Y-%m-%d)/index.html"
+echo "Then deploy: wrangler pages deploy TOMO/site/ --project-name=traintomo --branch=main --commit-dirty=true"

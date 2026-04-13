@@ -311,6 +311,16 @@ export const insightChatService = {
     return data as ChatResponse;
   },
 
+  /** ENH-10: One-tap "Tell me more" — single exchange follow-up */
+  async tellMeMore(insightId: string, tier: InsightTier, insightText: string): Promise<ChatResponse> {
+    return this.sendMessage({
+      insightId,
+      tier,
+      userMessage: 'Tell me more about the most interesting observation.',
+      context: insightText,
+    });
+  },
+
   /** Get existing conversation for an insight */
   async getConversation(insightId: string): Promise<InsightConversation | null> {
     const { data: { user } } = await supabase.auth.getUser();

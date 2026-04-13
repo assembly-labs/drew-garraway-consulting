@@ -36,11 +36,14 @@ import {
   RecordingPhase,
   ProcessingPhase,
   ReviewPhase,
+  SuccessPhase,
   type Phase,
   type EntryFields,
   type ReviewFields,
   PIPELINE_TIMEOUT_MS,
 } from './session-logger';
+import { getWeekBounds } from '../services/insights-engine';
+import type { TeaserContext } from '../data/insight-teasers';
 
 // ============================================
 // MAIN COMPONENT
@@ -105,6 +108,10 @@ export function SessionLoggerScreen() {
   const [extractionError, setExtractionError] = useState<string | null>(null); // Bug 16
   const [extractionModel, setExtractionModel] = useState<string | null>(null); // Bug 17
   const [schemaVersion, setSchemaVersion] = useState<number | undefined>(undefined); // Bug 17
+
+  // ENH-04 + ENH-05: success phase state
+  const [savedSessionId, setSavedSessionId] = useState<string | null>(null);
+  const [teaserContext, setTeaserContext] = useState<TeaserContext | null>(null);
 
   // Refs
   const pulseAnim = useRef(new Animated.Value(1)).current;
@@ -173,6 +180,8 @@ export function SessionLoggerScreen() {
         setSchemaVersion(undefined);
         setGymOverride(null);
         setShowGymPicker(false);
+        setSavedSessionId(null);
+        setTeaserContext(null);
         rawExtractionRef.current = null;
         processingRef.current = false;
         voiceRecorder.reset();
@@ -455,9 +464,40 @@ export function SessionLoggerScreen() {
       // then update the badge dot when the insight row lands
       maybeTriggerWeeklyInsight(profile)
         .then(() => checkForUnread())
-        .catch(() => {});
+        .catch((err) => console.warn('[Insights] Generation failed:', err?.message ?? err));
 
-      resetAndGoBack();
+      // ENH-04 + ENH-05: compute teaser context and go to success phase
+      // Build the teaser context from what we know about this week's sessions
+      const isFirstEver = (profile?.session_count ?? 1) <= 1;
+      const { start: weekStart, end: weekEnd } = getWeekBounds(new Date());
+      const allSessionsForTeaser = await sessionService.list().catch(() => []);
+      const thisWeekSessions = allSessionsForTeaser.filter(
+        (s) => s.date >= weekStart && s.date <= weekEnd && s.deleted_at === null
+      );
+      // Count unique techniques across this week (including just-saved)
+      const allTechniquesThisWeek = thisWeekSessions.flatMap((s) => s.techniques_drilled);
+      const uniqueTechniques = [...new Set(allTechniquesThisWeek.map((t) => t.toLowerCase().trim()))];
+      // Find the most-repeated technique
+      const techFreq: Record<string, number> = {};
+      for (const t of allTechniquesThisWeek) {
+        const k = t.toLowerCase().trim();
+        techFreq[k] = (techFreq[k] || 0) + 1;
+      }
+      const topTechEntry = Object.entries(techFreq).sort(([, a], [, b]) => b - a)[0];
+      const topTechnique = topTechEntry && topTechEntry[1] > 1 ? topTechEntry[0] : null;
+
+      const ctx: TeaserContext = {
+        techniqueCount: uniqueTechniques.length,
+        sessionCountThisWeek: thisWeekSessions.length,
+        targetFrequency: profile?.target_frequency ?? 3,
+        hasSparring: review.didSpar && (review.sparringRounds ?? 0) > 0,
+        topTechnique,
+        isFirstEver,
+      };
+
+      setSavedSessionId(created.id);
+      setTeaserContext(ctx);
+      setPhase('success');
     } catch (error) {
       console.error('Save error:', error);
       haptics.error();
@@ -494,6 +534,8 @@ export function SessionLoggerScreen() {
     setSchemaVersion(undefined);
     setGymOverride(null);
     setShowGymPicker(false);
+    setSavedSessionId(null);
+    setTeaserContext(null);
     rawExtractionRef.current = null;
     processingRef.current = false;
     voiceRecorder.reset();
@@ -586,6 +628,17 @@ export function SessionLoggerScreen() {
           onClose={() => setShowGymPicker(false)}
         />
       </>
+    );
+  }
+
+  // ENH-04 + ENH-05: success phase with mood pulse + insight teaser
+  if (phase === 'success' && savedSessionId && teaserContext) {
+    return (
+      <SuccessPhase
+        savedSessionId={savedSessionId}
+        teaserContext={teaserContext}
+        onDone={resetAndGoBack}
+      />
     );
   }
 

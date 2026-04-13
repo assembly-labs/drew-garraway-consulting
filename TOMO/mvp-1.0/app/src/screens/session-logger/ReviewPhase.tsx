@@ -24,6 +24,7 @@ import { Icons } from '../../components/Icons';
 import { GymChip } from '../../components/GymChip';
 import { TECHNIQUE_SUGGESTIONS, SUBMISSION_SUGGESTIONS } from '../../data/bjj-dictionary';
 import { sessionService } from '../../services/supabase';
+import { useAutocompleteSuggestions } from '../../hooks/useAutocompleteSuggestions';
 import { ReviewFields, autoWidthChip, Submission } from './types';
 
 export interface ReviewPhaseProps {
@@ -83,47 +84,13 @@ export function ReviewPhase({
   const [editingDetail, setEditingDetail] = useState<'mode' | 'duration' | null>(null);
   const [jiggleSection, setJiggleSection] = useState<'submissionsGiven' | 'submissionsReceived' | null>(null);
 
-  // Autocomplete state
-  const [userTechHistory, setUserTechHistory] = useState<string[]>([]);
-  const [userSubHistory, setUserSubHistory] = useState<string[]>([]);
-
-  useEffect(() => {
-    sessionService.getAutocompleteHistory().then(({ techniques, submissions }) => {
-      setUserTechHistory(techniques);
-      setUserSubHistory(submissions);
-    }).catch(() => { /* silent fallback to static-only */ });
-  }, []);
+  // Autocomplete via shared hook
+  const { getSuggestions: getTechSuggestions, recentHistory: userTechHistory } = useAutocompleteSuggestions('technique');
+  const { getSuggestions: getSubSuggestions, recentHistory: userSubHistory } = useAutocompleteSuggestions('submission');
 
   const getSuggestions = (input: string, type: 'technique' | 'submission', alreadyAdded: string[]): string[] => {
-    if (!input || input.length < 2) return [];
-    const lower = input.toLowerCase();
-    const addedLower = new Set(alreadyAdded.map((a) => a.toLowerCase()));
-
-    // User history first, then static dictionary
-    const history = type === 'technique' ? userTechHistory : userSubHistory;
-    const staticList = type === 'technique' ? TECHNIQUE_SUGGESTIONS : SUBMISSION_SUGGESTIONS;
-
-    const scored: { term: string; score: number }[] = [];
-    const seen = new Set<string>();
-
-    for (const term of [...history, ...staticList]) {
-      const termLower = term.toLowerCase();
-      if (seen.has(termLower) || addedLower.has(termLower)) continue;
-      seen.add(termLower);
-
-      if (termLower.startsWith(lower)) {
-        // Prefix match — highest priority; user history terms get extra boost
-        scored.push({ term, score: history.includes(term) ? 3 : 2 });
-      } else if (termLower.includes(lower)) {
-        // Substring match
-        scored.push({ term, score: history.includes(term) ? 1.5 : 1 });
-      }
-    }
-
-    return scored
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 5)
-      .map((s) => s.term);
+    const fn = type === 'technique' ? getTechSuggestions : getSubSuggestions;
+    return fn(input, alreadyAdded).map(s => s.name);
   };
   const jiggleAnim = useRef(new Animated.Value(0)).current;
 
@@ -382,12 +349,12 @@ export function ReviewPhase({
                   delayLongPress={400}
                 >
                   <Animated.View style={[styles.tag, styles.tagPositive, { gap: 8 }, jiggleSection === 'submissionsGiven' && { transform: [{ rotate: jiggleRotation }] }]}>
-                    <Pressable hitSlop={8} onPress={() => updateSubmissionCount('submissionsGiven', i, -1)}>
-                      <Icons.Minus size={16} color={colors.positive} />
+                    <Pressable hitSlop={14} onPress={() => updateSubmissionCount('submissionsGiven', i, -1)}>
+                      <Icons.Minus size={20} color={colors.positive} />
                     </Pressable>
                     <Text style={[styles.tagText, { color: colors.positive }]}>{s.type} ({s.count})</Text>
-                    <Pressable hitSlop={8} onPress={() => updateSubmissionCount('submissionsGiven', i, 1)}>
-                      <Icons.Plus size={16} color={colors.positive} />
+                    <Pressable hitSlop={14} onPress={() => updateSubmissionCount('submissionsGiven', i, 1)}>
+                      <Icons.Plus size={20} color={colors.positive} />
                     </Pressable>
                     {jiggleSection === 'submissionsGiven' && (
                       <Pressable
@@ -454,12 +421,12 @@ export function ReviewPhase({
                   delayLongPress={400}
                 >
                   <Animated.View style={[styles.tag, styles.tagNegative, { gap: 8 }, jiggleSection === 'submissionsReceived' && { transform: [{ rotate: jiggleRotation }] }]}>
-                    <Pressable hitSlop={8} onPress={() => updateSubmissionCount('submissionsReceived', i, -1)}>
-                      <Icons.Minus size={16} color={colors.negative} />
+                    <Pressable hitSlop={14} onPress={() => updateSubmissionCount('submissionsReceived', i, -1)}>
+                      <Icons.Minus size={20} color={colors.negative} />
                     </Pressable>
                     <Text style={[styles.tagText, { color: colors.negative }]}>{s.type} ({s.count})</Text>
-                    <Pressable hitSlop={8} onPress={() => updateSubmissionCount('submissionsReceived', i, 1)}>
-                      <Icons.Plus size={16} color={colors.negative} />
+                    <Pressable hitSlop={14} onPress={() => updateSubmissionCount('submissionsReceived', i, 1)}>
+                      <Icons.Plus size={20} color={colors.negative} />
                     </Pressable>
                     {jiggleSection === 'submissionsReceived' && (
                       <Pressable
@@ -579,7 +546,10 @@ export function ReviewPhase({
           </View>
         ) : null}
 
-        {/* Save button */}
+      </ScrollView>
+
+      {/* Sticky save footer — always visible regardless of scroll position */}
+      <View style={styles.saveFooter}>
         <Pressable
           style={({ pressed }) => [styles.saveButton, saving && { opacity: 0.7 }, pressed && !saving && { opacity: 0.85 }]}
           onPress={onSave}
@@ -591,7 +561,7 @@ export function ReviewPhase({
             <Text style={styles.saveButtonText}>Save Session</Text>
           )}
         </Pressable>
-      </ScrollView>
+      </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -626,7 +596,7 @@ const styles = StyleSheet.create({
   reviewContent: {
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.md,
-    paddingBottom: spacing['3xl'],
+    paddingBottom: spacing.lg,
   },
   detailsRow: {
     flexDirection: 'row',
@@ -825,12 +795,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     paddingBottom: spacing.md,
   },
+  saveFooter: {
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
+    borderTopWidth: 1,
+    borderTopColor: colors.gray800,
+    backgroundColor: colors.black,
+  },
   saveButton: {
     backgroundColor: colors.gold,
     paddingVertical: 18,
     borderRadius: radius.xl,
     alignItems: 'center',
-    marginTop: spacing.md,
   },
   saveButtonText: {
     fontFamily: 'Inter-Bold',

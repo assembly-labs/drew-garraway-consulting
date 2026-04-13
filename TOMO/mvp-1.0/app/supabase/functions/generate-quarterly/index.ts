@@ -461,7 +461,8 @@ Deno.serve(async (req) => {
         const parsed = JSON.parse(rawText);
         insightData = validateOutput(parsed);
       } catch (parseErr) {
-        error = `insight_parse_failed: ${(parseErr as Error).message} | raw: ${rawText.slice(0, 200)}`;
+        console.error('Quarterly insight parse failed:', parseErr, '| raw:', rawText.slice(0, 500));
+        error = 'insight_parse_failed';
       }
     } catch (apiErr) {
       const isTimeout = apiErr instanceof DOMException && apiErr.name === 'AbortError';
@@ -471,7 +472,8 @@ Deno.serve(async (req) => {
           { status: 504, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
         );
       }
-      error = `insight_api_failed: ${(apiErr as Error).message}`;
+      console.error('Quarterly insight API failed:', apiErr);
+      error = 'insight_api_failed';
     }
 
     // --- Handle Parse/Validation Failures ---
@@ -521,7 +523,7 @@ Deno.serve(async (req) => {
         success: true,
         data: insightData,
         stored: false,
-        error: `storage_failed: ${insertError.message}`,
+        error: 'storage_failed',
         metadata: {
           model: MODEL,
           schema_version: SCHEMA_VERSION,
@@ -552,10 +554,9 @@ Deno.serve(async (req) => {
       headers: { 'Content-Type': 'application/json', ...corsHeaders },
     });
   } catch (err) {
-    // Top-level catch for any unhandled errors
     console.error('Quarterly insight generation error:', err);
     return new Response(
-      JSON.stringify({ error: `Internal error: ${(err as Error).message}` }),
+      JSON.stringify({ error: 'Something went wrong. Please try again.' }),
       { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
     );
   }

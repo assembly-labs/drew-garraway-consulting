@@ -4,46 +4,63 @@ Append-only record of work sessions. Most recent at top.
 
 ---
 
-## 2026-04-08 -- Session 41: ONB-001 Onboarding Payoff Dead-End (Rachel bug)
+## 2026-04-13 -- Session 40: Security Hardening (Edge Functions + PostGIS RLS)
 
 **What happened:**
-- External tester Rachel (rmgb2000@gmail.com) reported being stuck on the onboarding payoff screen. Tapping "Start Training" did nothing.
-- Visual diagnosis: her payoff screen showed only 3 chat bubbles, but the current code shows 5. Proof she was on a pre-Mar-31 TestFlight build.
-- Root cause traced: her old build didn't send `birth_date` during profile upsert. The Mar 30 FEAT-008 migration made `profiles.birth_date NOT NULL`, so her insert was rejected by Postgres. `profileService.create` swallowed the error with `console.error` and returned null. `handleStart` ignored the null and transitioned to the payoff screen anyway. On "Start Training" tap, `refreshProfile` found no profile row, so `authState` stayed `needs_onboarding` and she was trapped.
-- Contributing cause: Apple's TestFlight external review lag (24-48h). Her external tester group never received the post-FEAT-008 app build even though it had been submitted. The DB migration and the app that understood it shipped out of sync.
-- Code fix shipped via PR #40 (merged to main):
-  - `profileService.create` throws on error, reports to Sentry
-  - `handlePayoffComplete` re-verifies profile after refresh, bounces with toast if it didn't land
-  - New migration drops `NOT NULL` on `birth_date` (keeps 18+ trigger)
-  - Added "CRITICAL: Schema Migration Rules" section to TOMO/CLAUDE.md (two-phase pattern + pre-push checklist)
-- Production actions executed directly:
-  - Migration `20260408000000` applied to prod Supabase via `supabase db push`
-  - Rachel's orphaned auth user deleted via admin API (zero collateral data)
-  - Stuck-user discovery query confirmed Rachel was the only affected account
+- Ran full security audit of TOMO's Supabase backend (RLS, API keys, Edge Functions, storage, auth)
+- Audit found 0 critical, 0 high, 2 medium issues — overall posture rated "strong for TestFlight beta"
+- Fixed SEC-006: Sanitized error responses in all 6 authenticated Edge Functions (23 instances across extract-session, transcribe-audio, generate-weekly, generate-monthly, generate-quarterly, chat-with-insight)
+- Raw Claude API output, PostgreSQL error messages, AssemblyAI errors, and env variable names were being returned to clients — all now replaced with generic messages, details logged server-side only
+- Deployed all 6 updated functions to production via `supabase functions deploy`
+- Investigated SEC-005 (PostGIS `spatial_ref_sys` RLS lint warning) — confirmed every possible fix path is blocked by `supabase_admin` table ownership. REVOKE workaround from March is effective. Lint warning is cosmetic only.
+- Created migration file `20260412000001_spatial_ref_sys_rls.sql` for documentation
+- Confirmed PostGIS is required — gym finder uses `ST_Distance`, `ST_DWithin`, GIST spatial index
 
 **Decisions made:**
-- D-103 (new): Drop `NOT NULL` on `profiles.birth_date` rather than rolling back the whole FEAT-008 migration. Keeps the 18+ enforcement trigger intact while unblocking older clients.
-- D-104 (new): All future schema-tightening migrations follow the two-phase pattern (permissive first, tighten in a follow-up migration after full tester rollout).
-- Local device test skipped at Drew's explicit request. TestFlight hotfix build deferred pending Drew's approval.
+- SEC-005: Accept lint warning as cosmetic. Free-tier support is unresponsive, REVOKE already blocks access. Not filing ticket.
+- Error sanitization: Keep error codes (`insight_parse_failed`, `storage_failed`) for future client-side handling but strip all internal details. Client doesn't currently check these codes (verified via grep).
+- No policies added to `spatial_ref_sys` — the existing REVOKE is more restrictive than a permissive SELECT policy would be.
 
-**Risks updated:**
-- R-007 (new): Schema-tightening migrations running ahead of app builds for external testers. Mitigated by the new CLAUDE.md rule + Sentry reporting on profile save failures. Status: mitigated.
+**Tasks completed:**
+- SEC-006: Edge Function error sanitization — done (23 fixes, 6 deploys)
+- SEC-005: Investigated, mitigated, documented — closed as cosmetic
+
+**Impact:**
+- Prevents information disclosure attacks (CWE-209) — an attacker probing error responses can no longer learn the AI provider, database schema, or internal architecture
+- Zero UX impact — users see the same behavior, just cleaner error messages if something fails
+- Server-side logging preserved — debugging capability unchanged (Supabase Dashboard > Edge Functions > Logs)
 
 **Next action:**
-- ~~Drew sends Rachel the instructions to delete + reinstall + re-signup~~ **Done** (Drew confirmed message sent)
-- ~~Cut TestFlight hotfix build when Drew approves~~ **Done** (shipped 2026-04-08 22:08 UTC from main)
-- Consider moving Rachel and other external testers to internal testing to bypass Apple review lag going forward (T-009, backlog)
+- Pre-public-launch: enable email confirmation (Supabase Auth settings)
+- Pre-public-launch: add rate limiting to insight generation Edge Functions
 
-**TestFlight build details:**
-- Source: `main` branch after PRs #40 and #41 merged
-- Submission ID: `6f90d77c-1415-4675-951e-734071b2ea40`
-- EAS submission URL: https://expo.dev/accounts/dgarraway/projects/tomo/submissions/6f90d77c-1415-4675-951e-734071b2ea40
-- App Store Connect: https://appstoreconnect.apple.com/apps/6760957435/testflight/ios
-- Apple processing: 5-10 min after submission, then available to internal testers
-- External tester availability: 24-48h (Apple review gate)
-- IPA size: 17.5 MB
+---
 
-**Session outcome:** ONB-001 fully closed. Code fix, DB migration, documentation, process rules, and TestFlight hotfix all shipped in a single session. Rachel unblocked via schema fix (she can use her existing build); the new hotfix will reach her after Apple review but she doesn't need it to get past the onboarding bug.
+## 2026-04-12 -- Session 39: Journal Edit Enhancement (6 Phases)
+
+**What happened:**
+- Built shared autocomplete hook (`useAutocompleteSuggestions.ts`) combining 3 sources: user history from Supabase, 361-technique tree, and static BJJ dictionary — with priority scoring
+- Built reusable `AutocompleteTagInput` component with suggestion dropdown, "Recently Used" section, position badges, and "Add as custom" row
+- Wired autocomplete into EditTechniquesSheet and EditSubmissionsSheet — submissions now show position-inferred suggestions from logged techniques
+- Collapsed empty sections into compact "+ Add" gold links (topic, injuries, instructor, warm-up)
+- Standardized all edit icons to 16px/gray500
+- Added content-aware save toasts ("Scissor Sweep added", "Warm-up → Yes", etc.)
+- Refactored ReviewPhase to use shared hook (no behavior change, regression-safe)
+- TypeScript clean (zero errors)
+
+**Decisions made:**
+- Injuries sheet kept as plain TextInput (too varied for useful autocomplete)
+- Technique autocomplete prioritizes history > tree > static with prefix/substring scoring
+- EditSubmissionsSheet uses `matchLoggedTechniques()` to infer positions and suggest relevant submissions
+- SheetWrapper gained `scrollable` prop instead of changing all sheets
+
+**Tasks completed:**
+- T-066 (JRN-007): Hide empty sections — done
+- T-009: Journal Edit Enhancement — done (new task, created and closed same session)
+
+**Next action:**
+- Local device test to verify all 6 phases work on-device
+- Then tester feedback before considering TestFlight
 
 ---
 

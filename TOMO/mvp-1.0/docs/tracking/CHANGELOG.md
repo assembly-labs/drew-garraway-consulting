@@ -31,63 +31,202 @@ Each entry follows this format:
 
 ---
 
-## 2026-04-08 -- Session 41: Fix silent onboarding save failure (Rachel bug)
+## 2026-04-13 — SEC-006 Sanitize Error Responses in Edge Functions
+**Type:** Fix (Security)
 
-**Type:** Fix
+### Changes
+- Stripped internal error details from all 6 authenticated Edge Functions (23 instances total)
+- **chat-with-insight:** 3 fixes — DB error, Anthropic API error, top-level catch
+- **extract-session:** 3 fixes — parse failure (was leaking raw AI output), API error, top-level catch
+- **generate-weekly:** 4 fixes — parse failure + raw output leak, API error, DB insert error, top-level catch
+- **generate-monthly:** 4 fixes — same pattern as weekly
+- **generate-quarterly:** 4 fixes — same pattern as weekly
+- **transcribe-audio:** 5 fixes — signed URL error, env var name disclosure, AssemblyAI errors, poll error, top-level catch
+- All errors now logged server-side via `console.error` (visible in Supabase Dashboard > Edge Functions > Logs)
+- Client-facing error messages are now generic ("Something went wrong. Please try again.") or use safe codes (`insight_parse_failed`, `storage_failed`) without internal details
+- `beta-signup-notify` and `nda-agreement-notify` were already clean — no changes needed
 
-### Context
+### Why
+- Security audit flagged CWE-209: error responses were leaking raw Anthropic API output (first 200 chars of Claude responses), PostgreSQL error messages (table/column names, constraint details), AssemblyAI internal errors, and environment variable names
+- These details could reveal: AI provider identity, database schema, internal hostnames, and system prompt reflections
 
-External tester Rachel was stuck on the onboarding payoff screen. She could see the "Start Training" CTA but tapping it did nothing. The gym name and belt info displayed correctly (those come from local onboarding state), but the app never advanced to the Journal tab.
+### Testing
+- Error codes (`insight_parse_failed`, `extraction_api_failed`, etc.) are NOT checked by any client code — verified via grep of `src/`
+- No functional changes — only error response content changed
+- Deploy all 6 functions: `supabase functions deploy <name>` for each
+- Verify in Supabase Dashboard > Edge Functions > Logs that internal errors still appear in server logs
 
-Root cause: her TestFlight build was from before the Mar 30 FEAT-008 migration. That migration added `birth_date NOT NULL` to the `profiles` table. Her build's `profileService.create` upsert was rejected by Postgres (null value in column "birth_date"), but `profileService.create` caught the error with `console.error` and returned `null` silently. `handleStart` in `GetStartedScreen` did not check the return value, so it transitioned to the payoff screen anyway. On "Start Training" tap, `refreshProfile` tried to load her profile row, found nothing, and `authState` stayed at `'needs_onboarding'`. The `RootNavigator` never swapped stacks, so she was trapped.
+---
 
-Apple's external TestFlight review lag (24-48h on first-to-group) meant Rachel's external tester group never received the post-FEAT-008 app build, even though it had been submitted days earlier. The DB migration and the app that understood it shipped out of sync.
+## 2026-04-12 — SEC-005 spatial_ref_sys RLS Fix
+**Type:** Fix (Security)
+
+### Changes
+- Created migration `20260412000001_spatial_ref_sys_rls.sql` — enables RLS on PostGIS `spatial_ref_sys` table to clear Supabase "rls_disabled_in_public" advisory
+- RLS only, no policy — the REVOKE from `20260325000000_security_hardening.sql` already blocks anon/authenticated access; adding a permissive policy would weaken that
+- PostGIS functions (ST_Distance, ST_DWithin, etc.) bypass RLS as extension-owner functions — gym search RPCs unaffected
+- Updated SEC-005 in ISSUES.md
+
+### Why
+- Supabase security lint still flagged `spatial_ref_sys` despite the March REVOKE workaround
+- Enabling RLS is the proper fix to satisfy the linter while maintaining the existing lockdown
+
+### Testing
+- Migration must be applied via Supabase Dashboard SQL Editor (table owned by `supabase_admin` — may require elevated permissions)
+- After applying: verify gym search still works (onboarding gym picker, `find_nearby_gyms`, `search_gyms`)
+- Verify lint warning clears in Supabase Dashboard > Database > Linter
+
+---
+
+## 2026-04-12 — Journal Edit Enhancement (6 Phases)
+**Type:** Feature / Refactor / Polish
+
+### Changes
+- **Phase 1:** Extracted autocomplete logic from ReviewPhase into `src/hooks/useAutocompleteSuggestions.ts` — shared hook combining user history, technique tree (361 techniques), and static dictionary with priority scoring
+- **Phase 2:** Built `src/components/AutocompleteTagInput.tsx` — reusable tag input with suggestion dropdown, "Recently Used" section, position badges, and "Add as custom" row
+- **Phase 3:** Wired AutocompleteTagInput into EditTechniquesSheet and EditSubmissionsSheet. Submissions sheet now shows position-based suggested submissions inferred from logged techniques. SheetWrapper gained `scrollable` prop.
+- **Phase 4:** Standardized all edit icons to 16px / gray500 (were inconsistent 12-14px / gray600-gray700)
+- **Phase 5:** Empty sections (topic, injuries, instructor, warm-up) now collapse into compact "+ Add" gold links instead of showing dashed empty cards. Techniques always visible.
+- **Phase 6:** Content-aware save toasts — "Scissor Sweep added", "Warm-up → Yes", "Sparring → 3 rounds" instead of generic "Changes saved"
+
+### Why
+- Technique autocomplete fixes data quality for Insights engine — canonical names enable proper tracking
+- Collapsing empty sections reduces clutter on sparse sessions
+- Specific toasts give immediate confirmation of what changed
+
+### Testing
+- `npx tsc --noEmit` passes with zero errors
+- **Recommend local device test** before TestFlight
+
+---
+
+## 2026-04-11 — Insights ENH-07 through ENH-10 (Intelligence Layer)
+
+**Type:** Feature
 
 ### Changes
 
-**`src/services/supabase.ts`**
-- `profileService.create` now throws on error instead of returning `null`. Return type tightened from `Profile | null` to `Profile`.
-- All error paths (auth missing, Postgres error, missing data) report to Sentry with `{ area: 'onboarding', operation: 'profile_create' }` tags and anonymized extras.
-- Imported `@sentry/react-native`.
-- Kept the previously-staged `.insert()` → `.upsert()` change (also relevant: lets failed partial inserts re-try cleanly).
+**ENH-07: The Reframe — Plateau Detection (insights-engine.ts + generate-weekly/index.ts + insights-types.ts)**
+- Added `computePlateauSignal()` to insights-engine.ts — 5-check compound signal over 4-week sliding window: technique diversity flat, frequency flat/declining, no new techniques, mood declining (optional), danger zone (optional). Fires when 2+ core checks or 1 core + 1 optional.
+- Added `plateauSignal` and `plateauContext` fields to `WeeklyInsightInput` type.
+- Added plateau routing block in edge function `buildSystemPrompt()` — instructs Claude to never say "plateau" or "stuck," shift lens to unseen progress dimension.
+- Wired into `buildWeeklyInput()` return value.
 
-**`src/screens/onboarding/GetStartedScreen.tsx`**
-- `handlePayoffComplete` now re-verifies the saved profile via `profileService.get()` after `refreshProfile`. If the loaded profile is missing or `onboarding_complete` is false, it shows an error toast, flips `showPayoff` back to false, and resets `mainOpacity` so the user lands on the logging-preference form with a retry path instead of a dead-end payoff screen.
+**ENH-08: One Year Ago on the Mat (insights-engine.ts + generate-weekly/index.ts + insights-types.ts)**
+- Added `findHistoricalSession()` to insights-engine.ts — searches 12/6/3 months back within +/-7 day window. Rate-limited to first 7 days of each month.
+- Added `historicalComparison` field to `WeeklyInsightInput` type.
+- Added historical data section in `buildUserMessage()` and comparison instruction in `buildSystemPrompt()`.
+- Wired into `buildWeeklyInput()` return value.
 
-**`supabase/migrations/20260408000000_profile_birth_date_nullable.sql` (new)**
-- Drops `NOT NULL` constraint on `profiles.birth_date`.
-- Keeps the `enforce_minimum_age` trigger (null birth_date passes through; 18+ check still fires for non-null values).
-- This is a backwards-compatible hotfix that lets older app builds save profiles again while longer-term FEAT-008 validation stays enforced on the client.
+**ENH-10: Tell Me More (insights-service.ts + WeeklyMessageView.tsx + styles.ts + insights-types.ts)**
+- Fixed `ChatRequest.context` type to accept `string` (edge function expects string, was object-only).
+- Added `tellMeMore()` convenience method to `insightChatService`.
+- Added gold "Tell me more" link after signoff in WeeklyMessageView. Loading state ("Thinking..."), response renders with 2px gold left border.
+- On revisit: checks `insightChatService.getConversation()` — if response exists, shows it directly (no link).
+- Uses existing `chat-with-insight` edge function (430 lines, already production-ready).
+
+**ENH-09: The Thread — Insight-to-Session Linking (5 files)**
+- Created `src/utils/technique-matcher.ts` — `extractMentionedTechniques()` scans paragraph text for technique names from session data. Word-boundary checks, overlap deduplication (longer match wins).
+- Created `src/screens/insights/LinkedText.tsx` — replaces BoldText for completed paragraphs. Merges bold segments and technique matches into unified segment array. Tappable gold spans for techniques.
+- Created `src/screens/insights/SessionMiniCard.tsx` — compact session card (date, mode, duration, techniques). Pressable → cross-tab navigation to SessionDetail.
+- Updated `InsightsScreen.tsx` — stores actual week session objects, passes to WeeklyMessageView.
+- Updated `WeeklyMessageView.tsx` — accepts `weekSessions` prop, uses LinkedText for completed paragraphs (EmberText during animation), manages expanded technique state with session mini-cards.
+- Updated barrel export `index.ts` with LinkedText and SessionMiniCard.
+
+### Why
+These four enhancements add intelligence that makes insights dramatically smarter: plateau detection that reframes progress instead of showing flat lines, temporal self-comparison for long-term users, evidence linking for trust-building, and a one-tap follow-up that tests the chat architecture.
+
+### Testing
+- `npx tsc --noEmit` — zero errors
+- Test locally: `cd mvp-1.0/app && SENTRY_DISABLE_AUTO_UPLOAD=true npx expo run:ios --device`
+- After verifying locally, deploy edge function: `supabase functions deploy generate-weekly --no-verify-jwt`
+
+---
+
+## 2026-04-11 — Insights ENH-01 through ENH-06 (Phase 2 Enhancements)
+
+**Type:** Feature
+
+### Changes
+
+**ENH-01: The Almost Knew (generate-weekly/index.ts)**
+- Added `LEAD WITH DISCOVERY` instruction to `buildSystemPrompt()` — forces Claude to open with the highest-surprise observation, not session count or mode breakdown.
+
+**ENH-02: Focus Echo (generate-weekly/index.ts + insight-trigger.ts + InsightsScreen.tsx)**
+- `insight-trigger.ts`: fetches most recent weekly insight before generation, extracts `focusNext` and `lens`.
+- `buildSystemPrompt()`: if `lastFocusNext` exists, prompts Claude to check whether that topic appeared this week and name the follow-through.
+- `buildUserMessage()`: appends "Last week's focus: {focusNext}" when present.
+- `InsightsScreen.tsx`: when in pre-insight `no_sessions` state and a prior `focusNext` exists, shows a "LAST WEEK'S FOCUS" label + text above the limitation message (gold JetBrains Mono label, gray Inter body, 1px #222 divider below).
+
+**ENH-03: The Angle Shift (generate-weekly/index.ts + insight-trigger.ts)**
+- Defined `INSIGHT_LENSES` constant (6 lenses) and `LENS_DESCRIPTIONS` map in edge function.
+- `selectLens()` cycles away from the previous week's lens.
+- Edge function stamps `lens` field onto `insight_data` before storing.
+- `insight-trigger.ts` passes `lastLens` from prior insight to the generation input.
+- `WeeklyInsightInput` and `WeeklyInsightOutputV2` types updated to include `lens`.
+
+**ENH-04: The Teaser (src/data/insight-teasers.ts + session-logger/SuccessPhase.tsx + SessionLoggerScreen.tsx)**
+- Created `insight-teasers.ts` with 7 template functions (6 contextual + 1 fallback), `TeaserContext` interface, and `getTeaser()` shuffle function.
+- Created `SuccessPhase.tsx` — new session-logger phase component. Shows mood dots + teaser. Auto-dismisses after 5s; stays open if mood is tapped (dismisses 1.2s after selection).
+- `SessionLoggerScreen.tsx`: `handleSave` now transitions to `'success'` phase (not directly to Journal). Computes `TeaserContext` from this week's sessions after save. `Phase` type updated to include `'success'`.
+
+**ENH-05: Mood Pulse (supabase/migrations/ + mvp-types.ts + supabase.ts + SuccessPhase.tsx + insights-engine.ts + generate-weekly/index.ts)**
+- Migration `20260411000000_add_mood_rating.sql`: `ALTER TABLE sessions ADD COLUMN mood_rating INTEGER CHECK (mood_rating >= 1 AND mood_rating <= 5)`.
+- `Session` type: added `mood_rating?: number | null`.
+- `SessionUpdate` is unmodified — mood uses `sessionService.updateMood()` (new method) to avoid setting `edited_after_ai = true`.
+- `supabase.ts`: `sessionService.updateMood(id, moodRating)` — direct Supabase update for mood only.
+- `SuccessPhase.tsx`: 5 gold dots with hitSlop 44px touch targets. Selection fills dots 1..n gold. Fires `updateMood` on tap.
+- `insights-engine.ts`: `computeMoodAverage()`, `computeMoodTrend()` helpers. `buildWeeklyInput()` now includes `moodAverage`, `moodCount`, `moodTrend` (last 4 weeks).
+- `WeeklyInsightInput` type: added `moodAverage`, `moodCount`, `moodTrend` fields.
+- `buildUserMessage()` / `buildSystemPrompt()`: mood data injected when present; prompt instructs Claude on mood-training correlation framing.
+
+**ENH-06: The Quiet Week (generate-weekly/index.ts + insight-trigger.ts + InsightsScreen.tsx + PreInsightSection.tsx + insights-engine.ts)**
+- `insights-engine.ts`: `buildWeeklyInput()` computes `daysSinceLastSession` (days from prior session to today).
+- `insight-trigger.ts`: also computes `daysSinceLastSession` independently for the generation trigger path.
+- `buildSystemPrompt()`: if `daysSinceLastSession >= 14`, adds "RETURNING AFTER A GAP" instruction — no gap references, no "welcome back", frame as "first week back", one paragraph max.
+- `InsightsScreen.tsx`: detects returning user (`no_sessions` + 14+ day gap). Shows `ReturnWelcome` instead of `PreInsightLimitation`.
+- `PreInsightSection.tsx`: new `ReturnWelcome` export — shows "Pick up where you left off. The mat will be there." + most recent past insight via `CollapsedWeekRow`.
+
+### Why
+Phase 2 Insights enhancements from product design ideation session. Six changes that make TOMO's weekly debrief feel more alive: surprise-led observations, follow-through on prior recommendations, rotating lens to prevent repetition, curiosity teasers after saves, mood tracking, and a graceful return path for gaps.
+
+### Testing
+- `npx tsc --noEmit` — zero errors.
+- Test locally: `cd mvp-1.0/app && SENTRY_DISABLE_AUTO_UPLOAD=true npx expo run:ios --device`
+- Edge function deploy: `supabase functions deploy generate-weekly --no-verify-jwt`
+- DB migration: run `20260411000000_add_mood_rating.sql` via Supabase dashboard or `supabase db push`
+
+---
+
+## 2026-04-11 — Insights Week-Over-Week Persistence (UX Fix)
+
+**Type:** Polish
+
+### Changes
+
+**Pre-insight copy updated (insight-limitations.ts)**
+- Changed `no_sessions` message from system-explaining language to training-partner voice: "Log a session this week and TOMO will build your debrief from there."
+
+**Quote typewriter skipped for returning users (PreInsightSection.tsx + InsightsScreen.tsx)**
+- Added `hasPastInsights` prop to `PreInsightLimitation`. When true (older weekly insights exist below), the BJJ quote animation is suppressed — it competed with real content. Still shows for brand-new users with no past debriefs.
+
+**"EARLIER" renamed to "PREVIOUS WEEKS" (InsightsScreen.tsx)**
+- Makes the temporal contrast explicit: top section = this week, bottom section = previous weeks.
+
+**Silent catch replaced with console.warn (InsightsScreen.tsx)**
+- Tab-focus generation trigger `.catch(() => {})` → `.catch((err) => console.warn(...))` for debuggability.
+
+**Dead EmptyNoWeekly render branch removed (InsightsScreen.tsx)**
+- The `!isPreInsight && !currentWeekInsight` state was unreachable (when `isPreInsight === false`, `currentWeekInsight` is guaranteed non-null). Removed branch + unused import.
 
 ### Why
 
-- The silent-null return pattern masked a fatal onboarding bug that only surfaced via user reports. Throwing + Sentry makes future regressions visible within minutes instead of days.
-- `birth_date NOT NULL` should have been landed AFTER all testers were on the FEAT-008 app build, not before. Dropping the constraint until the release cycle catches up unblocks everyone on older builds and prevents future orphaned accounts.
-- The payoff-screen guard is defense-in-depth. Even if another save path fails silently, users can't get trapped on a screen with no working exit.
+When a new week starts and the user hasn't logged a session yet, past insights were visually hidden behind a full-screen pre-insight message. The data persisted in Supabase — but the UI broke continuity. This contradicts First Principle 11 ("The Flashlight, Not the Path") and the EDGE_CASES.md spec ("the tab is NEVER empty after the first session"). The prior session's structural fix (single ScrollView) was correct; these 5 items address remaining copy, UX, and code quality gaps.
 
 ### Testing
 
-- `npx tsc --noEmit` -- zero errors
-- Local device QA deferred to post-merge (Drew skipping local test at his request)
-- **TestFlight hotfix build submitted 2026-04-08 at 22:08 UTC** (built from main after PRs #40 and #41 merged). Submission ID: `6f90d77c-1415-4675-951e-734071b2ea40`. Apple processing expected to complete in 5-10 minutes, then available to internal testers immediately. External testers (Rachel) will receive it after 24-48h Apple review; she can continue using her existing build in the meantime since the schema is already permissive.
-
-### Production actions taken (2026-04-08 evening)
-
-- **Migration applied to prod Supabase** via `supabase db push`. Verified in `supabase migration list` (20260408000000 shows on both local and remote).
-- **Rachel's orphaned auth user deleted** via admin API. She was `rmgb2000@gmail.com`, user_id `00377fc7-89dc-4b8c-9860-7b2c342d3ea9`, stuck since 2026-04-01 (7 days). Zero collateral data (verified: no sessions, insights, or user_gyms rows existed for her).
-- **Stuck-user discovery query run against prod.** Rachel was the only affected account. At the time of the fix, auth.users had 3 rows total: Drew's primary, Drew's assemblylabs account, and Rachel. Only Rachel was missing a profile row.
-- **PR #40 merged to main.** Code fix + migration + CLAUDE.md schema rules shipped together.
-- **CRITICAL: Schema Migration Rules section added to TOMO/CLAUDE.md.** New rule: never tighten schema constraints (NOT NULL, CHECK, etc.) before the corresponding app build is live for every tester. Includes two-phase migration pattern and pre-push checklist.
-
-### Communication to Rachel
-
-Drew to send: delete TOMO, reinstall from TestFlight, sign up fresh with `rmgb2000@gmail.com`. Her old build will now succeed because the schema is permissive.
-
-### Follow-up (tracked in project-management/TASKS.md)
-
-- ~~TestFlight hotfix build pending Drew's approval~~ **Shipped 2026-04-08 22:08 UTC**
-- Consider moving external testers to internal testing to bypass Apple's 24-48h review lag (T-009, backlog)
-- Add Sentry alert on any `area=onboarding` event so future silent failures are caught within minutes
+- `npx tsc --noEmit` — zero errors
+- Local device test recommended (4 scenarios: new week/no sessions, generating state, existing insight, brand new account)
 
 ---
 

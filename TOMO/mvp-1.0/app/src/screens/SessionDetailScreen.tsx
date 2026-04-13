@@ -35,6 +35,8 @@ import { userGymService } from '../services/userGymService';
 
 import type { Session, SessionUpdate, TrainingMode, SessionKind, Submission } from '../types/mvp-types';
 import { haptics } from '../utils/haptics';
+import { AutocompleteTagInput } from '../components/AutocompleteTagInput';
+import { matchLoggedTechniques, getSubmissionsFromPosition } from '../data/technique-tree';
 
 type Props = NativeStackScreenProps<JournalStackParamList, 'SessionDetail'>;
 
@@ -86,7 +88,7 @@ export function SessionDetailScreen({ route, navigation }: Props) {
   }, [loadSession]);
 
   const [isSaving, setIsSaving] = useState(false);
-  const handleUpdate = async (fields: SessionUpdate) => {
+  const handleUpdate = async (fields: SessionUpdate, toastMessage?: string) => {
     if (!session || isSaving) return;
     setIsSaving(true);
     try {
@@ -94,7 +96,7 @@ export function SessionDetailScreen({ route, navigation }: Props) {
       await loadSession();
       setEditSheet(null);
       haptics.success();
-      showToast('Changes saved', 'success');
+      showToast(toastMessage || 'Changes saved', 'success');
     } catch (err) {
       haptics.error();
       showToast('Could not save changes', 'error');
@@ -179,7 +181,7 @@ export function SessionDetailScreen({ route, navigation }: Props) {
           <Pressable style={({ pressed }) => [styles.headerCenter, pressed && { opacity: 0.7 }]} onPress={() => setEditSheet('date')}>
             <View style={styles.editDateRow}>
               <Text style={styles.headerDate}>{formattedDate}{formattedTime ? ` · ${formattedTime}` : ''}</Text>
-              <Icons.Edit size={12} color={colors.gray600} />
+              <Icons.Edit size={16} color={colors.gray500} />
             </View>
           </Pressable>
           <View style={{ width: 44 }} />
@@ -194,7 +196,7 @@ export function SessionDetailScreen({ route, navigation }: Props) {
             {session.did_spar && (
               <Text style={styles.headerDetail}>{session.sparring_rounds} rnd{(session.sparring_rounds ?? 0) !== 1 ? 's' : ''}</Text>
             )}
-            <Icons.Edit size={12} color={colors.gray600} />
+            <Icons.Edit size={16} color={colors.gray500} />
           </View>
         </Pressable>
         {gymName ? (
@@ -224,16 +226,7 @@ export function SessionDetailScreen({ route, navigation }: Props) {
           )}
         </Pressable>
 
-        {/* Lesson Topic */}
-        <DetailSection
-          label="LESSON TOPIC"
-          onEdit={() => setEditSheet('topic')}
-          empty={!session.lesson_topic}
-        >
-          <Text style={styles.sectionText}>{session.lesson_topic || 'Not recorded'}</Text>
-        </DetailSection>
-
-        {/* Techniques Drilled */}
+        {/* Techniques Drilled — always shown (primary edit target) */}
         <DetailSection
           label="TECHNIQUES DRILLED"
           onEdit={() => setEditSheet('techniques')}
@@ -252,7 +245,16 @@ export function SessionDetailScreen({ route, navigation }: Props) {
           )}
         </DetailSection>
 
-        {/* Sparring Details */}
+        {/* Populated sections only */}
+        {!!session.lesson_topic && (
+          <DetailSection
+            label="LESSON TOPIC"
+            onEdit={() => setEditSheet('topic')}
+          >
+            <Text style={styles.sectionText}>{session.lesson_topic}</Text>
+          </DetailSection>
+        )}
+
         {session.did_spar && (
           <DetailSection
             label="SPARRING"
@@ -268,7 +270,7 @@ export function SessionDetailScreen({ route, navigation }: Props) {
                   <Text style={styles.sectionText}>
                     {session.submissions_given.map((s) => `${s.type} (${s.count})`).join(', ')}
                   </Text>
-                  <Icons.Edit size={12} color={colors.gray600} />
+                  <Icons.Edit size={16} color={colors.gray500} />
                 </View>
               </Pressable>
             )}
@@ -279,20 +281,18 @@ export function SessionDetailScreen({ route, navigation }: Props) {
                   <Text style={styles.sectionText}>
                     {session.submissions_received.map((s) => `${s.type} (${s.count})`).join(', ')}
                   </Text>
-                  <Icons.Edit size={12} color={colors.gray600} />
+                  <Icons.Edit size={16} color={colors.gray500} />
                 </View>
               </Pressable>
             )}
           </DetailSection>
         )}
 
-        {/* Injuries (Fix #1) */}
-        <DetailSection
-          label="INJURIES"
-          onEdit={() => setEditSheet('injuries')}
-          empty={(session.injuries ?? []).length === 0}
-        >
-          {(session.injuries ?? []).length > 0 ? (
+        {(session.injuries ?? []).length > 0 && (
+          <DetailSection
+            label="INJURIES"
+            onEdit={() => setEditSheet('injuries')}
+          >
             <View style={styles.tagList}>
               {(session.injuries ?? []).map((injury, i) => (
                 <View key={i} style={[styles.tag, { backgroundColor: colors.warningDim, borderColor: colors.warningDimBorder }]}>
@@ -300,30 +300,47 @@ export function SessionDetailScreen({ route, navigation }: Props) {
                 </View>
               ))}
             </View>
-          ) : (
-            <Text style={styles.emptyText}>No injuries recorded</Text>
-          )}
-        </DetailSection>
+          </DetailSection>
+        )}
 
-        {/* Instructor */}
-        <DetailSection
-          label="INSTRUCTOR"
-          onEdit={() => setEditSheet('instructor')}
-          empty={!session.instructor}
-        >
-          <Text style={styles.sectionText}>{session.instructor || 'Not recorded'}</Text>
-        </DetailSection>
+        {!!session.instructor && (
+          <DetailSection
+            label="INSTRUCTOR"
+            onEdit={() => setEditSheet('instructor')}
+          >
+            <Text style={styles.sectionText}>{session.instructor}</Text>
+          </DetailSection>
+        )}
 
-        {/* Warm-up */}
-        <DetailSection
-          label="WARM-UP"
-          onEdit={() => setEditSheet('warmup')}
-          empty={session.warmed_up === null || session.warmed_up === undefined}
-        >
-          <Text style={styles.sectionText}>
-            {session.warmed_up === true ? 'Yes' : session.warmed_up === false ? 'No' : 'Not recorded'}
-          </Text>
-        </DetailSection>
+        {(session.warmed_up === true || session.warmed_up === false) && (
+          <DetailSection
+            label="WARM-UP"
+            onEdit={() => setEditSheet('warmup')}
+          >
+            <Text style={styles.sectionText}>
+              {session.warmed_up ? 'Yes' : 'No'}
+            </Text>
+          </DetailSection>
+        )}
+
+        {/* Add details — compact links for empty fields */}
+        {(() => {
+          const emptyFields: { key: string; label: string; sheet: string }[] = [];
+          if (!session.lesson_topic) emptyFields.push({ key: 'topic', label: 'Lesson topic', sheet: 'topic' });
+          if ((session.injuries ?? []).length === 0) emptyFields.push({ key: 'injuries', label: 'Injuries', sheet: 'injuries' });
+          if (!session.instructor) emptyFields.push({ key: 'instructor', label: 'Instructor', sheet: 'instructor' });
+          if (session.warmed_up === null || session.warmed_up === undefined) emptyFields.push({ key: 'warmup', label: 'Warm-up', sheet: 'warmup' });
+          if (emptyFields.length === 0) return null;
+          return (
+            <View style={styles.addDetailsRow}>
+              {emptyFields.map(f => (
+                <Pressable key={f.key} onPress={() => setEditSheet(f.sheet)} style={({ pressed }) => pressed && { opacity: 0.7 }}>
+                  <Text style={styles.addDetailLink}>+ {f.label}</Text>
+                </Pressable>
+              ))}
+            </View>
+          );
+        })()}
 
         {/* Transcript (collapsible — demoted to subtle toggle) */}
         {session.transcript ? (
@@ -352,25 +369,33 @@ export function SessionDetailScreen({ route, navigation }: Props) {
       <EditTopicSheet
         visible={editSheet === 'topic'}
         value={session.lesson_topic ?? ''}
-        onSave={(val) => handleUpdate({ lesson_topic: val || null })}
+        onSave={(val) => handleUpdate({ lesson_topic: val || null }, 'Topic updated')}
         onClose={() => setEditSheet(null)}
       />
       <EditTechniquesSheet
         visible={editSheet === 'techniques'}
         value={session.techniques_drilled ?? []}
-        onSave={(val) => handleUpdate({ techniques_drilled: val })}
+        onSave={(val) => {
+          const prev = session.techniques_drilled ?? [];
+          const added = val.filter(t => !prev.includes(t));
+          const removed = prev.filter(t => !val.includes(t));
+          let msg = 'Techniques updated';
+          if (added.length === 1 && removed.length === 0) msg = `${added[0]} added`;
+          else if (removed.length === 1 && added.length === 0) msg = `${removed[0]} removed`;
+          handleUpdate({ techniques_drilled: val }, msg);
+        }}
         onClose={() => setEditSheet(null)}
       />
       <EditNotesSheet
         visible={editSheet === 'notes'}
         value={session.notes ?? ''}
-        onSave={(val) => handleUpdate({ notes: val || null })}
+        onSave={(val) => handleUpdate({ notes: val || null }, 'Notes updated')}
         onClose={() => setEditSheet(null)}
       />
       <EditSparringSheet
         visible={editSheet === 'sparring'}
         rounds={session.sparring_rounds ?? 0}
-        onSave={(rounds) => handleUpdate({ sparring_rounds: rounds })}
+        onSave={(rounds) => handleUpdate({ sparring_rounds: rounds }, `Sparring → ${rounds} round${rounds !== 1 ? 's' : ''}`)}
         onClose={() => setEditSheet(null)}
       />
       <EditTrainingDetailsSheet
@@ -380,47 +405,49 @@ export function SessionDetailScreen({ route, navigation }: Props) {
         duration={session.duration_minutes}
         didSpar={session.did_spar}
         onSave={(mode, kind, duration, didSpar) =>
-          handleUpdate({ training_mode: mode as TrainingMode, session_kind: kind as SessionKind, duration_minutes: duration, did_spar: didSpar })
+          handleUpdate({ training_mode: mode as TrainingMode, session_kind: kind as SessionKind, duration_minutes: duration, did_spar: didSpar }, 'Training details updated')
         }
         onClose={() => setEditSheet(null)}
       />
       <EditInjuriesSheet
         visible={editSheet === 'injuries'}
         value={session.injuries ?? []}
-        onSave={(val) => handleUpdate({ injuries: val })}
+        onSave={(val) => handleUpdate({ injuries: val }, 'Injuries updated')}
         onClose={() => setEditSheet(null)}
       />
       <EditSubmissionsSheet
         visible={editSheet === 'submissionsGiven'}
         title="Submissions Landed"
         value={session.submissions_given ?? []}
-        onSave={(val) => handleUpdate({ submissions_given: val })}
+        onSave={(val) => handleUpdate({ submissions_given: val }, 'Submissions updated')}
         onClose={() => setEditSheet(null)}
+        techniquesDrilled={session.techniques_drilled ?? undefined}
       />
       <EditSubmissionsSheet
         visible={editSheet === 'submissionsReceived'}
         title="Got Caught"
         value={session.submissions_received ?? []}
-        onSave={(val) => handleUpdate({ submissions_received: val })}
+        onSave={(val) => handleUpdate({ submissions_received: val }, 'Submissions updated')}
         onClose={() => setEditSheet(null)}
+        techniquesDrilled={session.techniques_drilled ?? undefined}
       />
       <EditInstructorSheet
         visible={editSheet === 'instructor'}
         value={session.instructor ?? ''}
-        onSave={(val) => handleUpdate({ instructor: val || null })}
+        onSave={(val) => handleUpdate({ instructor: val || null }, 'Instructor updated')}
         onClose={() => setEditSheet(null)}
       />
       <EditWarmupSheet
         visible={editSheet === 'warmup'}
         value={session.warmed_up ?? null}
-        onSave={(val) => handleUpdate({ warmed_up: val })}
+        onSave={(val) => handleUpdate({ warmed_up: val }, `Warm-up → ${val === true ? 'Yes' : val === false ? 'No' : 'Unset'}`)}
         onClose={() => setEditSheet(null)}
       />
       <EditDateSheet
         visible={editSheet === 'date'}
         value={session.date}
         time={session.time}
-        onSave={(date, time) => handleUpdate({ date, time })}
+        onSave={(date, time) => handleUpdate({ date, time }, 'Date updated')}
         onClose={() => setEditSheet(null)}
       />
     </SafeAreaView>
@@ -448,7 +475,7 @@ function DetailSection({
     <Pressable style={({ pressed }) => [styles.section, empty && styles.sectionEmpty, pressed && { opacity: 0.85 }]} onPress={onEdit}>
       <View style={styles.sectionHeader}>
         <Text style={[styles.sectionLabel, labelColor ? { color: labelColor } : undefined]}>{label}</Text>
-        <Icons.Edit size={14} color={colors.gray700} />
+        <Icons.Edit size={16} color={colors.gray500} />
       </View>
       {children}
     </Pressable>
@@ -464,14 +491,20 @@ function SheetWrapper({
   title,
   onClose,
   onSave,
+  scrollable,
   children,
 }: {
   visible: boolean;
   title: string;
   onClose: () => void;
   onSave: () => void;
+  scrollable?: boolean;
   children: React.ReactNode;
 }) {
+  const Body = scrollable ? ScrollView : View;
+  const bodyProps = scrollable
+    ? { style: styles.sheetBody, keyboardShouldPersistTaps: 'handled' as const }
+    : { style: styles.sheetBody };
   return (
     <Modal visible={visible} animationType="slide" presentationStyle="pageSheet">
       <SafeAreaView style={styles.sheetContainer}>
@@ -484,7 +517,7 @@ function SheetWrapper({
             <Text style={styles.sheetSave}>Save</Text>
           </Pressable>
         </View>
-        <View style={styles.sheetBody}>{children}</View>
+        <Body {...bodyProps}>{children}</Body>
       </SafeAreaView>
     </Modal>
   );
@@ -512,28 +545,14 @@ function EditNotesSheet({ visible, value, onSave, onClose }: { visible: boolean;
 
 function EditTechniquesSheet({ visible, value, onSave, onClose }: { visible: boolean; value: string[]; onSave: (v: string[]) => void; onClose: () => void }) {
   const [items, setItems] = useState<string[]>(value);
-  const [input, setInput] = useState('');
-  useEffect(() => { if (visible) { setItems(value); setInput(''); } }, [visible, value]);
-  const addItem = () => { if (input.trim()) { setItems((p) => [...p, input.trim()]); setInput(''); } };
-  const removeItem = (i: number) => setItems((p) => p.filter((_, idx) => idx !== i));
+  useEffect(() => { if (visible) setItems(value); }, [visible, value]);
   return (
-    <SheetWrapper visible={visible} title="Techniques" onClose={onClose} onSave={() => onSave(items)}>
-      <View style={styles.tagList}>
-        {items.map((t, i) => (
-          <Pressable key={i} style={styles.editTag} onPress={() => removeItem(i)}>
-            <Text style={styles.editTagText}>{t}</Text>
-            <Icons.Close size={14} color={colors.gray400} />
-          </Pressable>
-        ))}
-      </View>
-      <TextInput
-        style={styles.sheetInput}
-        value={input}
-        onChangeText={setInput}
-        placeholder="Add technique and press return"
-        placeholderTextColor={colors.gray600}
-        returnKeyType="done"
-        onSubmitEditing={addItem}
+    <SheetWrapper visible={visible} title="Techniques" onClose={onClose} onSave={() => onSave(items)} scrollable>
+      <AutocompleteTagInput
+        items={items}
+        onItemsChange={setItems}
+        placeholder="Search techniques..."
+        type="technique"
       />
     </SheetWrapper>
   );
@@ -739,39 +758,93 @@ function EditInjuriesSheet({ visible, value, onSave, onClose }: { visible: boole
   );
 }
 
-function EditSubmissionsSheet({ visible, title, value, onSave, onClose }: { visible: boolean; title: string; value: Submission[]; onSave: (v: Submission[]) => void; onClose: () => void }) {
+function EditSubmissionsSheet({ visible, title, value, onSave, onClose, techniquesDrilled }: {
+  visible: boolean; title: string; value: Submission[]; onSave: (v: Submission[]) => void; onClose: () => void;
+  techniquesDrilled?: string[];
+}) {
   const [items, setItems] = useState<Submission[]>(value);
-  const [input, setInput] = useState('');
-  useEffect(() => { if (visible) { setItems(value); setInput(''); } }, [visible, value]);
-  const addItem = () => {
-    if (!input.trim()) return;
-    const existing = items.findIndex((s) => s.type.toLowerCase() === input.trim().toLowerCase());
+  useEffect(() => { if (visible) setItems(value); }, [visible, value]);
+
+  // Infer position-based submission suggestions from techniques
+  const suggestedSubs = React.useMemo(() => {
+    if (!techniquesDrilled?.length) return [];
+    const { matched } = matchLoggedTechniques(techniquesDrilled);
+    const posIds = new Set(matched.flatMap(t => t.positionIds));
+    const subs = [...posIds].flatMap(pid => getSubmissionsFromPosition(pid));
+    const addedLower = new Set(items.map(i => i.type.toLowerCase()));
+    const seen = new Set<string>();
+    return subs.filter(s => {
+      const low = s.name.toLowerCase();
+      if (seen.has(low) || addedLower.has(low)) return false;
+      seen.add(low);
+      return true;
+    }).slice(0, 8);
+  }, [techniquesDrilled, items]);
+
+  const addSubmission = (name: string) => {
+    const existing = items.findIndex(s => s.type.toLowerCase() === name.toLowerCase());
     if (existing >= 0) {
-      setItems((p) => p.map((s, i) => i === existing ? { ...s, count: s.count + 1 } : s));
+      setItems(p => p.map((s, i) => i === existing ? { ...s, count: s.count + 1 } : s));
     } else {
-      setItems((p) => [...p, { type: input.trim(), count: 1 }]);
+      setItems(p => [...p, { type: name, count: 1 }]);
     }
-    setInput('');
   };
-  const removeItem = (i: number) => setItems((p) => p.filter((_, idx) => idx !== i));
+
+  const removeItem = (i: number) => setItems(p => p.filter((_, idx) => idx !== i));
+
+  // Adapt AutocompleteTagInput for Submission[] — extract string names
+  const itemNames = items.map(s => s.type);
+  const handleItemsChange = (names: string[]) => {
+    // Determine what was added or removed
+    if (names.length > itemNames.length) {
+      // Item added
+      const added = names[names.length - 1];
+      addSubmission(added);
+    } else {
+      // Item removed — find which index was removed
+      const removedIdx = itemNames.findIndex((name, idx) => names[idx] !== name);
+      if (removedIdx >= 0) removeItem(removedIdx);
+    }
+  };
+
   return (
-    <SheetWrapper visible={visible} title={title} onClose={onClose} onSave={() => onSave(items)}>
-      <View style={styles.tagList}>
-        {items.map((s, i) => (
-          <Pressable key={i} style={styles.editTag} onPress={() => removeItem(i)}>
-            <Text style={styles.editTagText}>{s.type} ({s.count})</Text>
-            <Icons.Close size={14} color={colors.gray400} />
-          </Pressable>
-        ))}
-      </View>
-      <TextInput
-        style={styles.sheetInput}
-        value={input}
-        onChangeText={setInput}
-        placeholder="Add submission and press return"
-        placeholderTextColor={colors.gray600}
-        returnKeyType="done"
-        onSubmitEditing={addItem}
+    <SheetWrapper visible={visible} title={title} onClose={onClose} onSave={() => onSave(items)} scrollable>
+      {/* Position-based suggested submissions */}
+      {suggestedSubs.length > 0 && (
+        <View style={{ marginBottom: spacing.md }}>
+          <Text style={styles.sheetFieldLabel}>SUGGESTED FROM YOUR TECHNIQUES</Text>
+          <View style={styles.chipRow}>
+            {suggestedSubs.map(sub => (
+              <Pressable
+                key={sub.id}
+                style={({ pressed }) => [styles.suggestedSubChip, pressed && { opacity: 0.7 }]}
+                onPress={() => addSubmission(sub.name)}
+              >
+                <Text style={styles.suggestedSubText}>{sub.name}</Text>
+              </Pressable>
+            ))}
+          </View>
+        </View>
+      )}
+
+      {/* Tag chips with counts */}
+      {items.length > 0 && (
+        <View style={styles.tagList}>
+          {items.map((s, i) => (
+            <Pressable key={i} style={styles.editTag} onPress={() => removeItem(i)}>
+              <Text style={styles.editTagText}>{s.type} ({s.count})</Text>
+              <Icons.Close size={14} color={colors.gray400} />
+            </Pressable>
+          ))}
+        </View>
+      )}
+
+      <AutocompleteTagInput
+        items={itemNames}
+        onItemsChange={handleItemsChange}
+        placeholder="Search submissions..."
+        type="submission"
+        showTags={false}
       />
     </SheetWrapper>
   );
@@ -1239,6 +1312,39 @@ const styles = StyleSheet.create({
     color: colors.gray400,
   },
   roundChipTextSelected: {
+    color: colors.gold,
+  },
+
+  // Phase 5: Add details row
+  addDetailsRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing.sm,
+    marginTop: spacing.md,
+    marginBottom: spacing.md,
+  },
+  addDetailLink: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gold,
+    paddingVertical: spacing.xs,
+    paddingHorizontal: spacing.sm,
+  },
+
+  // Phase 3C: Suggested submission chips
+  suggestedSubChip: {
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 9999,
+    backgroundColor: colors.goldDim,
+    borderWidth: 1,
+    borderColor: colors.goldDimBorder,
+  },
+  suggestedSubText: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
     color: colors.gold,
   },
 });

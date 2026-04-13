@@ -11,7 +11,7 @@ import type { Submission } from '../../types/mvp-types';
 // Re-export Submission so phase components only need to import from ./types
 export type { Submission };
 
-export type Phase = 'entry' | 'recording' | 'processing' | 'review';
+export type Phase = 'entry' | 'recording' | 'processing' | 'review' | 'success';
 
 export interface EntryFields {
   trainingMode: 'gi' | 'nogi' | 'other';

@@ -21,12 +21,6 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | **Read Out Loud** | `/read-out-loud/` | Text-to-speech PWA for reading documents | Yes |
 | **Kaijutsu Landing** | `/kaijutsu/` | Kaijutsu landing page (logo + HTML only) | No |
 
-> **FHM moved out 2026-04-09.** Franklin Hugh Money lives in its own repo
-> ([assembly-labs/fhm](https://github.com/assembly-labs/fhm)) and serves at
-> [franklinhughmoney.com](https://franklinhughmoney.com). The old
-> `drewgarraway.com/fhm/*` URLs are 301-redirected via the `_redirects` file
-> at this repo's root.
-
 ### Nested Within Active Projects
 
 | Item | Location | Description |
@@ -47,6 +41,7 @@ This is a multi-project monorepo containing client work, personal projects, and 
 | TOMO | Expo (React Native) | expo run:ios | CSS Variables | TestFlight (pending) |
 | Scout | React 18 + TS | Vite | Tailwind | Cloudflare Pages |
 | Gather | React 19 + TS | Vite | Tailwind v4 | Cloudflare Pages |
+| ~~FHM~~ | ~~Extracted to assembly-labs/fhm~~ | | | |
 | F_This_App | Next.js 16 + TS | Next.js | Tailwind v4 | Cloudflare Pages |
 | Read Out Loud | Vanilla JS | N/A | Custom CSS | Cloudflare Pages |
 | TPL | Vanilla HTML | N/A | Custom CSS | GitHub Pages |
@@ -69,6 +64,7 @@ If the project has its own `CLAUDE.md`, read it before making changes:
 - `/TOMO/CLAUDE.md` - Comprehensive guide with design system, voice, deployment
 - `/gather/CLAUDE.md` - Routing guide: points to PRD, feature specs, brand guide, business model
 - `/scout/tpl/CLAUDE.md` - Style requirements, deployment, HTML conversion rules
+- ~~`/fhm/CLAUDE.md`~~ - FHM extracted to its own repo: `assembly-labs/fhm`
 
 ### Step 3: Understand Project Conventions
 
@@ -91,6 +87,7 @@ drew-garraway-consulting/
 │   │   └── pitches/             # Scout pitch deck
 │   ├── gather/                  # Farmers market platform
 │   │   └── _reference/          # Locally Strong (predecessor site)
+│   ├── fhm/                     # EXTRACTED → assembly-labs/fhm repo
 │   ├── f_this_app/              # Social game app
 │   ├── read-out-loud/           # Text-to-speech PWA
 │   └── kaijutsu/                # Landing page only
@@ -147,7 +144,7 @@ Quality checks are defined in `.github/workflows/pr-checks.yml`:
 
 | Project | Checks Run |
 |---------|------------|
-| TOMO | typecheck (`tsc --noEmit`) |
+| TOMO | build, lint |
 | Scout | build, lint |
 | F_This_App | build, lint |
 | Gather | build, lint |
@@ -160,6 +157,8 @@ cd scout && npm run deploy
 
 # F This App
 cd f_this_app && npm run build && npm run pages:build && npm run pages:deploy
+
+# FHM — EXTRACTED to assembly-labs/fhm repo (deploy from there)
 
 # Root site
 wrangler pages deploy _site --project-name=drewgarraway
@@ -226,14 +225,14 @@ When the user asks to "test", "review", "stage", "launch", etc., follow these pr
 
 ### Hard limits
 
-- **Cloudflare Pages: 25 MB per file.** Anything over breaks the deploy with "Pages only supports files up to 25 MiB in size". Applies to all drewgarraway.com content: Scout landing, Gather, Read Out Loud, Kaijutsu landing, scout-grants. (FHM moved to its own domain on 2026-04-09 — see franklinhughmoney.com.)
+- **Cloudflare Pages: 25 MB per file.** Anything over breaks the deploy with "Pages only supports files up to 25 MiB in size". Applies to all drewgarraway.com content: FHM, Scout landing, Gather, Read Out Loud, Kaijutsu landing.
 - **GitHub: 100 MB per file** (warns at 50 MB).
 
 ### Asset compression standards
 
 | Asset type | Command | Target size |
 |---|---|---|
-| Spoken-word audio (podcasts, etc.) | `ffmpeg -i in.m4a -c:a aac -b:a 48k -ac 1 -movflags +faststart out.m4a` | ~10 MB per 30 min |
+| Spoken-word audio (FHM podcasts, etc.) | `ffmpeg -i in.m4a -c:a aac -b:a 48k -ac 1 -movflags +faststart out.m4a` | ~10 MB per 30 min |
 | AS7MR audio (higher quality) | `ffmpeg -i in.m4a -c:a aac -b:a 96k -movflags +faststart out.m4a` | Check `feedback_as7mr_deploy_process.md` |
 | Images | `pngquant --quality=65-85` or `cwebp -q 80` | <200 KB hero, <30 KB thumbnail |
 | Video | H.264 MP4 with `+faststart` | <20 MB for web embed |
@@ -285,9 +284,6 @@ If you can't determine which project a task belongs to, ask:
 > - F_This_App (social game)
 > - Read Out Loud (text-to-speech)
 > - Or the root site (drewgarraway.com)?"
->
-> Note: FHM (Franklin Hugh Money) was extracted to its own repo on 2026-04-09 —
-> see [assembly-labs/fhm](https://github.com/assembly-labs/fhm) for FHM work.
 
 ---
 
@@ -298,4 +294,5 @@ If you can't determine which project a task belongs to, ask:
 | TOMO | `/TOMO/CLAUDE.md`, `/TOMO/docs/` |
 | Scout | `/scout/README.md`, `/scout/tpl/CLAUDE.md` |
 | Gather | `/gather/README.md`, `/gather/docs/` (local-only) |
+| ~~FHM~~ | Extracted → `assembly-labs/fhm` |
 | Others | Check `README.md` in project directory |

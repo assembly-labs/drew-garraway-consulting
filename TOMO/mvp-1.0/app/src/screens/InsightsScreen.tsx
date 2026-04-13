@@ -27,7 +27,9 @@ import { useAuth } from '../hooks/useAuth';
 import { useInsightsBadge } from '../hooks/useInsightsBadge';
 import { getInsightLimitation } from '../data/insight-limitations';
 import { getWeekBounds } from '../services/insights-engine';
+import { maybeTriggerWeeklyInsight } from '../services/insight-trigger';
 import type { Insight } from '../types/insights-types';
+import type { Session } from '../types/mvp-types';
 
 import {
   InsightsSkeleton,
@@ -36,9 +38,10 @@ import {
   CollapsedWeekRow,
   QuarterlyCard,
   MonthlyCard,
-  EmptyNoWeekly,
   styles,
+  normalizeInsightData,
 } from './insights';
+import { ReturnWelcome } from './insights/PreInsightSection';
 
 // ===========================================
 // MAIN SCREEN
@@ -53,6 +56,8 @@ export function InsightsScreen() {
   const [insights, setInsights] = useState<Insight[]>([]);
   const [sessionCount, setSessionCount] = useState<number | null>(null);
   const [sessionsThisWeek, setSessionsThisWeek] = useState(0);
+  const [weekSessions, setWeekSessions] = useState<Session[]>([]);
+  const [lastSessionDate, setLastSessionDate] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -110,10 +115,16 @@ export function InsightsScreen() {
 
       // Count sessions in the current week for limitation logic
       const { start: weekStart, end: weekEnd } = getWeekBounds(new Date());
-      const thisWeekCount = sessions.filter(
-        (s) => s.date >= weekStart && s.date <= weekEnd && s.deleted_at === null
-      ).length;
-      setSessionsThisWeek(thisWeekCount);
+      const activeSessions = sessions.filter((s) => s.deleted_at === null);
+      const thisWeekSessions = activeSessions.filter(
+        (s) => s.date >= weekStart && s.date <= weekEnd
+      );
+      setSessionsThisWeek(thisWeekSessions.length);
+      setWeekSessions(thisWeekSessions);
+
+      // ENH-06: track the most recent session date (for returning-user detection)
+      const sorted = [...activeSessions].sort((a, b) => b.date.localeCompare(a.date));
+      setLastSessionDate(sorted[0]?.date ?? null);
     } catch (err) {
       console.error('Failed to load insights:', err);
       setError('Could not load insights. Pull down to retry.');
@@ -172,9 +183,6 @@ export function InsightsScreen() {
     [weeklyInsights]
   );
 
-  const latestWeekly = sortedWeekly[0] ?? null;
-  const olderWeekly = sortedWeekly.slice(1);
-
   const totalSessions = sessionCount ?? 0;
 
   // Account age in days
@@ -193,6 +201,33 @@ export function InsightsScreen() {
   const limitation = getInsightLimitation(sessionsThisWeek, accountAgeDays, hasInsightThisWeek);
   const isPreInsight = limitation !== null;
 
+  // ENH-06: detect returning user (14+ day gap)
+  const daysSinceLastSession = useMemo(() => {
+    if (!lastSessionDate) return null;
+    const today = new Date();
+    const last = new Date(lastSessionDate + 'T00:00:00');
+    return Math.floor((today.getTime() - last.getTime()) / 86400000);
+  }, [lastSessionDate]);
+  const isReturning = limitation?.state === 'no_sessions' && typeof daysSinceLastSession === 'number' && daysSinceLastSession >= 14;
+
+  // ENH-02: extract focusNext from the most recent prior weekly insight
+  const lastFocusNext = useMemo(() => {
+    // The most recent weekly insight that is NOT the current week
+    const priorInsight = sortedWeekly.find((i) => i.period_start !== currentWeekStart);
+    if (!priorInsight) return null;
+    const normalized = normalizeInsightData(priorInsight.insight_data);
+    return normalized.focusNext || null;
+  }, [sortedWeekly, currentWeekStart]);
+
+  // When pre-insight: all weekly insights are "older" (no current week to feature)
+  // When not pre-insight: feature the current week's insight, rest are older
+  const currentWeekInsight = isPreInsight
+    ? null
+    : (sortedWeekly.find((i) => i.period_start === currentWeekStart) ?? null);
+  const olderWeekly = isPreInsight
+    ? sortedWeekly
+    : sortedWeekly.filter((i) => i.period_start !== currentWeekStart);
+
   // Auto-poll every 3s while "generating" state is showing and screen is focused.
   // Stops after 30 seconds or when the insight arrives.
   useEffect(() => {
@@ -209,6 +244,24 @@ export function InsightsScreen() {
 
     return () => clearInterval(interval);
   }, [limitation?.state, isFocused, loadData]);
+
+  // Tab-focus generation trigger: if the user has sessions this week but no
+  // insight (state === 'generating'), attempt generation from the tab itself.
+  // This provides a second chance if the session-save trigger failed silently.
+  const generationAttemptedRef = useRef(false);
+
+  useEffect(() => {
+    if (!isFocused) generationAttemptedRef.current = false;
+  }, [isFocused]);
+
+  useEffect(() => {
+    if (limitation?.state === 'generating' && profile && isFocused && !generationAttemptedRef.current) {
+      generationAttemptedRef.current = true;
+      maybeTriggerWeeklyInsight(profile)
+        .then(() => loadData())
+        .catch((err) => console.warn('[Insights] Tab-focus trigger failed:', err?.message ?? err));
+    }
+  }, [limitation?.state, profile, isFocused, loadData]);
 
   // ===========================================
   // RENDER
@@ -233,29 +286,7 @@ export function InsightsScreen() {
           <Text style={styles.emptyTitle}>Something went wrong</Text>
           <Text style={styles.emptyDescription}>{error}</Text>
         </View>
-      ) : isPreInsight ? (
-        // Mode A: Pre-insight holding message
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-              tintColor={colors.gold}
-            />
-          }
-          showsVerticalScrollIndicator={false}
-        >
-          <PreInsightLimitation
-            limitation={limitation!}
-            belt={profile?.belt ?? 'white'}
-            gender={profile?.gender ?? null}
-            hasBeenSeen={preInsightSeen}
-            onSeen={() => setPreInsightSeen(true)}
-          />
-        </ScrollView>
       ) : (
-        // Mode B: Has data — full weekly message view
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           refreshControl={
@@ -267,6 +298,44 @@ export function InsightsScreen() {
           }
           showsVerticalScrollIndicator={false}
         >
+          {/* Pre-insight holding message (new week, no insight yet) */}
+          {isPreInsight && (
+            <>
+              {/* ENH-06: warm re-entry for users returning after 14+ day gap */}
+              {isReturning ? (
+                <ReturnWelcome lastInsight={sortedWeekly[0] ?? null} />
+              ) : (
+                <>
+                  {/* ENH-02: Focus Echo — show last week's focus above the limitation message */}
+                  {lastFocusNext && limitation?.state === 'no_sessions' ? (
+                    <View style={styles.focusEchoContainer}>
+                      <Text style={styles.focusEchoLabel}>LAST WEEK'S FOCUS</Text>
+                      <Text style={styles.focusEchoText}>{lastFocusNext}</Text>
+                    </View>
+                  ) : null}
+                  <PreInsightLimitation
+                    limitation={limitation!}
+                    belt={profile?.belt ?? 'white'}
+                    gender={profile?.gender ?? null}
+                    hasBeenSeen={preInsightSeen}
+                    onSeen={() => setPreInsightSeen(true)}
+                    hasPastInsights={olderWeekly.length > 0}
+                  />
+                </>
+              )}
+            </>
+          )}
+
+          {/* Current week's insight — full message style */}
+          {!isPreInsight && currentWeekInsight && (
+            <WeeklyMessageView
+              insight={currentWeekInsight}
+              isNew={shouldAnimate(currentWeekInsight)}
+              onViewed={() => handleInsightViewed(currentWeekInsight.id)}
+              weekSessions={weekSessions}
+            />
+          )}
+
           {/* Quarterly Card */}
           {latestQuarterly && (
             <QuarterlyCard
@@ -289,21 +358,10 @@ export function InsightsScreen() {
             />
           )}
 
-          {/* Latest weekly — full message style */}
-          {latestWeekly ? (
-            <WeeklyMessageView
-              insight={latestWeekly}
-              isNew={shouldAnimate(latestWeekly)}
-              onViewed={() => handleInsightViewed(latestWeekly.id)}
-            />
-          ) : (
-            <EmptyNoWeekly />
-          )}
-
           {/* Older weekly rows — collapsed */}
           {olderWeekly.length > 0 && (
             <View style={styles.olderSection}>
-              <Text style={styles.olderSectionLabel}>EARLIER</Text>
+              <Text style={styles.olderSectionLabel}>PREVIOUS WEEKS</Text>
               {olderWeekly.map((wi) => (
                 <CollapsedWeekRow
                   key={wi.id}

@@ -54,6 +54,7 @@ export const styles = StyleSheet.create({
   // -------------------------------------------
   preInsightContainer: {
     paddingTop: spacing.lg,
+    paddingBottom: spacing.md,
   },
   preInsightText: {
     fontFamily: 'Inter',
@@ -79,6 +80,35 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     color: colors.gray500,
     marginTop: spacing.xs,
+  },
+
+  // ENH-06: Return Welcome wrapper for last insight
+  returnLastInsightWrapper: {
+    marginTop: spacing.lg,
+  },
+
+  // ENH-02: Focus Echo — last week's focus displayed at top of pre-insight state
+  focusEchoContainer: {
+    paddingBottom: spacing.md,
+    marginBottom: spacing.md,
+    borderBottomWidth: 1,
+    borderBottomColor: '#222222',
+  },
+  focusEchoLabel: {
+    fontFamily: 'JetBrains Mono-SemiBold',
+    fontSize: 11,
+    fontWeight: '600',
+    color: colors.gold,
+    letterSpacing: 1,
+    textTransform: 'uppercase' as const,
+    marginBottom: spacing.xs,
+  },
+  focusEchoText: {
+    fontFamily: 'Inter',
+    fontSize: 15,
+    fontWeight: '500',
+    color: colors.gray300,
+    lineHeight: 24,
   },
 
   // -------------------------------------------
@@ -164,6 +194,80 @@ export const styles = StyleSheet.create({
     color: colors.gray600,
     marginTop: 24,
     lineHeight: 20,
+  },
+
+  // ENH-10: Tell Me More
+  tellMeMoreLink: {
+    fontFamily: 'Inter',
+    fontSize: 15,
+    fontWeight: '600',
+    color: colors.gold,
+    marginTop: 16,
+  },
+  followUpResponse: {
+    marginTop: 16,
+    borderLeftWidth: 2,
+    borderLeftColor: colors.gold,
+    paddingLeft: 12,
+  },
+  followUpResponseText: {
+    fontFamily: 'Inter',
+    fontSize: 15,
+    fontWeight: '500',
+    color: colors.gray300,
+    lineHeight: 24,
+  },
+  followUpLoading: {
+    fontFamily: 'Inter',
+    fontSize: 15,
+    fontWeight: '500',
+    color: colors.gray500,
+    marginTop: 16,
+  },
+
+  // ENH-09: The Thread — technique linking
+  techniqueLink: {
+    color: colors.gold,
+    fontWeight: '600',
+  },
+  expandedTechniqueSection: {
+    marginTop: 12,
+    marginBottom: 8,
+  },
+  sessionMiniCard: {
+    backgroundColor: colors.gray800,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.gray700,
+    padding: 12,
+    marginBottom: 8,
+    minHeight: 44,
+  },
+  sessionMiniCardRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  sessionMiniCardDate: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '600',
+    color: colors.gray300,
+  },
+  sessionMiniCardMeta: {
+    fontFamily: 'Inter',
+    fontSize: 12,
+    fontWeight: '500',
+    color: colors.gray500,
+  },
+  sessionMiniCardExcerpt: {
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: '500',
+    color: colors.gray400,
+    lineHeight: 18,
+    marginTop: 4,
   },
 
   // -------------------------------------------

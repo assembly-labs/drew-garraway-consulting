@@ -21,6 +21,14 @@ const corsHeaders = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
+// RFC 2047 encode a header value if it contains non-ASCII characters
+function encodeRfc2047(value: string): string {
+  if (/^[\x20-\x7E]*$/.test(value)) return value;
+  const utf8Bytes = new TextEncoder().encode(value);
+  const binary = Array.from(utf8Bytes).map(b => String.fromCharCode(b)).join('');
+  return `=?UTF-8?B?${btoa(binary)}?=`;
+}
+
 // Send email via Gmail SMTP using base64-encoded AUTH PLAIN over TLS
 async function sendGmail(to: string, subject: string, htmlBody: string) {
   const password = Deno.env.get('GMAIL_APP_PASSWORD');
@@ -80,13 +88,13 @@ async function sendGmail(to: string, subject: string, htmlBody: string) {
     const message = [
       `From: Drew Garraway <${DREW_EMAIL}>`,
       `To: ${to}`,
-      `Subject: ${subject}`,
+      `Subject: ${encodeRfc2047(subject)}`,
       'MIME-Version: 1.0',
       `Content-Type: multipart/alternative; boundary="${boundary}"`,
       '',
       `--${boundary}`,
       'Content-Type: text/html; charset=UTF-8',
-      'Content-Transfer-Encoding: 7bit',
+      'Content-Transfer-Encoding: quoted-printable',
       '',
       htmlBody,
       '',

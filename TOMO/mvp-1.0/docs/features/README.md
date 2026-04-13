@@ -1,6 +1,6 @@
 # TOMO Features Backlog
 
-**Last Updated:** 2026-04-04
+**Last Updated:** 2026-04-06
 **Purpose:** Prioritized list of planned features. Major features get their own subfolder with strategy docs, specs, and task breakdowns.
 
 ---
@@ -48,6 +48,7 @@ This is the **single source of truth** for "what are we building next?"
 | FEAT-005 | **Competition Tracker** | **P3** | Open | -- | Track competition results, weight class, match outcomes. Low priority but feeds into technique insights. |
 | FEAT-006 | **Injury Tracker** | **P3** | Open | -- | Persistent injury tracking across sessions. 91% of practitioners report injuries. Affects technique recommendations. |
 | FEAT-007 | **Coach Integration** | **P3** | Open | -- | Student roster, feedback entry, promotion pipeline. Phase 2 feature set. |
+| FEAT-010 | **Reflections** | **P1** | Exploring | [reflections/](reflections/) | Freeform voice/text thoughts -- session-attached or standalone. Closes deliberate practice loop, fills insights data gaps, creates retention moat. Pitch: `PITCH.html` |
 
 ---
 
@@ -57,7 +58,7 @@ Move features here when they ship to TestFlight with a date and link to the CHAN
 
 | ID | Feature | Shipped | CHANGELOG Entry |
 |----|---------|---------|-----------------|
-| FEAT-002 | Insights Tab | 2026-04-04 | CHANGELOG.md: Session 38 |
+| FEAT-002 | Insights Tab | 2026-04-04 | CHANGELOG.md: Session 38 (base), Session 40 (auto-refresh + badge) |
 | FEAT-008 | User Profile Expansion | 2026-03-30 | CHANGELOG.md: Session 32 |
 
 ---

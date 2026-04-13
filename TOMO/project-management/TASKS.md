@@ -1,6 +1,6 @@
 # Tasks
 
-**Last updated:** 2026-04-08 (Session 41)
+**Last updated:** 2026-04-12 (Session 39)
 
 Statuses: `backlog` | `ready` | `in-progress` | `blocked` | `done` | `cut`
 
@@ -20,9 +20,22 @@ Tracks: `app` | `studio`
 | T-003 | Experience Intake (FEAT-001) | backlog | P1 | none | Conversational intake for experienced practitioners. Solves cold-start. |
 | T-004 | Processing Skip Upgrade (FEAT-004) | backlog | P2 | none | Gold "skip to manual" link after 10-15s delay. |
 | T-005 | Shake-to-Report Bug Reporter | done | P1 | none | Shake to open feedback modal (Bug/Idea), auto-screenshot, submit to Sentry. Needs native rebuild + on-device test. |
-| T-007 | ONB-001 code fix merged | done | P0 | none | profileService.create throws + Sentry, handlePayoffComplete guard, migration drops birth_date NOT NULL, CLAUDE.md schema rules. Merged via PR #40 (2026-04-08, Session 41). Migration applied to prod + Rachel's orphaned user deleted. |
-| T-008 | TestFlight hotfix build (ONB-001) | done | P0 | T-007 | Shipped to TestFlight 2026-04-08 at 22:08 UTC from main. Submission ID `6f90d77c-1415-4675-951e-734071b2ea40`. Built after PRs #40 and #41 merged. Internal testers get it in ~10 min after Apple processing; external testers get it after Apple review (24-48h). |
-| T-009 | Move external testers to internal testing | backlog | P1 | T-008 | Bypass Apple's 24-48h external review lag so schema/app sync issues are contained. Requires adding testers to App Store Connect team (Apple ID invite). Cap is 100 internal testers. |
+| T-007 | Insights ENH-01 through ENH-10 | done | P1 | T-001 (done) | 10 intelligence enhancements shipped to TestFlight Apr 11-12. Plateau detection, historical comparison, technique linking, Tell Me More chat. See INSIGHTS_ENHANCEMENTS.md. |
+| T-008 | Reflections Feature (FEAT-010) | backlog | P1 | none | Freeform voice/text reflections -- session-attached + standalone. Needs spec, DB migration, build. Pitch approved Apr 12. See features/reflections/PITCH.html |
+| T-009 | Journal Edit Enhancement (autocomplete + UX) | done | P1 | none | Technique autocomplete in edit sheets, empty section collapse, content-aware toasts, icon visibility fix. 6 phases shipped Session 39. |
+
+### Journal UX Audit (references mvp-1.0/docs/tracking/ISSUES.md, JRN- prefixes)
+
+| ID | Task | Status | Priority | Dependencies | Acceptance Criteria |
+|----|------|--------|----------|-------------|-------------------|
+| T-060 | Journal search (JRN-001) | backlog | P1 | none | Users can search sessions by technique, notes, instructor, topic. Results update as you type. |
+| T-061 | Fix "Earlier" date grouping (JRN-002) | backlog | P1 | none | Sessions older than this month grouped by month ("March 2026", "February 2026") instead of one "Earlier" bucket. |
+| T-062 | Display mood on SessionDetail (JRN-003) | backlog | P1 | none | mood_rating shown in session detail header. Visual matches 5-dot pattern from success phase. |
+| T-063 | Session card richness indicators (JRN-004) | backlog | P1 | none | Cards show subtle icons for: has notes, has mood, has injuries. Visual weight reflects content depth. |
+| T-064 | Ship narrative summary on SessionDetail (JRN-005) | backlog | P1 | none | generateNarrativeSummary() rendered at top of detail screen as human-readable "at a glance" text. |
+| T-065 | Audio playback on SessionDetail (JRN-006) | backlog | P1 | none | Play button near transcript section. Uses signed URL from audioService. Plays original voice recording. |
+| T-066 | Hide empty sections on SessionDetail (JRN-007) | done | P1 | none | Empty sections collapsed into "+ Add" gold links. Shipped Session 39. |
+| T-067 | Expand journal filters (JRN-008) | backlog | P2 | none | Add session kind filter (class/open mat/comp). Consider sparring toggle and date range as progressive disclosure. |
 
 ### Design Audit (references mvp-1.0/docs/tracking/ISSUES.md, DA-/DS- prefixes)
 

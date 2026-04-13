@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOMO | Your training. Remembered.</title>
+<meta name="description" content="A voice-first training journal. Talk through your session in 90 seconds and TOMO handles the rest.">
+<meta property="og:title" content="TOMO | Your training. Remembered.">
+<meta property="og:description" content="A voice-first training journal. Talk through your session in 90 seconds and TOMO handles the rest.">
+<meta property="og:url" content="https://traintomo.com/">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://traintomo.com/">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ===== MOBILE-FIRST BASE (all phones) ===== */
+  body {
+    background: #111111;
+    color: #e0e0e0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 1.8;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 56px 20px 48px;
+    background: linear-gradient(180deg, #1a1708 0%, #111111 100%);
+  }
+  .hero-logo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 44px;
+    color: #F5A623;
+    letter-spacing: 3px;
+  }
+  .hero-kanji {
+    font-size: 36px;
+    color: #F5A623;
+    margin-left: 8px;
+  }
+  .hero-tagline {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #fff;
+    margin-top: 20px;
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: #999;
+    margin-top: 16px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #111;
+    background: #F5A623;
+    padding: 16px 40px;
+    border-radius: 12px;
+    text-decoration: none;
+    margin-top: 28px;
+    min-height: 56px;
+  }
+  .hero-cta:hover { background: #e6951e; }
+  .hero-cta:active { background: #d4880f; transform: scale(0.98); }
+
+  /* Content */
+  .content { max-width: 720px; margin: 0 auto; padding: 0 20px 64px; }
+
+  /* Section */
+  .section { margin-top: 56px; }
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #F5A623;
+    margin-bottom: 16px;
+  }
+  .section h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .section p {
+    color: #ccc;
+    margin-bottom: 14px;
+    line-height: 1.8;
+    font-size: 17px;
+  }
+
+  /* Steps */
+  .steps { display: flex; flex-direction: column; gap: 0; margin-top: 24px; }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-number {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    color: #F5A623;
+    line-height: 1;
+    min-width: 44px;
+  }
+  .step-content h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .step-content p {
+    font-size: 16px;
+    color: #aaa;
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  /* What to expect list */
+  .expect-list { list-style: none; margin-top: 16px; }
+  .expect-list li {
+    padding: 14px 0;
+    border-bottom: 1px solid #1a1a1a;
+    color: #ccc;
+    font-size: 17px;
+    padding-left: 22px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .expect-list li:last-child { border-bottom: none; }
+  .expect-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 22px;
+    width: 7px;
+    height: 7px;
+    background: #F5A623;
+    border-radius: 50%;
+  }
+
+  /* CTA / Signup */
+  .cta {
+    margin-top: 56px;
+    background: linear-gradient(135deg, #1a1708, #151515);
+    border: 1px solid #333;
+    border-radius: 16px;
+    padding: 40px 24px;
+    text-align: center;
+  }
+  .cta h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .cta > p { color: #aaa; font-size: 16px; margin-bottom: 24px; line-height: 1.7; }
+
+  /* Signup form */
+  .signup-form { margin-top: 24px; text-align: left; }
+  .form-row { margin-bottom: 16px; }
+  .form-row-half { display: flex; gap: 12px; margin-bottom: 16px; }
+  .form-row-half > div { flex: 1; }
+  .form-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 8px;
+  }
+  .form-input, .form-select {
+    width: 100%;
+    padding: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    color: #fff;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 10px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .form-input::placeholder { color: #555; }
+  .form-input:focus, .form-select:focus {
+    border-color: #F5A623;
+    box-shadow: 0 0 0 2px rgba(245, 166, 35, 0.15);
+  }
+  .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 44px;
+  }
+  .form-select option { background: #1a1a1a; color: #fff; }
+
+  /* Agreement section */
+  .agreement-section {
+    margin-top: 24px;
+    text-align: left;
+  }
+  .agreement-toggle {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    padding: 16px 0;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .agreement-checkbox {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border: 2px solid #444;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    background: #1a1a1a;
+  }
+  .agreement-checkbox.checked {
+    background: #22c55e;
+    border-color: #22c55e;
+  }
+  .agreement-checkbox svg {
+    width: 16px;
+    height: 16px;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .agreement-checkbox.checked svg { opacity: 1; }
+  .agreement-toggle-text {
+    font-size: 16px;
+    color: #ccc;
+    line-height: 1.5;
+  }
+  .agreement-toggle-text a {
+    color: #F5A623;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* Expandable agreement */
+  .agreement-expand {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .agreement-expand.open {
+    max-height: 2000px;
+  }
+  .agreement-body {
+    background: #161616;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 28px 24px;
+    margin-bottom: 16px;
+  }
+  .agreement-body h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+  .agreement-body h3:first-child { margin-top: 0; }
+  .agreement-body p {
+    font-size: 15px;
+    color: #aaa;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .agreement-body p:last-child { margin-bottom: 0; }
+  .agreement-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #666;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #222;
+  }
+  .agreement-discount {
+    background: linear-gradient(135deg, #1a1708, #161616);
+    border-left: 3px solid #F5A623;
+    padding: 14px 18px;
+    margin: 12px 0;
+    border-radius: 0 10px 10px 0;
+    font-size: 15px;
+    color: #ccc;
+    line-height: 1.7;
+  }
+  .agreement-view-link {
+    font-size: 14px;
+    color: #F5A623;
+    margin-top: 8px;
+    cursor: pointer;
+    padding: 8px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .agreement-view-link:hover { text-decoration: underline; }
+
+  /* Submit button */
+  .form-submit {
+    width: 100%;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #111;
+    background: #F5A623;
+    border: none;
+    padding: 18px 32px;
+    border-radius: 12px;
+    cursor: pointer;
+    min-height: 56px;
+    margin-top: 8px;
+    transition: opacity 0.15s;
+  }
+  .form-submit:hover { background: #e6951e; }
+  .form-submit:active { background: #d4880f; transform: scale(0.98); }
+  .form-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .form-submit:disabled:hover { background: #F5A623; }
+  .form-submit:disabled:active { transform: none; }
+  .form-note {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+  .form-success {
+    text-align: center;
+    padding: 32px 0;
+    display: none;
+  }
+  .form-success h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #22c55e;
+    margin-bottom: 12px;
+  }
+  .form-success p {
+    font-size: 17px;
+    color: #aaa;
+    line-height: 1.7;
+  }
+
+  /* GIF overlay */
+  .gif-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .gif-overlay.active { display: flex; }
+  .gif-overlay img {
+    max-width: 90%;
+    max-height: 60vh;
+    border-radius: 12px;
+  }
+  .gif-overlay-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #666;
+    margin-top: 20px;
+  }
+
+  /* FAQ */
+  .faq-list { margin-top: 24px; }
+  .faq-item {
+    border-bottom: 1px solid #1a1a1a;
+    padding: 20px 0;
+  }
+  .faq-item:first-child { padding-top: 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: #fff;
+    margin-bottom: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    min-height: 44px;
+  }
+  .faq-q::after {
+    content: '+';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    color: #F5A623;
+    flex-shrink: 0;
+    min-width: 44px;
+    text-align: center;
+  }
+  .faq-item.open .faq-q::after {
+    content: '-';
+  }
+  .faq-a {
+    font-size: 16px;
+    color: #aaa;
+    line-height: 1.8;
+    display: none;
+    padding-right: 44px;
+  }
+  .faq-item.open .faq-a { display: block; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid #1a1a1a;
+    margin-top: 56px;
+  }
+  .footer p { font-size: 14px; color: #555; }
+  .footer .meaning { font-style: italic; color: #666; margin-top: 6px; font-size: 15px; }
+  .footer .builder { color: #555; margin-top: 16px; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ===== TABLET+ (min-width: 640px) ===== */
+  @media (min-width: 640px) {
+    .hero { padding: 80px 32px 64px; }
+    .hero-logo { font-size: 56px; }
+    .hero-kanji { font-size: 44px; }
+    .hero-tagline { font-size: 26px; }
+    .content { padding: 0 32px 80px; }
+    .section h2 { font-size: 28px; }
+    .step-number { font-size: 40px; min-width: 52px; }
+    .step-content h3 { font-size: 20px; }
+    .cta { padding: 56px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-logo">TOMO <span class="hero-kanji">&#21451;</span></div>
+  <div class="hero-tagline">Your training. Remembered.</div>
+  <p class="hero-sub">A voice-first BJJ journal for iPhone. Talk through your session in 90 seconds and TOMO handles the rest.</p>
+  <a href="#signup" class="hero-cta">Sign Up</a>
+  <div style="margin-top: 16px;"><a href="/features/" style="font-family: Inter, sans-serif; font-weight: 600; font-size: 15px; color: #F5A623; text-decoration: none;">See all features</a></div>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <div class="section-label">How It Works</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Train.</h3>
+          <p>Do your thing on the mats.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Talk.</h3>
+          <p>Open TOMO and speak naturally about your session: what you drilled, how rolls went, what clicked.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Done.</h3>
+          <p>TOMO extracts techniques, training details, and notes automatically. Review, edit if needed, save.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta" id="signup">
+    <h2>Get started</h2>
+    <p>Fill out your info, review the short beta agreement, and you're in. Drew will send your TestFlight invite.</p>
+
+    <form id="signup-form" class="signup-form">
+      <div class="form-row-half">
+        <div>
+          <label class="form-label" for="first-name">First Name</label>
+          <input class="form-input" type="text" id="first-name" name="first_name" placeholder="First" required>
+        </div>
+        <div>
+          <label class="form-label" for="last-name">Last Name</label>
+          <input class="form-input" type="text" id="last-name" name="last_name" placeholder="Last" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="email">Email</label>
+        <input class="form-input" type="email" id="email" name="email" placeholder="you@email.com" required>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="belt">Belt</label>
+        <select class="form-select" id="belt" name="belt" required>
+          <option value="" disabled selected>Select your belt</option>
+          <option value="White">White</option>
+          <option value="Blue">Blue</option>
+          <option value="Purple">Purple</option>
+          <option value="Brown">Brown</option>
+          <option value="Black">Black</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="iphone">iPhone Model</label>
+        <select class="form-select" id="iphone" name="iphone_model" required>
+          <option value="" disabled selected>Select your iPhone</option>
+          <option value="iPhone 17e">iPhone 17e (2026)</option>
+          <option value="iPhone 17 Pro Max">iPhone 17 Pro Max (2025)</option>
+          <option value="iPhone 17 Pro">iPhone 17 Pro (2025)</option>
+          <option value="iPhone 17 Air">iPhone 17 Air (2025)</option>
+          <option value="iPhone 17">iPhone 17 (2025)</option>
+          <option value="iPhone 16e">iPhone 16e (2025)</option>
+          <option value="iPhone 16 Pro Max">iPhone 16 Pro Max (2024)</option>
+          <option value="iPhone 16 Pro">iPhone 16 Pro (2024)</option>
+          <option value="iPhone 16 Plus">iPhone 16 Plus (2024)</option>
+          <option value="iPhone 16">iPhone 16 (2024)</option>
+          <option value="iPhone 15 Pro Max">iPhone 15 Pro Max (2023)</option>
+          <option value="iPhone 15 Pro">iPhone 15 Pro (2023)</option>
+          <option value="iPhone 15 Plus">iPhone 15 Plus (2023)</option>
+          <option value="iPhone 15">iPhone 15 (2023)</option>
+          <option value="iPhone 14 Pro Max">iPhone 14 Pro Max (2022)</option>
+          <option value="iPhone 14 Pro">iPhone 14 Pro (2022)</option>
+          <option value="iPhone 14 Plus">iPhone 14 Plus (2022)</option>
+          <option value="iPhone 14">iPhone 14 (2022)</option>
+          <option value="iPhone SE 3rd Gen">iPhone SE 3rd Gen (2022)</option>
+          <option value="iPhone 13 Pro Max">iPhone 13 Pro Max (2021)</option>
+          <option value="iPhone 13 Pro">iPhone 13 Pro (2021)</option>
+          <option value="iPhone 13">iPhone 13 (2021)</option>
+          <option value="iPhone 13 mini">iPhone 13 mini (2021)</option>
+          <option value="iPhone 12 Pro Max">iPhone 12 Pro Max (2020)</option>
+          <option value="iPhone 12 Pro">iPhone 12 Pro (2020)</option>
+          <option value="iPhone 12">iPhone 12 (2020)</option>
+          <option value="iPhone 12 mini">iPhone 12 mini (2020)</option>
+          <option value="iPhone SE 2nd Gen">iPhone SE 2nd Gen (2020)</option>
+          <option value="Older model">Older model</option>
+        </select>
+      </div>
+
+      <!-- Embedded Agreement -->
+      <div class="agreement-section">
+        <div class="agreement-view-link" id="agreement-view-link" onclick="toggleAgreement()">Read the beta tester agreement</div>
+
+        <div class="agreement-expand" id="agreement-expand">
+          <div class="agreement-body">
+            <div class="agreement-header">Beta Tester Agreement -- Alliance Paoli</div>
+
+            <p>Thanks for being willing to test TOMO. This is a quick agreement to make sure we're on the same page before you get access.</p>
+
+            <h3>1. What You're Getting</h3>
+            <p>Early access to TOMO, a voice-first BJJ training journal, through Apple TestFlight. This is a pre-release build, so it's still a work in progress.</p>
+            <div class="agreement-discount">As a thank-you, you'll get a heavily discounted subscription when TOMO officially launches. This offer is just for you and can't be transferred.</div>
+
+            <h3>2. Keep It Between Us</h3>
+            <p>Please keep the details of the app within our gym for now. Don't post screenshots or feature details on social media. Talking about it with other Alliance Paoli testers is fine.</p>
+
+            <h3>3. Feedback and Ideas</h3>
+            <p>I genuinely want to hear what you think. Any feedback you share may end up shaping the product, and I'll have full freedom to use those ideas however makes sense.</p>
+
+            <h3>4. Intellectual Property</h3>
+            <p>TOMO, including the app, its design, and all the technology behind it, belongs to Drew Garraway. Beta access doesn't come with any ownership or licensing rights.</p>
+
+            <h3>5. Your Access Is Personal</h3>
+            <p>Your TestFlight invite is tied to you. Don't share the link or let someone else use the app through your account.</p>
+
+            <h3>6. It's a Beta</h3>
+            <p>Things might crash, data might get lost, and the experience won't always be polished. No warranties, just an honest work in progress.</p>
+
+            <h3>7. Liability</h3>
+            <p>I can't be held liable for any issues that come up from using the beta, including lost data or device problems.</p>
+
+            <h3>8. After the Beta</h3>
+            <p>The beta won't last forever. I'll give you a heads up before anything changes.</p>
+
+            <h3>9. Age Requirement</h3>
+            <p>You must be 18 or older to participate. No exceptions.</p>
+          </div>
+        </div>
+
+        <div class="agreement-toggle" id="agreement-toggle" onclick="toggleCheckbox()">
+          <div class="agreement-checkbox" id="agreement-checkbox">
+            <svg fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <div class="agreement-toggle-text">I've read and agree to the beta tester agreement</div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <button type="submit" class="form-submit" id="submit-btn" disabled>I'm In</button>
+      </div>
+
+      <p class="form-note">You must be 18 or older. Drew will send your TestFlight invite after you sign up.</p>
+    </form>
+
+    <div class="form-success" id="form-success">
+      <h3>You're in.</h3>
+      <p>Agreement signed. Drew will send your TestFlight invite shortly. See you on the mats.</p>
+    </div>
+  </div>
+
+  <script>
+  var SIGNUP_URL = 'https://whzycopfjvwmsgzfqvig.supabase.co/functions/v1/beta-signup-notify';
+
+  var form = document.getElementById('signup-form');
+  var submitBtn = document.getElementById('submit-btn');
+  var agreed = false;
+
+  function toggleAgreement() {
+    var expand = document.getElementById('agreement-expand');
+    var link = document.getElementById('agreement-view-link');
+    expand.classList.toggle('open');
+    link.textContent = expand.classList.contains('open') ? 'Hide agreement' : 'Read the beta tester agreement';
+  }
+
+  function toggleCheckbox() {
+    agreed = !agreed;
+    var cb = document.getElementById('agreement-checkbox');
+    if (agreed) {
+      cb.classList.add('checked');
+      submitBtn.disabled = false;
+    } else {
+      cb.classList.remove('checked');
+      submitBtn.disabled = true;
+    }
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!agreed) return;
+
+    submitBtn.textContent = 'Signing up...';
+    submitBtn.disabled = true;
+
+    var firstName = document.getElementById('first-name').value.trim();
+    var lastName = document.getElementById('last-name').value.trim();
+
+    var payload = {
+      name: firstName + ' ' + lastName,
+      email: document.getElementById('email').value,
+      belt: document.getElementById('belt').value,
+      iphone_model: document.getElementById('iphone').value,
+      agreement_accepted: true
+    };
+
+    fetch(SIGNUP_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res) { return res.json().then(function(data) { return { ok: res.ok, status: res.status, data: data }; }); })
+    .then(function(result) {
+      if (result.ok) {
+        form.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+        showGifOverlay();
+      } else if (result.status === 409) {
+        alert('This email has already signed up. Check your inbox for the agreement link, or email drew@assemblylabs.co.');
+        submitBtn.textContent = "I'm In";
+        submitBtn.disabled = false;
+      } else {
+        alert(result.data.error || 'Something went wrong. Email drew@assemblylabs.co directly.');
+        submitBtn.textContent = "I'm In";
+        submitBtn.disabled = false;
+      }
+    })
+    .catch(function() {
+      alert('Connection error. Email drew@assemblylabs.co directly.');
+      submitBtn.textContent = "I'm In";
+      submitBtn.disabled = false;
+    });
+  });
+  </script>
+
+  <div class="section">
+    <div class="section-label">What to Expect</div>
+    <ul class="expect-list">
+      <li>Voice-powered session logging -- talk, don't type</li>
+      <li>Your own training profile personalized to your belt level</li>
+      <li>Recommended videos and stats visualizations coming soon</li>
+      <li>Free during beta via Apple TestFlight (iPhone required)</li>
+      <li>Heavily discounted subscription when TOMO launches publicly</li>
+      <li>Your feedback directly shapes the product</li>
+    </ul>
+    <div style="margin-top: 20px;"><a href="/features/" style="font-family: Inter, sans-serif; font-weight: 600; font-size: 15px; color: #F5A623; text-decoration: none;">See the full feature list</a></div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">FAQ</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do I need an iPhone?</div>
+        <div class="faq-a">Yes. TOMO is distributed through Apple TestFlight, which requires an iPhone running iOS 16 or later. Android is not supported during the beta.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is it really free?</div>
+        <div class="faq-a">Completely free during the beta. When TOMO launches publicly it will be a paid subscription, but beta testers from Alliance Paoli will get a heavily discounted rate as a thank-you.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is my data private?</div>
+        <div class="faq-a">Yes. Your training data is yours. Nobody else at the gym can see your sessions, notes, or stats. Not your coach, not your training partners.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How much time does it take after each class?</div>
+        <div class="faq-a">About 90 seconds. You talk through your session naturally and TOMO handles the rest. It's designed for when you're exhausted and just want to get to your car.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I report bugs or give feedback?</div>
+        <div class="faq-a">Email drew@assemblylabs.co or grab Drew at the gym. A quick text or voice note about what happened is perfect.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>TOMO (&#21451;)</p>
+    <p class="meaning">"Friend" in Japanese. Built for practitioners who take their training seriously.</p>
+    <p class="builder">Built by Assembly Labs, LLC</p>
+  </div>
+</div>
+
+<div class="gif-overlay" id="gif-overlay" onclick="hideGifOverlay()">
+  <img src="john-danaher-golf-clap.gif" alt="Danaher approves">
+  <div class="gif-overlay-text">Tap anywhere to close</div>
+</div>
+
+<script>
+function showGifOverlay() {
+  document.getElementById('gif-overlay').classList.add('active');
+}
+function hideGifOverlay() {
+  document.getElementById('gif-overlay').classList.remove('active');
+}
+</script>
+
+</body>
+</html>

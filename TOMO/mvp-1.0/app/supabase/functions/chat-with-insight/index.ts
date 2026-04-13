@@ -248,7 +248,7 @@ Deno.serve(async (req) => {
     if (convoError) {
       console.error('Conversation lookup error:', convoError);
       return new Response(
-        JSON.stringify({ error: `Database error: ${convoError.message}` }),
+        JSON.stringify({ error: 'Something went wrong. Please try again.' }),
         { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
       );
     }
@@ -344,8 +344,9 @@ Deno.serve(async (req) => {
           { status: 504, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
         );
       }
+      console.error('Chat API error:', apiErr);
       return new Response(
-        JSON.stringify({ success: false, error: `API error: ${(apiErr as Error).message}` }),
+        JSON.stringify({ success: false, error: 'Chat response failed. Please try again.' }),
         { status: 502, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
       );
     }
@@ -419,10 +420,9 @@ Deno.serve(async (req) => {
       headers: { 'Content-Type': 'application/json', ...corsHeaders },
     });
   } catch (err) {
-    // Top-level catch for any unhandled errors
     console.error('Chat with insight error:', err);
     return new Response(
-      JSON.stringify({ error: `Internal error: ${(err as Error).message}` }),
+      JSON.stringify({ error: 'Something went wrong. Please try again.' }),
       { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
     );
   }

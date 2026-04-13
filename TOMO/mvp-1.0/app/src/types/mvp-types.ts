@@ -163,6 +163,9 @@ export interface Session {
   extraction_model: string | null;
   transcription_error: string | null;
   extraction_error: string | null;
+
+  // ENH-05: Mood Pulse — optional post-session rating (1-5)
+  mood_rating?: number | null;
 }
 
 export interface Submission {

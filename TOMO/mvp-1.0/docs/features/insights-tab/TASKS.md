@@ -29,6 +29,11 @@
 - [ ] **BE-5: Deploy edge function** -- `supabase functions deploy generate-weekly --no-verify-jwt`. Test with curl. (10 min)
 - [ ] **BE-6: Wire generation trigger** -- After session save in session-service.ts, check eligibility (7+ days since last, 1+ session this week), fire background generation. (20 min)
 
+### UX Polish (Session 40, 2026-04-06)
+
+- [x] **UX-1: Auto-refresh polling** -- InsightsScreen polls every 3s while "generating" state is active + screen focused. 30s timeout. `fetchInFlightRef` prevents poll/pull-to-refresh overlap. Shipped to TestFlight.
+- [x] **UX-2: Unread badge dot** -- Gold dot on Insights tab icon via new `useInsightsBadge` context. `hasUnread()` count-only query. Badge check chains after `maybeTriggerWeeklyInsight`. Clears optimistically on view. Shipped to TestFlight.
+
 ### Integration Testing
 
 - [ ] **TEST-1: Local device test** -- Full flow on Drew's phone. Log a session, wait for trigger, open Insights tab, verify typewriter plays, verify content is belt-appropriate, verify skip works, verify revisit shows static text. (30 min)

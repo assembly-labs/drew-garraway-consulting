@@ -96,6 +96,35 @@ cd mvp-1.0/app && bash build.sh    # Builds IPA + submits to TestFlight (~20-30 
 
 ---
 
+## Release Notes (MANDATORY)
+
+Every TestFlight build MUST have a release page at traintomo.com/updates/YYYY-MM-DD.
+
+### When to create
+After `build.sh` succeeds and the build is submitted to TestFlight.
+
+### How to create
+1. Read this session's CHANGELOG.md entry for what shipped
+2. Create `site/updates/YYYY-MM-DD/index.html` following the template at `site/updates/_template.html`
+3. Write user-facing descriptions (not developer changelog). Translate technical changes into user value.
+4. Update `site/updates/index.html` to include the new release in the listing
+5. Deploy: `wrangler pages deploy TOMO/site/ --project-name=traintomo --branch=main --commit-dirty=true`
+6. Verify: `curl -sL "https://traintomo.com/updates/YYYY-MM-DD" | grep "<title>"`
+
+### Content rules
+- Write for users/testers, not developers
+- Use benefit language: "You can now..." not "We refactored..."
+- Skip refactors, build changes, and infra unless they improve reliability
+- Include a "Why this matters" callout for the headline feature
+- Badge categories: Intelligence, UX, Design, Polish, Fix
+- No developer jargon (no file paths, no function names, no TypeScript)
+- BJJ terminology welcome — users are practitioners
+
+### Template reference
+See `site/updates/_template.html` for the HTML pattern.
+
+---
+
 ## Project Overview
 
 TOMO is a voice-first training journal app for Brazilian Jiu-Jitsu practitioners. The app helps users log training sessions, track belt progression, and build a personal technique library.

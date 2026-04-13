@@ -69,6 +69,7 @@ At the end of every work session:
 3. Update `RISKS.md` -- if risk landscape changed
 4. Append to `SESSION_LOG.md` -- date, what happened, decisions made, next action
 5. Remind Drew to update `CHANGELOG.md` and `ISSUES.md` (those stay in their existing location)
+6. If a TestFlight build was deployed, verify release page exists at `site/updates/YYYY-MM-DD/`
 
 ## Two Workstreams
 

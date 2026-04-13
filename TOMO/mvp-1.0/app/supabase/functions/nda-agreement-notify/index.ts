@@ -17,6 +17,15 @@ const corsHeaders = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
+// RFC 2047 encode a header value if it contains non-ASCII characters
+function encodeRfc2047(value: string): string {
+  if (/^[\x20-\x7E]*$/.test(value)) return value;
+  // Deno btoa works on binary strings, so encode UTF-8 bytes first
+  const utf8Bytes = new TextEncoder().encode(value);
+  const binary = Array.from(utf8Bytes).map(b => String.fromCharCode(b)).join('');
+  return `=?UTF-8?B?${btoa(binary)}?=`;
+}
+
 async function sendGmail(to: string, subject: string, htmlBody: string) {
   const password = Deno.env.get('GMAIL_APP_PASSWORD');
   if (!password) {
@@ -64,13 +73,13 @@ async function sendGmail(to: string, subject: string, htmlBody: string) {
     const message = [
       `From: Drew Garraway <${DREW_EMAIL}>`,
       `To: ${to}`,
-      `Subject: ${subject}`,
+      `Subject: ${encodeRfc2047(subject)}`,
       'MIME-Version: 1.0',
       `Content-Type: multipart/alternative; boundary="${boundary}"`,
       '',
       `--${boundary}`,
       'Content-Type: text/html; charset=UTF-8',
-      'Content-Transfer-Encoding: 7bit',
+      'Content-Transfer-Encoding: quoted-printable',
       '',
       htmlBody,
       '',
@@ -166,7 +175,7 @@ Deno.serve(async (req: Request) => {
     // Email Drew
     await sendGmail(
       DREW_EMAIL,
-      `TOMO NDA Signed: ${name.trim()} is ready for TestFlight`,
+      `IMPORTANT: NEW TOMO BETA USER REQUEST - ${name.trim()}`,
       `<div style="font-family: monospace; padding: 20px; color: #333;">
         <h3 style="margin: 0 0 8px 0; color: #22c55e;">NDA Agreement Signed</h3>
         <p style="margin: 0 0 16px 0; font-size: 14px;">This tester is ready for a TestFlight invite.</p>
