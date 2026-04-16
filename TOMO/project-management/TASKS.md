@@ -1,6 +1,6 @@
 # Tasks
 
-**Last updated:** 2026-04-12 (Session 39)
+**Last updated:** 2026-04-13 (Session 40)
 
 Statuses: `backlog` | `ready` | `in-progress` | `blocked` | `done` | `cut`
 
@@ -23,6 +23,9 @@ Tracks: `app` | `studio`
 | T-007 | Insights ENH-01 through ENH-10 | done | P1 | T-001 (done) | 10 intelligence enhancements shipped to TestFlight Apr 11-12. Plateau detection, historical comparison, technique linking, Tell Me More chat. See INSIGHTS_ENHANCEMENTS.md. |
 | T-008 | Reflections Feature (FEAT-010) | backlog | P1 | none | Freeform voice/text reflections -- session-attached + standalone. Needs spec, DB migration, build. Pitch approved Apr 12. See features/reflections/PITCH.html |
 | T-009 | Journal Edit Enhancement (autocomplete + UX) | done | P1 | none | Technique autocomplete in edit sheets, empty section collapse, content-aware toasts, icon visibility fix. 6 phases shipped Session 39. |
+| T-070 | Review CEO Product Audit | ready | P0 | none | Drew reviews `docs/CEO_AUDIT_REPORT.md` and `site/internal/product-audit/index.html`. Acceptance: Drew provides written feedback on audit findings, data gaps, and opportunity priorities. |
+| T-071 | Write Feature Requirement: Free-Form Reflections Journal (FEAT-010 expansion) | ready | P0 | none | Full FRD expanding FEAT-010 pitch into complete requirement doc. See `features/reflections/FEATURE_REQUIREMENTS.md`. |
+| T-072 | Write Feature Requirement: AI Video Recommendations (FEAT-011) | ready | P0 | none | Full FRD for AI-powered video curation. See `features/video-recommendations/FEATURE_REQUIREMENTS.md`. |
 
 ### Journal UX Audit (references mvp-1.0/docs/tracking/ISSUES.md, JRN- prefixes)
 

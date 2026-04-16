@@ -48,7 +48,8 @@ This is the **single source of truth** for "what are we building next?"
 | FEAT-005 | **Competition Tracker** | **P3** | Open | -- | Track competition results, weight class, match outcomes. Low priority but feeds into technique insights. |
 | FEAT-006 | **Injury Tracker** | **P3** | Open | -- | Persistent injury tracking across sessions. 91% of practitioners report injuries. Affects technique recommendations. |
 | FEAT-007 | **Coach Integration** | **P3** | Open | -- | Student roster, feedback entry, promotion pipeline. Phase 2 feature set. |
-| FEAT-010 | **Reflections** | **P1** | Exploring | [reflections/](reflections/) | Freeform voice/text thoughts -- session-attached or standalone. Closes deliberate practice loop, fills insights data gaps, creates retention moat. Pitch: `PITCH.html` |
+| FEAT-010 | **Reflections** | **P0** | Speccing | [reflections/](reflections/) | Freeform voice/text journal -- session-attached or standalone. Closes deliberate practice loop, fills insights data gaps, creates retention moat. Pitch: `PITCH.html`, FRD: `FEATURE_REQUIREMENTS.md` |
+| FEAT-011 | **AI Video Recommendations** | **P0** | Speccing | [video-recommendations/](video-recommendations/) | AI-powered video curation based on user weaknesses, classroom focus, and technique gaps. Analyzes training data to cherry-pick instructional videos. FRD: `FEATURE_REQUIREMENTS.md` |
 
 ---
 

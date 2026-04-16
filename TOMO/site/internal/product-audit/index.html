@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOMO | Product Audit — April 2026</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<meta http-equiv="X-Robots-Tag" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #111111;
+    color: #e0e0e0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 1.8;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 48px 20px 24px;
+    border-bottom: 1px solid #1f1f1f;
+  }
+  .header-logo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    color: #F5A623;
+    letter-spacing: 2px;
+    text-decoration: none;
+  }
+  .header-label {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: rgba(245, 166, 35, 0.12);
+    color: #F5A623;
+    margin-top: 12px;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 48px 20px 40px;
+    background: linear-gradient(180deg, #1a1708 0%, #111111 100%);
+  }
+  .hero h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: #999;
+    margin-top: 16px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat-value {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    color: #F5A623;
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #666;
+    margin-top: 6px;
+  }
+
+  /* Content */
+  .content { max-width: 800px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* Section */
+  .section { margin-top: 56px; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #F5A623;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .section-desc {
+    font-size: 16px;
+    color: #aaa;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  /* Feature cards */
+  .features { display: grid; gap: 16px; }
+  .feature {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+  .feature:hover { border-color: #3a3a3a; }
+  .feature-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+  .badge-core { background: rgba(245, 166, 35, 0.15); color: #F5A623; }
+  .badge-intelligence { background: rgba(139, 92, 246, 0.15); color: #8B5CF6; }
+  .badge-data { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+  .badge-infra { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+  .badge-security { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+  .badge-ux { background: rgba(236, 72, 153, 0.15); color: #ec4899; }
+
+  .feature h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .feature p {
+    font-size: 15px;
+    color: #999;
+    line-height: 1.6;
+  }
+  .feature-details {
+    margin-top: 12px;
+    padding-left: 0;
+    list-style: none;
+  }
+  .feature-details li {
+    font-size: 14px;
+    color: #888;
+    line-height: 1.6;
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+  .feature-details li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #333;
+  }
+
+  /* Highlight callout */
+  .highlight {
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.08) 0%, rgba(245, 166, 35, 0.02) 100%);
+    border: 1px solid rgba(245, 166, 35, 0.2);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-top: 24px;
+  }
+  .highlight p {
+    font-size: 15px;
+    color: #ccc;
+    line-height: 1.6;
+  }
+  .highlight strong { color: #F5A623; }
+
+  /* Insight enhancement grid */
+  .enh-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .enh-item {
+    background: #161616;
+    border: 1px solid #222;
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+  .enh-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .enh-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: #555;
+    margin-right: 8px;
+  }
+  .enh-desc {
+    font-size: 14px;
+    color: #888;
+    line-height: 1.5;
+  }
+
+  /* Table */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 14px;
+  }
+  .data-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #666;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #1a1a1a;
+    color: #bbb;
+    vertical-align: top;
+  }
+  .data-table td:first-child {
+    color: #fff;
+    font-weight: 600;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* Pipeline diagram */
+  .pipeline {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 24px 0;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .pipeline-step {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 16px;
+    min-width: 140px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .pipeline-step-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #F5A623;
+    margin-bottom: 6px;
+  }
+  .pipeline-step-desc {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.4;
+  }
+  .pipeline-arrow {
+    color: #333;
+    font-size: 20px;
+    padding: 0 8px;
+    flex-shrink: 0;
+  }
+
+  /* Cost table */
+  .cost-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-label { color: #bbb; font-size: 15px; }
+  .cost-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 15px;
+    color: #F5A623;
+  }
+  .cost-total {
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.08) 0%, rgba(245, 166, 35, 0.02) 100%);
+    border: 1px solid rgba(245, 166, 35, 0.2);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cost-total .cost-label {
+    color: #fff;
+    font-weight: 700;
+  }
+  .cost-total .cost-value {
+    font-size: 20px;
+  }
+
+  /* Opportunity section */
+  .opportunity {
+    background: #161616;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 16px;
+  }
+  .opp-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .opp-desc {
+    font-size: 14px;
+    color: #888;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .opp-impact {
+    font-size: 13px;
+    color: #8B5CF6;
+    font-weight: 600;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 48px 20px;
+    border-top: 1px solid #1f1f1f;
+    font-size: 14px;
+    color: #555;
+  }
+
+  /* Responsive */
+  @media (min-width: 640px) {
+    .hero h1 { font-size: 44px; }
+    .hero-stat-value { font-size: 40px; }
+    .enh-grid { grid-template-columns: 1fr 1fr; }
+    .content { padding: 0 32px 80px; }
+  }
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 28px; }
+    .hero-meta { gap: 20px; }
+    .hero-stat-value { font-size: 28px; }
+    .pipeline { flex-direction: column; align-items: stretch; }
+    .pipeline-arrow { transform: rotate(90deg); text-align: center; padding: 4px 0; }
+    .data-table { font-size: 13px; }
+    .data-table th, .data-table td { padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="https://traintomo.com" class="header-logo">TOMO</a>
+  <div><span class="header-label">Internal Product Audit</span></div>
+</div>
+
+<div class="hero">
+  <h1>What We've Built</h1>
+  <p class="hero-sub">A complete audit of TOMO's features, AI system, database, and data collection as of April 13, 2026. Live on TestFlight.</p>
+  <div class="hero-meta">
+    <div class="hero-stat">
+      <div class="hero-stat-value">4</div>
+      <div class="hero-stat-label">App Screens</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value">10</div>
+      <div class="hero-stat-label">Insight Enhancements</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value">8</div>
+      <div class="hero-stat-label">Edge Functions</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value">9</div>
+      <div class="hero-stat-label">Database Tables</div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ==================== CORE PRODUCT ==================== -->
+  <div class="section">
+    <div class="section-label">01 / Core Product</div>
+    <h2 class="section-title">Voice-First Session Logging</h2>
+    <p class="section-desc">Users finish training, open TOMO, and log their session in under 90 seconds by speaking naturally. AI handles the rest.</p>
+
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <div class="pipeline-step-label">Entry</div>
+        <div class="pipeline-step-desc">Mode, kind, duration (5-10s)</div>
+      </div>
+      <div class="pipeline-arrow">&rarr;</div>
+      <div class="pipeline-step">
+        <div class="pipeline-step-label">Record</div>
+        <div class="pipeline-step-desc">Speak naturally (15-90s)</div>
+      </div>
+      <div class="pipeline-arrow">&rarr;</div>
+      <div class="pipeline-step">
+        <div class="pipeline-step-label">Process</div>
+        <div class="pipeline-step-desc">Transcribe + extract (5-15s)</div>
+      </div>
+      <div class="pipeline-arrow">&rarr;</div>
+      <div class="pipeline-step">
+        <div class="pipeline-step-label">Review</div>
+        <div class="pipeline-step-desc">Edit AI results (10-30s)</div>
+      </div>
+      <div class="pipeline-arrow">&rarr;</div>
+      <div class="pipeline-step">
+        <div class="pipeline-step-label">Save</div>
+        <div class="pipeline-step-desc">Mood + teaser (3-5s)</div>
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <span class="feature-badge badge-core">Core</span>
+        <h3>Voice Recording + Auto-Stop</h3>
+        <p>Pulsing gold mic with live timer. Auto-stops at 90 seconds because users are exhausted post-training. AAC format via expo-audio. Text-only fallback always available.</p>
+      </div>
+
+      <div class="feature">
+        <span class="feature-badge badge-intelligence">AI Extraction</span>
+        <h3>13 Structured Fields From Voice</h3>
+        <p>Claude Haiku parses messy voice transcripts into structured data. Preserves the practitioner's own technique phrasing.</p>
+        <ul class="feature-details">
+          <li>Training mode (gi/nogi), session kind (class/open mat/comp training)</li>
+          <li>Duration, warm-up, sparring rounds</li>
+          <li>Techniques drilled (array), submissions given/received (with counts)</li>
+          <li>Injuries, instructor name, lesson topic</li>
+          <li>Clean 1-3 sentence journal summary</li>
+        </ul>
+      </div>
+
+      <div class="feature">
+        <span class="feature-badge badge-intelligence">AI Transcription</span>
+        <h3>BJJ-Optimized Speech-to-Text</h3>
+        <p>AssemblyAI with 180 BJJ-specific terms word-boosted. "Rear naked choke," "de la Riva," "berimbolo" all transcribe correctly out of the box.</p>
+      </div>
+
+      <div class="feature">
+        <span class="feature-badge badge-ux">UX</span>
+        <h3>Intelligent Session Editing</h3>
+        <p>Technique autocomplete searches personal history + 361 canonical BJJ techniques + dictionary. Position-aware submission suggestions. Recently-used techniques surfaced with one tap.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JOURNAL ==================== -->
+  <div class="section">
+    <div class="section-label">02 / Journal</div>
+    <h2 class="section-title">Session History + Filtering</h2>
+    <p class="section-desc">Every session logged appears in a scrollable, filterable timeline grouped by date.</p>
+
+    <div class="features">
+      <div class="feature">
+        <span class="feature-badge badge-core">Core</span>
+        <h3>Date-Grouped Timeline</h3>
+        <p>Sessions grouped into Today, Yesterday, This Week, This Month, Earlier. Each card shows mode badge, duration, kind, lesson topic, technique preview, and sparring indicator.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-badge badge-ux">UX</span>
+        <h3>Weekly Pulse Strip</h3>
+        <p>Gold dots show "3 of 4 sessions this week" against the user's target frequency. Visual accountability without nagging.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-badge badge-core">Core</span>
+        <h3>Mode Filtering + Session Detail</h3>
+        <p>Filter by All / Gi / No-Gi. Tap any session for full detail view with inline editing via bottom-sheet modals. Soft delete with audit trail.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== INSIGHTS ==================== -->
+  <div class="section">
+    <div class="section-label">03 / Insights</div>
+    <h2 class="section-title">AI Training Debriefs</h2>
+    <p class="section-desc">The differentiating feature. TOMO generates personalized weekly training debriefs using a three-tier AI architecture with context cascade. 10 enhancements shipped.</p>
+
+    <div class="highlight">
+      <p><strong>Three-Tier Architecture:</strong> Weekly debriefs (Haiku, "training partner" persona) feed into monthly reviews (Sonnet, "coach" persona) which feed into quarterly assessments (Opus, "black belt" persona). Each tier passes context downward so insights stay coherent across timescales.</p>
+    </div>
+
+    <div class="features" style="margin-top: 24px;">
+      <div class="feature">
+        <span class="feature-badge badge-intelligence">Intelligence</span>
+        <h3>Belt-Adaptive Prompting</h3>
+        <p>Every AI prompt dynamically adjusts tone, vocabulary depth, and encouragement based on the user's belt level.</p>
+        <ul class="feature-details">
+          <li>White belt: warm, supportive, celebrate showing up, basic BJJ terms</li>
+          <li>Blue belt: coaching, balanced, identity-building, intermediate terms</li>
+          <li>Purple belt: collaborative, direct, analytical, advanced terms</li>
+          <li>Brown/Black: peer, professional, systems-level, expert terms</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px; color: #fff; margin-top: 32px; margin-bottom: 16px;">10 Shipped Enhancements (ENH-01 through ENH-10)</h3>
+
+    <div class="enh-grid">
+      <div class="enh-item">
+        <div class="enh-name"><span class="enh-id">ENH-01</span>The Almost Knew</div>
+        <div class="enh-desc">Leads with highest-surprise observation, not session count. The first sentence should make users stop scrolling.</div>
+      </div>
+      <div class="enh-item">
+        <div class="enh-name"><span class="enh-id">ENH-02</span>Focus Echo</div>
+        <div class="enh-desc">Shows last week's focus recommendation at the top. AI checks if the user followed through.</div>
+      </div>
+      <div class="enh-item">
+        <div class="enh-name"><span class="enh-id">ENH-03</span>The Angle Shift</div>
+        <div class="enh-desc">Rotates through 6 analytical lenses weekly (technique, rhythm, energy, partnerships, positions, recovery). Never repeats.</div>
+      </div>
+      <div class="enh-item">
+        <div class="enh-name"><span class="enh-id">ENH-04</span>The Teaser</div>
+        <div class="enh-desc">Post-save success phase previews the weekly debrief. 6 rotating templates, zero AI cost.</div>
+      </div>
+      <div class="enh-item">
+        <div class="enh-name"><span class="enh-id">ENH-05</span>Mood Pulse</div>
+        <div class="enh-desc">Optional 5-dot mood rating after save. Injected into weekly prompt for mood-training correlation analysis.</div>
+      </div>
+      <div class="enh-item">
+        <div class="enh-name"><span class="enh-id">ENH-06</span>The Quiet Week</div>
+        <div class="enh-desc">Warm re-entry for users returning after 14+ day gap. No guilt, just: "The mat will be there."</div>
+      </div>
+      <div class="enh-item">
+        <div class="enh-name"><span class="enh-id">ENH-07</span>The Reframe</div>
+        <div class="enh-desc">Detects plateaus (4+ weeks flat) and reframes as unseen progress. Never says "plateau" or "stuck."</div>
+      </div>
+      <div class="enh-item">
+        <div class="enh-name"><span class="enh-id">ENH-08</span>One Year Ago</div>
+        <div class="enh-desc">Resurfaces sessions from 3/6/12 months ago. AI generates comparison showing how training evolved.</div>
+      </div>
+      <div class="enh-item">
+        <div class="enh-name"><span class="enh-id">ENH-09</span>The Thread</div>
+        <div class="enh-desc">Technique mentions are tappable gold text. Reveals contributing sessions with excerpts. Cross-tab navigation.</div>
+      </div>
+      <div class="enh-item">
+        <div class="enh-name"><span class="enh-id">ENH-10</span>Tell Me More</div>
+        <div class="enh-desc">Gold link below each insight. One-exchange chat follow-up via dedicated edge function. Response persists.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ONBOARDING ==================== -->
+  <div class="section">
+    <div class="section-label">04 / Onboarding + Profile</div>
+    <h2 class="section-title">60-Second Setup</h2>
+    <p class="section-desc">Four screens collect everything TOMO needs to personalize the experience from day one.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Screen</th>
+          <th>Data Collected</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Welcome</td>
+          <td>Brand moment: TOMO logo + kanji + cycling taglines</td>
+        </tr>
+        <tr>
+          <td>About You</td>
+          <td>Name, belt (white-black), stripes (0-4), birthday (18+ enforced), gender</td>
+        </tr>
+        <tr>
+          <td>Your Training</td>
+          <td>Gym (autocomplete + location), target frequency, training goals (6 options), experience level, body weight</td>
+        </tr>
+        <tr>
+          <td>Get Started</td>
+          <td>Logging preference (voice/text), mic permission</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="features" style="margin-top: 24px;">
+      <div class="feature">
+        <span class="feature-badge badge-core">Core</span>
+        <h3>Profile Management</h3>
+        <p>Belt-colored avatar, editable fields (belt, stripes, weight, frequency, preference), session count, gym history with visit counts per gym. Privacy policy accessible from profile.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-badge badge-data">Data</span>
+        <h3>Gym Database</h3>
+        <p>120+ BJJ gyms with PostGIS spatial queries. "Find nearby" uses device location. Users can add custom gyms. Gym history tracks every academy trained at with relationship type (home, drop-in, seminar).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== DATABASE ==================== -->
+  <div class="section">
+    <div class="section-label">05 / Database + Infrastructure</div>
+    <h2 class="section-title">What Powers It</h2>
+    <p class="section-desc">Supabase (PostgreSQL) with 9 tables, 8 edge functions, Row Level Security on everything, and private audio storage.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Table</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>profiles</td>
+          <td>User account, belt, gym, preferences, training goals</td>
+        </tr>
+        <tr>
+          <td>sessions</td>
+          <td>Training sessions with full AI extraction metadata + mood</td>
+        </tr>
+        <tr>
+          <td>gyms</td>
+          <td>BJJ gym database with PostGIS spatial queries</td>
+        </tr>
+        <tr>
+          <td>user_gyms</td>
+          <td>Gym history per user (home, drop-in, seminar)</td>
+        </tr>
+        <tr>
+          <td>insights</td>
+          <td>Weekly/monthly/quarterly AI debriefs (JSONB)</td>
+        </tr>
+        <tr>
+          <td>insight_conversations</td>
+          <td>5-exchange chat follow-ups per insight</td>
+        </tr>
+        <tr>
+          <td>user_context</td>
+          <td>Living personalization document (grows with usage)</td>
+        </tr>
+        <tr>
+          <td>beta_signups</td>
+          <td>Alliance Paoli tester registration</td>
+        </tr>
+        <tr>
+          <td>nda_agreements</td>
+          <td>Immutable legal log of NDA acceptance</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="features" style="margin-top: 24px;">
+      <div class="feature">
+        <span class="feature-badge badge-security">Security</span>
+        <h3>Row Level Security + Private Audio</h3>
+        <p>Every table has RLS policies. Users can only access their own data. Audio files stored in a private bucket with 15-minute signed URLs. API keys never ship in the app binary. 18+ age enforcement via database trigger.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-badge badge-infra">Infrastructure</span>
+        <h3>8 Edge Functions</h3>
+        <ul class="feature-details">
+          <li><strong>transcribe-audio</strong> &mdash; AssemblyAI speech-to-text (180 BJJ terms boosted)</li>
+          <li><strong>extract-session</strong> &mdash; Claude Haiku: transcript &rarr; 13 structured fields</li>
+          <li><strong>generate-weekly</strong> &mdash; Claude Haiku: weekly training debrief</li>
+          <li><strong>generate-monthly</strong> &mdash; Claude Sonnet: monthly structured review</li>
+          <li><strong>generate-quarterly</strong> &mdash; Claude Opus: strategic quarterly assessment</li>
+          <li><strong>chat-with-insight</strong> &mdash; Routes to correct model tier, max 5 exchanges</li>
+          <li><strong>beta-signup-notify</strong> &mdash; Tester registration emails</li>
+          <li><strong>nda-agreement-notify</strong> &mdash; NDA acceptance confirmation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== AI COST ==================== -->
+  <div class="section">
+    <div class="section-label">06 / AI Economics</div>
+    <h2 class="section-title">Cost Per User</h2>
+    <p class="section-desc">Estimated annual cost for an active user logging ~3 sessions per week.</p>
+
+    <div style="background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 24px;">
+      <div class="cost-row">
+        <span class="cost-label">Weekly insights (52x Haiku)</span>
+        <span class="cost-value">$0.02</span>
+      </div>
+      <div class="cost-row">
+        <span class="cost-label">Monthly insights (12x Sonnet)</span>
+        <span class="cost-value">$0.11</span>
+      </div>
+      <div class="cost-row">
+        <span class="cost-label">Quarterly insights (4x Opus)</span>
+        <span class="cost-value">$0.20-0.40</span>
+      </div>
+      <div class="cost-row">
+        <span class="cost-label">Session extraction (~150x Haiku)</span>
+        <span class="cost-value">$0.03</span>
+      </div>
+      <div class="cost-row">
+        <span class="cost-label">Transcription (~150x AssemblyAI)</span>
+        <span class="cost-value">$0.90</span>
+      </div>
+      <div class="cost-row">
+        <span class="cost-label">Chat follow-ups (~50 exchanges)</span>
+        <span class="cost-value">$0.15-0.75</span>
+      </div>
+      <div class="cost-total">
+        <span class="cost-label">Total per active user per year</span>
+        <span class="cost-value">~$1.40-2.20</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== DATA COLLECTION ==================== -->
+  <div class="section">
+    <div class="section-label">07 / Data Collection Audit</div>
+    <h2 class="section-title">What We Capture vs. What We Could</h2>
+
+    <h3 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px; color: #fff; margin-bottom: 16px; margin-top: 24px;">Currently Collecting (Per Session)</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Source</th>
+          <th>Populated?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Date + time</td><td>Auto-captured</td><td>Always</td></tr>
+        <tr><td>Training mode</td><td>AI extraction / manual</td><td>Always</td></tr>
+        <tr><td>Session kind</td><td>AI extraction / manual</td><td>Always</td></tr>
+        <tr><td>Duration</td><td>AI extraction / manual</td><td>Usually</td></tr>
+        <tr><td>Warmed up</td><td>AI extraction</td><td>Often null</td></tr>
+        <tr><td>Did spar</td><td>AI extraction / manual</td><td>Always</td></tr>
+        <tr><td>Sparring rounds</td><td>AI extraction</td><td>Often null</td></tr>
+        <tr><td>Techniques drilled</td><td>AI extraction</td><td>Usually</td></tr>
+        <tr><td>Submissions given</td><td>AI extraction</td><td>When applicable</td></tr>
+        <tr><td>Submissions received</td><td>AI extraction</td><td>When applicable</td></tr>
+        <tr><td>Injuries</td><td>AI extraction</td><td>Empty array when none</td></tr>
+        <tr><td>Instructor</td><td>AI extraction</td><td>Often null</td></tr>
+        <tr><td>Lesson topic</td><td>AI extraction</td><td>Often null</td></tr>
+        <tr><td>Notes (journal summary)</td><td>AI extraction</td><td>Always</td></tr>
+        <tr><td>Mood rating (1-5)</td><td>Post-save UI tap</td><td>Often null (optional)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px; color: #fff; margin-bottom: 16px; margin-top: 32px;">Not Collecting (But Users Already Describe)</h3>
+
+    <div class="highlight">
+      <p><strong>The 90-Second Paradox:</strong> Users already describe far more than we index. The transcript contains training intent, partner names, body state, coaching feedback, technique failures, and emotional arcs -- all of which are lost after extraction. The highest-leverage next move isn't collecting new data; it's indexing data users are already giving us.</p>
+    </div>
+
+    <table class="data-table" style="margin-top: 16px;">
+      <thead>
+        <tr>
+          <th>Lost Data</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Training intent</td><td>"I wanted to focus on half guard today"</td></tr>
+        <tr><td>Partner context</td><td>"Rolled with Marcus (blue) and two whites"</td></tr>
+        <tr><td>Body state</td><td>"Still sore from yesterday, low energy"</td></tr>
+        <tr><td>Failed attempts</td><td>"Tried omoplata twice but couldn't finish"</td></tr>
+        <tr><td>Coach feedback</td><td>"Coach said tighten posture on the pass"</td></tr>
+        <tr><td>Session arc</td><td>"Started frustrated, breakthrough in the last round"</td></tr>
+        <tr><td>Recovery</td><td>"Iced my knee after class"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== OPPORTUNITIES ==================== -->
+  <div class="section">
+    <div class="section-label">08 / Biggest Opportunities</div>
+    <h2 class="section-title">What Would Maximize Insights Value</h2>
+    <p class="section-desc">Ranked by impact-to-effort ratio. Tier 1 items unlock the most value with the least friction.</p>
+
+    <div style="display: grid; gap: 16px; margin-top: 8px;">
+      <div class="opportunity">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <span class="feature-badge badge-core" style="margin-bottom: 0;">Tier 1</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #666; letter-spacing: 1px;">0-2 SPRINTS</span>
+        </div>
+        <div class="opp-title">Enhanced Transcript Extraction</div>
+        <div class="opp-desc">Extract training intent, partner names, body state, failed technique attempts, and coaching feedback from transcripts users are already recording. Zero new user behavior required.</div>
+        <div class="opp-impact">Unlocks: intent vs. outcome analysis, partner graph, fatigue-adjusted insights</div>
+      </div>
+
+      <div class="opportunity">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <span class="feature-badge badge-core" style="margin-bottom: 0;">Tier 1</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #666; letter-spacing: 1px;">0-2 SPRINTS</span>
+        </div>
+        <div class="opp-title">Technique Proficiency Rating</div>
+        <div class="opp-desc">One tap per technique in review phase: Learning / Developing / Solid. Distinguishes "drilled" from "owned" and tracks confidence growth over time.</div>
+        <div class="opp-impact">Unlocks: "Armbar went from Learning to Solid in 6 weeks" insight</div>
+      </div>
+
+      <div class="opportunity">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <span class="feature-badge badge-intelligence" style="margin-bottom: 0;">Tier 2</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #666; letter-spacing: 1px;">2-4 SPRINTS</span>
+        </div>
+        <div class="opp-title">Reflections Feature (FEAT-010)</div>
+        <div class="opp-desc">Post-session voice/text thoughts, separate from structured data. "What I learned" creates a retention moat and reveals coaching intent.</div>
+        <div class="opp-impact">Unlocks: connects what happened to what user internalized</div>
+      </div>
+
+      <div class="opportunity">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <span class="feature-badge badge-intelligence" style="margin-bottom: 0;">Tier 2</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #666; letter-spacing: 1px;">2-4 SPRINTS</span>
+        </div>
+        <div class="opp-title">Persistent Injury Tracking (FEAT-006)</div>
+        <div class="opp-desc">Structured injury log: body part, severity, duration, recovery attempts. Essential for risk detection and recovery-sensitive insights.</div>
+        <div class="opp-impact">Unlocks: "Left knee for 4th week + heel hook volume = pattern?"</div>
+      </div>
+
+      <div class="opportunity">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <span class="feature-badge badge-data" style="margin-bottom: 0;">Tier 3</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #666; letter-spacing: 1px;">4+ SPRINTS</span>
+        </div>
+        <div class="opp-title">Competition Tracker (FEAT-005)</div>
+        <div class="opp-desc">Pre-comp weight, bracket results, match records. Tournament outcomes are the ultimate performance metric.</div>
+        <div class="opp-impact">Unlocks: competition readiness, training-to-comp performance gap</div>
+      </div>
+
+      <div class="opportunity">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <span class="feature-badge badge-data" style="margin-bottom: 0;">Tier 4</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #666; letter-spacing: 1px;">8+ SPRINTS</span>
+        </div>
+        <div class="opp-title">Coach Integration (FEAT-007)</div>
+        <div class="opp-desc">Coaches see student roster + logs + add feedback. Closes the loop: "Coach said focus on X" &rarr; student logs sessions &rarr; insights reference coach feedback.</div>
+        <div class="opp-impact">Unlocks: coach-integrated feedback loop, institutional adoption</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TECH STACK ==================== -->
+  <div class="section">
+    <div class="section-label">09 / Tech Stack</div>
+    <h2 class="section-title">What It Runs On</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>Technology</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Mobile</td><td>Expo (React Native), iOS 16+</td></tr>
+        <tr><td>Database</td><td>Supabase (PostgreSQL + PostGIS)</td></tr>
+        <tr><td>Auth</td><td>Supabase Auth (Email + Apple Sign-In)</td></tr>
+        <tr><td>Voice</td><td>expo-audio (AAC, high-quality preset)</td></tr>
+        <tr><td>Transcription</td><td>AssemblyAI (180 BJJ terms word-boosted)</td></tr>
+        <tr><td>AI Extraction</td><td>Claude Haiku 4.5</td></tr>
+        <tr><td>AI Insights</td><td>Haiku (weekly) / Sonnet (monthly) / Opus (quarterly)</td></tr>
+        <tr><td>Storage</td><td>Supabase Storage (private, signed URLs)</td></tr>
+        <tr><td>Crash Reporting</td><td>Sentry</td></tr>
+        <tr><td>Design</td><td>Dark theme, gold accent, Unbounded + Inter + JetBrains Mono</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== BOTTOM LINE ==================== -->
+  <div class="section">
+    <div class="section-label">10 / Bottom Line</div>
+    <div class="highlight" style="margin-top: 0;">
+      <p><strong>What we built:</strong> A voice-first BJJ journal that turns a 90-second voice memo into a structured training log, then delivers belt-personalized weekly AI debriefs that notice patterns the practitioner can't see from inside their own training.</p>
+      <p style="margin-top: 12px;"><strong>What makes it defensible:</strong> The three-tier AI architecture with context cascade creates insights that get smarter over time. Belt-adaptive prompting means a white belt and a black belt get fundamentally different experiences. Cost per user is ~$1.40-2.20/year.</p>
+      <p style="margin-top: 12px;"><strong>Biggest unlock ahead:</strong> Users already describe far more than we index. Enhanced extraction from existing transcripts is the lowest-friction path to dramatically richer insights -- no new user behavior required.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>TOMO (&#21451;) &mdash; Internal Product Audit &mdash; April 13, 2026</p>
+  <p style="margin-top: 8px; color: #444;">This page is not indexed by search engines.</p>
+</div>
+
+</body>
+</html>
