@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drew Garraway — Projects</title>
+  <meta name="description" content="What Drew Garraway is building.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231E1B4B'/%3E%3Ctext x='50%25' y='50%25' font-size='16' font-weight='bold' text-anchor='middle' dy='.35em' fill='%23ffffff'%3EDG%3C/text%3E%3C/svg%3E">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0d0d12;
+      --surface: #16161f;
+      --border:  #25252f;
+      --text:    #e8e8f0;
+      --muted:   #888898;
+      --accent:  #7c6ff7;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      padding: 72px 32px 96px;
+    }
+
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 56px;
+    }
+
+    header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    a.card {
+      display: block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, background 0.15s;
+      cursor: pointer;
+    }
+
+    a.card:hover {
+      border-color: var(--accent);
+      background: #1c1c28;
+    }
+
+    a.card.paused {
+      opacity: 0.4;
+    }
+
+    .card-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .card-blurb {
+      margin-top: 6px;
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    footer {
+      margin-top: 72px;
+      font-size: 13px;
+      color: var(--muted);
+      opacity: 0.4;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 48px 20px 64px; }
+      a.card { padding: 22px 20px; }
+      header h1 { font-size: 28px; }
+      header p { font-size: 16px; }
+      .card-name { font-size: 19px; }
+      .card-blurb { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>Drew Garraway</h1>
+    <p>Things I'm building.</p>
+  </header>
+
+  <div class="grid" id="grid"></div>
+
+  <footer id="footer"></footer>
+
+</div>
+
+<script>
+  // ─── EDIT THIS BLOCK TO UPDATE THE PAGE ───────────────────────────────────
+  const PROJECTS = [
+    {
+      name:  "Assembly Labs",
+      blurb: "Agentic AI systems for small professional services firms.",
+      url:   "https://assemblylabs.co",
+    },
+    {
+      name:  "AS7MR",
+      blurb: "ASMR-based exam prep. Calm review, quiet confidence.",
+      url:   "https://as7mr.com",
+    },
+    {
+      name:  "TOMO",
+      blurb: "Voice-first BJJ training journal for iOS.",
+      url:   "https://traintomo.com",
+    },
+    {
+      name:  "Kaijutsu",
+      blurb: "SEL card game for K-4 educators. Digital + physical.",
+      url:   "https://playkaijutsu.com",
+    },
+    {
+      name:  "Search with Scout",
+      blurb: "AI catalog discovery for public libraries.",
+      url:   "https://searchwithscout.com",
+    },
+    {
+      name:  "Franklin Hugh Money",
+      blurb: "Personal finance documentation and securities exam prep.",
+      url:   "https://franklinhughmoney.com",
+    },
+    {
+      name:   "Gather",
+      blurb:  "Farmers market marketplace. Instacart for local vendors.",
+      url:    null,
+      paused: true,
+    },
+  ];
+  // ──────────────────────────────────────────────────────────────────────────
+
+  const grid = document.getElementById("grid");
+
+  PROJECTS.forEach(p => {
+    const card = document.createElement("a");
+    card.className = "card" + (p.paused ? " paused" : "");
+    if (p.url) {
+      card.href = p.url;
+      card.target = "_blank";
+      card.rel = "noopener";
+    }
+
+    card.innerHTML = `
+      <div class="card-name">${p.name}</div>
+      <div class="card-blurb">${p.blurb}</div>
+    `;
+    grid.appendChild(card);
+  });
+
+  const footer = document.getElementById("footer");
+  const now = new Date();
+  footer.textContent = `Updated ${now.toLocaleDateString("en-US", { month: "long", year: "numeric" })}`;
+</script>
+</body>
+</html>
